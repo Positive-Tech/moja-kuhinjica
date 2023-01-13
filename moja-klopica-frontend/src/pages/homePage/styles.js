@@ -35,19 +35,22 @@ export const Content = styled('label')`
 export const InputWrapper = styled('div')`
     display: flex;
     align-items: center;
-    width: 480px;
+    width: 450px;
     height: 55px;
     position: relative;
     margin-top: 50px;
 `
 export const Input = styled('input')`
-    position: absoulte;
-    width: 480px;
+    position: absolute;
+    width: 100%;
     height: 100%;
     border-radius: 40px;
     border: none;
-    margin-left: 1%;
+    border-left: 2px solid ${(props) => props.theme.colors.primaryRed};
     padding: 0px 0px 0px 60px;
+    font-family: Open Sans;
+    font-weight: 300;
+    font-size: 20px;
 
     ::placeholder {
         font-family: Open Sans;
@@ -55,13 +58,53 @@ export const Input = styled('input')`
         font-size: 20px;
         color: ${(props) => props.theme.colors.placeholder};
     }
+
+    &:focus {
+        outline: none;
+        border: 2px solid #c63a2f;
+    }
 `
 export const SearchIcon = styled('img')`
     position: absolute;
     height: 100%;
 `
-export const SearchButton = styled('img')`
+export const ArrowIcon = styled('img')`
     position: absolute;
-    height: 80%;
-    right: 10px;
+    height: 35%;
+    cursor: pointer;
+`
+export const SearchButtonDiv = styled('div')`
+    position: absolute;
+    height: 100%;
+    margin-left: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const SearchButton = styled('button')`
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: ${(props) => props.theme.colors.primaryRed};
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        background: ${(props) => props.theme.colors.secondaryRed};
+    }
+`
+
+export const SearchButtonWrapper = styled('div')`
+    position: relative;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+export const RestaurantListWrapper = styled('div')`
+    width: 100%;
+    background-color: #f3f1f0;
 `
