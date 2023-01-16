@@ -9,8 +9,8 @@ export const Wrapper = styled(ColDiv)`
 `
 export const RestaurantPic = styled('img')`
     height: 200px;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 `
 export const RestaurantRating = styled('label')`
     font-family: Open Sans;

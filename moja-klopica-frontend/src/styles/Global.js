@@ -16,8 +16,8 @@ export const theme = {
 export const ColDiv = styled('div')`
     display: flex;
     flex-direction: column;
-    width: ${(props) => (props.width ? props.width : '100%')};
-    height: ${(props) => (props.height ? props.height : '100%')};
+    width: ${(props) => props.width || '100%'};
+    height: ${(props) => props.height || '100%'};
     ${({ justifyContent }) =>
         justifyContent && `justify-content: ${justifyContent};`}
     ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
@@ -25,8 +25,8 @@ export const ColDiv = styled('div')`
 export const RowDiv = styled('div')`
     display: flex;
     flex-direction: row;
-    width: ${(props) => (props.width ? props.width : '100%')};
-    height: ${(props) => (props.height ? props.height : '100%')};
+    width: ${(props) => props.width || '100%'};
+    height: ${(props) => props.height || '100%'};
     ${({ justifyContent }) =>
         justifyContent && `justify-content: ${justifyContent};`}
     ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}

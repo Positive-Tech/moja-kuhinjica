@@ -18,13 +18,13 @@ const RestaurantCard = () => {
             <ColDiv width="90%">
                 <RestaurantPic src={pic} alt="" />
                 <RowDiv>
-                    <ColDiv>
+                    <ColDiv justifyContent="center">
                         <TitleLabel
                             size={'20px'}
                             content={'Restoran Top FOOD 021'}
                         />
                         <RowDiv>
-                            <RowDiv width="60%">
+                            <RowDiv width="60%" alignItems="center">
                                 <RegularLabel
                                     size={'13px'}
                                     content={'RESTORANI'}
@@ -35,7 +35,11 @@ const RestaurantCard = () => {
                                     content={'Domaća kuhinja'}
                                 />
                             </RowDiv>
-                            <RowDiv justifyContent="right" width="40%">
+                            <RowDiv
+                                justifyContent="right"
+                                width="40%"
+                                alignItems="center"
+                            >
                                 <RegularLabel
                                     size={'13px'}
                                     content={'0.5 km'}
@@ -50,7 +54,7 @@ const RestaurantCard = () => {
                         <RowDiv>
                             <RowDiv alignItems="center">
                                 <RestaurantRating>4.2</RestaurantRating>
-                                <RowDiv>
+                                <RowDiv alignItems="center">
                                     <img src={star} alt=""></img>
                                     <img src={star} alt=""></img>
                                     <img src={star} alt=""></img>
@@ -58,7 +62,11 @@ const RestaurantCard = () => {
                                     <img src={star} alt=""></img>
                                 </RowDiv>
                             </RowDiv>
-                            <RowDiv justifyContent="right" width="50%">
+                            <RowDiv
+                                justifyContent="right"
+                                width="50%"
+                                alignItems="center"
+                            >
                                 <RegularLabel
                                     size={'13px'}
                                     content={'Besplatna dostava'}
