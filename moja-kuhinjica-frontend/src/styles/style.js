@@ -36,7 +36,7 @@ export const Content = styled('label')`
 export const InputWrapper = styled('div')`
     display: flex;
     align-items: center;
-    width: 450px;
+    width: 400px;
     height: 55px;
     position: relative;
     margin-top: 50px;
@@ -52,6 +52,7 @@ export const Input = styled('input')`
     font-family: Open Sans;
     font-weight: 300;
     font-size: 20px;
+    margin-left: 2%;
 
     ::placeholder {
         font-family: Open Sans;

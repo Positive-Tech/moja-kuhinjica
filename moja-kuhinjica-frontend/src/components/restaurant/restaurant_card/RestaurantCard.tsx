@@ -6,6 +6,7 @@ import TitleLabel from '../../labels/TitleLabel'
 import RegularLabel from '../../labels/RegularLabel'
 import { LabelSeparator } from '../../labels/style'
 import star from '../../../../public/static/assets/images/star.svg'
+import Image from 'next/image'
 
 const RestaurantCard = () => {
     return (
@@ -55,11 +56,11 @@ const RestaurantCard = () => {
                             <RowDiv alignItems="center">
                                 <RestaurantRating>4.2</RestaurantRating>
                                 <RowDiv alignItems="center">
-                                    <img src={star} alt=""></img>
-                                    <img src={star} alt=""></img>
-                                    <img src={star} alt=""></img>
-                                    <img src={star} alt=""></img>
-                                    <img src={star} alt=""></img>
+                                    <Image src={star} alt=""></Image>
+                                    <Image src={star} alt=""></Image>
+                                    <Image src={star} alt=""></Image>
+                                    <Image src={star} alt=""></Image>
+                                    <Image src={star} alt=""></Image>
                                 </RowDiv>
                             </RowDiv>
                             <RowDiv

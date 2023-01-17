@@ -1,12 +1,12 @@
 import {ColDiv} from '../styles/global'
-import Image from 'next/image'
 import { Wrapper, SearchContainer, Title, Content, InputWrapper, Input, SearchIcon, SearchButtonDiv, SearchButtonWrapper, SearchButton, ArrowIcon } from '@/styles/style'
 import Header from '@/components/header/Header'
-import RestaurantList from '@/components/restaurant/restaurantList/RestaurantList'
+import RestaurantList from '@/components/restaurant/restaurant_list/RestaurantList'
 import { RestaurantListWrapper } from '@/styles/style'
 import searchRectangle from '../../public/static/assets/images/search-location.png'
 import searchButton from '../../public/static/assets/images/search-button.png'
 import arrowIcon from '../../public/static/assets/images/arrow.svg'
+import MySlider from '@/components/slider/MySlider'
 
 
 const Home = () => {
@@ -38,9 +38,10 @@ const Home = () => {
                   </InputWrapper>
               </SearchContainer>
           </Wrapper>
-          <RestaurantListWrapper>
+          <MySlider/>
+          {/* <RestaurantListWrapper>
               <RestaurantList />
-          </RestaurantListWrapper>
+          </RestaurantListWrapper> */}
       </ColDiv>
   )
 }
