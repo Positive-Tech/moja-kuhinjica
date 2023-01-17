@@ -7,14 +7,12 @@ import { RestaurantListWrapper } from '@/styles/style'
 import searchRectangle from '../../public/static/assets/images/search-location.png'
 import searchButton from '../../public/static/assets/images/search-button.png'
 import arrowIcon from '../../public/static/assets/images/arrow.svg'
-import background from '../../public/static/assets/images/background.jpg'
 
 
 const Home = () => {
     return (
       <ColDiv>
           <Wrapper height="887px" >
-            {/* <Image src={background} alt="Caoo"/> */}
               <Header />
               <SearchContainer justifyContent="center" width="50%">
                   <Title>moja klopica</Title>
