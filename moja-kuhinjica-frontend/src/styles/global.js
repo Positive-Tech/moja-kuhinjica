@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const theme = {
     colors: {
-        header: 'rgba(114, 95, 82, .2)',
-        primaryRed: '#C63A2F',
+        header: 'rgba(30, 30, 30, 0.3)',
+        primaryRed: '#C10016',
         secondaryRed: '#9D2218',
         placeholder: 'rgba(30, 30, 30, .4)',
         background: '#F3F1F0',

@@ -2,7 +2,7 @@ import React from 'react'
 import { RegularLabelStyled } from './style'
 
 interface IRegularLabelProps {
-    size: number
+    size: string
     content: string
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import { GridDiv } from '../../../styles/global'
 import RestaurantCard from '../restaurant_card/RestaurantCard'
+import { GridDiv } from '../../../styles/global'
 
 const RestaurantList = () => {
     const restaurantCards = [

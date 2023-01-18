@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { ColDiv } from '../styles/global'
 import Image from 'next/image'
-import bg from '../../public/static/assets/images/background.jpg'
+import bg from '../../public/static/assets/images/background.png'
+import { WhiteButton } from '@/components/buttons/style'
 
 export const Wrapper = styled(ColDiv)`
     background-image: url(${bg.src});
@@ -27,32 +28,33 @@ export const Title = styled('label')`
 export const Content = styled('label')`
     font-family: Nunito;
     font-size: 35px;
-    font-weight: 800;
+    font-weight: 500;
     color: #ffff;
-    width: 477px;
-    height: 66px;
-    line-height: 35px;
+    width: 525px;
+    height: 105px;
+    line-height: 50px;
+    letter-spacing: 0.03em;
 `
 export const InputWrapper = styled('div')`
     display: flex;
     align-items: center;
-    width: 400px;
-    height: 55px;
+    width: 530px;
+    height: 65px;
     position: relative;
-    margin-top: 50px;
+    margin-top: 35px;
 `
 export const Input = styled('input')`
     position: absolute;
     width: 100%;
     height: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     border-radius: 40px;
-    border: none;
-    border-left: 2px solid ${(props) => props.theme.colors.primaryRed};
-    padding: 0px 0px 0px 60px;
+    padding: 0px 0px 0px 70px;
     font-family: Open Sans;
     font-weight: 300;
     font-size: 20px;
-    margin-left: 2%;
+    border: 2px solid ${(props) => props.theme.colors.primaryRed};
 
     ::placeholder {
         font-family: Open Sans;
@@ -63,17 +65,11 @@ export const Input = styled('input')`
 
     &:focus {
         outline: none;
-        border: 2px solid #c63a2f;
     }
 `
 export const SearchIcon = styled(Image)`
     position: absolute;
     height: 100%;
-`
-export const ArrowIcon = styled(Image)`
-    position: absolute;
-    height: 35%;
-    cursor: pointer;
 `
 export const SearchButtonDiv = styled('div')`
     position: absolute;
@@ -81,32 +77,19 @@ export const SearchButtonDiv = styled('div')`
     margin-left: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
 `
 
-export const SearchButton = styled('button')`
+export const SearchButton = styled(WhiteButton)`
     position: absolute;
-    width: 45px;
-    height: 45px;
-    border: none;
-    background: ${(props) => props.theme.colors.primaryRed};
-    border-radius: 50%;
-    cursor: pointer;
-
-    &:hover {
-        background: ${(props) => props.theme.colors.secondaryRed};
-    }
-`
-
-export const SearchButtonWrapper = styled('div')`
-    position: relative;
-    height: 50px;
+    right: 10px;
     width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 50px;
 `
 export const RestaurantListWrapper = styled('div')`
-    width: 80%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
     background-color: #f3f1f0;
 `

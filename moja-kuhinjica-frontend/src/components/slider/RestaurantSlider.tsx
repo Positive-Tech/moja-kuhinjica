@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Slider from 'react-slick'
 import RestaurantCard from '../restaurant/restaurant_card/RestaurantCard'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-const MySlider = () => {
+const RestaurantSlider = () => {
     var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
+        infinite: false,
+        speed: 600,
         slidesToShow: 2.5,
         slidesToScroll: 1,
-        initialSlide: 0.5,
-        arrows: true,
+        initialSlide: 0,
         responsive: [
             {
                 breakpoint: 1024,
@@ -42,11 +40,13 @@ const MySlider = () => {
     }
 
     return (
-        <Slider {...settings}>
-            {restaurantCards.map((restaurant) => {
-                return <RestaurantCard restaurant={restaurant} />
-            })}
-        </Slider>
+        <div style={{ width: '80%' }}>
+            <Slider {...settings}>
+                {restaurantCards.map((restaurant) => {
+                    return <RestaurantCard restaurant={restaurant} />
+                })}
+            </Slider>
+        </div>
     )
 }
 
@@ -60,7 +60,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Gondola',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -68,7 +68,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Lanterna',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -76,7 +76,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Veliki',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -84,7 +84,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Petrus',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -92,7 +92,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Dva stapica',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -100,7 +100,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Kibic korner',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -108,7 +108,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'La Brasa',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -116,7 +116,7 @@ const restaurantCards = [
         rating: 4.2,
     },
     {
-        name: 'Restoran TOP FOOD 021',
+        name: 'Vidikovac',
         type: 'RESTORANI',
         foodType: 'Domaća kuhinja',
         distance: 0.5,
@@ -125,4 +125,4 @@ const restaurantCards = [
     },
 ]
 
-export default MySlider
+export default RestaurantSlider
