@@ -1,4 +1,5 @@
 import React from 'react'
+import uuid from 'react-uuid'
 import RestaurantCard from '../restaurant_card/RestaurantCard'
 import { GridDiv } from '../../../styles/global'
 
@@ -48,7 +49,7 @@ const RestaurantList = () => {
     return (
         <GridDiv>
             {restaurantCards.map((restaurant) => {
-                return <RestaurantCard restaurant={restaurant} />
+                return <RestaurantCard restaurant={restaurant} key={uuid()} />
             })}
         </GridDiv>
     )

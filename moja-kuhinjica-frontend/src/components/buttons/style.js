@@ -3,14 +3,12 @@ import arrow from '../../../public/static/assets/images/arrow.svg'
 import redArrow from '../../../public/static/assets/images/redArrow.svg'
 
 export const WhiteButton = styled('button')`
-    /* position: absolute; */
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
     background: transparent;
     border-radius: 50%;
     padding: 15px;
-    /* right: 10px; */
     cursor: pointer;
 
     &::after {
@@ -24,14 +22,12 @@ export const WhiteButton = styled('button')`
     }
 `
 export const RedButton = styled('button')`
-    /* position: absolute; */
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
     background: ${(props) => props.theme.colors.primaryRed};
     border-radius: 50%;
     padding: 15px;
-    /* right: 10px; */
     cursor: pointer;
 
     &::after {
