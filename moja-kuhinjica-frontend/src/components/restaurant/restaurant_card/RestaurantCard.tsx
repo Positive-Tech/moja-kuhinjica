@@ -1,14 +1,25 @@
 import React from 'react'
+import Image from 'next/image'
 import { ColDiv, RowDiv } from '../../../styles/global'
 import { RestaurantPic, RestaurantRating, Wrapper } from './style'
-import pic from '../../../../public/static/assets/images/restaurant.png'
 import TitleLabel from '../../labels/TitleLabel'
 import RegularLabel from '../../labels/RegularLabel'
 import { LabelSeparator } from '../../labels/style'
+import pic from '../../../../public/static/assets/images/restaurant.png'
 import star from '../../../../public/static/assets/images/star.svg'
-import Image from 'next/image'
 
-const RestaurantCard = () => {
+interface IRestaurantProps {
+    restaurant: {
+        name: string
+        type: string
+        foodType: string
+        distance: number
+        time: number
+        rating: number
+    }
+}
+
+const RestaurantCard = ({ restaurant }: IRestaurantProps) => {
     return (
         <Wrapper
             height="330px"
@@ -20,20 +31,17 @@ const RestaurantCard = () => {
                 <RestaurantPic src={pic} alt="" />
                 <RowDiv>
                     <ColDiv justifyContent="center">
-                        <TitleLabel
-                            size={'20px'}
-                            content={'Restoran Top FOOD 021'}
-                        />
+                        <TitleLabel size="20px" content={restaurant.name} />
                         <RowDiv>
                             <RowDiv width="60%" alignItems="center">
                                 <RegularLabel
-                                    size={'13px'}
-                                    content={'RESTORANI'}
+                                    size="13px"
+                                    content={restaurant.type}
                                 />
                                 <LabelSeparator>&bull;</LabelSeparator>
                                 <RegularLabel
-                                    size={'13px'}
-                                    content={'Domaća kuhinja'}
+                                    size="13px"
+                                    content={restaurant.foodType}
                                 />
                             </RowDiv>
                             <RowDiv
@@ -42,25 +50,27 @@ const RestaurantCard = () => {
                                 alignItems="center"
                             >
                                 <RegularLabel
-                                    size={'13px'}
-                                    content={'0.5 km'}
+                                    size="13px"
+                                    content={restaurant.distance + ' km'}
                                 />
                                 <LabelSeparator>&bull;</LabelSeparator>
                                 <RegularLabel
-                                    size={'13px'}
-                                    content={'15 min'}
+                                    size="13px"
+                                    content={restaurant.time + ' min'}
                                 />
                             </RowDiv>
                         </RowDiv>
                         <RowDiv>
                             <RowDiv alignItems="center">
-                                <RestaurantRating>4.2</RestaurantRating>
+                                <RestaurantRating>
+                                    {restaurant.rating}
+                                </RestaurantRating>
                                 <RowDiv alignItems="center">
-                                    <Image src={star} alt=""></Image>
-                                    <Image src={star} alt=""></Image>
-                                    <Image src={star} alt=""></Image>
-                                    <Image src={star} alt=""></Image>
-                                    <Image src={star} alt=""></Image>
+                                    <Image src={star} alt="" />
+                                    <Image src={star} alt="" />
+                                    <Image src={star} alt="" />
+                                    <Image src={star} alt="" />
+                                    <Image src={star} alt="" />
                                 </RowDiv>
                             </RowDiv>
                             <RowDiv
@@ -69,8 +79,8 @@ const RestaurantCard = () => {
                                 alignItems="center"
                             >
                                 <RegularLabel
-                                    size={'13px'}
-                                    content={'Besplatna dostava'}
+                                    size="13px"
+                                    content="Besplatna dostava"
                                 />
                             </RowDiv>
                         </RowDiv>

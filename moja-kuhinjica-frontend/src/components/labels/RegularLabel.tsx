@@ -1,12 +1,13 @@
 import React from 'react'
 import { RegularLabelStyled } from './style'
 
-const RegularLabel = (props: any) => {
-    return (
-        <RegularLabelStyled size={props.size}>
-            {props.content}
-        </RegularLabelStyled>
-    )
+interface IRegularLabelProps {
+    size: number
+    content: string
+}
+
+const RegularLabel = ({ size, content }: IRegularLabelProps) => {
+    return <RegularLabelStyled size={size}>{content}</RegularLabelStyled>
 }
 
 export default RegularLabel

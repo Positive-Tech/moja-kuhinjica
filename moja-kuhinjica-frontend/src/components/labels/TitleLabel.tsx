@@ -1,10 +1,13 @@
 import React from 'react'
 import { TitleLabelStyled } from './style'
 
-const TitleLabel = (props: any) => {
-    return (
-        <TitleLabelStyled size={props.size}>{props.content}</TitleLabelStyled>
-    )
+interface ITitleLabelProps {
+    size: string
+    content: string
+}
+
+const TitleLabel = ({ size, content }: ITitleLabelProps) => {
+    return <TitleLabelStyled size={size}>{content}</TitleLabelStyled>
 }
 
 export default TitleLabel

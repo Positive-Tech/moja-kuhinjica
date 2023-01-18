@@ -43,17 +43,86 @@ const MySlider = () => {
 
     return (
         <Slider {...settings}>
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
-            <RestaurantCard />
+            {restaurantCards.map((restaurant) => {
+                return <RestaurantCard restaurant={restaurant} />
+            })}
         </Slider>
     )
 }
+
+const restaurantCards = [
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+    {
+        name: 'Restoran TOP FOOD 021',
+        type: 'RESTORANI',
+        foodType: 'Domaća kuhinja',
+        distance: 0.5,
+        time: 15,
+        rating: 4.2,
+    },
+]
 
 export default MySlider
