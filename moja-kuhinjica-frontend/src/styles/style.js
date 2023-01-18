@@ -107,6 +107,6 @@ export const SearchButtonWrapper = styled('div')`
     justify-content: center;
 `
 export const RestaurantListWrapper = styled('div')`
-    width: 100%;
+    width: 80%;
     background-color: #f3f1f0;
 `
