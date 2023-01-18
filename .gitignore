@@ -1,1 +1,34 @@
+# dependencies
+moja-kuhinjica-frontend/node_modules
+moja-kuhinjica-frontend/**/*.pnp
+moja-kuhinjica-frontend/**/*.
+
+# testing
+moja-kuhinjica-frontend/coverage
+
+# next.js
+moja-kuhinjica-frontend/.next/
+moja-kuhinjica-frontend/out/
+
+# production
+moja-kuhinjica-frontend/build
+
+# misc
 .DS_Store
+moja-kuhinjica-frontend/**/*.pem
+
+# debug
+moja-kuhinjica-frontend/npm-debug.log*
+moja-kuhinjica-frontend/yarn-debug.log*
+moja-kuhinjica-frontend/yarn-error.log*
+moja-kuhinjica-frontend/.pnpm-debug.log*
+
+# local env files
+moja-kuhinjica-frontend/.env*.local
+
+# vercel
+moja-kuhinjica-frontend/.vercel
+
+# typescript
+moja-kuhinjica-frontend/**/*.tsbuildinfo
+moja-kuhinjica-frontend/next-env.d.ts
