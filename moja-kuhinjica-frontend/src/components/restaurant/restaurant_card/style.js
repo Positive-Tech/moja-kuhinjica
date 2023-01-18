@@ -6,7 +6,6 @@ export const Wrapper = styled(ColDiv)`
     background-color: #ffffff;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    /* padding: 10px; */
 `
 export const RestaurantPic = styled(Image)`
     height: 200px;

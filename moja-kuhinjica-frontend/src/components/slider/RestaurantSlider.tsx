@@ -6,20 +6,6 @@ import RestaurantCard from '../restaurant/restaurant_card/RestaurantCard'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-const RestaurantSlider = () => {
-    return (
-        <div style={{ width: '80%' }}>
-            <Slider {...sliderSettings}>
-                {restaurantCards.map((restaurant) => {
-                    return (
-                        <RestaurantCard restaurant={restaurant} key={uuid()} />
-                    )
-                })}
-            </Slider>
-        </div>
-    )
-}
-
 const restaurantCards = [
     {
         name: 'Restoran TOP FOOD 021',
@@ -94,5 +80,19 @@ const restaurantCards = [
         rating: 4.2,
     },
 ]
+
+const RestaurantSlider = () => {
+    return (
+        <div style={{ width: '80%' }}>
+            <Slider {...sliderSettings}>
+                {restaurantCards.map((restaurant) => {
+                    return (
+                        <RestaurantCard restaurant={restaurant} key={uuid()} />
+                    )
+                })}
+            </Slider>
+        </div>
+    )
+}
 
 export default RestaurantSlider

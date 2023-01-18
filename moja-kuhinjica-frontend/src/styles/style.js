@@ -55,6 +55,7 @@ export const Input = styled('input')`
     font-weight: 300;
     font-size: 20px;
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
+    padding-right: 15%;
 
     ::placeholder {
         font-family: Open Sans;
