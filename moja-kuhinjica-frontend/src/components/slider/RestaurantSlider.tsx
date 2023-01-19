@@ -1,10 +1,14 @@
 import React from 'react'
 import Slider from 'react-slick'
 import uuid from 'react-uuid'
-import { sliderSettings } from '@/constants/constants'
 import RestaurantCard from '../restaurant/restaurant_card/RestaurantCard'
+import { sliderSettings } from '@/constants/constants'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { ButtonWrapper, Wrapper } from './style'
+import { RedButton } from '../buttons/style'
+
+const sliderRef = React.createRef<Slider>()
 
 const restaurantCards = [
     {
@@ -83,15 +87,19 @@ const restaurantCards = [
 
 const RestaurantSlider = () => {
     return (
-        <div style={{ width: '80%' }}>
-            <Slider {...sliderSettings}>
+        <Wrapper>
+            <Slider ref={sliderRef} {...sliderSettings}>
                 {restaurantCards.map((restaurant) => {
                     return (
                         <RestaurantCard restaurant={restaurant} key={uuid()} />
                     )
                 })}
             </Slider>
-        </div>
+            <ButtonWrapper>
+                <RedButton onClick={() => sliderRef.current?.slickPrev()} />
+                <RedButton onClick={() => sliderRef.current?.slickNext()} />
+            </ButtonWrapper>
+        </Wrapper>
     )
 }
 

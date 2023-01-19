@@ -1,5 +1,8 @@
+import { RedButton } from '@/components/buttons/style'
+
 export const sliderSettings = {
     infinite: false,
+    arrows: false,
     speed: 600,
     slidesToShow: 2.5,
     slidesToScroll: 1,
@@ -12,6 +15,7 @@ export const sliderSettings = {
                 slidesToScroll: 3,
                 infinite: true,
                 dots: true,
+                arrows: false,
             },
         },
         {
