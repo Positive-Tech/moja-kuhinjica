@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const TitleLabelStyled = styled('label')`
     font-family: Poppins;
     font-weight: 600;
-    color: #333333;
+    color: #ffffff;
     font-size: ${(props) => props.size};
     padding-bottom: 2%;
 `

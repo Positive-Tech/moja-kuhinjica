@@ -2,11 +2,10 @@ import React from 'react'
 import Slider from 'react-slick'
 import uuid from 'react-uuid'
 import RestaurantCard from '../restaurant/restaurant_card/RestaurantCard'
+import { ButtonWrapper, Wrapper, PrevButton, NextButton } from './style'
 import { sliderSettings } from '@/constants/constants'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { ButtonWrapper, Wrapper, PrevButton, NextButton } from './style'
-import { RedButton } from '../buttons/style'
 
 const sliderRef = React.createRef<Slider>()
 

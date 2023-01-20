@@ -56,7 +56,7 @@ export const RedBackButton = styled('button')`
         content: url(${backWhiteArrow.src});
     }
     &:hover {
-        background-color: #85858480;
+        background-color: rgba(133, 133, 132, 0.5);
         &::after {
             content: url(${backRedArrow.src});
         }
@@ -75,7 +75,7 @@ export const RedNextButton = styled('button')`
         content: url(${arrow.src});
     }
     &:hover {
-        background-color: #85858480;
+        background-color: rgba(133, 133, 132, 0.5);
         &::after {
             content: url(${redArrow.src});
         }

@@ -1,22 +1,29 @@
 import styled from 'styled-components'
-import { ColDiv } from '../../../styles/global'
-import Image from 'next/image'
+import { ColDiv, RowDiv } from '../../../styles/global'
 
-export const Wrapper = styled(ColDiv)`
+export const Wrapper = styled(RowDiv)`
+    position: relative;
+    height: 330px;
+    width: 570px;
     background-color: #ffffff;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(
+            to bottom,
+            #d9d9d912,
+            #4e4e4e89,
+            #000000cc
+        ),
+        url(${(props) => props.bg.src});
+    background-size: cover;
+    background-repeat: no-repeat;
     border-radius: 10px;
 `
-export const RestaurantPic = styled(Image)`
-    height: 100%;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+export const ContentWrapper = styled(ColDiv)`
+    padding: 0px 35px 35px 35px;
 `
 export const RestaurantRating = styled('label')`
     font-family: Open Sans;
     font-weight: 600;
     font-size: 15px;
-    color: ${(props) => props.theme.colors.primaryRed};
+    color: ${(props) => props.theme.colors.secondaryRed};
     margin-right: 2%;
 `

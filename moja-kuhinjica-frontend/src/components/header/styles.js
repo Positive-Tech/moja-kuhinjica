@@ -5,8 +5,6 @@ export const Wrapper = styled('header')`
     height: 140px;
     background: ${(props) => props.theme.colors.header};
     display: flex;
-    /* position: fixed; */
-    /* backdrop-filter: blur(5px); */
     justify-content: space-between;
     align-items: center;
 `
