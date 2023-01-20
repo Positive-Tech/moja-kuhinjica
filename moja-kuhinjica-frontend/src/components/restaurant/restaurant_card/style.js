@@ -8,7 +8,8 @@ export const Wrapper = styled(ColDiv)`
     border-radius: 10px;
 `
 export const RestaurantPic = styled(Image)`
-    height: 200px;
+    height: 100%;
+    width: 100%;
     margin-top: 2%;
     margin-bottom: 2%;
 `

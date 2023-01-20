@@ -23,11 +23,11 @@ const RestaurantCard = ({ restaurant }: IRestaurantProps) => {
     return (
         <Wrapper
             height="330px"
-            width="430px"
+            width="570px"
             justifyContent="center"
             alignItems="center"
         >
-            <ColDiv width="90%">
+            <ColDiv width="90%" justifyContent="center" alignItems="center">
                 <RestaurantPic src={pic} alt="" />
                 <RowDiv>
                     <ColDiv justifyContent="center">

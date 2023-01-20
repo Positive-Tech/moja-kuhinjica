@@ -88,9 +88,11 @@ export const SearchButton = styled(WhiteButton)`
     height: 50px;
 `
 export const RestaurantListWrapper = styled('div')`
+    position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 500px;
     background-color: #f3f1f0;
 `

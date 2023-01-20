@@ -4,7 +4,7 @@ export const sliderSettings = {
     infinite: false,
     arrows: false,
     speed: 600,
-    slidesToShow: 2.5,
+    slidesToShow: 2.2,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [

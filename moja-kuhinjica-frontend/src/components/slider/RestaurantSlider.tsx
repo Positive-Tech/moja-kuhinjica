@@ -5,7 +5,7 @@ import RestaurantCard from '../restaurant/restaurant_card/RestaurantCard'
 import { sliderSettings } from '@/constants/constants'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { ButtonWrapper, Wrapper } from './style'
+import { ButtonWrapper, Wrapper, PrevButton, NextButton } from './style'
 import { RedButton } from '../buttons/style'
 
 const sliderRef = React.createRef<Slider>()
@@ -87,19 +87,32 @@ const restaurantCards = [
 
 const RestaurantSlider = () => {
     return (
-        <Wrapper>
-            <Slider ref={sliderRef} {...sliderSettings}>
-                {restaurantCards.map((restaurant) => {
-                    return (
-                        <RestaurantCard restaurant={restaurant} key={uuid()} />
-                    )
-                })}
-            </Slider>
+        <>
+            <Wrapper>
+                <Slider ref={sliderRef} {...sliderSettings}>
+                    {restaurantCards.map((restaurant) => {
+                        return (
+                            <RestaurantCard
+                                restaurant={restaurant}
+                                key={uuid()}
+                            />
+                        )
+                    })}
+                </Slider>
+            </Wrapper>
             <ButtonWrapper>
-                <RedButton onClick={() => sliderRef.current?.slickPrev()} />
-                <RedButton onClick={() => sliderRef.current?.slickNext()} />
+                <PrevButton
+                    width="50px"
+                    height="50px"
+                    onClick={() => sliderRef.current?.slickPrev()}
+                />
+                <NextButton
+                    width="50px"
+                    height="50px"
+                    onClick={() => sliderRef.current?.slickNext()}
+                />
             </ButtonWrapper>
-        </Wrapper>
+        </>
     )
 }
 
