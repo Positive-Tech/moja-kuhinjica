@@ -5,12 +5,14 @@ import backRedArrow from '../../../public/static/assets/images/backRedArrow.svg'
 import backWhiteArrow from '../../../public/static/assets/images/backWhiteArrow.svg'
 
 export const WhiteButton = styled('button')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
     background: transparent;
     border-radius: 50%;
-    padding: 15px;
     cursor: pointer;
 
     &::after {
@@ -29,7 +31,6 @@ export const RedButton = styled('button')`
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
     background: ${(props) => props.theme.colors.primaryRed};
     border-radius: 50%;
-    padding: 15px;
     cursor: pointer;
 
     &::after {
@@ -38,7 +39,7 @@ export const RedButton = styled('button')`
     &:hover {
         background: transparent;
         &::after {
-            content: url(${redArrow.src});
+            /* content: url(${redArrow.src}); */
         }
     }
 `
@@ -49,7 +50,6 @@ export const RedBackButton = styled('button')`
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
     background: ${(props) => props.theme.colors.primaryRed};
     border-radius: 50%;
-    padding: 15px;
     cursor: pointer;
 
     &::after {
@@ -68,9 +68,7 @@ export const RedNextButton = styled('button')`
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
     background: ${(props) => props.theme.colors.primaryRed};
     border-radius: 50%;
-    padding: 15px;
     cursor: pointer;
-
     &::after {
         content: url(${arrow.src});
     }

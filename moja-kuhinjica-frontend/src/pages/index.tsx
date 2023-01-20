@@ -1,5 +1,5 @@
 import RestaurantSlider from '@/components/slider/RestaurantSlider'
-import { ColDiv } from '../styles/global'
+import { ColDiv, theme } from '../styles/global'
 import {
     Wrapper,
     SearchContainer,
@@ -14,8 +14,12 @@ import {
 import Header from '@/components/header/Header'
 import { RestaurantListWrapper } from '@/styles/style'
 import searchRectangle from '../../public/static/assets/images/search-location.png'
+import '../styles/global'
+import { useState } from 'react'
 
 const Home = () => {
+    const [hover, setHover] = useState(false)
+
     return (
         <ColDiv>
             <Wrapper height="840px">
