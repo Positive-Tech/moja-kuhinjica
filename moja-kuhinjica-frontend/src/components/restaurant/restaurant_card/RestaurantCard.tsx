@@ -20,7 +20,7 @@ interface IRestaurantProps {
 
 const RestaurantCard = ({ restaurant }: IRestaurantProps) => {
     return (
-        <Wrapper height="330px" width="570px" bg={pic} alignItems="end">
+        <Wrapper bg={pic} alignItems="end">
             <ContentWrapper justifyContent="end">
                 <TitleLabel size="18px" content={restaurant.name} />
                 <RowDiv alignItems="center" height="5%">
