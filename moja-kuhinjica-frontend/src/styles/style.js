@@ -83,9 +83,6 @@ export const SearchButtonDiv = styled('div')`
 
 export const SearchButton = styled(WhiteButton)`
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     right: 10px;
     width: 50px;
     height: 50px;

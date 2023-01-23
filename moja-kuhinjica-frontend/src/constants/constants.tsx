@@ -1,5 +1,3 @@
-import { RedButton } from '@/components/buttons/style'
-
 export const sliderSettings = {
     infinite: false,
     arrows: false,

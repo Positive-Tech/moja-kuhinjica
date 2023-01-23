@@ -1,8 +1,4 @@
 import styled from 'styled-components'
-import arrow from '../../../public/static/assets/images/arrow.svg'
-import redArrow from '../../../public/static/assets/images/redArrow.svg'
-import backRedArrow from '../../../public/static/assets/images/backRedArrow.svg'
-import backWhiteArrow from '../../../public/static/assets/images/backWhiteArrow.svg'
 
 export const WhiteButton = styled('button')`
     display: flex;
@@ -14,14 +10,14 @@ export const WhiteButton = styled('button')`
     background: transparent;
     border-radius: 50%;
     cursor: pointer;
-
-    &::after {
-        content: url(${redArrow.src});
+    svg {
+        fill: ${(props) => props.theme.colors.primaryRed};
     }
+
     &:hover {
         background: ${(props) => props.theme.colors.primaryRed};
-        &::after {
-            content: url(${arrow.src});
+        svg {
+            fill: white;
         }
     }
 `
@@ -33,13 +29,10 @@ export const RedButton = styled('button')`
     border-radius: 50%;
     cursor: pointer;
 
-    &::after {
-        content: url(${arrow.src});
-    }
     &:hover {
         background: transparent;
-        &::after {
-            /* content: url(${redArrow.src}); */
+        svg {
+            fill: ${(props) => props.theme.colors.primaryRed};
         }
     }
 `
@@ -51,14 +44,14 @@ export const RedBackButton = styled('button')`
     background: ${(props) => props.theme.colors.primaryRed};
     border-radius: 50%;
     cursor: pointer;
-
-    &::after {
-        content: url(${backWhiteArrow.src});
+    svg {
+        transform: rotate(180deg);
+        fill: white;
     }
     &:hover {
         background-color: rgba(133, 133, 132, 0.5);
-        &::after {
-            content: url(${backRedArrow.src});
+        svg {
+            fill: ${(props) => props.theme.colors.primaryRed};
         }
     }
 `
@@ -69,13 +62,13 @@ export const RedNextButton = styled('button')`
     background: ${(props) => props.theme.colors.primaryRed};
     border-radius: 50%;
     cursor: pointer;
-    &::after {
-        content: url(${arrow.src});
+    svg {
+        fill: white;
     }
     &:hover {
         background-color: rgba(133, 133, 132, 0.5);
-        &::after {
-            content: url(${redArrow.src});
+        svg {
+            fill: ${(props) => props.theme.colors.primaryRed};
         }
     }
 `
