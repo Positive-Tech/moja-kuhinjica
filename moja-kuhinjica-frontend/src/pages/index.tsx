@@ -1,6 +1,5 @@
 import Image from 'next/image'
-import RestaurantSlider from '@/components/slider/RestaurantSlider'
-import { ColDiv, RowDiv } from '../styles/global'
+import { ColDiv, GridDiv, RowDiv } from '../styles/global'
 import logo from '../../public/static/assets/images/logo-moja-klopica.svg'
 
 import {
@@ -8,15 +7,16 @@ import {
     SearchContainer,
     Title,
     Content,
-    InputWrapper,
-    Input,
-    SearchIcon,
-    SearchButton,
     BottomWrapper,
+    ButtonWrapper,
+    Button,
+    MenuWrapper,
+    TitleLabel,
+    DayButton,
+    DayButtonWrapper,
 } from '@/styles/style'
 import Header from '@/components/header/Header'
-import { RestaurantListWrapper } from '@/styles/style'
-import searchRectangle from '../../public/static/assets/images/search-location.png'
+import { MenuItem } from '@/components/menu/MenuItem'
 import '../styles/global'
 
 const Home = () => {
@@ -29,27 +29,38 @@ const Home = () => {
                     <Content>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </Content>
-                    <InputWrapper>
-                        <Input
-                            placeholder="Unesi adresu na kojoj se nalaziš"
-                            type="text"
-                        />
-                        <SearchIcon src={searchRectangle} alt="" />
-                        <SearchButton>
-                            <svg
-                                width="19"
-                                height="19"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path d="M6.29289 2.29289C6.68342 1.90237 7.31658 1.90237 7.70711 2.29289L14.0404 8.62623C14.431 9.01675 14.431 9.64992 14.0404 10.0404L7.70711 16.3738C7.31658 16.7643 6.68342 16.7643 6.29289 16.3738C5.90237 15.9832 5.90237 15.3501 6.29289 14.9596L11.9191 9.33333L6.29289 3.70711C5.90237 3.31658 5.90237 2.68342 6.29289 2.29289Z" />
-                            </svg>
-                        </SearchButton>
-                    </InputWrapper>
+                    <ButtonWrapper>
+                        <Button>Registrujte se</Button>
+                        <Button>Ulogujte se</Button>
+                    </ButtonWrapper>
                 </SearchContainer>
             </Wrapper>
-            <RestaurantListWrapper>
-                <RestaurantSlider />
-            </RestaurantListWrapper>
+            <MenuWrapper>
+                <ColDiv alignItems="center">
+                    <TitleLabel>Dnevni meni - 20/1/2023</TitleLabel>
+                    <RowDiv
+                        height="100px"
+                        alignItems="center"
+                        justifyContent="space-between"
+                    >
+                        <DayButton disabled={true}>Ponedeljak</DayButton>
+                        <DayButton disabled={false}>Utorak</DayButton>
+                        <DayButton disabled={true}>Sreda</DayButton>
+                        <DayButton disabled={true}>Cetvrtak</DayButton>
+                        <DayButton disabled={true}>Petak</DayButton>
+                        <DayButton disabled={true}>Subota</DayButton>
+                    </RowDiv>
+                    <GridDiv>
+                        <MenuItem />
+                        <MenuItem />
+                        <MenuItem />
+                        <MenuItem />
+                        <MenuItem />
+                        <MenuItem />
+                        <MenuItem />
+                    </GridDiv>
+                </ColDiv>
+            </MenuWrapper>
             <BottomWrapper>
                 <ColDiv alignItems="center" justifyContent="center" width="90%">
                     <RowDiv height="30%" justifyContent="start">
@@ -59,8 +70,6 @@ const Home = () => {
                         <svg
                             width="1308"
                             height="1"
-                            viewBox="0 0 1308 1"
-                            fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <rect

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ColDiv } from '../styles/global'
+import { ColDiv, RowDiv } from '../styles/global'
 import Image from 'next/image'
 import bg from '../../public/static/assets/images/background.png'
 import { WhiteButton } from '@/components/buttons/style'
@@ -69,6 +69,65 @@ export const Content = styled('label')`
         line-height: 40px;
     }
 `
+export const ButtonWrapper = styled(RowDiv)`
+    height: 20%;
+    width: 60%;
+    margin-top: 10%;
+    display: flex;
+    justify-content: space-between;
+`
+export const Button = styled('button')`
+    width: 195px;
+    height: 67px;
+
+    color: white;
+    font-weight: 800;
+    font-family: ${(props) => props.theme.fonts.button};
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+        background: ${(props) => props.theme.colors.primaryRed};
+    }
+
+    border-radius: 40px;
+    border: 4px solid ${(props) => props.theme.colors.primaryRed};
+    font-size: 22px;
+`
+export const MenuWrapper = styled('div')`
+    width: 100%;
+    height: 50%;
+    background-color: white;
+`
+export const TitleLabel = styled('label')`
+    font-family: Nunito;
+    font-weight: 600;
+    color: ${(props) => props.theme.colors.grey};
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 26px;
+`
+export const DayButton = styled('button')`
+    width: 220px;
+    height: 60px;
+    font-weight: 500;
+    font-family: ${(props) => props.theme.fonts.button};
+    cursor: pointer;
+    border-radius: 40px;
+    border: 0;
+    font-size: 28px;
+    margin: 15px;
+
+    color: ${(props) =>
+        props.disabled ? props.theme.colors.disabledGrey : 'white'};
+    background: ${(props) =>
+        props.disabled ? 'transparent' : props.theme.colors.primaryRed};
+
+    &:disabled {
+        border: 2px solid ${(props) => props.theme.colors.disabledGrey};
+    }
+`
+//useful styles for later
 export const InputWrapper = styled('div')`
     display: flex;
     align-items: center;
@@ -213,5 +272,5 @@ export const BottomWrapper = styled('div')`
     justify-content: center;
     width: 100%;
     height: 252px;
-    background-color: ${(props) => props.theme.colors.bottomBackground};
+    background-color: ${(props) => props.theme.colors.grey};
 `

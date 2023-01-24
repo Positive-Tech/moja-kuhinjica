@@ -3,6 +3,7 @@ import '../../styles/global'
 import { breakpoints } from '../../styles/global'
 
 export const Wrapper = styled('header')`
+    position: relative;
     width: 100%;
     height: 15%;
     background: ${(props) => props.theme.colors.header};
@@ -12,6 +13,7 @@ export const Wrapper = styled('header')`
 `
 
 export const LogoWrapper = styled('div')`
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
