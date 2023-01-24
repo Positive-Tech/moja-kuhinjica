@@ -38,6 +38,9 @@ export const RedButton = styled('button')`
 `
 
 export const RedBackButton = styled('button')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
@@ -56,6 +59,9 @@ export const RedBackButton = styled('button')`
     }
 `
 export const RedNextButton = styled('button')`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     border: 2px solid ${(props) => props.theme.colors.primaryRed};
