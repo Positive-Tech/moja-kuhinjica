@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRef } from 'react'
 import { ColDiv, GridDiv, RowDiv } from '../styles/global'
 import logo from '../../public/static/assets/images/logo-moja-klopica.svg'
 
@@ -13,18 +14,28 @@ import {
     MenuWrapper,
     TitleLabel,
     DayButton,
-    DayButtonWrapper,
+    ScrollLabel,
+    ScrollLabelWrapper,
 } from '@/styles/style'
 import Header from '@/components/header/Header'
 import { MenuItem } from '@/components/menu/MenuItem'
 import '../styles/global'
+import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 
 const Home = () => {
+    const ref = useRef<HTMLDivElement>(null)
+    const handleClick = () => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' })
+    }
     return (
         <ColDiv>
             <Wrapper height="100vh">
                 <Header />
-                <SearchContainer justifyContent="center" width="50%">
+                <SearchContainer
+                    justifyContent="center"
+                    width="50%"
+                    height="80%"
+                >
                     <Title>moja klopica</Title>
                     <Content>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
@@ -34,8 +45,21 @@ const Home = () => {
                         <Button>Ulogujte se</Button>
                     </ButtonWrapper>
                 </SearchContainer>
+                <RowDiv height="10%" justifyContent="end">
+                    <ScrollLabelWrapper>
+                        <ScrollLabel onClick={handleClick}>
+                            Dnevni meni
+                        </ScrollLabel>
+                        <Image
+                            src={scrollArrow}
+                            alt=""
+                            onClick={handleClick}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </ScrollLabelWrapper>
+                </RowDiv>
             </Wrapper>
-            <MenuWrapper>
+            <MenuWrapper ref={ref}>
                 <ColDiv alignItems="center">
                     <TitleLabel>Dnevni meni - 20/1/2023</TitleLabel>
                     <RowDiv

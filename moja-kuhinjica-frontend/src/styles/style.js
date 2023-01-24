@@ -103,8 +103,8 @@ export const TitleLabel = styled('label')`
     font-family: Nunito;
     font-weight: 600;
     color: ${(props) => props.theme.colors.grey};
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 3%;
+    margin-bottom: 3%;
     font-size: 26px;
 `
 export const DayButton = styled('button')`
@@ -125,6 +125,23 @@ export const DayButton = styled('button')`
 
     &:disabled {
         border: 2px solid ${(props) => props.theme.colors.disabledGrey};
+    }
+`
+export const ScrollLabelWrapper = styled(RowDiv)`
+    width: 20%;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 5%;
+`
+export const ScrollLabel = styled('label')`
+    font-family: Nunito;
+    color: white;
+    font-size: 25px;
+    margin-right: 5%;
+    cursor: pointer;
+
+    :hover {
+        border-bottom: 2px solid #ffff;
     }
 `
 //useful styles for later
