@@ -1,32 +1,22 @@
+import { breakpoints } from '../styles/global'
+
 export const sliderSettings = {
     infinite: false,
+    arrows: false,
     speed: 600,
-    slidesToShow: 2.5,
+    slidesToShow: 2.2,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
         {
-            breakpoint: 1024,
+            breakpoint: breakpoints.large,
             settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: true,
-            },
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                initialSlide: 2,
-            },
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
+                infinite: false,
+                arrows: false,
+                speed: 600,
+                slidesToShow: 1.5,
                 slidesToScroll: 1,
+                initialSlide: 0,
             },
         },
     ],
