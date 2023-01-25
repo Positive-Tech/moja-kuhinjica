@@ -284,10 +284,3 @@ export const RestaurantListWrapper = styled('div')`
         height: 400px;
     }
 `
-export const BottomWrapper = styled('div')`
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 252px;
-    background-color: ${(props) => props.theme.colors.grey};
-`

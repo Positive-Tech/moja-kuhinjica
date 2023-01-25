@@ -43,6 +43,8 @@ export default class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&family=Poppins:wght@300;400&family=Londrina+Solid&display=swap"
                         rel="stylesheet"
                     />
+                    <link rel="shortcut icon" href="/logo-moja-klopica.svg" />
+                    <title>Dunda</title>
                 </Head>
                 <body>
                     <Main />

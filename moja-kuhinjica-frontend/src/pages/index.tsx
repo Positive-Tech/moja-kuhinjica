@@ -1,14 +1,11 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { ColDiv, GridDiv, RowDiv } from '../styles/global'
-import logo from '../../public/static/assets/images/logo-moja-klopica.svg'
-
 import {
     Wrapper,
     SearchContainer,
     Title,
     Content,
-    BottomWrapper,
     ButtonWrapper,
     Button,
     MenuWrapper,
@@ -21,12 +18,14 @@ import Header from '@/components/header/Header'
 import { MenuItem } from '@/components/menu/MenuItem'
 import '../styles/global'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
+import { Footer } from '@/components/footer/Footer'
 
 const Home = () => {
     const ref = useRef<HTMLDivElement>(null)
     const handleClick = () => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
+
     return (
         <ColDiv>
             <Wrapper height="100vh">
@@ -85,28 +84,7 @@ const Home = () => {
                     </GridDiv>
                 </ColDiv>
             </MenuWrapper>
-            <BottomWrapper>
-                <ColDiv alignItems="center" justifyContent="center" width="90%">
-                    <RowDiv height="30%" justifyContent="start">
-                        <Image src={logo} alt="" style={{ height: '100%' }} />
-                    </RowDiv>
-                    <RowDiv>
-                        <svg
-                            width="1308"
-                            height="1"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <rect
-                                x="0.0465088"
-                                width="1307.91"
-                                height="1"
-                                fill="#D9D9D9"
-                            />
-                        </svg>
-                    </RowDiv>
-                    <RowDiv></RowDiv>
-                </ColDiv>
-            </BottomWrapper>
+            <Footer />
         </ColDiv>
     )
 }

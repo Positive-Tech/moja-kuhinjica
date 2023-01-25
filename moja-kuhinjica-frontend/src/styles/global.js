@@ -9,6 +9,7 @@ export const theme = {
         background: '#F3F1F0',
         grey: '#333333',
         disabledGrey: '#28272033',
+        footer: '#171717',
     },
     fonts: {
         button: 'Nunito',

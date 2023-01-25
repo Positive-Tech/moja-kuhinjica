@@ -1,25 +1,26 @@
-import React, { useState, useRef } from 'react'
-import Image from 'next/image'
-import { Wrapper, LogoWrapper, TitleLabel, TitleSpan, Button } from './styles'
+import React, { useState } from 'react'
+import { Wrapper, LogoWrapper, Button, LogoImage } from './styles'
 import logo from '../../../public/static/assets/images/logo-moja-klopica.svg'
 import { RowDiv } from '@/styles/global'
 
 const Header = () => {
-    const [selectedButton, setSelectedButton] = useState(true)
+    const [active, setActive] = useState(1)
 
     return (
         <Wrapper>
             <LogoWrapper>
-                <Image
-                    src={logo}
-                    alt=""
-                    style={{ height: '100%', width: '100%' }}
-                />
+                <LogoImage src={logo} alt="" />
             </LogoWrapper>
             <RowDiv alignItems="center" justifyContent="center" width="50%">
-                <Button selected={true}>Početna</Button>
-                <Button selected={false}>Meni</Button>
-                <Button selected={false}>Profil</Button>
+                <Button selected={active == 1} onClick={() => setActive(1)}>
+                    Početna
+                </Button>
+                <Button selected={active == 2} onClick={() => setActive(2)}>
+                    Meni
+                </Button>
+                <Button selected={active == 3} onClick={() => setActive(3)}>
+                    O nama
+                </Button>
             </RowDiv>
         </Wrapper>
     )

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 import '../../styles/global'
 import { breakpoints } from '../../styles/global'
 
@@ -19,6 +20,10 @@ export const LogoWrapper = styled('div')`
     width: 10%;
     height: 100%;
     margin-left: 5%;
+`
+export const LogoImage = styled(Image)`
+    height: 100%;
+    width: 100%;
 `
 
 export const TitleLabel = styled('label')`
