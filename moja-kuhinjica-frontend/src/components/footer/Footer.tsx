@@ -7,6 +7,7 @@ import playStoreButton from '../../../public/static/assets/images/playStore.svg'
 import circle from '../../../public/static/assets/images/c-circle.svg'
 import location from '../../../public/static/assets/images/locationFooter.svg'
 import earth from '../../../public/static/assets/images/earth.svg'
+import { SVGFooterSeparator } from '../svg/SVGFooterSeparator'
 
 export const Footer = () => {
     return (
@@ -35,13 +36,7 @@ export const Footer = () => {
                     </div>
                 </div>
                 <div className={styles.rowDiv3}>
-                    <svg
-                        width="1402"
-                        height="2"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <rect width="1402" height="2" fill="#C40016" />
-                    </svg>
+                    <SVGFooterSeparator />
                 </div>
                 <div className={styles.rowDiv4}>
                     <div className={styles.rowDiv6}>

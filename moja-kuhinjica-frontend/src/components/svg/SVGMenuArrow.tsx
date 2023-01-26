@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const SVGMenuArrow = (props: { onClick: () => void }) => {
+export const SVGMenuArrow = (className: string, onClick: () => void) => {
     return (
         <svg
-            onClick={props.onClick}
+            onClick={onClick}
             width="19"
             height="19"
             xmlns="http://www.w3.org/2000/svg"
