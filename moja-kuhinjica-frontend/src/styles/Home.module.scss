@@ -1,0 +1,164 @@
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    @extend .colDiv;
+    height: 100vh;
+    background-image: url('../../public/static/assets/images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    @extend .colDiv;
+    justify-content: center;
+    width: 50%;
+    height: 80%;
+    margin-left: 5%;
+}
+
+.title {
+    font-family: Londrina Solid;
+    font-weight: 400;
+    color: #c10016;
+    text-shadow: -0.5px 0px 0px black, 0.5px 0px 0px black, 0px -0.5px 0px black,
+        0px 0.5px 0px black;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 70px;
+}
+
+.content {
+    font-family: Nunito;
+    font-weight: 500;
+    color: #ffff;
+    line-height: 50px;
+    letter-spacing: 0.03em;
+    height: 10%;
+    width: 90%;
+    font-size: 35px;
+}
+
+.buttonWrapper {
+    @extend .rowDiv;
+    height: 20%;
+    width: 60%;
+    margin-top: 10%;
+    justify-content: space-between;
+}
+
+.button {
+    width: 195px;
+    height: 67px;
+
+    color: white;
+    font-weight: 800;
+    font-family: Nunito;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+        background: #c10016;
+    }
+
+    border-radius: 40px;
+    border: 4px solid #c10016;
+    font-size: 22px;
+}
+
+.scrollDiv {
+    @extend .rowDiv;
+    height: 10%;
+    justify-content: flex-end;
+}
+.scrollLabelWrapper {
+    @extend .rowDiv;
+    width: 20%;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 5%;
+}
+
+.scrollLabel {
+    font-family: Nunito;
+    color: white;
+    font-size: 25px;
+    margin-right: 5%;
+    cursor: pointer;
+
+    &:hover {
+        border-bottom: 2px solid #ffff;
+    }
+}
+
+.scrollIcon {
+    cursor: pointer;
+}
+
+.menuWrapper {
+    width: 100%;
+    height: 50%;
+    background-color: white;
+}
+
+.menuColDiv {
+    @extend .colDiv;
+    align-items: center;
+}
+
+.titleLabel {
+    font-family: Nunito;
+    font-weight: 600;
+    color: #333333;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 26px;
+}
+
+.menuRowDiv {
+    @extend .rowDiv;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dayButton {
+    width: 220px;
+    height: 60px;
+    font-weight: 500;
+    font-family: Nunito;
+    cursor: pointer;
+    border-radius: 40px;
+    border: 0;
+    font-size: 28px;
+    margin: 15px;
+
+    color: #28272033;
+    border: 2px solid #28272033;
+    background: transparent;
+}
+
+.dayButtonSelected {
+    @extend .dayButton;
+    color: white;
+    border: none;
+    background: #c10016;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr [col-start]);
+    row-gap: 15px;
+    column-gap: 70px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    justify-items: center;
+}
