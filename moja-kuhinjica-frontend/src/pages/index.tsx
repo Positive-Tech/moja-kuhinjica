@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useRef } from 'react'
 import { ColDiv, GridDiv, RowDiv } from '../styles/global'
 import {
@@ -13,6 +12,7 @@ import {
     DayButton,
     ScrollLabel,
     ScrollLabelWrapper,
+    ScrollIcon,
 } from '@/styles/style'
 import Header from '@/components/header/Header'
 import { MenuItem } from '@/components/menu/MenuItem'
@@ -49,11 +49,10 @@ const Home = () => {
                         <ScrollLabel onClick={handleClick}>
                             Dnevni meni
                         </ScrollLabel>
-                        <Image
+                        <ScrollIcon
                             src={scrollArrow}
                             alt=""
                             onClick={handleClick}
-                            style={{ cursor: 'pointer' }}
                         />
                     </ScrollLabelWrapper>
                 </RowDiv>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ColDiv, RowDiv } from '../../styles/global'
 import Image from 'next/image'
 import {
@@ -50,8 +50,6 @@ export const Footer = () => {
                     <svg
                         width="1402"
                         height="2"
-                        viewBox="0 0 1402 2"
-                        fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <rect width="1402" height="2" fill="#C40016" />

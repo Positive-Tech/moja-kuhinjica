@@ -144,6 +144,10 @@ export const ScrollLabel = styled('label')`
         border-bottom: 2px solid #ffff;
     }
 `
+export const ScrollIcon = styled(Image)`
+    cursor: pointer;
+`
+
 //useful styles for later
 export const InputWrapper = styled('div')`
     display: flex;

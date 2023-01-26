@@ -12,13 +12,13 @@ const Header = () => {
                 <LogoImage src={logo} alt="" />
             </LogoWrapper>
             <RowDiv alignItems="center" justifyContent="center" width="50%">
-                <Button selected={active == 1} onClick={() => setActive(1)}>
+                <Button selected={active === 1} onClick={() => setActive(1)}>
                     Početna
                 </Button>
-                <Button selected={active == 2} onClick={() => setActive(2)}>
+                <Button selected={active === 2} onClick={() => setActive(2)}>
                     Meni
                 </Button>
-                <Button selected={active == 3} onClick={() => setActive(3)}>
+                <Button selected={active === 3} onClick={() => setActive(3)}>
                     O nama
                 </Button>
             </RowDiv>
