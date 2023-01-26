@@ -7,7 +7,9 @@ export const theme = {
         secondaryRed: '#C63A2F',
         placeholder: 'rgba(30, 30, 30, .4)',
         background: '#F3F1F0',
-        bottomBackground: '#333333',
+        grey: '#333333',
+        disabledGrey: '#28272033',
+        footer: '#171717',
     },
     fonts: {
         button: 'Nunito',
@@ -47,7 +49,8 @@ export const RowDiv = styled('div')`
 export const GridDiv = styled('div')`
     display: grid;
     grid-template-columns: repeat(3, 1fr [col-start]);
-    row-gap: 20px;
+    row-gap: 15px;
+    column-gap: 70px;
     padding-top: 5%;
     padding-bottom: 5%;
     justify-items: center;

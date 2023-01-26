@@ -1,8 +1,10 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 import '../../styles/global'
 import { breakpoints } from '../../styles/global'
 
 export const Wrapper = styled('header')`
+    position: relative;
     width: 100%;
     height: 15%;
     background: ${(props) => props.theme.colors.header};
@@ -18,6 +20,10 @@ export const LogoWrapper = styled('div')`
     width: 10%;
     height: 100%;
     margin-left: 5%;
+`
+export const LogoImage = styled(Image)`
+    height: 100%;
+    width: 100%;
 `
 
 export const TitleLabel = styled('label')`
@@ -71,45 +77,16 @@ export const TitleSpan = styled('span')`
     }
 `
 export const Button = styled('button')`
-    width: 12%;
-    height: 50%;
+    width: 25%;
+    height: 40%;
     margin-right: 5%;
     color: white;
-    font-weight: 800;
+    font-weight: 300;
     font-family: ${(props) => props.theme.fonts.button};
+    font-size: 25px;
     background: transparent;
     cursor: pointer;
-
-    &:hover {
-        background: ${(props) => props.theme.colors.primaryRed};
-    }
-
-    border-radius: 40px;
-    border: 4px solid ${(props) => props.theme.colors.primaryRed};
-    font-size: 22px;
-    @media only screen and (max-width: ${breakpoints.breakpoint1440p}px) {
-        border-radius: 40px;
-        border: 4px solid ${(props) => props.theme.colors.primaryRed};
-        font-size: 35px;
-    }
-    @media only screen and (max-width: ${breakpoints.breakpoint1080p}px) {
-        border-radius: 40px;
-        border: 4px solid ${(props) => props.theme.colors.primaryRed};
-        font-size: 25px;
-    }
-    @media only screen and (max-width: ${breakpoints.breakpoint900p}px) {
-        border-radius: 40px;
-        border: 4px solid ${(props) => props.theme.colors.primaryRed};
-        font-size: 22px;
-    }
-    @media only screen and (max-width: ${breakpoints.breakpoint720p}px) {
-        border-radius: 30px;
-        border: 3px solid ${(props) => props.theme.colors.primaryRed};
-        font-size: 18px;
-    }
-    @media only screen and (max-width: ${breakpoints.large}px) {
-        border-radius: 30px;
-        border: 3px solid ${(props) => props.theme.colors.primaryRed};
-        font-size: 15px;
-    }
+    border-radius: 20px;
+    border: ${(props) => (props.selected ? 2 : 0)}px solid
+        ${(props) => props.theme.colors.primaryRed};
 `

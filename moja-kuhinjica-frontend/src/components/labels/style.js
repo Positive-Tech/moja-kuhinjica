@@ -10,8 +10,8 @@ export const TitleLabelStyled = styled('label')`
 
 export const RegularLabelStyled = styled('label')`
     font-family: Poppins;
-    font-weight: 400;
-    color: #8a8a8a;
+    font-weight: 700;
+    color: ${(props) => props.theme.colors.grey};
     font-size: ${(props) => props.size};
 `
 export const LabelSeparator = styled('label')`
