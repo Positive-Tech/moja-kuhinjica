@@ -1,28 +1,49 @@
 import React, { useState } from 'react'
-import { Wrapper, LogoWrapper, Button, LogoImage } from './styles'
+import Image from 'next/image'
+import styles from './Header.module.scss'
 import logo from '../../../public/static/assets/images/logo-moja-klopica.svg'
-import { RowDiv } from '@/styles/global'
 
 const Header = () => {
     const [active, setActive] = useState(1)
 
     return (
-        <Wrapper>
-            <LogoWrapper>
-                <LogoImage src={logo} alt="" />
-            </LogoWrapper>
-            <RowDiv alignItems="center" justifyContent="center" width="50%">
-                <Button selected={active === 1} onClick={() => setActive(1)}>
+        <div className={styles.wrapper}>
+            <div className={styles.logoWrapper}>
+                <Image src={logo} alt="" className={styles.logoImage} />
+            </div>
+            <div className={styles.buttonWrapper}>
+                <button
+                    className={
+                        active === 1
+                            ? styles.navButtonSelected
+                            : styles.navButton
+                    }
+                    onClick={() => setActive(1)}
+                >
                     Početna
-                </Button>
-                <Button selected={active === 2} onClick={() => setActive(2)}>
+                </button>
+                <button
+                    className={
+                        active === 2
+                            ? styles.navButtonSelected
+                            : styles.navButton
+                    }
+                    onClick={() => setActive(2)}
+                >
                     Meni
-                </Button>
-                <Button selected={active === 3} onClick={() => setActive(3)}>
+                </button>
+                <button
+                    className={
+                        active === 3
+                            ? styles.navButtonSelected
+                            : styles.navButton
+                    }
+                    onClick={() => setActive(3)}
+                >
                     O nama
-                </Button>
-            </RowDiv>
-        </Wrapper>
+                </button>
+            </div>
+        </div>
     )
 }
 
