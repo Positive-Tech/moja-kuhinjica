@@ -1,10 +1,17 @@
 import { useRef, useState } from 'react'
+import Modal from 'react-modal'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
 import styles from '../styles/Home.module.scss'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
+import { bgModal } from '@/constants/constants'
+import { FormInput } from '@/components/input/FormInput'
+import email from '../../public/static/assets/images/email.svg'
+import password from '../../public/static/assets/images/password.svg'
+import mobile from '../../public/static/assets/images/mobile.svg'
+import profile from '../../public/static/assets/images/profile.svg'
 
 const today = new Date()
 
@@ -14,6 +21,25 @@ const Home = () => {
 
     const handleClick = () => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    const [loginModalIsOpen, setIsOpenLogin] = useState(false)
+    const [signInModalIsOpen, setIsOpenSignIn] = useState(false)
+
+    const openLoginModal = () => {
+        setIsOpenLogin(true)
+    }
+
+    const closeLoginModal = () => {
+        setIsOpenLogin(false)
+    }
+
+    const openSignInModal = () => {
+        setIsOpenSignIn(true)
+    }
+
+    const closeSignInModal = () => {
+        setIsOpenSignIn(false)
     }
 
     return (
@@ -26,10 +52,18 @@ const Home = () => {
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
                     <div className={styles.buttonWrapper}>
-                        <button className={styles.button}>
+                        <button
+                            className={styles.button}
+                            onClick={openSignInModal}
+                        >
                             Registrujte se
                         </button>
-                        <button className={styles.button}>Ulogujte se</button>
+                        <button
+                            className={styles.button}
+                            onClick={openLoginModal}
+                        >
+                            Ulogujte se
+                        </button>
                     </div>
                 </div>
                 <div className={styles.scrollDiv}>
@@ -128,6 +162,56 @@ const Home = () => {
                 </div>
             </div>
             <Footer />
+            <Modal
+                isOpen={loginModalIsOpen}
+                onRequestClose={closeLoginModal}
+                style={bgModal}
+                className={styles.modalContainer}
+            >
+                <div className={styles.formContainer}>
+                    <div className={styles.formDiv}>
+                        <label className={styles.formTitle}>Ulogujte se</label>
+                        <FormInput src={email} content="Email" type="text" />
+                        <FormInput
+                            src={password}
+                            content="Šifra"
+                            type="password"
+                        />
+                        <button className={styles.formButton}>Potvrdi</button>
+                    </div>
+                </div>
+            </Modal>
+            <Modal
+                isOpen={signInModalIsOpen}
+                onRequestClose={closeSignInModal}
+                style={bgModal}
+                className={styles.modalContainer}
+            >
+                <div className={styles.formContainer}>
+                    <div className={styles.formDiv}>
+                        <label className={styles.formTitle}>
+                            Registrujte se
+                        </label>
+                        <FormInput
+                            src={profile}
+                            content="Ime i prezime"
+                            type="text"
+                        />
+                        <FormInput src={email} content="Email" type="text" />
+                        <FormInput
+                            src={password}
+                            content="Šifra"
+                            type="password"
+                        />
+                        <FormInput
+                            src={mobile}
+                            content="Broj telefona"
+                            type="text"
+                        />
+                        <button className={styles.formButton}>Potvrdi</button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }
