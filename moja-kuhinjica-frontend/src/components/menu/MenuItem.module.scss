@@ -1,0 +1,70 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    height: 700px;
+    align-items: center;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    height: 20%;
+}
+
+.svgSeparator {
+    transform: rotate(90deg);
+    fill: #c10016;
+    cursor: pointer;
+}
+
+.svgSeparatorRotated {
+    @extend .svgSeparator;
+    transform: rotate(-90deg);
+}
+
+.titleLabel {
+    font-family: Poppins;
+    font-weight: 700;
+    color: #333333;
+    font-size: 28px;
+    text-align: center;
+    width: 80%;
+}
+
+.descriptionLabelDiv {
+    display: flex;
+    height: 20%;
+    width: 100%;
+    justify-content: center;
+}
+
+.priceWrapper {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentLabel {
+    font-family: Poppins;
+    text-transform: uppercase;
+    font-size: 24px;
+    color: #333333;
+}
+
+.priceLabel {
+    @extend .contentLabel;
+    color: #c10016;
+}
+
+.descriptionLabel {
+    font-family: Poppins;
+    font-weight: lighter;
+    font-size: 20px;
+    width: 70%;
+    color: #333333;
+}

@@ -1,0 +1,104 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 252px;
+    background-color: #171717;
+}
+
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rowDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.colDiv1 {
+    @extend .colDiv;
+    width: 95%;
+}
+
+.rowDiv1 {
+    @extend .rowDiv;
+    justify-content: space-between;
+    width: 100%;
+    height: 70%;
+}
+
+.rowDiv2 {
+    @extend .rowDiv;
+    width: 70%;
+}
+.navButton {
+    width: 25%;
+    height: 40%;
+    margin-right: 5%;
+    color: white;
+    font-weight: 300;
+    font-family: Nunito;
+    font-size: 25px;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0;
+}
+
+.colDiv3 {
+    @extend .colDiv;
+    align-items: end;
+    width: 15%;
+}
+
+.footerButton {
+    margin-bottom: 5%;
+}
+
+.rowDiv3 {
+    @extend .rowDiv;
+    justify-content: none;
+    height: 5%;
+}
+
+.rowDiv4 {
+    @extend .rowDiv;
+    justify-content: none;
+    height: 15%;
+}
+
+.footerLabel {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: Poppins;
+    font-size: 16px;
+    margin-right: 5%;
+}
+
+.footerImage {
+    height: 100%;
+    margin-right: 1%;
+}
+
+.imageWrapper {
+    width: 15%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.rowDiv5 {
+    @extend .rowDiv;
+    justify-content: flex-end;
+    align-items: none;
+}
+
+.rowDiv6 {
+    @extend .rowDiv;
+    justify-content: flex-start;
+}
