@@ -6,12 +6,9 @@ import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
 import styles from '../styles/Home.module.scss'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
-import { bgModal } from '@/constants/constants'
-import { FormInput } from '@/components/input/FormInput'
-import email from '../../public/static/assets/images/email.svg'
-import password from '../../public/static/assets/images/password.svg'
-import mobile from '../../public/static/assets/images/mobile.svg'
-import profile from '../../public/static/assets/images/profile.svg'
+import { LoginModal } from '@/components/modal/login/LoginModal'
+import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
+import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
 
 const today = new Date()
 
@@ -23,44 +20,30 @@ const Home = () => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
 
-    const [loginModalIsOpen, setIsOpenLogin] = useState(false)
-    const [signInModalIsOpen, setIsOpenSignIn] = useState(false)
-
-    const openLoginModal = () => {
-        setIsOpenLogin(true)
-    }
-
-    const closeLoginModal = () => {
-        setIsOpenLogin(false)
-    }
-
-    const openSignInModal = () => {
-        setIsOpenSignIn(true)
-    }
-
-    const closeSignInModal = () => {
-        setIsOpenSignIn(false)
-    }
+    const [showLoginModal, setShowLoginModal] = useState(false)
+    const [showSignUpModal, setShowSignUpModal] = useState(false)
+    const [showSignUpModalNotification, setShowSignUpModalNotification] =
+        useState(false)
 
     return (
         <div className={styles.colDiv}>
             <div className={styles.wrapper}>
                 <Header />
                 <div className={styles.container}>
-                    <label className={styles.title}>moja klopica</label>
+                    <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
                     <div className={styles.buttonWrapper}>
                         <button
                             className={styles.button}
-                            onClick={openSignInModal}
+                            onClick={() => setShowSignUpModal(true)}
                         >
                             Registrujte se
                         </button>
                         <button
                             className={styles.button}
-                            onClick={openLoginModal}
+                            onClick={() => setShowLoginModal(true)}
                         >
                             Ulogujte se
                         </button>
@@ -85,6 +68,11 @@ const Home = () => {
             </div>
             <div className={styles.menuWrapper} ref={ref}>
                 <div className={styles.menuColDiv}>
+                    <div className={styles.restaurantButtonWrapper}>
+                        <button className={styles.restaurantButton}>
+                            Restoran Top FOOD 021
+                        </button>
+                    </div>
                     <label className={styles.titleLabel}>
                         Dnevni meni - {today.toLocaleString().split(',')[0]}
                     </label>
@@ -162,56 +150,18 @@ const Home = () => {
                 </div>
             </div>
             <Footer />
-            <Modal
-                isOpen={loginModalIsOpen}
-                onRequestClose={closeLoginModal}
-                style={bgModal}
-                className={styles.modalContainer}
-            >
-                <div className={styles.formContainer}>
-                    <div className={styles.formDiv}>
-                        <label className={styles.formTitle}>Ulogujte se</label>
-                        <FormInput src={email} content="Email" type="text" />
-                        <FormInput
-                            src={password}
-                            content="Šifra"
-                            type="password"
-                        />
-                        <button className={styles.formButton}>Potvrdi</button>
-                    </div>
-                </div>
-            </Modal>
-            <Modal
-                isOpen={signInModalIsOpen}
-                onRequestClose={closeSignInModal}
-                style={bgModal}
-                className={styles.modalContainer}
-            >
-                <div className={styles.formContainer}>
-                    <div className={styles.formDiv}>
-                        <label className={styles.formTitle}>
-                            Registrujte se
-                        </label>
-                        <FormInput
-                            src={profile}
-                            content="Ime i prezime"
-                            type="text"
-                        />
-                        <FormInput src={email} content="Email" type="text" />
-                        <FormInput
-                            src={password}
-                            content="Šifra"
-                            type="password"
-                        />
-                        <FormInput
-                            src={mobile}
-                            content="Broj telefona"
-                            type="text"
-                        />
-                        <button className={styles.formButton}>Potvrdi</button>
-                    </div>
-                </div>
-            </Modal>
+            <LoginModal
+                modalIsOpen={showLoginModal}
+                closeModal={() => setShowLoginModal(false)}
+            />
+            <SignUpModal
+                modalIsOpen={showSignUpModal}
+                closeModal={() => setShowSignUpModal(false)}
+            />
+            <SignUpNotificationModal
+                modalIsOpen={showSignUpModalNotification}
+                closeModal={() => setShowSignUpModalNotification(false)}
+            />
         </div>
     )
 }

@@ -8,8 +8,6 @@
 .icon {
     position: absolute;
     box-sizing: border-box;
-    // top: 25%;
-    // left: 10px;
     transform: translateY(-50%);
 }
 
@@ -22,10 +20,9 @@
     font-weight: 400;
     font-size: 20px;
     width: 100%;
-    margin-bottom: 5%;
     outline: none;
     border: 0;
-    border-bottom: 2px solid #33333380;
+    border-bottom: 1px solid #33333380;
     background: transparent;
     &::placeholder {
         color: #3333334d;
