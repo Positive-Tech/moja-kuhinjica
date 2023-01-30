@@ -1,19 +1,19 @@
 import { useRef, useState } from 'react'
-import Modal from 'react-modal'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
-import styles from '../styles/Home.module.scss'
-import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
+import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
+import styles from '../styles/Home.module.scss'
 
 const today = new Date()
 
 const Home = () => {
     const [active, setActive] = useState(today.getDay())
+    const bla = 34
     const ref = useRef<HTMLDivElement>(null)
 
     const handleClick = () => {
@@ -55,7 +55,7 @@ const Home = () => {
                             className={styles.scrollLabel}
                             onClick={handleClick}
                         >
-                            Dnevni meni
+                            Ponuda
                         </label>
                         <Image
                             className={styles.scrollIcon}
@@ -115,7 +115,7 @@ const Home = () => {
                                     : styles.dayButton
                             }
                         >
-                            Cetvrtak
+                            Četvrtak
                         </button>
                         <button
                             onClick={() => setActive(5)}

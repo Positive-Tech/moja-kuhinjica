@@ -30,7 +30,7 @@ const Header = () => {
                     }
                     onClick={() => setActive(2)}
                 >
-                    Meni
+                    Ponuda
                 </button>
                 <button
                     className={
