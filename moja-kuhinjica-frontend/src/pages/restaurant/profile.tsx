@@ -13,8 +13,8 @@ import restaurantPic from '../../../public/static/assets/images/restaurantGaller
 const Profile = () => {
     return (
         <div className={styles.colDiv}>
+            <Header type="profile" />
             <div className={styles.wrapper}>
-                <Header type="profile" />
                 <div className={styles.container}>
                     <div className={styles.colDiv1}>
                         <div className={styles.rowDiv1}>

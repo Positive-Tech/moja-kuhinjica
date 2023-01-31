@@ -8,7 +8,7 @@ interface IHeaderProps {
     type: string
 }
 const Header = ({ type }: IHeaderProps) => {
-    const [active, setActive] = useState(type === 'main' ? 1 : 0)
+    const [active, setActive] = useState(0)
     const router = useRouter()
 
     const handleClick = (buttonNumber: number, url: string) => {
@@ -40,7 +40,7 @@ const Header = ({ type }: IHeaderProps) => {
                 />
                 <HeaderButton
                     active={active === 3}
-                    onClick={() => handleClick(3, '/')}
+                    onClick={() => handleClick(3, '/aboutUs')}
                     content="O nama"
                     headerType={type}
                 />

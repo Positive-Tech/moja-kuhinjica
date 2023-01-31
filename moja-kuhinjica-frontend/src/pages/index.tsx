@@ -10,7 +10,7 @@ import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
-import { DayButton } from '@/components/button/DayButton'
+import { TabButton } from '@/components/button/TabButton'
 
 const Home = () => {
     const [active, setActive] = useState(2)
@@ -27,8 +27,8 @@ const Home = () => {
 
     return (
         <div className={styles.colDiv}>
+            <Header type="main" />
             <div className={styles.wrapper}>
-                <Header type="main" />
                 <div className={styles.container}>
                     <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
@@ -76,32 +76,32 @@ const Home = () => {
                         Dnevni meni - 21/01/2023
                     </label>
                     <div className={styles.menuRowDiv}>
-                        <DayButton
+                        <TabButton
                             active={active === 1}
                             onClick={() => setActive(1)}
                             content="Ponedeljak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 2}
                             onClick={() => setActive(2)}
                             content="Utorak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 3}
                             onClick={() => setActive(3)}
                             content="Sreda"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 4}
                             onClick={() => setActive(4)}
                             content="Četvrtak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 5}
                             onClick={() => setActive(5)}
                             content="Petak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 6}
                             onClick={() => setActive(6)}
                             content="Subota"
