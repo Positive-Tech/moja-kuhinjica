@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import logo from '../../../public/static/assets/images/logo-moja-klopica.svg'
+import { HeaderButton } from '../button/HeaderButton'
 
 const Header = () => {
     const [active, setActive] = useState(1)
@@ -12,36 +13,21 @@ const Header = () => {
                 <Image src={logo} alt="" className={styles.logoImage} />
             </div>
             <div className={styles.buttonWrapper}>
-                <button
-                    className={
-                        active === 1
-                            ? styles.navButtonSelected
-                            : styles.navButton
-                    }
+                <HeaderButton
+                    active={active === 1}
                     onClick={() => setActive(1)}
-                >
-                    Početna
-                </button>
-                <button
-                    className={
-                        active === 2
-                            ? styles.navButtonSelected
-                            : styles.navButton
-                    }
+                    content="Početna"
+                />
+                <HeaderButton
+                    active={active === 2}
                     onClick={() => setActive(2)}
-                >
-                    Meni
-                </button>
-                <button
-                    className={
-                        active === 3
-                            ? styles.navButtonSelected
-                            : styles.navButton
-                    }
+                    content="Ponuda"
+                />
+                <HeaderButton
+                    active={active === 3}
                     onClick={() => setActive(3)}
-                >
-                    O nama
-                </button>
+                    content="O nama"
+                />
             </div>
         </div>
     )

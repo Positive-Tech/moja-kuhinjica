@@ -9,3 +9,9 @@ export const breakpoints = {
     small: 600,
     smallest: 350,
 }
+
+export const bgModal = {
+    overlay: {
+        background: 'transparent',
+    },
+}

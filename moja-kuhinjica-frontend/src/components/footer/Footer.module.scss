@@ -2,15 +2,9 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 252px;
+    height: 10%;
     background-color: #171717;
-}
-
-.colDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border-top: 3px solid #c40016;
 }
 
 .rowDiv {
@@ -20,22 +14,6 @@
     width: 100%;
 }
 
-.colDiv1 {
-    @extend .colDiv;
-    width: 95%;
-}
-
-.rowDiv1 {
-    @extend .rowDiv;
-    justify-content: space-between;
-    width: 100%;
-    height: 70%;
-}
-
-.rowDiv2 {
-    @extend .rowDiv;
-    width: 70%;
-}
 .navButton {
     width: 25%;
     height: 40%;
@@ -50,26 +28,13 @@
     border: 0;
 }
 
-.colDiv3 {
-    @extend .colDiv;
-    align-items: end;
-    width: 15%;
-}
-
 .footerButton {
     margin-bottom: 5%;
 }
 
-.rowDiv3 {
+.rowDiv1 {
     @extend .rowDiv;
     justify-content: none;
-    height: 5%;
-}
-
-.rowDiv4 {
-    @extend .rowDiv;
-    justify-content: none;
-    height: 15%;
 }
 
 .footerLabel {
@@ -79,6 +44,7 @@
     font-family: Poppins;
     font-size: 16px;
     margin-right: 5%;
+    cursor: pointer;
 }
 
 .footerImage {
@@ -87,18 +53,19 @@
 }
 
 .imageWrapper {
-    width: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
     display: flex;
+    justify-content: flex-start;
+    height: 80%;
+}
+.rowDiv2 {
+    @extend .rowDiv;
     justify-content: flex-start;
 }
 
-.rowDiv5 {
+.rowDiv3 {
     @extend .rowDiv;
     justify-content: flex-end;
     align-items: none;
-}
-
-.rowDiv6 {
-    @extend .rowDiv;
-    justify-content: flex-start;
 }
