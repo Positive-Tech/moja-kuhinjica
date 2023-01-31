@@ -1,0 +1,84 @@
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    height: 100vh;
+}
+
+.container {
+    @extend .colDiv;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+
+.colDiv1 {
+    width: 95%;
+}
+
+.rowDiv1 {
+    @extend .rowDiv;
+    justify-content: space-between;
+    gap: 2%;
+}
+.contentContainer {
+    @extend .colDiv;
+    gap: 5%;
+}
+
+.name {
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 36px;
+    color: #c10016;
+}
+
+.description {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+
+    color: #333333;
+}
+
+.title {
+    font-family: Nunito;
+    width: 100%;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 49px;
+    color: #333333;
+    margin-left: 5%;
+}
+
+.galleryWrapper {
+    width: 100%;
+    height: 50%;
+}
+
+.galleryColDiv {
+    @extend .colDiv;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr [col-start]);
+    row-gap: 50px;
+    column-gap: 70px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    justify-items: center;
+}

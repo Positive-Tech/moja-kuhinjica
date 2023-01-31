@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { HomePageButton } from '@/components/button/HomePageButton'
@@ -11,10 +12,9 @@ import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
 import { DayButton } from '@/components/button/DayButton'
 
-const today = new Date()
-
 const Home = () => {
-    const [active, setActive] = useState(today.getDay())
+    const [active, setActive] = useState(2)
+    const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
     const handleClick = () => {
@@ -28,7 +28,7 @@ const Home = () => {
     return (
         <div className={styles.colDiv}>
             <div className={styles.wrapper}>
-                <Header />
+                <Header type="main" />
                 <div className={styles.container}>
                     <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
@@ -65,12 +65,15 @@ const Home = () => {
             <div className={styles.menuWrapper} ref={ref}>
                 <div className={styles.menuColDiv}>
                     <div className={styles.restaurantButtonWrapper}>
-                        <button className={styles.restaurantButton}>
+                        <button
+                            className={styles.restaurantButton}
+                            onClick={() => router.push('/restaurant/profile')}
+                        >
                             Restoran Top FOOD 021
                         </button>
                     </div>
                     <label className={styles.titleLabel}>
-                        Dnevni meni - {today.toLocaleString().split(',')[0]}
+                        Dnevni meni - 21/01/2023
                     </label>
                     <div className={styles.menuRowDiv}>
                         <DayButton

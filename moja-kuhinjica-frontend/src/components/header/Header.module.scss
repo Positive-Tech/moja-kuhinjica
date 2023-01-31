@@ -8,6 +8,11 @@
     align-items: center;
 }
 
+.profileWrapper {
+    @extend .wrapper;
+    background: #c50016;
+}
+
 .logoWrapper {
     display: flex;
     justify-content: center;
