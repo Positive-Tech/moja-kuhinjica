@@ -1,0 +1,22 @@
+.dayButton {
+    width: 220px;
+    height: 60px;
+    font-weight: 500;
+    font-family: Nunito;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0;
+    font-size: 28px;
+    margin: 15px;
+
+    color: #28272033;
+    border: 2px solid #28272033;
+    background: transparent;
+}
+
+.dayButtonSelected {
+    @extend .dayButton;
+    color: white;
+    border: none;
+    background: #c10016;
+}

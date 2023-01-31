@@ -23,8 +23,12 @@ export const LoginModal = ({ modalIsOpen, closeModal }: ILoginModalProps) => {
             <div className={styles.formContainer}>
                 <div className={styles.formDiv}>
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    <FormInput src={email} content="Email" type="text" />
-                    <FormInput src={password} content="Šifra" type="password" />
+                    <FormInput src={email} placeholder="Email" type="text" />
+                    <FormInput
+                        src={password}
+                        placeholder="Šifra"
+                        type="password"
+                    />
                     <button className={styles.formButton}>Potvrdi</button>
                 </div>
             </div>

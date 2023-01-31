@@ -4,18 +4,18 @@ import Image from 'next/image'
 
 interface IFormInputProps {
     src: string
-    content: string
+    placeholder: string
     type: string
 }
 
-export const FormInput = (props: IFormInputProps) => {
+export const FormInput = ({ src, placeholder, type }: IFormInputProps) => {
     return (
         <div className={styles.wrapper}>
-            <Image src={props.src} className={styles.icon} alt="" />
+            <Image src={src} className={styles.icon} alt="" />
             <input
                 className={styles.input}
-                placeholder={props.content}
-                type={props.type}
+                placeholder={placeholder}
+                type={type}
             ></input>
         </div>
     )

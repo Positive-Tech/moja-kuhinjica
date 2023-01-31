@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
+import { HomePageButton } from '@/components/button/HomePageButton'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
 import { LoginModal } from '@/components/modal/login/LoginModal'
@@ -8,12 +9,12 @@ import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
+import { DayButton } from '@/components/button/DayButton'
 
 const today = new Date()
 
 const Home = () => {
     const [active, setActive] = useState(today.getDay())
-    const bla = 34
     const ref = useRef<HTMLDivElement>(null)
 
     const handleClick = () => {
@@ -22,8 +23,7 @@ const Home = () => {
 
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [showSignUpModal, setShowSignUpModal] = useState(false)
-    const [showSignUpModalNotification, setShowSignUpModalNotification] =
-        useState(false)
+    const [showNotification, setNotification] = useState(false)
 
     return (
         <div className={styles.colDiv}>
@@ -35,18 +35,14 @@ const Home = () => {
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
                     <div className={styles.buttonWrapper}>
-                        <button
-                            className={styles.button}
-                            onClick={() => setShowSignUpModal(true)}
-                        >
-                            Registrujte se
-                        </button>
-                        <button
-                            className={styles.button}
-                            onClick={() => setShowLoginModal(true)}
-                        >
-                            Ulogujte se
-                        </button>
+                        <HomePageButton
+                            content="Registrujte se"
+                            setShowModal={setShowSignUpModal}
+                        />
+                        <HomePageButton
+                            content="Ulogujte se"
+                            setShowModal={setShowLoginModal}
+                        />
                     </div>
                 </div>
                 <div className={styles.scrollDiv}>
@@ -77,66 +73,42 @@ const Home = () => {
                         Dnevni meni - {today.toLocaleString().split(',')[0]}
                     </label>
                     <div className={styles.menuRowDiv}>
-                        <button
-                            onClick={() => setActive(1)}
-                            className={
-                                active === 1
-                                    ? styles.dayButtonSelected
-                                    : styles.dayButton
-                            }
-                        >
-                            Ponedeljak
-                        </button>
-                        <button
-                            onClick={() => setActive(2)}
-                            className={
-                                active === 2
-                                    ? styles.dayButtonSelected
-                                    : styles.dayButton
-                            }
-                        >
-                            Utorak
-                        </button>
-                        <button
-                            onClick={() => setActive(3)}
-                            className={
-                                active === 3
-                                    ? styles.dayButtonSelected
-                                    : styles.dayButton
-                            }
-                        >
-                            Sreda
-                        </button>
-                        <button
-                            onClick={() => setActive(4)}
-                            className={
-                                active === 4
-                                    ? styles.dayButtonSelected
-                                    : styles.dayButton
-                            }
-                        >
-                            Četvrtak
-                        </button>
-                        <button
-                            onClick={() => setActive(5)}
-                            className={
-                                active === 5
-                                    ? styles.dayButtonSelected
-                                    : styles.dayButton
-                            }
-                        >
-                            Petak
-                        </button>
-                        <button
-                            onClick={() => setActive(6)}
-                            className={
-                                active === 6
-                                    ? styles.dayButtonSelected
-                                    : styles.dayButton
-                            }
-                        >
-                            Subota
-                        </button>
+                        <DayButton
+                            active={active}
+                            setActive={setActive}
+                            buttonNumber={1}
+                            content="Ponedeljak"
+                        />
+                        <DayButton
+                            active={active}
+                            setActive={setActive}
+                            buttonNumber={2}
+                            content="Utorak"
+                        />
+                        <DayButton
+                            active={active}
+                            setActive={setActive}
+                            buttonNumber={3}
+                            content="Sreda"
+                        />
+                        <DayButton
+                            active={active}
+                            setActive={setActive}
+                            buttonNumber={4}
+                            content="Četvrtak"
+                        />
+                        <DayButton
+                            active={active}
+                            setActive={setActive}
+                            buttonNumber={5}
+                            content="Petak"
+                        />
+                        <DayButton
+                            active={active}
+                            setActive={setActive}
+                            buttonNumber={6}
+                            content="Subota"
+                        />
                     </div>
                     <div className={styles.grid}>
                         <MenuItem />
@@ -159,8 +131,8 @@ const Home = () => {
                 closeModal={() => setShowSignUpModal(false)}
             />
             <SignUpNotificationModal
-                modalIsOpen={showSignUpModalNotification}
-                closeModal={() => setShowSignUpModalNotification(false)}
+                modalIsOpen={showNotification}
+                closeModal={() => setNotification(false)}
             />
         </div>
     )

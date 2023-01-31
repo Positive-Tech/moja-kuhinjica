@@ -29,14 +29,18 @@ export const SignUpModal = ({ modalIsOpen, closeModal }: ISignUpModalProps) => {
                     <label className={styles.formTitle}>Registrujte se</label>
                     <FormInput
                         src={profile}
-                        content="Ime i prezime"
+                        placeholder="Ime i prezime"
                         type="text"
                     />
-                    <FormInput src={email} content="Email" type="text" />
-                    <FormInput src={password} content="Šifra" type="password" />
+                    <FormInput src={email} placeholder="Email" type="text" />
+                    <FormInput
+                        src={password}
+                        placeholder="Šifra"
+                        type="password"
+                    />
                     <FormInput
                         src={mobile}
-                        content="Broj telefona"
+                        placeholder="Broj telefona"
                         type="text"
                     />
                     <button className={styles.formButton}>Potvrdi</button>

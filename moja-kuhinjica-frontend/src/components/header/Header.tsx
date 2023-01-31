@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import logo from '../../../public/static/assets/images/logo-moja-klopica.svg'
+import { HeaderButton } from '../button/HeaderButton'
 
 const Header = () => {
     const [active, setActive] = useState(1)
@@ -12,36 +13,24 @@ const Header = () => {
                 <Image src={logo} alt="" className={styles.logoImage} />
             </div>
             <div className={styles.buttonWrapper}>
-                <button
-                    className={
-                        active === 1
-                            ? styles.navButtonSelected
-                            : styles.navButton
-                    }
-                    onClick={() => setActive(1)}
-                >
-                    Početna
-                </button>
-                <button
-                    className={
-                        active === 2
-                            ? styles.navButtonSelected
-                            : styles.navButton
-                    }
-                    onClick={() => setActive(2)}
-                >
-                    Ponuda
-                </button>
-                <button
-                    className={
-                        active === 3
-                            ? styles.navButtonSelected
-                            : styles.navButton
-                    }
-                    onClick={() => setActive(3)}
-                >
-                    O nama
-                </button>
+                <HeaderButton
+                    active={active}
+                    setActive={setActive}
+                    buttonNumber={1}
+                    content="Početna"
+                />
+                <HeaderButton
+                    active={active}
+                    setActive={setActive}
+                    buttonNumber={2}
+                    content="Ponuda"
+                />
+                <HeaderButton
+                    active={active}
+                    setActive={setActive}
+                    buttonNumber={3}
+                    content="O nama"
+                />
             </div>
         </div>
     )
