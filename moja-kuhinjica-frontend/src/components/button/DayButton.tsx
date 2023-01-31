@@ -2,25 +2,15 @@ import React from 'react'
 import styles from './DayButton.module.scss'
 
 interface IDayButtonProps {
-    active: number
-    setActive: (param: number) => void
-    buttonNumber: number
+    active: boolean
+    onClick: () => void
     content: string
 }
-export const DayButton = ({
-    active,
-    setActive,
-    buttonNumber,
-    content,
-}: IDayButtonProps) => {
+export const DayButton = ({ active, onClick, content }: IDayButtonProps) => {
     return (
         <button
-            onClick={() => setActive(buttonNumber)}
-            className={
-                active === buttonNumber
-                    ? styles.dayButtonSelected
-                    : styles.dayButton
-            }
+            onClick={onClick}
+            className={active ? styles.dayButtonSelected : styles.dayButton}
         >
             {content}
         </button>

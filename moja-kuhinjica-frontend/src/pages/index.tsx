@@ -23,7 +23,7 @@ const Home = () => {
 
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [showSignUpModal, setShowSignUpModal] = useState(false)
-    const [showNotification, setNotification] = useState(false)
+    const [showNotification, setShowNotification] = useState(false)
 
     return (
         <div className={styles.colDiv}>
@@ -74,39 +74,33 @@ const Home = () => {
                     </label>
                     <div className={styles.menuRowDiv}>
                         <DayButton
-                            active={active}
-                            setActive={setActive}
-                            buttonNumber={1}
+                            active={active === 1}
+                            onClick={() => setActive(1)}
                             content="Ponedeljak"
                         />
                         <DayButton
-                            active={active}
-                            setActive={setActive}
-                            buttonNumber={2}
+                            active={active === 2}
+                            onClick={() => setActive(2)}
                             content="Utorak"
                         />
                         <DayButton
-                            active={active}
-                            setActive={setActive}
-                            buttonNumber={3}
+                            active={active === 3}
+                            onClick={() => setActive(3)}
                             content="Sreda"
                         />
                         <DayButton
-                            active={active}
-                            setActive={setActive}
-                            buttonNumber={4}
+                            active={active === 4}
+                            onClick={() => setActive(4)}
                             content="Četvrtak"
                         />
                         <DayButton
-                            active={active}
-                            setActive={setActive}
-                            buttonNumber={5}
+                            active={active === 5}
+                            onClick={() => setActive(5)}
                             content="Petak"
                         />
                         <DayButton
-                            active={active}
-                            setActive={setActive}
-                            buttonNumber={6}
+                            active={active === 6}
+                            onClick={() => setActive(6)}
                             content="Subota"
                         />
                     </div>
@@ -132,7 +126,7 @@ const Home = () => {
             />
             <SignUpNotificationModal
                 modalIsOpen={showNotification}
-                closeModal={() => setNotification(false)}
+                closeModal={() => setShowNotification(false)}
             />
         </div>
     )
