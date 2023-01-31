@@ -2,25 +2,19 @@ import React from 'react'
 import styles from './HeaderButton.module.scss'
 
 interface IHeaderButtonProps {
-    active: number
-    setActive: (param: number) => void
-    buttonNumber: number
+    active: boolean
+    onClick: () => void
     content: string
 }
 export const HeaderButton = ({
     active,
-    setActive,
-    buttonNumber,
+    onClick,
     content,
 }: IHeaderButtonProps) => {
     return (
         <button
-            className={
-                active === buttonNumber
-                    ? styles.navButtonSelected
-                    : styles.navButton
-            }
-            onClick={() => setActive(buttonNumber)}
+            className={active ? styles.navButtonSelected : styles.navButton}
+            onClick={onClick}
         >
             {content}
         </button>

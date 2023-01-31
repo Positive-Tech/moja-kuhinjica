@@ -14,21 +14,18 @@ const Header = () => {
             </div>
             <div className={styles.buttonWrapper}>
                 <HeaderButton
-                    active={active}
-                    setActive={setActive}
-                    buttonNumber={1}
+                    active={active === 1}
+                    onClick={() => setActive(1)}
                     content="Početna"
                 />
                 <HeaderButton
-                    active={active}
-                    setActive={setActive}
-                    buttonNumber={2}
+                    active={active === 2}
+                    onClick={() => setActive(2)}
                     content="Ponuda"
                 />
                 <HeaderButton
-                    active={active}
-                    setActive={setActive}
-                    buttonNumber={3}
+                    active={active === 3}
+                    onClick={() => setActive(3)}
                     content="O nama"
                 />
             </div>
