@@ -6,11 +6,11 @@ import { HomePageButton } from '@/components/button/HomePageButton'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
 import { LoginModal } from '@/components/modal/login/LoginModal'
+import { TabButton } from '@/components/button/TabButton'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
-import { TabButton } from '@/components/button/TabButton'
 
 const Home = () => {
     const [active, setActive] = useState(2)
@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <div className={styles.colDiv}>
-            <Header type="main" />
+            <Header type="main" selectedButton={1} />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <label className={styles.title}>dunda</label>

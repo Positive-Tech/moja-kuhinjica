@@ -6,9 +6,10 @@ import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 interface IHeaderProps {
     type: string
+    selectedButton: number
 }
-const Header = ({ type }: IHeaderProps) => {
-    const [active, setActive] = useState(0)
+const Header = ({ type, selectedButton }: IHeaderProps) => {
+    const [active, setActive] = useState(selectedButton)
     const router = useRouter()
 
     const handleClick = (buttonNumber: number, url: string) => {

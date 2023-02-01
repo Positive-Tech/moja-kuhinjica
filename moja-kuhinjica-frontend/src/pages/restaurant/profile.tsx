@@ -2,9 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
+import { LabelWithIcon } from '@/components/label/LabelWithIcon'
 import styles from './Profile.module.scss'
 import restaurantMap from '../../../public/static/assets/images/map.svg'
-import { LabelWithIcon } from '@/components/label/LabelWithIcon'
 import clock from '../../../public/static/assets/images/clock.svg'
 import location from '../../../public/static/assets/images/location.svg'
 import telephone from '../../../public/static/assets/images/telephone.svg'
@@ -13,7 +13,7 @@ import restaurantPic from '../../../public/static/assets/images/restaurantGaller
 const Profile = () => {
     return (
         <div className={styles.colDiv}>
-            <Header type="profile" />
+            <Header type="profile" selectedButton={0} />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <div className={styles.colDiv1}>
