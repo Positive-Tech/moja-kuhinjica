@@ -13,7 +13,7 @@ import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
 
 const Home = () => {
-    const [active, setActive] = useState(2)
+    const [active, setActive] = useState<number>(2)
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 

@@ -14,6 +14,7 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url('../../../public/static/assets/images/background.png');
     filter: blur(1.5px);
+    background-size: cover;
     background-position: left center;
 }
 

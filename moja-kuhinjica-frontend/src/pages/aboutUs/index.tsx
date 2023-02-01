@@ -8,7 +8,7 @@ import { TabButton } from '@/components/button/TabButton'
 import styles from './AboutUs.module.scss'
 import aboutUsPic from '../../../public/static/assets/images/aboutUs.png'
 const AboutUs = () => {
-    const [active, setActive] = useState(1)
+    const [active, setActive] = useState<number>(1)
     return (
         <div className={styles.colDiv}>
             <div className={styles.wrapper}></div>

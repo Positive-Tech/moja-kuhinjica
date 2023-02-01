@@ -6,7 +6,7 @@ interface IQuestionLabelProps {
     answer: string
 }
 export const QuestionLabel = ({ question, answer }: IQuestionLabelProps) => {
-    const [showAnswer, setShowAnswer] = useState(false)
+    const [showAnswer, setShowAnswer] = useState<boolean>(false)
     return (
         <>
             <div

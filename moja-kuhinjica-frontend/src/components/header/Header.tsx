@@ -9,7 +9,7 @@ interface IHeaderProps {
     selectedButton: number
 }
 const Header = ({ type, selectedButton }: IHeaderProps) => {
-    const [active, setActive] = useState(selectedButton)
+    const [active, setActive] = useState<number>(selectedButton)
     const router = useRouter()
 
     const handleClick = (buttonNumber: number, url: string) => {
