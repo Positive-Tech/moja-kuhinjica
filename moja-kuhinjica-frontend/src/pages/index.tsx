@@ -1,34 +1,34 @@
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { HomePageButton } from '@/components/button/HomePageButton'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
 import { LoginModal } from '@/components/modal/login/LoginModal'
+import { TabButton } from '@/components/button/TabButton'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
-import { DayButton } from '@/components/button/DayButton'
-
-const today = new Date()
 
 const Home = () => {
-    const [active, setActive] = useState(today.getDay())
+    const [active, setActive] = useState<number>(2)
+    const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
     const handleClick = () => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
 
-    const [showLoginModal, setShowLoginModal] = useState(false)
-    const [showSignUpModal, setShowSignUpModal] = useState(false)
-    const [showNotification, setShowNotification] = useState(false)
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+    const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
+    const [showNotification, setShowNotification] = useState<boolean>(false)
 
     return (
         <div className={styles.colDiv}>
+            <Header type="main" selectedButton={1} />
             <div className={styles.wrapper}>
-                <Header />
                 <div className={styles.container}>
                     <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
@@ -65,40 +65,43 @@ const Home = () => {
             <div className={styles.menuWrapper} ref={ref}>
                 <div className={styles.menuColDiv}>
                     <div className={styles.restaurantButtonWrapper}>
-                        <button className={styles.restaurantButton}>
+                        <button
+                            className={styles.restaurantButton}
+                            onClick={() => router.push('/restaurant/profile')}
+                        >
                             Restoran Top FOOD 021
                         </button>
                     </div>
                     <label className={styles.titleLabel}>
-                        Dnevni meni - {today.toLocaleString().split(',')[0]}
+                        Dnevni meni - 21/01/2023
                     </label>
                     <div className={styles.menuRowDiv}>
-                        <DayButton
+                        <TabButton
                             active={active === 1}
                             onClick={() => setActive(1)}
                             content="Ponedeljak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 2}
                             onClick={() => setActive(2)}
                             content="Utorak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 3}
                             onClick={() => setActive(3)}
                             content="Sreda"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 4}
                             onClick={() => setActive(4)}
                             content="Četvrtak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 5}
                             onClick={() => setActive(5)}
                             content="Petak"
                         />
-                        <DayButton
+                        <TabButton
                             active={active === 6}
                             onClick={() => setActive(6)}
                             content="Subota"

@@ -16,3 +16,8 @@
     @extend .navButton;
     border: 2px solid #c10016;
 }
+
+.navButtonProfileSelected {
+    @extend .navButtonSelected;
+    border: 2px solid white;
+}
