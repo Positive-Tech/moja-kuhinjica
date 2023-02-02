@@ -21,9 +21,9 @@ const Home = () => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
 
-    const [showLoginModal, setShowLoginModal] = useState(false)
-    const [showSignUpModal, setShowSignUpModal] = useState(false)
-    const [showNotification, setShowNotification] = useState(false)
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+    const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
+    const [showNotification, setShowNotification] = useState<boolean>(false)
 
     return (
         <div className={styles.colDiv}>
