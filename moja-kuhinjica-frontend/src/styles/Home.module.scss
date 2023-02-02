@@ -139,7 +139,7 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr [col-start]);
-    row-gap: 15px;
+
     column-gap: 70px;
     padding-top: 5%;
     padding-bottom: 5%;

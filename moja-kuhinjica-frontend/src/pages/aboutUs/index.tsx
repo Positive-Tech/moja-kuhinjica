@@ -5,15 +5,22 @@ import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { QuestionLabel } from '@/components/label/QuestionLabel'
 import { TabButton } from '@/components/button/TabButton'
+import { LoginModal } from '@/components/modal/login/LoginModal'
 import styles from './AboutUs.module.scss'
 import aboutUsPic from '../../../public/static/assets/images/aboutUs.png'
 const AboutUs = () => {
     const [active, setActive] = useState<number>(1)
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+
     return (
         <div className={styles.colDiv}>
             <div className={styles.wrapper}></div>
             <label className={styles.title}>DUNDA</label>
-            <Header type="main" selectedButton={3} />
+            <Header
+                type="main"
+                selectedButton={3}
+                openLoginModal={setShowLoginModal}
+            />
             <div className={styles.menuRowDiv}>
                 <TabButton
                     active={active === 1}
@@ -138,6 +145,10 @@ const AboutUs = () => {
                 )}
             </div>
             <Footer />
+            <LoginModal
+                modalIsOpen={showLoginModal}
+                closeModal={() => setShowLoginModal(false)}
+            />
         </div>
     )
 }

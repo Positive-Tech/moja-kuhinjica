@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
@@ -9,11 +9,18 @@ import clock from '../../../public/static/assets/images/clock.svg'
 import location from '../../../public/static/assets/images/location.svg'
 import telephone from '../../../public/static/assets/images/telephone.svg'
 import restaurantPic from '../../../public/static/assets/images/restaurantGallery.svg'
+import { LoginModal } from '@/components/modal/login/LoginModal'
 
 const Profile = () => {
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+
     return (
         <div className={styles.colDiv}>
-            <Header type="profile" selectedButton={0} />
+            <Header
+                type="red"
+                selectedButton={0}
+                openLoginModal={setShowLoginModal}
+            />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <div className={styles.colDiv1}>
@@ -70,6 +77,10 @@ const Profile = () => {
                 </div>
             </div>
             <Footer />
+            <LoginModal
+                modalIsOpen={showLoginModal}
+                closeModal={() => setShowLoginModal(false)}
+            />
         </div>
     )
 }

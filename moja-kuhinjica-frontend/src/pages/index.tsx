@@ -27,7 +27,11 @@ const Home = () => {
 
     return (
         <div className={styles.colDiv}>
-            <Header type="main" selectedButton={1} />
+            <Header
+                type="main"
+                selectedButton={1}
+                openLoginModal={setShowLoginModal}
+            />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <label className={styles.title}>dunda</label>
