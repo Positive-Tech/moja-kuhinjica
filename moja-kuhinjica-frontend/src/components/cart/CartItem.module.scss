@@ -1,0 +1,78 @@
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.itemContainer {
+    @extend .rowDiv;
+    align-items: center;
+    height: 30%;
+    border-bottom: 1px solid #c1001633;
+    margin-bottom: 5%;
+}
+
+.rowDiv1 {
+    @extend .rowDiv;
+    align-items: flex-start;
+    width: 80%;
+}
+.pictureWrapper {
+    height: 80%;
+    width: 35%;
+    overflow: auto;
+    border-radius: 30px;
+    overflow-y: hidden;
+}
+
+.mealPicture {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mealNameWrapper {
+    @extend .colDiv;
+    margin-left: 5%;
+    width: 50%;
+}
+
+.mealName {
+    font-size: 16px;
+}
+
+.amountWrapper {
+    justify-content: flex-start;
+}
+
+.priceWrapper {
+    @extend .colDiv;
+    width: 20%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.binWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.binButton {
+    cursor: pointer;
+}
+
+.priceDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 10%;
+}
+.price {
+    font-size: 16px;
+}

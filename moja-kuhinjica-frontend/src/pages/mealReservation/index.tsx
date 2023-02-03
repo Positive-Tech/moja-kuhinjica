@@ -6,6 +6,9 @@ import { MenuItem } from '@/components/menu/MenuItem'
 import styles from './MealReservation.module.scss'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
+import { CartItem } from '@/components/cart/CartItem'
+import { RegularButton } from '@/components/button/RegularButton'
+import { Text } from '@/components/label/Text'
 
 const MealReservation = () => {
     const router = useRouter()
@@ -69,7 +72,45 @@ const MealReservation = () => {
                             </div>
                         </div>
                         <div className={styles.cartContainer}>
-                            <Title content="korpa" style={styles.cartTitle} />
+                            <div className={styles.cartWrapper}>
+                                <div className={styles.cartDiv}>
+                                    <Title
+                                        content="korpa"
+                                        style={styles.cartTitle}
+                                    />
+                                    <div
+                                        style={{
+                                            overflow: 'scroll',
+                                            padding: '5%',
+                                            height: '50%',
+                                        }}
+                                    >
+                                        <CartItem />
+                                        <CartItem />
+                                        <CartItem />
+                                        <CartItem />
+                                        <CartItem />
+                                        <CartItem />
+                                    </div>
+                                    <div className={styles.priceDiv}>
+                                        <Text
+                                            content="Ukupno:"
+                                            style={styles.priceLabel}
+                                        />
+                                        <div className={styles.totalPriceDiv}>
+                                            <Text
+                                                content="560"
+                                                style={styles.totalPrice}
+                                            />
+                                            <Text
+                                                content="RSD"
+                                                style={styles.totalPrice}
+                                            />
+                                        </div>
+                                    </div>
+                                    <RegularButton content="Potvrdi rezervaciju" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

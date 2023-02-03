@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import pic from '../../../public/static/assets/images/meal1.png'
 import styles from './MenuItem.module.scss'
-import increment from '../../../public/static/assets/images/increment.svg'
-import decrement from '../../../public/static/assets/images/decrement.svg'
-import { TabButton } from '../button/TabButton'
 import { RegularButton } from '../button/RegularButton'
 import { Title } from '../label/Title'
 import { Text } from '../label/Text'
+import { AmountButton } from '../button/AmountButton'
 
 interface IMenuItemProps {
     type?: string
@@ -25,7 +23,7 @@ export const MenuItem = ({ type }: IMenuItemProps) => {
             </div>
             <div className={styles.titleWrapper}>
                 <Title
-                    content="Piletina u sosu od sampinjona"
+                    content="Piletina u sosu od šampinjona"
                     style={
                         isOrdering()
                             ? styles.orderingTitleLabel
@@ -66,11 +64,7 @@ export const MenuItem = ({ type }: IMenuItemProps) => {
             </div>
             {type === 'ordering' && (
                 <div className={styles.buttonContainer}>
-                    <div className={styles.amountWrapper}>
-                        <Image src={decrement} alt="" />
-                        <label className={styles.contentLabel}>1</label>
-                        <Image src={increment} alt="" />
-                    </div>
+                    <AmountButton />
                     <RegularButton content="Rezerviši" />
                 </div>
             )}
