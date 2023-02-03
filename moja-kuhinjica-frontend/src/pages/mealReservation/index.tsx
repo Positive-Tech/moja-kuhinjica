@@ -82,7 +82,7 @@ const MealReservation = () => {
                                         style={{
                                             overflow: 'scroll',
                                             padding: '5%',
-                                            height: '50%',
+                                            height: '80%',
                                         }}
                                     >
                                         <CartItem />
