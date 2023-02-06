@@ -2,8 +2,8 @@ import React from 'react'
 import styles from './TabButton.module.scss'
 
 interface IDayButtonProps {
-    active: boolean
-    onClick: () => void
+    active?: boolean
+    onClick?: () => void
     content: string
 }
 export const TabButton = ({ active, onClick, content }: IDayButtonProps) => {

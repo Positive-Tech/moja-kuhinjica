@@ -1,0 +1,139 @@
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    @extend .colDiv;
+    margin-top: 10%;
+    align-items: center;
+}
+
+.restaurantButtonWrapper {
+    width: 100%;
+    height: 50px;
+    margin-left: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.restaurantButton {
+    width: 25%;
+    height: 100%;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 22px;
+    background: transparent;
+    border: 2px solid #c10016;
+    border-radius: 15px;
+    color: #c10016;
+    cursor: pointer;
+}
+
+.titleLabel {
+    font-family: Nunito;
+    font-weight: 600;
+    color: #333333;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 26px;
+}
+
+.menuRowDiv {
+    @extend .rowDiv;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr [col-start]);
+    padding-top: 5%;
+    padding-bottom: 5%;
+    justify-items: center;
+}
+
+.menuDiv {
+    @extend .rowDiv;
+    justify-content: space-between;
+}
+
+.menuColDiv {
+    @extend .colDiv;
+    width: 70%;
+}
+
+.cartContainer {
+    align-self: stretch;
+    width: 30%;
+    margin-right: 2%;
+}
+
+.cartWrapper {
+    @extend .colDiv;
+    align-items: center;
+    background: rgba(217, 217, 217, 0.22);
+    border-radius: 40px;
+    height: 40%;
+    width: 100%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5%;
+}
+
+.cartDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    overflow: auto;
+}
+
+.cartTitle {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.cartItemContainer {
+    @extend .colDiv;
+    width: 90%;
+    height: 100%;
+    align-items: center;
+}
+
+.priceDiv {
+    @extend .rowDiv;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.priceLabel {
+    font-size: 16px;
+    margin-left: 5%;
+}
+
+.totalPriceDiv {
+    display: flex;
+    gap: 10%;
+    margin-right: 5%;
+}
+
+.totalPrice {
+    font-size: 16px;
+    font-weight: 600;
+}

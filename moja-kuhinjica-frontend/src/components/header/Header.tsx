@@ -7,8 +7,9 @@ import { useRouter } from 'next/router'
 interface IHeaderProps {
     type: string
     selectedButton: number
+    openLoginModal?: (param: boolean) => void
 }
-const Header = ({ type, selectedButton }: IHeaderProps) => {
+const Header = ({ type, selectedButton, openLoginModal }: IHeaderProps) => {
     const [active, setActive] = useState<number>(selectedButton)
     const router = useRouter()
 
@@ -17,12 +18,15 @@ const Header = ({ type, selectedButton }: IHeaderProps) => {
         router.push(url)
     }
 
+    const handleReservationClick = (buttonNumber: number, url: string) => {
+        setActive(buttonNumber)
+        const jwt = null
+        if (!!jwt) router.push(url)
+        openLoginModal?.(true)
+    }
+
     return (
-        <div
-            className={
-                type === 'profile' ? styles.profileWrapper : styles.wrapper
-            }
-        >
+        <div className={type === 'red' ? styles.redWrapper : styles.wrapper}>
             <div className={styles.logoWrapper}>
                 <Image src={logo} alt="" className={styles.logoImage} />
             </div>
@@ -35,8 +39,8 @@ const Header = ({ type, selectedButton }: IHeaderProps) => {
                 />
                 <HeaderButton
                     active={active === 2}
-                    onClick={() => handleClick(2, '/')}
-                    content="Ponuda"
+                    onClick={() => handleReservationClick(2, '/reservation')}
+                    content="Rezerviši"
                     headerType={type}
                 />
                 <HeaderButton

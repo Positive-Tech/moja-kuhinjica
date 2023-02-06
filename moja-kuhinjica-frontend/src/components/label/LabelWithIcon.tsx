@@ -10,7 +10,7 @@ export const LabelWithIcon = ({ src, content }: ILabelWithIconProps) => {
     return (
         <div className={styles.container}>
             <Image src={src} alt="" />
-            <label className={styles.text}>{content}</label>
+            <label className={styles.content}>{content}</label>
         </div>
     )
 }

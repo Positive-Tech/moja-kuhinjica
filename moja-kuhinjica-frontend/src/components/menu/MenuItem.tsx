@@ -2,17 +2,33 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import pic from '../../../public/static/assets/images/meal1.png'
 import styles from './MenuItem.module.scss'
+import { RegularButton } from '../button/RegularButton'
+import { Title } from '../label/Title'
+import { Text } from '../label/Text'
+import { AmountButton } from '../button/AmountButton'
 
-export const MenuItem = () => {
+interface IMenuItemProps {
+    type?: string
+}
+export const MenuItem = ({ type }: IMenuItemProps) => {
     const [openDescription, setOpenDescription] = useState(false)
 
+    const isOrdering = () => type === 'ordering'
+
     return (
-        <div className={styles.wrapper}>
-            <Image src={pic} alt="" />
+        <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>
+            <div>
+                <Image src={pic} alt="" className={styles.restaurantPicture} />
+            </div>
             <div className={styles.titleWrapper}>
-                <label className={styles.titleLabel}>
-                    Piletina u sosu od šampinjona
-                </label>
+                <Title
+                    content="Piletina u sosu od šampinjona"
+                    style={
+                        isOrdering()
+                            ? styles.orderingTitleLabel
+                            : styles.titleLabel
+                    }
+                />
                 <svg
                     className={
                         openDescription
@@ -29,16 +45,28 @@ export const MenuItem = () => {
             </div>
             {openDescription && (
                 <div className={styles.descriptionLabelDiv}>
-                    <label className={styles.descriptionLabel}>
+                    <Text
+                        content="
                         Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros
-                    </label>
+                        elit. Donec odio. Quisque volutpat mattis eros"
+                        style={
+                            isOrdering()
+                                ? styles.orderingDescriptionLabel
+                                : styles.descriptionLabel
+                        }
+                    />
                 </div>
             )}
             <div className={styles.priceWrapper}>
                 <label className={styles.contentLabel}>meni 1 -</label>
                 <label className={styles.priceLabel}>560 din</label>
             </div>
+            {isOrdering() && (
+                <div className={styles.buttonContainer}>
+                    <AmountButton />
+                    <RegularButton content="Rezerviši" />
+                </div>
+            )}
         </div>
     )
 }
