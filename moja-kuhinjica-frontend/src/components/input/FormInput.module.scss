@@ -31,3 +31,13 @@
         color: #333333cc;
     }
 }
+
+.invalidInput {
+    @extend .input;
+    border-bottom: 1px solid #c10016;
+}
+
+.errorIcon {
+    position: absolute;
+    right: 0;
+}
