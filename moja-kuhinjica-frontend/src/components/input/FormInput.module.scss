@@ -35,9 +35,10 @@
 .invalidInput {
     @extend .input;
     border-bottom: 1px solid #c10016;
+    color: #c10016;
 }
 
-.errorIcon {
+.sideIcon {
     position: absolute;
     right: 0;
 }

@@ -5,8 +5,6 @@
     bottom: auto;
     transform: translate(-50%, -50%);
     position: absolute;
-    height: 80%;
-    width: 950px;
     border-radius: 30px;
 
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.05);
@@ -14,6 +12,8 @@
     background-color: #e7e7e7e5;
     backdrop-filter: blur(10px);
     border: white;
+    height: 60%;
+    width: 45%;
 }
 
 .formContainer {
@@ -59,36 +59,16 @@
     margin-top: 5%;
 }
 
-.separator {
-    height: 1px;
-    border: 0;
-    background: #333333cc;
-    width: 40%;
-}
-
-.separatorWrapper {
-    width: 100%;
+.contentDiv {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 2%;
-}
-
-.separatorLabel {
-    width: 10%;
-    font-family: Poppins;
-    font-weight: 500;
-    font-size: 32px;
-    color: #333333;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.buttonWrapper2 {
-    height: 10%;
-    display: flex;
-    align-items: flex-end;
     justify-content: center;
-    gap: 15%;
-    margin: 0;
+    gap: 15px;
+}
+
+.contentLabel {
+    font-family: Poppins;
+    font-weight: 400;
+    color: #c10016;
+    font-size: 16px;
 }

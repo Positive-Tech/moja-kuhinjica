@@ -9,13 +9,15 @@ import { Title } from '@/components/label/Title'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
+import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
 
 const MealReservation = () => {
     const router = useRouter()
     const [active, setActive] = useState<number>(1)
+    const [showNotification, setShowNotification] = useState<boolean>(false)
     return (
         <div className={styles.colDiv}>
-            <Header type="red" selectedButton={0} />
+            <Header type="red" selectedButton={2} />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <div className={styles.restaurantButtonWrapper}>
@@ -115,6 +117,12 @@ const MealReservation = () => {
                     </div>
                 </div>
             </div>
+            <SuccessNotificationModal
+                modalIsOpen={showNotification}
+                closeModal={() => setShowNotification(false)}
+                title="rezervacija uspešna"
+                buttonText="rezerviši ponovo"
+            />
             <Footer />
         </div>
     )

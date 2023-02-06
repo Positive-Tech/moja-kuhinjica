@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form'
 import styles from './FormInput.module.scss'
 import errorIcon from '../../../public/static/assets/images/error.svg'
+import hidePassword from '../../../public/static/assets/images/hidePassword.svg'
 interface IFormInputProps {
     src: string
     placeholder: string
@@ -46,7 +47,10 @@ export const FormInput = ({
                 {...register(name, validationSchema)}
             ></input>
             {invalidInput && (
-                <Image src={errorIcon} alt="" className={styles.errorIcon} />
+                <Image src={errorIcon} alt="" className={styles.sideIcon} />
+            )}
+            {type === 'password' && !invalidInput && (
+                <Image src={hidePassword} alt="" className={styles.sideIcon} />
             )}
         </div>
     )

@@ -8,7 +8,7 @@ import { Footer } from '@/components/footer/Footer'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import { TabButton } from '@/components/button/TabButton'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
-import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
+import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import styles from '../styles/Home.module.scss'
 
@@ -131,9 +131,12 @@ const Home = () => {
                 modalIsOpen={showSignUpModal}
                 closeModal={() => setShowSignUpModal(false)}
             />
-            <SignUpNotificationModal
+            <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
+                type="registration"
+                title="registracija uspešna"
+                buttonText="zatvori"
             />
         </div>
     )
