@@ -13,9 +13,8 @@ interface IMenuItemProps {
 export const MenuItem = ({ type }: IMenuItemProps) => {
     const [openDescription, setOpenDescription] = useState(false)
 
-    const isOrdering = () => {
-        return type === 'ordering'
-    }
+    const isOrdering = () => type === 'ordering'
+
     return (
         <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>
             <div>
@@ -62,7 +61,7 @@ export const MenuItem = ({ type }: IMenuItemProps) => {
                 <label className={styles.contentLabel}>meni 1 -</label>
                 <label className={styles.priceLabel}>560 din</label>
             </div>
-            {type === 'ordering' && (
+            {isOrdering() && (
                 <div className={styles.buttonContainer}>
                     <AmountButton />
                     <RegularButton content="Rezerviši" />
