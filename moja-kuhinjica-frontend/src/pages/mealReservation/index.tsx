@@ -15,56 +15,62 @@ const MealReservation = () => {
     const router = useRouter()
     const [active, setActive] = useState<number>(1)
     const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [menuIsPresent, setMenuIsPresent] = useState<boolean>(true)
+    const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(false)
     return (
         <div className={styles.colDiv}>
             <Header type="red" selectedButton={2} />
-            <div className={styles.wrapper}>
-                <div className={styles.container}>
-                    <div className={styles.restaurantButtonWrapper}>
-                        <button
-                            className={styles.restaurantButton}
-                            onClick={() => router.push('/restaurant/profile')}
-                        >
-                            Restoran Top FOOD 021
-                        </button>
-                    </div>
-                    <label className={styles.titleLabel}>
-                        Dnevni meni - 21/01/2023
-                    </label>
-                    <div className={styles.menuDiv}>
-                        <div className={styles.menuColDiv}>
-                            <div className={styles.menuRowDiv}>
-                                <TabButton
-                                    active={active === 1}
-                                    onClick={() => setActive(1)}
-                                    content="Ponedeljak"
-                                />
-                                <TabButton
-                                    active={active === 2}
-                                    onClick={() => setActive(2)}
-                                    content="Utorak"
-                                />
-                                <TabButton
-                                    active={active === 3}
-                                    onClick={() => setActive(3)}
-                                    content="Sreda"
-                                />
-                                <TabButton
-                                    active={active === 4}
-                                    onClick={() => setActive(4)}
-                                    content="Četvrtak"
-                                />
-                                <TabButton
-                                    active={active === 5}
-                                    onClick={() => setActive(5)}
-                                    content="Petak"
-                                />
-                                <TabButton
-                                    active={active === 6}
-                                    onClick={() => setActive(6)}
-                                    content="Subota"
-                                />
-                            </div>
+            <div
+                className={
+                    menuIsPresent ? styles.container : styles.emptyMenuContainer
+                }
+            >
+                <div className={styles.restaurantButtonWrapper}>
+                    <button
+                        className={styles.restaurantButton}
+                        onClick={() => router.push('/restaurant/profile')}
+                    >
+                        Restoran Top FOOD 021
+                    </button>
+                </div>
+                <label className={styles.titleLabel}>
+                    Dnevni meni - 21/01/2023
+                </label>
+                <div className={styles.menuDiv}>
+                    <div className={styles.menuColDiv}>
+                        <div className={styles.menuRowDiv}>
+                            <TabButton
+                                active={active === 1}
+                                onClick={() => setActive(1)}
+                                content="Ponedeljak"
+                            />
+                            <TabButton
+                                active={active === 2}
+                                onClick={() => setActive(2)}
+                                content="Utorak"
+                            />
+                            <TabButton
+                                active={active === 3}
+                                onClick={() => setActive(3)}
+                                content="Sreda"
+                            />
+                            <TabButton
+                                active={active === 4}
+                                onClick={() => setActive(4)}
+                                content="Četvrtak"
+                            />
+                            <TabButton
+                                active={active === 5}
+                                onClick={() => setActive(5)}
+                                content="Petak"
+                            />
+                            <TabButton
+                                active={active === 6}
+                                onClick={() => setActive(6)}
+                                content="Subota"
+                            />
+                        </div>
+                        {menuIsPresent ? (
                             <div className={styles.grid}>
                                 <MenuItem type="ordering" />
                                 <MenuItem type="ordering" />
@@ -72,9 +78,31 @@ const MealReservation = () => {
                                 <MenuItem type="ordering" />
                                 <MenuItem type="ordering" />
                             </div>
-                        </div>
-                        <div className={styles.cartContainer}>
-                            <div className={styles.cartWrapper}>
+                        ) : (
+                            <div className={styles.emptyMenuDiv}>
+                                <Text
+                                    content="Dnevni meni za 20/1/2023 još uvek nije
+                                        objavljen."
+                                    style={styles.emptyMenuLabel}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className={styles.cartContainer}>
+                        <div className={styles.cartWrapper}>
+                            {cartIsEmpty && (
+                                <div className={styles.emptyCartDiv}>
+                                    <Title
+                                        content="korpa"
+                                        style={styles.cartTitle}
+                                    />
+                                    <Text
+                                        content="Vaša korpa je prazna, rezervišite jelo iz dnevnog menija."
+                                        style={styles.emptyCartLabel}
+                                    />
+                                </div>
+                            )}
+                            {!cartIsEmpty && (
                                 <div className={styles.cartDiv}>
                                     <Title
                                         content="korpa"
@@ -112,10 +140,12 @@ const MealReservation = () => {
                                     </div>
                                     <RegularButton content="Potvrdi rezervaciju" />
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
+
+                <Footer />
             </div>
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
@@ -123,7 +153,6 @@ const MealReservation = () => {
                 title="rezervacija uspešna"
                 buttonText="rezerviši ponovo"
             />
-            <Footer />
         </div>
     )
 }

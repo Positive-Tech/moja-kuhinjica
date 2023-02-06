@@ -20,6 +20,7 @@
     width: 10%;
     height: 100%;
     margin-left: 5%;
+    object-fit: contain;
 }
 
 .logoImage {
@@ -31,6 +32,38 @@
     display: flex;
     width: 50%;
     height: 100%;
-    justify-content: center;
     align-items: center;
+}
+
+.profileIconWrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 5%;
+    position: relative;
+}
+
+.profileIcon {
+    padding-right: 2%;
+    cursor: pointer;
+}
+
+.dropDownButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5%;
+}
+.dropdownMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #c50016;
+    width: 250%;
+    right: 15%;
+    top: 100%;
+    padding: 0;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
