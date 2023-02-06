@@ -25,10 +25,13 @@ export const CartItem = ({ item }: ICartItemProps) => {
                 </div>
                 <div className={styles.mealNameWrapper}>
                     <Text
-                        content="Piletina sa sampinjonima"
+                        content="Piletina sa šampinjonima"
                         style={styles.mealName}
                     />
-                    <AmountButton style={styles.amountWrapper} />
+                    <AmountButton
+                        style={styles.amountWrapper}
+                        labelStyle={styles.amountLabel}
+                    />
                 </div>
             </div>
 

@@ -59,7 +59,7 @@ const Header = ({ type, selectedButton, openLoginModal }: IHeaderProps) => {
                     content="O nama"
                     headerType={type}
                 />
-                {jwt == null && (
+                {jwt == null && type === 'red' && (
                     <div className={styles.profileIconWrapper}>
                         <Image
                             src={profileIcon}

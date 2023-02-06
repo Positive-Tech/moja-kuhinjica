@@ -49,6 +49,10 @@
     justify-content: flex-start;
 }
 
+.amountLabel {
+    font-size: 16px;
+}
+
 .priceWrapper {
     @extend .colDiv;
     width: 20%;

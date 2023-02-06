@@ -6,7 +6,7 @@
     justify-content: center;
     position: relative;
 
-    :hover {
+    &:hover {
         border: 1px solid white;
         border-radius: 20px;
     }
@@ -29,4 +29,8 @@
 .icon {
     position: absolute;
     left: 10%;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
