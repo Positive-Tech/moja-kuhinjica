@@ -74,10 +74,10 @@
 
 .grid {
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(3, 1fr [col-start]);
-    row-gap: 50px;
-    column-gap: 70px;
+    row-gap: 10%;
     padding-top: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 10%;
     justify-items: center;
 }

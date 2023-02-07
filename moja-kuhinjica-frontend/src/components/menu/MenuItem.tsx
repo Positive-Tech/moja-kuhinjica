@@ -22,6 +22,7 @@ export const MenuItem = ({ type }: IMenuItemProps) => {
             </div>
             <div className={styles.titleWrapper}>
                 <Title
+                    onClick={() => setOpenDescription(!openDescription)}
                     content="Piletina u sosu od šampinjona"
                     style={
                         isOrdering()

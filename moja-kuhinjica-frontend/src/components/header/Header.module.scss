@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints.module.scss';
+
 .wrapper {
     position: absolute;
     width: 100%;
@@ -34,6 +36,16 @@
     height: 100%;
     align-items: center;
     justify-content: flex-end;
+
+    @media only screen and (max-width: $breakpoint-1440p) {
+        width: 35%;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        width: 40%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        display: none;
+    }
 }
 
 .profileIconWrapper {

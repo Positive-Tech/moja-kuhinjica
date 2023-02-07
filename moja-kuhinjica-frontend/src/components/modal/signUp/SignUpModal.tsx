@@ -107,8 +107,16 @@ export const SignUpModal = ({ modalIsOpen, closeModal }: ISignUpModalProps) => {
                         <div className={styles.separator}></div>
                     </div>
                     <div className={styles.buttonWrapper2}>
-                        <Image src={google} alt="" />
-                        <Image src={mailSignUp} alt="" />
+                        <Image
+                            src={google}
+                            alt=""
+                            className={styles.buttonImage}
+                        />
+                        <Image
+                            src={mailSignUp}
+                            alt=""
+                            className={styles.buttonImage}
+                        />
                     </div>
                 </form>
             </div>

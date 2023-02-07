@@ -68,13 +68,16 @@ const Home = () => {
             </div>
             <div className={styles.menuWrapper} ref={ref}>
                 <div className={styles.menuColDiv}>
-                    <div className={styles.restaurantButtonWrapper}>
-                        <button
-                            className={styles.restaurantButton}
-                            onClick={() => router.push('/restaurant/profile')}
-                        >
+                    <div className={styles.restaurantTitleWrapper}>
+                        <label className={styles.restaurantTitle}>
                             Restoran Top FOOD 021
-                        </button>
+                        </label>
+                        <label
+                            onClick={() => router.push('/restaurant/profile')}
+                            className={styles.restaurantInfoLabel}
+                        >
+                            opste informacije
+                        </label>
                     </div>
                     <label className={styles.titleLabel}>
                         Dnevni meni - 21/01/2023
@@ -83,32 +86,32 @@ const Home = () => {
                         <TabButton
                             active={active === 1}
                             onClick={() => setActive(1)}
-                            content="Ponedeljak"
+                            content="PON"
                         />
                         <TabButton
                             active={active === 2}
                             onClick={() => setActive(2)}
-                            content="Utorak"
+                            content="UTO"
                         />
                         <TabButton
                             active={active === 3}
                             onClick={() => setActive(3)}
-                            content="Sreda"
+                            content="SRE"
                         />
                         <TabButton
                             active={active === 4}
                             onClick={() => setActive(4)}
-                            content="Četvrtak"
+                            content="ČET"
                         />
                         <TabButton
                             active={active === 5}
                             onClick={() => setActive(5)}
-                            content="Petak"
+                            content="PET"
                         />
                         <TabButton
                             active={active === 6}
                             onClick={() => setActive(6)}
-                            content="Subota"
+                            content="SUB"
                         />
                     </div>
                     <div className={styles.grid}>

@@ -1,6 +1,6 @@
 .dayButton {
-    width: 220px;
-    height: 60px;
+    width: 15%;
+    height: 100%;
     font-weight: 500;
     font-family: Nunito;
     cursor: pointer;
@@ -11,10 +11,23 @@
     color: #28272033;
     border: 2px solid #28272033;
     background: transparent;
+
+    &:hover {
+        color: #c10016;
+        border: 2px solid #c10016;
+    }
 }
 
 .dayButtonSelected {
-    @extend .dayButton;
+    width: 15%;
+    height: 100%;
+    font-weight: 500;
+    font-family: Nunito;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0;
+    font-size: 24px;
+
     color: white;
     border: none;
     background: #c10016;

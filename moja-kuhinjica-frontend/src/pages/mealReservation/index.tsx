@@ -16,7 +16,7 @@ const MealReservation = () => {
     const [active, setActive] = useState<number>(1)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [menuIsPresent, setMenuIsPresent] = useState<boolean>(true)
-    const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(false)
+    const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(true)
     return (
         <div className={styles.colDiv}>
             <Header type="red" selectedButton={2} />
@@ -42,32 +42,32 @@ const MealReservation = () => {
                             <TabButton
                                 active={active === 1}
                                 onClick={() => setActive(1)}
-                                content="Ponedeljak"
+                                content="PON"
                             />
                             <TabButton
                                 active={active === 2}
                                 onClick={() => setActive(2)}
-                                content="Utorak"
+                                content="UTO"
                             />
                             <TabButton
                                 active={active === 3}
                                 onClick={() => setActive(3)}
-                                content="Sreda"
+                                content="SRE"
                             />
                             <TabButton
                                 active={active === 4}
                                 onClick={() => setActive(4)}
-                                content="Četvrtak"
+                                content="ČET"
                             />
                             <TabButton
                                 active={active === 5}
                                 onClick={() => setActive(5)}
-                                content="Petak"
+                                content="PET"
                             />
                             <TabButton
                                 active={active === 6}
                                 onClick={() => setActive(6)}
-                                content="Subota"
+                                content="SUB"
                             />
                         </div>
                         {menuIsPresent ? (
