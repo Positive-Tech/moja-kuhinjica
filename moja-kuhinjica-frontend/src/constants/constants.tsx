@@ -15,3 +15,5 @@ export const bgModal = {
         background: 'transparent',
     },
 }
+
+export const MOBILE_WIDTH = 768

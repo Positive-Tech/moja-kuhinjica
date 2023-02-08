@@ -12,6 +12,7 @@ interface IFormInputProps {
     validationSchema: {}
     name: string
     errors: FieldErrors<FieldValues>
+    style?: string
 }
 
 export const FormInput = ({
@@ -22,6 +23,7 @@ export const FormInput = ({
     validationSchema,
     name,
     errors,
+    style,
 }: IFormInputProps) => {
     const [invalidInput, setInvalidInput] = useState(false)
 
@@ -41,7 +43,11 @@ export const FormInput = ({
         <div className={styles.wrapper}>
             <Image src={src} className={styles.icon} alt="" />
             <input
-                className={invalidInput ? styles.invalidInput : styles.input}
+                className={
+                    invalidInput
+                        ? `${styles.invalidInput} ${style}`
+                        : `${styles.input} ${style}`
+                }
                 placeholder={placeholder}
                 type={type}
                 {...register(name, validationSchema)}

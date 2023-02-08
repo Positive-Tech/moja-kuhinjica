@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
@@ -13,6 +13,7 @@ import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import burgerMenu from '../../public/static/assets/images/burgerMenu.svg'
 import styles from '../styles/Home.module.scss'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import { MOBILE_WIDTH } from '../constants/constants'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)
@@ -26,6 +27,29 @@ const Home = () => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowsWidth, setWindowsWidth] = useState<number>(0)
+
+    useEffect(() => {
+        const handleResize = () => setWindowsWidth(window.innerWidth)
+        window.addEventListener('resize', handleResize)
+        setIsMobile(windowsWidth < MOBILE_WIDTH)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [windowsWidth])
+
+    const handleSignUpClick = () => {
+        console.log(isMobile)
+        if (isMobile) router.push('/registration')
+        else setShowSignUpModal(true)
+    }
+
+    const handleLoginClick = () => {
+        if (isMobile) router.push('/login')
+        else setShowLoginModal(true)
+    }
 
     return (
         <div className={styles.colDiv}>
@@ -48,11 +72,11 @@ const Home = () => {
                     <div className={styles.buttonWrapper}>
                         <HomePageButton
                             content="Registrujte se"
-                            setShowModal={setShowSignUpModal}
+                            onClick={handleSignUpClick}
                         />
                         <HomePageButton
                             content="Ulogujte se"
-                            setShowModal={setShowLoginModal}
+                            onClick={handleLoginClick}
                         />
                     </div>
                 </div>

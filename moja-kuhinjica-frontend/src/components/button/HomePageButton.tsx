@@ -3,14 +3,11 @@ import styles from './HomePageButton.module.scss'
 
 interface IHeaderButtonProps {
     content: string
-    setShowModal: (param: boolean) => void
+    onClick: () => void
 }
-export const HomePageButton = ({
-    content,
-    setShowModal,
-}: IHeaderButtonProps) => {
+export const HomePageButton = ({ content, onClick }: IHeaderButtonProps) => {
     return (
-        <button className={styles.button} onClick={() => setShowModal(true)}>
+        <button className={styles.button} onClick={onClick}>
             {content}
         </button>
     )
