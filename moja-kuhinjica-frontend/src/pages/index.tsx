@@ -14,9 +14,11 @@ import burgerMenu from '../../public/static/assets/images/burgerMenu.svg'
 import styles from '../styles/Home.module.scss'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { MOBILE_WIDTH } from '../constants/constants'
+import Menu from './menu'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
@@ -53,6 +55,7 @@ const Home = () => {
 
     return (
         <div className={styles.colDiv}>
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
                 type="main"
                 selectedButton={1}
@@ -64,6 +67,7 @@ const Home = () => {
                         src={burgerMenu}
                         alt=""
                         className={styles.menuIcon}
+                        onClick={() => setShowMenu(true)}
                     />
                     <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
