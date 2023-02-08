@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints.module.scss';
+
 .navButton {
     width: 25%;
     height: 40%;
@@ -10,6 +12,28 @@
     cursor: pointer;
     border-radius: 20px;
     border: 0;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        width: 20%;
+        height: 30%;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        width: 20%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        width: 25%;
+        height: 40%;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 25%;
+        height: 45%;
+        font-size: 22px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 25%;
+        height: 50%;
+        font-size: 20px;
+    }
 }
 
 .navButtonSelected {

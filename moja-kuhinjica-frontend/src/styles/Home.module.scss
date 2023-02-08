@@ -16,9 +16,14 @@
     @extend .colDiv;
     height: 100vh;
     background-image: url('../../public/static/assets/images/background.png');
+
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: flex-end;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        background-position: 50%;
+    }
 }
 
 .container {
@@ -44,10 +49,12 @@
         width: 60%;
     }
     @media only screen and (max-width: $breakpoint-medium) {
-        width: 90%;
-    }
-    @media only screen and (max-width: $breakpoint-medium) {
-        width: 90%;
+        backdrop-filter: blur(1.5px);
+        height: 100%;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+        justify-content: flex-start;
     }
 }
 
@@ -73,6 +80,11 @@
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 65px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 80px;
+        margin-left: 5%;
+        margin-top: 50%;
+    }
 }
 
 .content {
@@ -87,12 +99,16 @@
 
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 35px;
+        line-height: 50px;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 30px;
+        line-height: 40px;
     }
     @media only screen and (max-width: $breakpoint-small) {
-        font-size: 25px;
+        font-size: 20px;
+        line-height: 30px;
+        margin-left: 5%;
     }
 }
 
@@ -125,9 +141,11 @@
         margin-top: 15%;
     }
     @media only screen and (max-width: $breakpoint-medium) {
-        width: 75%;
+        width: 90%;
         justify-content: flex-start;
         gap: 5%;
+        margin-top: 10%;
+        margin-left: 5%;
     }
 }
 
@@ -135,6 +153,10 @@
     @extend .rowDiv;
     height: 10%;
     justify-content: flex-end;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: none;
+    }
 }
 .scrollLabelWrapper {
     @extend .rowDiv;
@@ -191,6 +213,10 @@
     font-size: 38px;
     color: #c10016;
     cursor: pointer;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 23px;
+    }
 }
 
 .restaurantInfoLabel {
@@ -206,6 +232,10 @@
     &:hover {
         border-bottom: 1px solid #333333;
     }
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 10px;
+    }
 }
 
 .titleLabel {
@@ -214,13 +244,32 @@
     color: #333333;
     margin-bottom: 3%;
     font-size: 26px;
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 12px;
+    }
 }
 
 .menuRowDiv {
     @extend .rowDiv;
     height: 50px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+
+    @media only screen and (max-width: $breakpoint-1080p) {
+        height: 70px;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        height: 60px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        height: 50px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 45px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 50px;
+    }
 }
 
 .grid {
@@ -232,4 +281,16 @@
     padding-top: 5%;
     padding-bottom: 5%;
     justify-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        grid-template-columns: repeat(2, 1fr [col-start]);
+    }
+}
+
+.menuIcon {
+    @media only screen and (min-width: $breakpoint-medium) {
+        display: none;
+    }
+    margin-top: 5%;
+    margin-left: 5%;
 }

@@ -10,6 +10,7 @@ import { TabButton } from '@/components/button/TabButton'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
+import burgerMenu from '../../public/static/assets/images/burgerMenu.svg'
 import styles from '../styles/Home.module.scss'
 
 const Home = () => {
@@ -34,6 +35,11 @@ const Home = () => {
             />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
+                    <Image
+                        src={burgerMenu}
+                        alt=""
+                        className={styles.menuIcon}
+                    />
                     <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
