@@ -12,6 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
 import burgerMenu from '../../public/static/assets/images/burgerMenu.svg'
 import styles from '../styles/Home.module.scss'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)
@@ -132,6 +133,7 @@ const Home = () => {
                 </div>
             </div>
             <Footer />
+            <MobileFooter />
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
