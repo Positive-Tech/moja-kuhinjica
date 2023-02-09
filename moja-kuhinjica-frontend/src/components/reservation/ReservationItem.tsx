@@ -22,12 +22,14 @@ export const ReservationItem = () => {
                         Donec odio. Quisque volutpat mattis eros
                     </label>
                     <label className={styles.contentLabel}>1 porcija</label>
-                    <div className={styles.buttonWrapper}>
-                        <label className={styles.priceLabel}>560 din</label>
-                        <RegularButton
-                            content="Otkaži rezervaciju"
-                            style={styles.button}
-                        />
+                    <div className={styles.buttonContainer}>
+                        <div className={styles.buttonWrapper}>
+                            <label className={styles.priceLabel}>560 din</label>
+                            <RegularButton
+                                content="Otkaži rezervaciju"
+                                style={styles.button}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

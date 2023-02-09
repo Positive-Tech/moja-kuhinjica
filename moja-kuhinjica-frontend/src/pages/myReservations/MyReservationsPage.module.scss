@@ -19,6 +19,12 @@
     align-items: center;
 }
 
+.emptyContainer {
+    @extend .colDiv;
+    height: 100vh;
+    align-items: center;
+}
+
 .titleLabel {
     font-family: Poppins;
     font-weight: 500;
@@ -28,11 +34,16 @@
     font-size: 32px;
 
     @media only screen and (max-width: $breakpoint-720p) {
-        font-size: 30px;
-    }
-    @media only screen and (max-width: $breakpoint-large) {
         font-size: 28px;
     }
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 24px;
+    }
+}
+
+.emptyTitleLabel {
+    @extend .titleLabel;
+    margin-top: 12%;
 }
 
 .infoLabel {
@@ -42,10 +53,10 @@
     font-size: 22px;
 
     @media only screen and (max-width: $breakpoint-720p) {
-        font-size: 30px;
+        font-size: 20px;
     }
     @media only screen and (max-width: $breakpoint-large) {
-        font-size: 28px;
+        font-size: 18px;
     }
 }
 
@@ -61,7 +72,6 @@
     @extend .colDiv;
     width: 90%;
     margin-top: 5%;
-    justify-content: center;
     align-items: center;
 }
 
@@ -76,4 +86,8 @@
     font-weight: 400;
     font-size: 24px;
     color: #333333;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 20px;
+    }
 }

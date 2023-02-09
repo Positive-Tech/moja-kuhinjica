@@ -7,12 +7,25 @@ import { Footer } from '@/components/footer/Footer'
 
 const MyReservationsPage = () => {
     const [active, setActive] = useState<number>(1)
+    const [reservationsExist, setReservationsExist] = useState<boolean>(true)
 
     return (
         <div className={styles.colDiv}>
             <Header type="red" selectedButton={0} />
-            <div className={styles.container}>
-                <label className={styles.titleLabel}>Moje rezervacije</label>
+            <div
+                className={
+                    reservationsExist ? styles.container : styles.emptyContainer
+                }
+            >
+                <label
+                    className={
+                        reservationsExist
+                            ? styles.titleLabel
+                            : styles.emptyTitleLabel
+                    }
+                >
+                    Moje rezervacije
+                </label>
                 <label className={styles.infoLabel}>
                     Rezervacije se mogu otkazati do 10 časova
                 </label>
@@ -50,22 +63,33 @@ const MyReservationsPage = () => {
                         />
                     </div>
                     <label className={styles.titleLabel}>Februar 4</label>
-                    <div className={styles.reservationWrapper}>
-                        <label className={styles.reservationLabel}>
-                            Rezervacija #234913
-                        </label>
-                        <ReservationItem />
-                        <ReservationItem />
-                    </div>
-                    <div className={styles.reservationWrapper}>
-                        <label className={styles.reservationLabel}>
-                            Rezervacija #234913
-                        </label>
-                        <ReservationItem />
-                    </div>
+                    {!reservationsExist && (
+                        <div className={styles.rowDiv}>
+                            <label className={styles.infoLabel}>
+                                Nema rezervacija za ovaj datum.
+                            </label>
+                        </div>
+                    )}
+                    {reservationsExist && (
+                        <div className={styles.reservationWrapper}>
+                            <label className={styles.reservationLabel}>
+                                Rezervacija #234913
+                            </label>
+                            <ReservationItem />
+                            <ReservationItem />
+                        </div>
+                    )}
+                    {reservationsExist && (
+                        <div className={styles.reservationWrapper}>
+                            <label className={styles.reservationLabel}>
+                                Rezervacija #234913
+                            </label>
+                            <ReservationItem />
+                        </div>
+                    )}
                 </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
     )
 }
