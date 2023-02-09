@@ -15,6 +15,7 @@ import styles from '../styles/Home.module.scss'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { MOBILE_WIDTH } from '../constants/constants'
 import Menu from './menu'
+import { type } from 'os'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)
@@ -30,17 +31,22 @@ const Home = () => {
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
-    const [windowsWidth, setWindowsWidth] = useState<number>(0)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+        console.log(windowWidth)
+    }
 
     useEffect(() => {
-        const handleResize = () => setWindowsWidth(window.innerWidth)
-        window.addEventListener('resize', handleResize)
-        setIsMobile(windowsWidth < MOBILE_WIDTH)
-
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
         return () => {
-            window.removeEventListener('resize', handleResize)
+            window.removeEventListener('resize', handleWindowResize)
         }
-    }, [windowsWidth])
+    }, [windowWidth])
 
     const handleSignUpClick = () => {
         console.log(isMobile)
