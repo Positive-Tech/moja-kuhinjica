@@ -5,15 +5,20 @@ interface IDropdownButtonProps {
     content: string
     src: string
     style?: string
+    handleClick?: () => void
 }
 export const DropdownMenuButton = ({
     content,
     src,
     style,
+    handleClick,
 }: IDropdownButtonProps) => {
     return (
         <div className={styles.buttonWrapper}>
-            <button className={`${styles.dropDownMenuButton} ${style}`}>
+            <button
+                onClick={handleClick}
+                className={`${styles.dropDownMenuButton} ${style}`}
+            >
                 {content}
             </button>
             <Image src={src} alt="" className={styles.icon} />

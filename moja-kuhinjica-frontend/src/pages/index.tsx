@@ -35,7 +35,6 @@ const Home = () => {
 
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth)
-        console.log(windowWidth)
     }
 
     useEffect(() => {
@@ -49,7 +48,6 @@ const Home = () => {
     }, [windowWidth])
 
     const handleSignUpClick = () => {
-        console.log(isMobile)
         if (isMobile) router.push('/registration')
         else setShowSignUpModal(true)
     }

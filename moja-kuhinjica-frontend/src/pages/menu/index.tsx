@@ -6,10 +6,17 @@ import { DropdownMenuButton } from '@/components/button/DropdownMenuButton'
 import homeIcon from '../../../public/static/assets/images/homeIcon.svg'
 import reservationIcon from '../../../public/static/assets/images/reservationIcon.svg'
 import aboutUsIcon from '../../../public/static/assets/images/aboutUsIcon.svg'
+import { useRouter } from 'next/router'
 interface IMenuProps {
     closeMenu: () => void
 }
 const Menu = ({ closeMenu }: IMenuProps) => {
+    const router = useRouter()
+
+    const goToHomePage = () => {
+        closeMenu()
+        router.push('/')
+    }
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -21,6 +28,7 @@ const Menu = ({ closeMenu }: IMenuProps) => {
                         content="Početna"
                         src={homeIcon}
                         style={styles.button}
+                        handleClick={() => goToHomePage()}
                     />
                     <DropdownMenuButton
                         content="Rezerviši"

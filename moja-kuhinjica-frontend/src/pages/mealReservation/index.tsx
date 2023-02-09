@@ -16,7 +16,7 @@ const MealReservation = () => {
     const [active, setActive] = useState<number>(1)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [menuIsPresent, setMenuIsPresent] = useState<boolean>(true)
-    const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(true)
+    const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(false)
     return (
         <div className={styles.colDiv}>
             <Header type="red" selectedButton={2} />
@@ -25,13 +25,22 @@ const MealReservation = () => {
                     menuIsPresent ? styles.container : styles.emptyMenuContainer
                 }
             >
-                <div className={styles.restaurantButtonWrapper}>
-                    <button
-                        className={styles.restaurantButton}
-                        onClick={() => router.push('/restaurant/profile')}
-                    >
+                <div
+                    className={
+                        menuIsPresent
+                            ? styles.restaurantTitleWrapper
+                            : styles.emptyMenuTitleWrapper
+                    }
+                >
+                    <label className={styles.restaurantTitle}>
                         Restoran Top FOOD 021
-                    </button>
+                    </label>
+                    <label
+                        onClick={() => router.push('/restaurant/profile')}
+                        className={styles.restaurantInfoLabel}
+                    >
+                        opste informacije
+                    </label>
                 </div>
                 <label className={styles.titleLabel}>
                     Dnevni meni - 21/01/2023
@@ -108,13 +117,7 @@ const MealReservation = () => {
                                         content="korpa"
                                         style={styles.cartTitle}
                                     />
-                                    <div
-                                        style={{
-                                            overflow: 'scroll',
-                                            padding: '5%',
-                                            height: '80%',
-                                        }}
-                                    >
+                                    <div className={styles.scrollItemsDiv}>
                                         <CartItem />
                                         <CartItem />
                                         <CartItem />
@@ -138,7 +141,10 @@ const MealReservation = () => {
                                             />
                                         </div>
                                     </div>
-                                    <RegularButton content="Potvrdi rezervaciju" />
+                                    <RegularButton
+                                        content="Potvrdi rezervaciju"
+                                        style={styles.confirmButton}
+                                    />
                                 </div>
                             )}
                         </div>
