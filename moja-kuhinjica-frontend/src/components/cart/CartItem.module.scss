@@ -14,7 +14,7 @@
 .itemContainer {
     @extend .rowDiv;
     align-items: center;
-    height: 25%;
+    height: 40%;
     border-bottom: 1px solid #c1001633;
     margin-bottom: 5%;
 
@@ -29,11 +29,16 @@
     width: 80%;
 }
 .pictureWrapper {
-    height: 80%;
-    width: 35%;
+    height: 80px;
+    width: 95px;
     overflow: auto;
-    border-radius: 30px;
+    border-radius: 20px;
     overflow-y: hidden;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 70px;
+        width: 85px;
+    }
 }
 
 .mealPicture {
@@ -48,11 +53,13 @@
 }
 
 .mealName {
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 5%;
 }
 
 .amountWrapper {
     justify-content: flex-start;
+    height: 20%;
 }
 
 .amountLabel {
@@ -84,5 +91,5 @@
     gap: 10%;
 }
 .price {
-    font-size: 16px;
+    font-size: 14px;
 }

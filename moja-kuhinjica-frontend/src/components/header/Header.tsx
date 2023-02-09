@@ -73,6 +73,9 @@ const Header = ({ type, selectedButton, openLoginModal }: IHeaderProps) => {
                                     <DropdownMenuButton
                                         content="Moje rezervacije"
                                         src={myReservationsIcon}
+                                        handleClick={() =>
+                                            router.push('/myReservations')
+                                        }
                                     />
                                     <DropdownMenuButton
                                         content="Izmena profila"

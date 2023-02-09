@@ -1,0 +1,70 @@
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.container {
+    height: 250px;
+    width: 100%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.pictureWrapper {
+    height: 100%;
+    width: 20%;
+    border-radius: 20px;
+    overflow: auto;
+}
+
+.contentWrapper {
+    @extend .colDiv;
+    height: 100%;
+    width: 70%;
+    margin-left: 5%;
+    justify-content: space-between;
+}
+
+.mealPicture {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.titleLabel {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 26px;
+    color: #333333;
+}
+
+.contentLabel {
+    font-family: Poppins;
+    font-weight: lighter;
+    font-size: 20px;
+    color: #333333;
+}
+
+.buttonWrapper {
+    @extend .rowDiv;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2%;
+}
+
+.priceLabel {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 28px;
+    color: #c10016;
+}
+
+.button {
+    width: 30%;
+    height: 60%;
+}

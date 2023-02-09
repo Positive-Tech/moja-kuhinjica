@@ -21,16 +21,16 @@
         width: 20%;
     }
     @media only screen and (max-width: $breakpoint-900p) {
-        width: 25%;
+        width: 30%;
         height: 40%;
     }
     @media only screen and (max-width: $breakpoint-720p) {
-        width: 25%;
+        width: 35%;
         height: 45%;
         font-size: 22px;
     }
     @media only screen and (max-width: $breakpoint-large) {
-        width: 40%;
+        width: 45%;
         height: 50%;
         font-size: 18px;
     }
