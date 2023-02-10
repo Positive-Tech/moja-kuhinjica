@@ -26,6 +26,7 @@ const MealReservation = () => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+    const [showCart, setShowCart] = useState<boolean>(false)
 
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth)
@@ -187,8 +188,11 @@ const MealReservation = () => {
                 title="rezervacija uspešna"
                 buttonText="rezerviši ponovo"
             />
-            {isMobile && (
-                <div className={styles.bottomCart}>
+            {isMobile && !showCart && (
+                <div
+                    className={styles.bottomCart}
+                    onClick={() => setShowCart(true)}
+                >
                     {cartIsEmpty ? (
                         <>
                             <div className={styles.emptyIconWrapper}>
@@ -227,6 +231,35 @@ const MealReservation = () => {
                             </div>
                         </>
                     )}
+                </div>
+            )}
+            {isMobile && showCart && !cartIsEmpty && (
+                <div
+                    className={styles.openCartContainer}
+                    onClick={() => setShowCart(false)}
+                >
+                    <div className={styles.openCartBottom}>
+                        <Title content="korpa" style={styles.cartTitle} />
+                        <div className={styles.scrollItemsDiv}>
+                            <CartItem />
+                            <CartItem />
+                            <CartItem />
+                            <CartItem />
+                            <CartItem />
+                            <CartItem />
+                        </div>
+                        <div className={styles.priceDiv}>
+                            <Text content="Ukupno:" style={styles.priceLabel} />
+                            <div className={styles.totalPriceDiv}>
+                                <Text content="560" style={styles.totalPrice} />
+                                <Text content="RSD" style={styles.totalPrice} />
+                            </div>
+                        </div>
+                        <RegularButton
+                            content="Potvrdi rezervaciju"
+                            style={styles.confirmButton}
+                        />
+                    </div>
                 </div>
             )}
         </div>
