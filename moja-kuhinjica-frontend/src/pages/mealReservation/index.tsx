@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { MenuItem } from '@/components/menu/MenuItem'
@@ -12,8 +13,9 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../mobileMenu'
-import styles from './MealReservation.module.scss'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import cartIcon from '../../../public/static/assets/images/cart.svg'
+import styles from './MealReservation.module.scss'
 
 const MealReservation = () => {
     const router = useRouter()
@@ -185,6 +187,48 @@ const MealReservation = () => {
                 title="rezervacija uspešna"
                 buttonText="rezerviši ponovo"
             />
+            {isMobile && (
+                <div className={styles.bottomCart}>
+                    {cartIsEmpty ? (
+                        <>
+                            <div className={styles.emptyIconWrapper}>
+                                <Image
+                                    src={cartIcon}
+                                    alt=""
+                                    className={styles.cartIcon}
+                                />
+                            </div>
+                            <label className={styles.cartInfo}>
+                                Vasa korpa je prazna, rezervisite neko jelo iz
+                                dnevnog menija
+                            </label>
+                        </>
+                    ) : (
+                        <>
+                            <div className={styles.amountWrapper}>
+                                <div className={styles.iconWrapper}>
+                                    <Image
+                                        src={cartIcon}
+                                        alt=""
+                                        className={styles.cartIcon}
+                                    />
+                                </div>
+                                <label className={styles.cartInfo}>
+                                    5 rezervacija
+                                </label>
+                            </div>
+                            <div className={styles.priceWrapper}>
+                                <label className={styles.priceLabel}>
+                                    Ukupno:
+                                </label>
+                                <label className={styles.totalPrice}>
+                                    1120 RSD
+                                </label>
+                            </div>
+                        </>
+                    )}
+                </div>
+            )}
         </div>
     )
 }
