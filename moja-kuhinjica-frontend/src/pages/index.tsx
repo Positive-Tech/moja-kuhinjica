@@ -14,8 +14,7 @@ import burgerMenu from '../../public/static/assets/images/burgerMenu.svg'
 import styles from '../styles/Home.module.scss'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { MOBILE_WIDTH } from '../constants/constants'
-import Menu from './menu'
-import { type } from 'os'
+import Menu from './mobileMenu'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)

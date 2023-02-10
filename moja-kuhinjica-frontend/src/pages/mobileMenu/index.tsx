@@ -6,6 +6,11 @@ import { DropdownMenuButton } from '@/components/button/DropdownMenuButton'
 import homeIcon from '../../../public/static/assets/images/homeIcon.svg'
 import reservationIcon from '../../../public/static/assets/images/reservationIcon.svg'
 import aboutUsIcon from '../../../public/static/assets/images/aboutUsIcon.svg'
+import myReservations from '../../../public/static/assets/images/myReservations.svg'
+import editProfile from '../../../public/static/assets/images/editProfile.svg'
+import logout from '../../../public/static/assets/images/logout.svg'
+import profile from '../../../public/static/assets/images/profileHeader.svg'
+
 import { useRouter } from 'next/router'
 interface IMenuProps {
     closeMenu: () => void
@@ -21,6 +26,16 @@ const Menu = ({ closeMenu }: IMenuProps) => {
         <div className={styles.container}>
             <div className={styles.wrapper}>
                 <div className={styles.closeButtonWrapper}>
+                    <div className={styles.userNameWrapper}>
+                        <div className={styles.pictureWrapper}>
+                            <Image
+                                src={profile}
+                                alt=""
+                                className={styles.profilePicture}
+                            />
+                        </div>
+                        <label className={styles.userName}>Pera Peric</label>
+                    </div>
                     <Image src={closeIcon} alt="" onClick={closeMenu} />
                 </div>
                 <div className={styles.buttonWrapper}>
@@ -36,8 +51,23 @@ const Menu = ({ closeMenu }: IMenuProps) => {
                         style={styles.button}
                     />
                     <DropdownMenuButton
+                        content="Moje rezervacije"
+                        src={myReservations}
+                        style={styles.button}
+                    />
+                    <DropdownMenuButton
+                        content="Izmena profila"
+                        src={editProfile}
+                        style={styles.button}
+                    />
+                    <DropdownMenuButton
                         content="O nama"
                         src={aboutUsIcon}
+                        style={styles.button}
+                    />
+                    <DropdownMenuButton
+                        content="Odjavi se"
+                        src={logout}
                         style={styles.button}
                     />
                 </div>
