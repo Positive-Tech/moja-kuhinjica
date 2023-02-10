@@ -25,6 +25,9 @@
     @media only screen and (max-width: $breakpoint-large) {
         height: 180px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 150px;
+    }
 }
 
 .pictureWrapper {
@@ -33,6 +36,10 @@
     border-radius: 20px;
     overflow: auto;
     overflow-y: hidden;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 60%;
+    }
 }
 
 .contentWrapper {
@@ -57,6 +64,9 @@
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 20px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
+    }
 }
 
 .contentLabel {
@@ -67,6 +77,9 @@
 
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 16px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 8px;
     }
 }
 
@@ -88,6 +101,10 @@
     @media only screen and (max-width: $breakpoint-large) {
         width: 55%;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 80%;
+        gap: 10%;
+    }
 }
 
 .priceLabel {
@@ -101,6 +118,9 @@
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
     }
 }
 
@@ -126,5 +146,8 @@
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 16px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
     }
 }

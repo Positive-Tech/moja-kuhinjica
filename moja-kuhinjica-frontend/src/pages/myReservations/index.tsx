@@ -1,17 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import styles from './MyReservationsPage.module.scss'
 import { ReservationItem } from '@/components/reservation/ReservationItem'
 import { Footer } from '@/components/footer/Footer'
+import Menu from '../mobileMenu'
+import { MOBILE_WIDTH } from '@/constants/constants'
+import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 
 const MyReservationsPage = () => {
     const [active, setActive] = useState<number>(1)
     const [reservationsExist, setReservationsExist] = useState<boolean>(true)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
+        return () => {
+            window.removeEventListener('resize', handleWindowResize)
+        }
+    }, [windowWidth])
 
     return (
         <div className={styles.colDiv}>
-            <Header type="red" selectedButton={0} />
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {isMobile ? (
+                <MobileHeader handleClick={() => setShowMenu(true)} />
+            ) : (
+                <Header type="red" selectedButton={0} />
+            )}
             <div
                 className={
                     reservationsExist ? styles.container : styles.emptyContainer
@@ -95,6 +121,7 @@ const MyReservationsPage = () => {
                     )}
                 </div>
                 <Footer />
+                {isMobile && <MobileFooter />}
             </div>
         </div>
     )

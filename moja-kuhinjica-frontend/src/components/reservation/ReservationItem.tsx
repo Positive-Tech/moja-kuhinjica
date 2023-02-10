@@ -17,16 +17,14 @@ export const ReservationItem = () => {
                     </label>
                     <label className={styles.contentLabel}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros.Lorem
-                        ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Donec odio. Quisque volutpat mattis eros
+                        elit. Donec odio. Quisque volutpat mattis eros.
                     </label>
                     <label className={styles.contentLabel}>1 porcija</label>
                     <div className={styles.buttonContainer}>
                         <div className={styles.buttonWrapper}>
                             <label className={styles.priceLabel}>560 din</label>
                             <button className={styles.cancelButton}>
-                                Otkaži rezervaciju
+                                Otkaži
                             </button>
                         </div>
                     </div>

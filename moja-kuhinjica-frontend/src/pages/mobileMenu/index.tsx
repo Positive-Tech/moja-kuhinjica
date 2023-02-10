@@ -18,9 +18,9 @@ interface IMenuProps {
 const Menu = ({ closeMenu }: IMenuProps) => {
     const router = useRouter()
 
-    const goToHomePage = () => {
+    const navigate = (url: string) => {
         closeMenu()
-        router.push('/')
+        router.push(url)
     }
     return (
         <div className={styles.container}>
@@ -43,7 +43,7 @@ const Menu = ({ closeMenu }: IMenuProps) => {
                         content="Početna"
                         src={homeIcon}
                         style={styles.button}
-                        handleClick={() => goToHomePage()}
+                        handleClick={() => navigate('/')}
                     />
                     <DropdownMenuButton
                         content="Rezerviši"
@@ -54,6 +54,7 @@ const Menu = ({ closeMenu }: IMenuProps) => {
                         content="Moje rezervacije"
                         src={myReservations}
                         style={styles.button}
+                        handleClick={() => navigate('/myReservations')}
                     />
                     <DropdownMenuButton
                         content="Izmena profila"

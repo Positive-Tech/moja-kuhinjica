@@ -5,6 +5,10 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        align-items: center;
+    }
 }
 
 .rowDiv {
@@ -17,6 +21,10 @@
     @extend .colDiv;
     margin-top: 10%;
     align-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 90%;
+    }
 }
 
 .emptyContainer {
@@ -58,6 +66,10 @@
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 18px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+        margin-bottom: 10%;
+    }
 }
 
 .menuRowDiv {
@@ -73,12 +85,23 @@
     width: 90%;
     margin-top: 5%;
     align-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+    }
 }
 
 .reservationWrapper {
-    @extend .colDiv;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
     border-bottom: 1px solid rgba(193, 0, 22, 0.2);
     margin-bottom: 3%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        margin-top: 5%;
+    }
 }
 
 .restaurantLabel {
@@ -90,6 +113,9 @@
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 24px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
 }
 
 .reservationLabel {
@@ -100,5 +126,8 @@
 
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
     }
 }
