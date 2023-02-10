@@ -34,7 +34,7 @@ const Menu = ({ closeMenu }: IMenuProps) => {
                                 className={styles.profilePicture}
                             />
                         </div>
-                        <label className={styles.userName}>Pera Peric</label>
+                        <label className={styles.userName}>Pera Perić</label>
                     </div>
                     <Image src={closeIcon} alt="" onClick={closeMenu} />
                 </div>
@@ -49,6 +49,7 @@ const Menu = ({ closeMenu }: IMenuProps) => {
                         content="Rezerviši"
                         src={reservationIcon}
                         style={styles.button}
+                        handleClick={() => navigate('/mealReservation')}
                     />
                     <DropdownMenuButton
                         content="Moje rezervacije"

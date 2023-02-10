@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { MenuItem } from '@/components/menu/MenuItem'
-import styles from './MealReservation.module.scss'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
+import { MOBILE_WIDTH } from '@/constants/constants'
+import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
+import Menu from '../mobileMenu'
+import styles from './MealReservation.module.scss'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 
 const MealReservation = () => {
     const router = useRouter()
@@ -17,9 +21,32 @@ const MealReservation = () => {
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [menuIsPresent, setMenuIsPresent] = useState<boolean>(true)
     const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
+        return () => {
+            window.removeEventListener('resize', handleWindowResize)
+        }
+    }, [windowWidth])
+
     return (
         <div className={styles.colDiv}>
-            <Header type="red" selectedButton={2} />
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {isMobile ? (
+                <MobileHeader handleClick={() => setShowMenu(true)} />
+            ) : (
+                <Header type="red" selectedButton={2} />
+            )}
             <div
                 className={
                     menuIsPresent ? styles.container : styles.emptyMenuContainer
@@ -150,8 +177,7 @@ const MealReservation = () => {
                         </div>
                     </div>
                 </div>
-
-                <Footer />
+                {isMobile ? <MobileFooter /> : <Footer />}
             </div>
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
