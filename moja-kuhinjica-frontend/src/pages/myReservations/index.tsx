@@ -72,6 +72,9 @@ const MyReservationsPage = () => {
                     )}
                     {reservationsExist && (
                         <div className={styles.reservationWrapper}>
+                            <label className={styles.restaurantLabel}>
+                                Restoran Top FOOD 021
+                            </label>
                             <label className={styles.reservationLabel}>
                                 Rezervacija #234913
                             </label>
@@ -81,6 +84,9 @@ const MyReservationsPage = () => {
                     )}
                     {reservationsExist && (
                         <div className={styles.reservationWrapper}>
+                            <label className={styles.restaurantLabel}>
+                                Restoran Top FOOD 021
+                            </label>
                             <label className={styles.reservationLabel}>
                                 Rezervacija #234913
                             </label>

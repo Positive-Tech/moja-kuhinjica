@@ -81,9 +81,20 @@
     margin-bottom: 3%;
 }
 
+.restaurantLabel {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 26px;
+    color: #c10016;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 24px;
+    }
+}
+
 .reservationLabel {
     font-family: Poppins;
-    font-weight: 400;
+    font-weight: lighter;
     font-size: 24px;
     color: #333333;
 

@@ -25,10 +25,9 @@ export const ReservationItem = () => {
                     <div className={styles.buttonContainer}>
                         <div className={styles.buttonWrapper}>
                             <label className={styles.priceLabel}>560 din</label>
-                            <RegularButton
-                                content="Otkaži rezervaciju"
-                                style={styles.button}
-                            />
+                            <button className={styles.cancelButton}>
+                                Otkaži rezervaciju
+                            </button>
                         </div>
                     </div>
                 </div>
