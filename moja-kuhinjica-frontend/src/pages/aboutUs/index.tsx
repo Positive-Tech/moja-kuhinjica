@@ -26,20 +26,24 @@ const AboutUs = () => {
                     active={active === 1}
                     onClick={() => setActive(1)}
                     content="O nama"
+                    style={styles.tabButton}
                 />
                 <TabButton
                     active={active === 2}
                     onClick={() => setActive(2)}
+                    style={styles.tabButton}
                     content="FAQ"
                 />
                 <TabButton
                     active={active === 3}
                     onClick={() => setActive(3)}
+                    style={styles.tabButton}
                     content="Politika privatnosti"
                 />
                 <TabButton
                     active={active === 4}
                     onClick={() => setActive(4)}
+                    style={styles.tabButton}
                     content="Uslovi korišćenja"
                 />
             </div>
