@@ -120,8 +120,7 @@ const MyReservationsPage = () => {
                         </div>
                     )}
                 </div>
-                <Footer />
-                {isMobile && <MobileFooter />}
+                {isMobile ? <MobileFooter /> : <Footer />}
             </div>
         </div>
     )

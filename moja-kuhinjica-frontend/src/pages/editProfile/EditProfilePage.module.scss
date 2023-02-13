@@ -1,0 +1,61 @@
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    @extend .colDiv;
+    height: 100vh;
+}
+
+.titleLabel {
+    font-family: Poppins;
+    font-weight: 500;
+    color: #333333;
+    margin-top: 12%;
+    margin-bottom: 1%;
+    margin-left: 5%;
+    font-size: 32px;
+}
+
+.formContainer {
+    @extend .colDiv;
+    align-items: center;
+}
+
+.formWrapper {
+    @extend .colDiv;
+    width: 60%;
+    align-items: center;
+}
+
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3%;
+    width: 80%;
+    height: 100%;
+}
+
+.formButton {
+    width: 35%;
+    height: 7%;
+    background: #c10016;
+    border: 0;
+    color: white;
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: lighter;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 5%;
+}

@@ -80,6 +80,9 @@ const Header = ({ type, selectedButton, openLoginModal }: IHeaderProps) => {
                                     <DropdownMenuButton
                                         content="Izmena profila"
                                         src={editProfileIcon}
+                                        handleClick={() =>
+                                            router.push('/editProfile')
+                                        }
                                     />
                                     <DropdownMenuButton
                                         content="Odjavi me"
