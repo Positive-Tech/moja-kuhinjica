@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints.module.scss';
+
 .container {
     display: flex;
     width: 100%;
@@ -18,6 +20,10 @@
     align-items: center;
     width: 100%;
     height: 90px;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 60px;
+    }
 }
 
 .labelWrapper {
@@ -31,6 +37,10 @@
     font-weight: 600;
     font-size: 24px;
     color: #c10016;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
 }
 
 .svgButton {
@@ -49,6 +59,10 @@
     font-weight: 300;
     font-size: 24px;
     color: #333333;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
 }
 
 .title {

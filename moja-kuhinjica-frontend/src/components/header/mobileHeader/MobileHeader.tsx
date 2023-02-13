@@ -5,16 +5,20 @@ import burgerMenuIcon from '../../../../public/static/assets/images/burgerMenuRe
 import profileIcon from '../../../../public/static/assets/images/profileHeader.svg'
 interface IMobileHeaderProps {
     handleClick: () => void
+    style?: string
+    src?: string
     showProfileIcon?: boolean
 }
 export const MobileHeader = ({
     handleClick,
     showProfileIcon,
+    style,
+    src,
 }: IMobileHeaderProps) => {
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${style}`}>
             <Image
-                src={burgerMenuIcon}
+                src={src ? src : burgerMenuIcon}
                 alt=""
                 className={styles.burgerMenu}
                 onClick={handleClick}

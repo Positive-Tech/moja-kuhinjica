@@ -12,12 +12,13 @@
     width: 100%;
 }
 .wrapper {
+    width: 100%;
     height: 50vh;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         url('../../../public/static/assets/images/background.png');
-    filter: blur(1.5px);
+    backdrop-filter: blur(1.5px);
     background-size: cover;
-    background-position: left center;
+    background-position: 55%;
 }
 
 .title {
@@ -46,6 +47,10 @@
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 80px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        margin-top: 50%;
+        font-size: 80px;
+    }
 }
 
 .menuRowDiv {
@@ -56,6 +61,10 @@
     gap: 20px;
     margin-top: 2%;
     margin-bottom: 2%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        gap: 10px;
+    }
 }
 
 .tabWrapper {
@@ -71,9 +80,15 @@
 }
 
 .aboutUs {
-    @extend .rowDiv;
+    display: flex;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     gap: 5%;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        flex-direction: column;
+    }
 }
 
 .content {
@@ -96,6 +111,9 @@
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 24px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 22px;
+    }
 }
 
 .contentText {
@@ -115,6 +133,9 @@
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 18px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
 }
 
 .privacyContainer {
@@ -128,6 +149,10 @@
     font-size: 24px;
     color: #c10016;
     margin-bottom: 5%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
 }
 
 .text {
@@ -135,11 +160,19 @@
     font-weight: 300;
     font-size: 24px;
     color: #000000;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
 }
 
 .FAQContainer {
     @extend .colDiv;
     width: 60%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 80%;
+    }
 }
 
 .tabButton {
@@ -154,4 +187,34 @@
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 16px;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 8px;
+        width: 20%;
+        height: 50%;
+        border-radius: 7px;
+        border: 1px solid;
+    }
+}
+
+.aboutUsHeader {
+    position: absolute;
+}
+
+.pictureWrapper {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    border-radius: 30px;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        margin-bottom: 10%;
+        height: 230px;
+    }
+}
+
+.aboutUsPicture {
+    max-width: 100%;
+    max-height: 100%;
 }

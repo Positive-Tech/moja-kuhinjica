@@ -1,26 +1,59 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useState } from 'react'
 import { Footer } from '@/components/footer/Footer'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Header from '@/components/header/Header'
 import { QuestionLabel } from '@/components/label/QuestionLabel'
 import { TabButton } from '@/components/button/TabButton'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import styles from './AboutUs.module.scss'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import aboutUsPic from '../../../public/static/assets/images/aboutUs.png'
+import burgerMenuIcon from '../../../public/static/assets/images/burgerMenuWhite.svg'
+import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
+import Menu from '../mobileMenu'
 const AboutUs = () => {
     const [active, setActive] = useState<number>(1)
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
 
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
+        return () => {
+            window.removeEventListener('resize', handleWindowResize)
+        }
+    }, [windowWidth])
     return (
         <div className={styles.colDiv}>
-            <div className={styles.wrapper}></div>
-            <label className={styles.title}>DUNDA</label>
-            <Header
-                type="main"
-                selectedButton={3}
-                openLoginModal={setShowLoginModal}
-            />
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+
+            <div className={styles.wrapper}>
+                <label className={styles.title}>DUNDA</label>
+            </div>
+            {isMobile ? (
+                <MobileHeader
+                    handleClick={() => setShowMenu(true)}
+                    showProfileIcon={false}
+                    style={styles.aboutUsHeader}
+                    src={burgerMenuIcon}
+                />
+            ) : (
+                <Header
+                    type="main"
+                    selectedButton={3}
+                    openLoginModal={setShowLoginModal}
+                />
+            )}
             <div className={styles.menuRowDiv}>
                 <TabButton
                     active={active === 1}
@@ -51,7 +84,13 @@ const AboutUs = () => {
                 {active === 1 && (
                     <div className={styles.aboutUsContainer}>
                         <div className={styles.aboutUs}>
-                            <Image src={aboutUsPic} alt="" />
+                            <div className={styles.pictureWrapper}>
+                                <Image
+                                    src={aboutUsPic}
+                                    alt=""
+                                    className={styles.aboutUsPicture}
+                                />
+                            </div>
                             <div className={styles.content}>
                                 <label className={styles.contentTitle}>
                                     Lorem ipsum?
@@ -148,7 +187,7 @@ const AboutUs = () => {
                     </div>
                 )}
             </div>
-            <Footer />
+            {isMobile ? <MobileFooter /> : <Footer />}
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
