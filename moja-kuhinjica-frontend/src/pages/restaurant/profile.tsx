@@ -130,7 +130,7 @@ const Profile = () => {
                             />
                         </div>
                     )}
-                    <div className={styles.gallerySlider}></div>
+                    {isMobile && <div className={styles.gallerySlider}></div>}
                 </div>
             </div>
             {isMobile ? <MobileFooter /> : <Footer />}
