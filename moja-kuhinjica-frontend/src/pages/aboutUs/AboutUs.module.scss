@@ -79,7 +79,7 @@
     width: 90%;
 }
 
-.aboutUs {
+.aboutUsWrapper {
     display: flex;
     height: 100%;
     width: 100%;
@@ -138,12 +138,12 @@
     }
 }
 
-.privacyContainer {
+.privacyInfoContainer {
     @extend .colDiv;
     width: 90%;
 }
 
-.redTitle {
+.infoTitle {
     font-family: Poppins;
     font-weight: 600;
     font-size: 24px;
@@ -155,7 +155,7 @@
     }
 }
 
-.text {
+.infoText {
     font-family: Poppins;
     font-weight: 300;
     font-size: 24px;

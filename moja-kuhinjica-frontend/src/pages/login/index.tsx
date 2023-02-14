@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { FormInput } from '@/components/input/FormInput'
-import back from '../../../public/static/assets/images/backArrow.svg'
-import email from '../../../public/static/assets/images/email.svg'
-import password from '../../../public/static/assets/images/password.svg'
+import back from 'public/static/assets/images/backArrow.svg'
+import email from 'public/static/assets/images/email.svg'
+import password from 'public/static/assets/images/password.svg'
 
 import styles from './LoginPage.module.scss'
 

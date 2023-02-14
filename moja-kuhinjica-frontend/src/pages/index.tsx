@@ -9,12 +9,12 @@ import { LoginModal } from '@/components/modal/login/LoginModal'
 import { TabButton } from '@/components/button/TabButton'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
-import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
-import burgerMenu from '../../public/static/assets/images/burgerMenu.svg'
-import styles from '../styles/Home.module.scss'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { MOBILE_WIDTH } from '../constants/constants'
-import Menu from './mobileMenu'
+import Menu from 'src/components/mobileMenu'
+import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
+import styles from 'src/styles/Home.module.scss'
+import { MOBILE_WIDTH } from 'src/constants/constants'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)
@@ -67,7 +67,7 @@ const Home = () => {
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <Image
-                        src={burgerMenu}
+                        src={burgerMenuIcon}
                         alt=""
                         className={styles.menuIcon}
                         onClick={() => setShowMenu(true)}
@@ -88,16 +88,16 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={styles.scrollDiv}>
-                    <div className={styles.scrollLabelWrapper}>
+                    <div className={styles.labelForScrollWrapper}>
                         <label
-                            className={styles.scrollLabel}
+                            className={styles.labelForScroll}
                             onClick={handleClick}
                         >
                             Ponuda
                         </label>
                         <Image
-                            className={styles.scrollIcon}
-                            src={scrollArrow}
+                            className={styles.labelForScrollIcon}
+                            src={scrollArrowIcon}
                             alt=""
                             onClick={handleClick}
                         />
@@ -152,7 +152,7 @@ const Home = () => {
                             content="SUB"
                         />
                     </div>
-                    <div className={styles.grid}>
+                    <div className={styles.menuGridDiv}>
                         <MenuItem />
                         <MenuItem />
                         <MenuItem />
@@ -163,8 +163,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
-            <MobileFooter />
+            {isMobile ? <MobileFooter /> : <Footer />}
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}

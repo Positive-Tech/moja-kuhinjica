@@ -11,11 +11,13 @@ import myReservationsIcon from '../../../public/static/assets/images/myReservati
 import styles from './Header.module.scss'
 interface IHeaderProps {
     type: string
-    selectedButton: number
+    selectedButton?: number
     openLoginModal?: (param: boolean) => void
 }
 const Header = ({ type, selectedButton, openLoginModal }: IHeaderProps) => {
-    const [active, setActive] = useState<number>(selectedButton)
+    const [active, setActive] = useState<number>(
+        selectedButton ? selectedButton : 0
+    )
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
     const router = useRouter()
     const jwt = null

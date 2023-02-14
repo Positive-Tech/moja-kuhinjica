@@ -7,12 +7,13 @@ import Header from '@/components/header/Header'
 import { QuestionLabel } from '@/components/label/QuestionLabel'
 import { TabButton } from '@/components/button/TabButton'
 import { LoginModal } from '@/components/modal/login/LoginModal'
-import styles from './AboutUs.module.scss'
 import { MOBILE_WIDTH } from '@/constants/constants'
-import aboutUsPic from '../../../public/static/assets/images/aboutUs.png'
-import burgerMenuIcon from '../../../public/static/assets/images/burgerMenuWhite.svg'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
-import Menu from '../mobileMenu'
+import Menu from 'src/components/mobileMenu'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenuWhite.svg'
+import aboutUsPic from 'public/static/assets/images/aboutUs.png'
+import styles from './AboutUs.module.scss'
+
 const AboutUs = () => {
     const [active, setActive] = useState<number>(1)
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
@@ -33,6 +34,7 @@ const AboutUs = () => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -83,7 +85,7 @@ const AboutUs = () => {
             <div className={styles.tabWrapper}>
                 {active === 1 && (
                     <div className={styles.aboutUsContainer}>
-                        <div className={styles.aboutUs}>
+                        <div className={styles.aboutUsWrapper}>
                             <div className={styles.pictureWrapper}>
                                 <Image
                                     src={aboutUsPic}
@@ -129,11 +131,11 @@ const AboutUs = () => {
                     </div>
                 )}
                 {active === 3 && (
-                    <div className={styles.privacyContainer}>
-                        <label className={styles.redTitle}>
+                    <div className={styles.privacyInfoContainer}>
+                        <label className={styles.infoTitle}>
                             DUNDA Obaveštenje o privatnosti
                         </label>
-                        <label className={styles.text}>
+                        <label className={styles.infoText}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Vivamus quis dolor nec dui auctor lobortis. Ut
                             placerat velit eu placerat molestie. Suspendisse
@@ -158,11 +160,11 @@ const AboutUs = () => {
                     </div>
                 )}
                 {active === 4 && (
-                    <div className={styles.privacyContainer}>
-                        <label className={styles.redTitle}>
+                    <div className={styles.privacyInfoContainer}>
+                        <label className={styles.infoTitle}>
                             DUNDA Uslovi korišćenja
                         </label>
-                        <label className={styles.text}>
+                        <label className={styles.infoText}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Vivamus quis dolor nec dui auctor lobortis. Ut
                             placerat velit eu placerat molestie. Suspendisse

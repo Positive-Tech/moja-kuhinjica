@@ -5,16 +5,17 @@ import Image from 'next/image'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { FormInput } from '@/components/input/FormInput'
-import Menu from '../mobileMenu'
+import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import styles from './EditProfilePage.module.scss'
-import email from '../../../public/static/assets/images/email.svg'
-import profile from '../../../public/static/assets/images/profile.svg'
+import email from 'public/static/assets/images/email.svg'
+import profile from 'public/static/assets/images/profile.svg'
 import password from '../../../public/static/assets/images/password.svg'
-import mobile from '../../../public/static/assets/images/mobile.svg'
-import profileIcon from '../../../public/static/assets/images/profileHeader.svg'
+import mobile from 'public/static/assets/images/mobile.svg'
+import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import { MOBILE_WIDTH } from '@/constants/constants'
+import styles from './EditProfilePage.module.scss'
+
 const EditProfilePage = () => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)

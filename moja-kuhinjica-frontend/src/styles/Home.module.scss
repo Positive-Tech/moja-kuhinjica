@@ -157,7 +157,7 @@
         display: none;
     }
 }
-.scrollLabelWrapper {
+.labelForScrollWrapper {
     @extend .rowDiv;
     width: 20%;
     justify-content: center;
@@ -165,7 +165,7 @@
     margin-bottom: 5%;
 }
 
-.scrollLabel {
+.labelForScroll {
     font-family: Nunito;
     color: white;
     font-size: 25px;
@@ -177,7 +177,7 @@
     }
 }
 
-.scrollIcon {
+.labelForScrollIcon {
     cursor: pointer;
 }
 
@@ -275,7 +275,7 @@
     }
 }
 
-.grid {
+.menuGridDiv {
     display: grid;
     grid-template-columns: repeat(3, 1fr [col-start]);
 
