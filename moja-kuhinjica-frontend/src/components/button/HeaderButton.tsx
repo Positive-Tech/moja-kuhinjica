@@ -17,7 +17,7 @@ export const HeaderButton = ({
         <button
             className={
                 active
-                    ? headerType === 'profile'
+                    ? headerType === 'red'
                         ? styles.navButtonProfileSelected
                         : styles.navButtonSelected
                     : styles.navButton

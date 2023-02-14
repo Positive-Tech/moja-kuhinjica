@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    height: 90%;
+}
+
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3%;
+    width: 100%;
+    height: 100%;
+}
+
+.formTitle {
+    font-family: Poppins;
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+
+    color: #333333;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.formButton {
+    width: 90%;
+    height: 6%;
+    background: #c10016;
+    border: 0;
+    color: white;
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 5%;
+}
+
+.input {
+    height: 60%;
+}

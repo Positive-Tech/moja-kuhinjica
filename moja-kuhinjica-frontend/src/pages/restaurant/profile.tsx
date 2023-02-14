@@ -1,30 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { LabelWithIcon } from '@/components/label/LabelWithIcon'
-import styles from './Profile.module.scss'
-import restaurantMap from '../../../public/static/assets/images/map.svg'
-import clock from '../../../public/static/assets/images/clock.svg'
-import location from '../../../public/static/assets/images/location.svg'
-import telephone from '../../../public/static/assets/images/telephone.svg'
-import restaurantPic from '../../../public/static/assets/images/restaurantGallery.svg'
 import { LoginModal } from '@/components/modal/login/LoginModal'
+import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import Menu from '@/components/mobileMenu'
+import restaurantMap from 'public/static/assets/images/map.svg'
+import clock from 'public/static/assets/images/clock.svg'
+import location from 'public/static/assets/images/location.svg'
+import telephone from 'public/static/assets/images/telephone.svg'
+import restaurantPic from 'public/static/assets/images/restaurantGallery.svg'
+import styles from './Profile.module.scss'
+import { MOBILE_WIDTH } from '@/constants/constants'
 
 const Profile = () => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
+        return () => {
+            window.removeEventListener('resize', handleWindowResize)
+        }
+    }, [windowWidth])
 
     return (
         <div className={styles.colDiv}>
-            <Header
-                type="red"
-                selectedButton={0}
-                openLoginModal={setShowLoginModal}
-            />
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {isMobile ? (
+                <MobileHeader handleClick={() => setShowMenu(true)} />
+            ) : (
+                <Header
+                    type="red"
+                    selectedButton={0}
+                    openLoginModal={setShowLoginModal}
+                />
+            )}
             <div className={styles.wrapper}>
                 <div className={styles.container}>
-                    <div className={styles.colDiv1}>
-                        <div className={styles.rowDiv1}>
+                    <div className={styles.mainContainer}>
+                        <div className={styles.mainWrapper}>
                             <div className={styles.contentContainer}>
                                 <label className={styles.name}>
                                     Restoran Top Food 021
@@ -32,12 +58,15 @@ const Profile = () => {
                                 <LabelWithIcon
                                     src={clock}
                                     content="Ponedeljak-Petak, 12h-15h"
+                                    style={styles.infoLabel}
                                 />
                                 <LabelWithIcon
                                     src={location}
+                                    style={styles.infoLabel}
                                     content="Svetozara Miletića 26, 21000 Novi Sad"
                                 />
                                 <LabelWithIcon
+                                    style={styles.infoLabel}
                                     src={telephone}
                                     content="0644226471"
                                 />
@@ -53,30 +82,58 @@ const Profile = () => {
                                     eget metus a dictum.
                                 </label>
                             </div>
-
-                            <Image
-                                src={restaurantMap}
-                                alt=""
-                                className={styles.mapImage}
-                            />
+                            <div className={styles.pictureWrapper}>
+                                <Image
+                                    src={restaurantMap}
+                                    alt=""
+                                    className={styles.mapImage}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className={styles.galleryWrapper}>
+                <label className={styles.title}>Galerija</label>
                 <div className={styles.galleryColDiv}>
-                    <label className={styles.title}>Galerija</label>
-                    <div className={styles.grid}>
-                        <Image src={restaurantPic} alt="" />
-                        <Image src={restaurantPic} alt="" />
-                        <Image src={restaurantPic} alt="" />
-                        <Image src={restaurantPic} alt="" />
-                        <Image src={restaurantPic} alt="" />
-                        <Image src={restaurantPic} alt="" />
-                    </div>
+                    {!isMobile && (
+                        <div className={styles.grid}>
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                className={styles.gridImage}
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                className={styles.gridImage}
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                className={styles.gridImage}
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                className={styles.gridImage}
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                className={styles.gridImage}
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                className={styles.gridImage}
+                            />
+                        </div>
+                    )}
+                    {isMobile && <div className={styles.gallerySlider}></div>}
                 </div>
             </div>
-            <Footer />
+            {isMobile ? <MobileFooter /> : <Footer />}
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}

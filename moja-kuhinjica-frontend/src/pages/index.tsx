@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
@@ -8,12 +8,17 @@ import { Footer } from '@/components/footer/Footer'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import { TabButton } from '@/components/button/TabButton'
 import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
-import { SignUpNotificationModal } from '@/components/modal/signUp/SignUpNotificationModal'
-import scrollArrow from '../../public/static/assets/images/scrollArrow.svg'
-import styles from '../styles/Home.module.scss'
+import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import Menu from 'src/components/mobileMenu'
+import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
+import styles from 'src/styles/Home.module.scss'
+import { MOBILE_WIDTH } from 'src/constants/constants'
 
 const Home = () => {
     const [active, setActive] = useState<number>(2)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
@@ -24,9 +29,36 @@ const Home = () => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
+        return () => {
+            window.removeEventListener('resize', handleWindowResize)
+        }
+    }, [windowWidth])
+
+    const handleSignUpClick = () => {
+        if (isMobile) router.push('/registration')
+        else setShowSignUpModal(true)
+    }
+
+    const handleLoginClick = () => {
+        if (isMobile) router.push('/login')
+        else setShowLoginModal(true)
+    }
 
     return (
         <div className={styles.colDiv}>
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
                 type="main"
                 selectedButton={1}
@@ -34,6 +66,12 @@ const Home = () => {
             />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
+                    <Image
+                        src={burgerMenuIcon}
+                        alt=""
+                        className={styles.menuIcon}
+                        onClick={() => setShowMenu(true)}
+                    />
                     <label className={styles.title}>dunda</label>
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
@@ -41,25 +79,25 @@ const Home = () => {
                     <div className={styles.buttonWrapper}>
                         <HomePageButton
                             content="Registrujte se"
-                            setShowModal={setShowSignUpModal}
+                            onClick={handleSignUpClick}
                         />
                         <HomePageButton
                             content="Ulogujte se"
-                            setShowModal={setShowLoginModal}
+                            onClick={handleLoginClick}
                         />
                     </div>
                 </div>
                 <div className={styles.scrollDiv}>
-                    <div className={styles.scrollLabelWrapper}>
+                    <div className={styles.labelForScrollWrapper}>
                         <label
-                            className={styles.scrollLabel}
+                            className={styles.labelForScroll}
                             onClick={handleClick}
                         >
                             Ponuda
                         </label>
                         <Image
-                            className={styles.scrollIcon}
-                            src={scrollArrow}
+                            className={styles.labelForScrollIcon}
+                            src={scrollArrowIcon}
                             alt=""
                             onClick={handleClick}
                         />
@@ -68,13 +106,16 @@ const Home = () => {
             </div>
             <div className={styles.menuWrapper} ref={ref}>
                 <div className={styles.menuColDiv}>
-                    <div className={styles.restaurantButtonWrapper}>
-                        <button
-                            className={styles.restaurantButton}
-                            onClick={() => router.push('/restaurant/profile')}
-                        >
+                    <div className={styles.restaurantTitleWrapper}>
+                        <label className={styles.restaurantTitle}>
                             Restoran Top FOOD 021
-                        </button>
+                        </label>
+                        <label
+                            onClick={() => router.push('/restaurant/profile')}
+                            className={styles.restaurantInfoLabel}
+                        >
+                            opste informacije
+                        </label>
                     </div>
                     <label className={styles.titleLabel}>
                         Dnevni meni - 21/01/2023
@@ -83,35 +124,35 @@ const Home = () => {
                         <TabButton
                             active={active === 1}
                             onClick={() => setActive(1)}
-                            content="Ponedeljak"
+                            content="PON"
                         />
                         <TabButton
                             active={active === 2}
                             onClick={() => setActive(2)}
-                            content="Utorak"
+                            content="UTO"
                         />
                         <TabButton
                             active={active === 3}
                             onClick={() => setActive(3)}
-                            content="Sreda"
+                            content="SRE"
                         />
                         <TabButton
                             active={active === 4}
                             onClick={() => setActive(4)}
-                            content="Četvrtak"
+                            content="ČET"
                         />
                         <TabButton
                             active={active === 5}
                             onClick={() => setActive(5)}
-                            content="Petak"
+                            content="PET"
                         />
                         <TabButton
                             active={active === 6}
                             onClick={() => setActive(6)}
-                            content="Subota"
+                            content="SUB"
                         />
                     </div>
-                    <div className={styles.grid}>
+                    <div className={styles.menuGridDiv}>
                         <MenuItem />
                         <MenuItem />
                         <MenuItem />
@@ -122,7 +163,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            {isMobile ? <MobileFooter /> : <Footer />}
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
@@ -131,9 +172,12 @@ const Home = () => {
                 modalIsOpen={showSignUpModal}
                 closeModal={() => setShowSignUpModal(false)}
             />
-            <SignUpNotificationModal
+            <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
+                type="registration"
+                title="registracija uspešna"
+                buttonText="zatvori"
             />
         </div>
     )

@@ -1,53 +1,98 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useState } from 'react'
 import { Footer } from '@/components/footer/Footer'
+import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Header from '@/components/header/Header'
 import { QuestionLabel } from '@/components/label/QuestionLabel'
 import { TabButton } from '@/components/button/TabButton'
 import { LoginModal } from '@/components/modal/login/LoginModal'
+import { MOBILE_WIDTH } from '@/constants/constants'
+import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
+import Menu from 'src/components/mobileMenu'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenuWhite.svg'
+import aboutUsPic from 'public/static/assets/images/aboutUs.png'
 import styles from './AboutUs.module.scss'
-import aboutUsPic from '../../../public/static/assets/images/aboutUs.png'
+
 const AboutUs = () => {
     const [active, setActive] = useState<number>(1)
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
+
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    useEffect(() => {
+        handleWindowResize()
+        window.addEventListener('resize', handleWindowResize)
+        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
+        else setIsMobile(false)
+        return () => {
+            window.removeEventListener('resize', handleWindowResize)
+        }
+    }, [windowWidth])
 
     return (
         <div className={styles.colDiv}>
-            <div className={styles.wrapper}></div>
-            <label className={styles.title}>DUNDA</label>
-            <Header
-                type="main"
-                selectedButton={3}
-                openLoginModal={setShowLoginModal}
-            />
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+
+            <div className={styles.wrapper}>
+                <label className={styles.title}>DUNDA</label>
+            </div>
+            {isMobile ? (
+                <MobileHeader
+                    handleClick={() => setShowMenu(true)}
+                    showProfileIcon={false}
+                    style={styles.aboutUsHeader}
+                    src={burgerMenuIcon}
+                />
+            ) : (
+                <Header
+                    type="main"
+                    selectedButton={3}
+                    openLoginModal={setShowLoginModal}
+                />
+            )}
             <div className={styles.menuRowDiv}>
                 <TabButton
                     active={active === 1}
                     onClick={() => setActive(1)}
                     content="O nama"
+                    style={styles.tabButton}
                 />
                 <TabButton
                     active={active === 2}
                     onClick={() => setActive(2)}
+                    style={styles.tabButton}
                     content="FAQ"
                 />
                 <TabButton
                     active={active === 3}
                     onClick={() => setActive(3)}
+                    style={styles.tabButton}
                     content="Politika privatnosti"
                 />
                 <TabButton
                     active={active === 4}
                     onClick={() => setActive(4)}
+                    style={styles.tabButton}
                     content="Uslovi korišćenja"
                 />
             </div>
             <div className={styles.tabWrapper}>
                 {active === 1 && (
                     <div className={styles.aboutUsContainer}>
-                        <div className={styles.aboutUs}>
-                            <Image src={aboutUsPic} alt="" />
+                        <div className={styles.aboutUsWrapper}>
+                            <div className={styles.pictureWrapper}>
+                                <Image
+                                    src={aboutUsPic}
+                                    alt=""
+                                    className={styles.aboutUsPicture}
+                                />
+                            </div>
                             <div className={styles.content}>
                                 <label className={styles.contentTitle}>
                                     Lorem ipsum?
@@ -86,11 +131,11 @@ const AboutUs = () => {
                     </div>
                 )}
                 {active === 3 && (
-                    <div className={styles.privacyContainer}>
-                        <label className={styles.redTitle}>
+                    <div className={styles.privacyInfoContainer}>
+                        <label className={styles.infoTitle}>
                             DUNDA Obaveštenje o privatnosti
                         </label>
-                        <label className={styles.text}>
+                        <label className={styles.infoText}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Vivamus quis dolor nec dui auctor lobortis. Ut
                             placerat velit eu placerat molestie. Suspendisse
@@ -115,11 +160,11 @@ const AboutUs = () => {
                     </div>
                 )}
                 {active === 4 && (
-                    <div className={styles.privacyContainer}>
-                        <label className={styles.redTitle}>
+                    <div className={styles.privacyInfoContainer}>
+                        <label className={styles.infoTitle}>
                             DUNDA Uslovi korišćenja
                         </label>
-                        <label className={styles.text}>
+                        <label className={styles.infoText}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit. Vivamus quis dolor nec dui auctor lobortis. Ut
                             placerat velit eu placerat molestie. Suspendisse
@@ -144,7 +189,7 @@ const AboutUs = () => {
                     </div>
                 )}
             </div>
-            <Footer />
+            {isMobile ? <MobileFooter /> : <Footer />}
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}

@@ -6,12 +6,13 @@ import decrement from '../../../public/static/assets/images/decrement.svg'
 
 interface IAmountButtonProps {
     style?: string
+    labelStyle?: string
 }
-export const AmountButton = ({ style }: IAmountButtonProps) => {
+export const AmountButton = ({ style, labelStyle }: IAmountButtonProps) => {
     return (
         <div className={`${styles.amountWrapper} ${style}`}>
             <Image src={decrement} alt="" className={styles.button} />
-            <label className={styles.contentLabel}>1</label>
+            <label className={`${styles.contentLabel} ${labelStyle}`}>1</label>
             <Image src={increment} alt="" className={styles.button} />
         </div>
     )

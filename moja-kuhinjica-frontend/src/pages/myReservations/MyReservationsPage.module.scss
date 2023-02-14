@@ -1,0 +1,133 @@
+@import '../../styles/breakpoints.module.scss';
+
+.colDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        align-items: center;
+    }
+}
+
+.rowDiv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    @extend .colDiv;
+    margin-top: 10%;
+    align-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 90%;
+    }
+}
+
+.emptyContainer {
+    @extend .colDiv;
+    height: 100vh;
+    align-items: center;
+}
+
+.titleLabel {
+    font-family: Poppins;
+    font-weight: 500;
+    color: #333333;
+    margin-top: 3%;
+    margin-bottom: 1%;
+    font-size: 32px;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 28px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 24px;
+    }
+}
+
+.emptyTitleLabel {
+    @extend .titleLabel;
+    margin-top: 12%;
+}
+
+.infoLabel {
+    font-family: Poppins;
+    font-weight: lighter;
+    color: #333333;
+    font-size: 22px;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 18px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+        margin-bottom: 10%;
+    }
+}
+
+.menuRowDiv {
+    @extend .rowDiv;
+    height: 50px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2%;
+}
+
+.colDiv1 {
+    @extend .colDiv;
+    width: 90%;
+    margin-top: 5%;
+    align-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+    }
+}
+
+.reservationWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid rgba(193, 0, 22, 0.2);
+    margin-bottom: 3%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        margin-top: 5%;
+    }
+}
+
+.restaurantLabel {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 26px;
+    color: #c10016;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 24px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 16px;
+    }
+}
+
+.reservationLabel {
+    font-family: Poppins;
+    font-weight: lighter;
+    font-size: 24px;
+    color: #333333;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
+    }
+}

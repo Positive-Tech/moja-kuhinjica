@@ -1,3 +1,4 @@
+@import '../../../styles//breakpoints.module.scss';
 .modalContainer {
     top: 50%;
     left: 50%;
@@ -5,8 +6,8 @@
     bottom: auto;
     transform: translate(-50%, -50%);
     position: absolute;
-    height: 80%;
-    width: 950px;
+    height: 90%;
+    width: 60%;
     border-radius: 30px;
 
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.05);
@@ -14,12 +15,33 @@
     background-color: #e7e7e7e5;
     backdrop-filter: blur(10px);
     border: white;
-}
 
-.modalContainerSuccessfulRegistration {
-    @extend .modalContainer;
-    height: 60%;
-    width: 45%;
+    display: flex;
+    align-items: center;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        height: 60%;
+        width: 55%;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        height: 70%;
+        width: 55%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        height: 90%;
+        width: 70%;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 90%;
+        width: 65%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 95%;
+        width: 75%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: none;
+    }
 }
 
 .formContainer {
@@ -27,6 +49,12 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 90%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 90%;
+    }
 }
 
 .formDiv {
@@ -34,26 +62,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 3%;
     width: 80%;
     height: 100%;
 }
 
 .formTitle {
-    font-family: 'Poppins';
+    font-family: Poppins;
+    width: 100%;
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
-    line-height: 48px;
 
     color: #333333;
     text-align: center;
     text-transform: uppercase;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 28px;
+    }
 }
 
 .formButton {
-    width: 70%;
-    height: 50px;
+    width: 65%;
+    height: 7%;
     background: #c10016;
     border: 0;
     color: white;
@@ -63,6 +95,10 @@
     border-radius: 15px;
     cursor: pointer;
     margin-top: 5%;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 20%;
+    }
 }
 
 .separator {
@@ -88,27 +124,28 @@
     color: #333333;
     text-align: center;
     text-transform: uppercase;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 28px;
+    }
 }
 
 .buttonWrapper2 {
+    width: 100%;
     height: 10%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 15%;
+    gap: 5%;
     margin: 0;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 15%;
+        gap: 0;
+    }
 }
 
-.contentDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-}
-
-.contentLabel {
-    font-family: Poppins;
-    font-weight: 400;
-    color: #c10016;
-    font-size: 16px;
+.buttonImage {
+    max-width: 100%;
+    max-height: 100%;
 }

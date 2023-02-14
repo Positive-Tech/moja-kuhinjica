@@ -22,6 +22,7 @@ export const MenuItem = ({ type }: IMenuItemProps) => {
             </div>
             <div className={styles.titleWrapper}>
                 <Title
+                    onClick={() => setOpenDescription(!openDescription)}
                     content="Piletina u sosu od šampinjona"
                     style={
                         isOrdering()
@@ -58,8 +59,24 @@ export const MenuItem = ({ type }: IMenuItemProps) => {
                 </div>
             )}
             <div className={styles.priceWrapper}>
-                <label className={styles.contentLabel}>meni 1 -</label>
-                <label className={styles.priceLabel}>560 din</label>
+                <label
+                    className={
+                        isOrdering()
+                            ? styles.orderingContentLabel
+                            : styles.contentLabel
+                    }
+                >
+                    meni 1 -
+                </label>
+                <label
+                    className={
+                        isOrdering()
+                            ? styles.orderingPriceLabel
+                            : styles.priceLabel
+                    }
+                >
+                    560 din
+                </label>
             </div>
             {isOrdering() && (
                 <div className={styles.buttonContainer}>

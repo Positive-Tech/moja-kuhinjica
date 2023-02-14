@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints.module.scss';
+
 .wrapper {
     position: absolute;
     width: 100%;
@@ -6,6 +8,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: none;
+    }
 }
 
 .redWrapper {
@@ -20,6 +26,7 @@
     width: 10%;
     height: 100%;
     margin-left: 5%;
+    object-fit: contain;
 }
 
 .logoImage {
@@ -31,6 +38,58 @@
     display: flex;
     width: 50%;
     height: 100%;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-end;
+
+    @media only screen and (max-width: $breakpoint-1440p) {
+        width: 35%;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        width: 40%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: none;
+    }
+}
+
+.profileIconWrapper {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    padding-right: 5%;
+    position: relative;
+}
+
+.profileIcon {
+    padding-right: 2%;
+    cursor: pointer;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.dropDownButtonWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5%;
+}
+.dropdownMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #c50016;
+    width: 250px;
+    right: 15%;
+    top: 100%;
+    padding: 0;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 220px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 180px;
+    }
 }

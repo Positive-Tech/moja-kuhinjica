@@ -1,4 +1,6 @@
 import React from 'react'
+import { useState } from 'react'
+import { useForm, FieldValues } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FormInput } from '../../input/FormInput'
 import { bgModal } from '../../../constants/constants'
@@ -10,8 +12,21 @@ interface ILoginModalProps {
     modalIsOpen: boolean
     closeModal: (param: boolean) => void
 }
-
+export type RegistrationFormFields = {
+    email: string
+    password: string
+}
 export const LoginModal = ({ modalIsOpen, closeModal }: ILoginModalProps) => {
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm()
+    const onSubmit = (data: any) => {
+        reset()
+    }
+
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -21,16 +36,41 @@ export const LoginModal = ({ modalIsOpen, closeModal }: ILoginModalProps) => {
             ariaHideApp={false}
         >
             <div className={styles.formContainer}>
-                <div className={styles.formDiv}>
+                <form
+                    className={styles.formDiv}
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    <FormInput src={email} placeholder="Email" type="text" />
                     <FormInput
+                        register={register}
+                        errors={errors}
+                        name="email"
+                        src={email}
+                        placeholder="Email"
+                        type="text"
+                        validationSchema={{
+                            required: 'email is required',
+                            pattern: {
+                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                message: 'invalid email value',
+                            },
+                        }}
+                    />
+                    <FormInput
+                        register={register}
+                        errors={errors}
+                        name="password"
                         src={password}
                         placeholder="Šifra"
                         type="password"
+                        validationSchema={{
+                            required: 'pass is required',
+                        }}
                     />
-                    <button className={styles.formButton}>Potvrdi</button>
-                </div>
+                    <button type="submit" className={styles.formButton}>
+                        Potvrdi
+                    </button>
+                </form>
             </div>
         </Modal>
     )

@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints.module.scss';
+
 .modalContainerLogin {
     top: 50%;
     left: 50%;
@@ -12,8 +14,20 @@
     background-color: #e7e7e7e5;
     backdrop-filter: blur(10px);
     border: white;
-    height: 70%;
-    width: 60%;
+    height: 60%;
+    width: 50%;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 70%;
+        width: 65%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 70%;
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: none;
+    }
 }
 
 .formContainer {
@@ -34,15 +48,17 @@
 }
 
 .formTitle {
-    font-family: 'Poppins';
-    font-style: normal;
+    font-family: Poppins;
     font-weight: 500;
     font-size: 32px;
-    line-height: 48px;
 
     color: #333333;
     text-align: center;
     text-transform: uppercase;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 28px;
+    }
 }
 
 .formButton {

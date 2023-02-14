@@ -1,3 +1,5 @@
+@import './breakpoints.module.scss';
+
 .colDiv {
     display: flex;
     flex-direction: column;
@@ -14,9 +16,14 @@
     @extend .colDiv;
     height: 100vh;
     background-image: url('../../public/static/assets/images/background.png');
+
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: flex-end;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        background-position: 55%;
+    }
 }
 
 .container {
@@ -25,6 +32,30 @@
     width: 50%;
     height: 80%;
     margin-left: 5%;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        width: 30%;
+    }
+    @media only screen and (max-width: $breakpoint-1440p) {
+        width: 30%;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        width: 35%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        width: 50%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        backdrop-filter: blur(1.5px);
+        height: 100%;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+        justify-content: flex-start;
+    }
 }
 
 .title {
@@ -36,6 +67,24 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: 70px;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        font-size: 130px;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        font-size: 100px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 70px;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 65px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 80px;
+        margin-left: 5%;
+        margin-top: 80%;
+    }
 }
 
 .content {
@@ -47,6 +96,20 @@
     height: 10%;
     width: 90%;
     font-size: 35px;
+
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 35px;
+        line-height: 50px;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 30px;
+        line-height: 40px;
+    }
+    @media only screen and (max-width: $breakpoint-small) {
+        font-size: 20px;
+        line-height: 30px;
+        margin-left: 5%;
+    }
 }
 
 .buttonWrapper {
@@ -55,14 +118,46 @@
     width: 60%;
     margin-top: 10%;
     justify-content: space-between;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        width: 35%;
+    }
+    @media only screen and (max-width: $breakpoint-1440p) {
+        width: 55%;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        width: 65%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 65%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 70%;
+        justify-content: flex-start;
+        gap: 5%;
+        margin-top: 15%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 90%;
+        gap: 5%;
+        margin-top: 10%;
+        margin-left: 5%;
+    }
 }
 
 .scrollDiv {
     @extend .rowDiv;
     height: 10%;
     justify-content: flex-end;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: none;
+    }
 }
-.scrollLabelWrapper {
+.labelForScrollWrapper {
     @extend .rowDiv;
     width: 20%;
     justify-content: center;
@@ -70,7 +165,7 @@
     margin-bottom: 5%;
 }
 
-.scrollLabel {
+.labelForScroll {
     font-family: Nunito;
     color: white;
     font-size: 25px;
@@ -82,7 +177,7 @@
     }
 }
 
-.scrollIcon {
+.labelForScrollIcon {
     cursor: pointer;
 }
 
@@ -90,58 +185,117 @@
     width: 100%;
     height: 50%;
     background-color: white;
+    display: flex;
+    justify-content: center;
 }
 
 .menuColDiv {
     @extend .colDiv;
+    width: 90%;
     align-items: center;
 }
 
-.restaurantButtonWrapper {
+.restaurantTitleWrapper {
     width: 100%;
-    height: 50px;
+    height: 10%;
     margin-top: 3%;
-    margin-left: 15px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-.restaurantButton {
-    width: 25%;
+.restaurantTitle {
     height: 100%;
     font-family: Poppins;
-    font-weight: 500;
-    font-size: 22px;
-    background: transparent;
-    border: 2px solid #c10016;
-    border-radius: 15px;
+    font-weight: 600;
+    font-size: 38px;
     color: #c10016;
     cursor: pointer;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 23px;
+    }
+}
+
+.restaurantInfoLabel {
+    font-family: Poppins;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: #333333;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+
+    &:hover {
+        border-bottom: 1px solid #333333;
+    }
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 10px;
+        border-bottom: 1px solid #333333;
+    }
 }
 
 .titleLabel {
     font-family: Nunito;
     font-weight: 600;
     color: #333333;
-    margin-top: 3%;
     margin-bottom: 3%;
     font-size: 26px;
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 12px;
+        margin-top: 10%;
+    }
 }
 
 .menuRowDiv {
     @extend .rowDiv;
-    height: 100px;
+    height: 50px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+
+    @media only screen and (max-width: $breakpoint-1080p) {
+        height: 70px;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        height: 60px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        height: 50px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 45px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 50px;
+        margin-bottom: 5%;
+        margin-top: 5%;
+    }
 }
 
-.grid {
+.menuGridDiv {
     display: grid;
     grid-template-columns: repeat(3, 1fr [col-start]);
 
-    column-gap: 70px;
+    row-gap: 50px;
+    column-gap: 50px;
     padding-top: 5%;
     padding-bottom: 5%;
     justify-items: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        grid-template-columns: repeat(2, 1fr [col-start]);
+        row-gap: 10px;
+        column-gap: 10px;
+    }
+}
+
+.menuIcon {
+    @media only screen and (min-width: $breakpoint-medium) {
+        display: none;
+    }
+    margin-top: 5%;
+    margin-left: 5%;
 }
