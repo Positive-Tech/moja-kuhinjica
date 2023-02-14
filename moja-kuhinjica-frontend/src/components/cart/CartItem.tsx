@@ -12,7 +12,7 @@ interface ICartItemProps {
         price: number
     }
 }
-export const CartItem = ({ item }: ICartItemProps) => {
+export const CartItem = ({ item }: ICartItemProps): JSX.Element => {
     return (
         <div className={styles.itemContainer}>
             <div className={styles.rowDiv1}>

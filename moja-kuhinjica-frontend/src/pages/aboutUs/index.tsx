@@ -10,18 +10,18 @@ import { LoginModal } from '@/components/modal/login/LoginModal'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from 'src/components/mobileMenu'
-import burgerMenuIcon from 'public/static/assets/images/burgerMenuWhite.svg'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import aboutUsPic from 'public/static/assets/images/aboutUs.png'
 import styles from './AboutUs.module.scss'
 
-const AboutUs = () => {
+const AboutUs = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
 
-    const handleWindowResize = () => {
+    const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 

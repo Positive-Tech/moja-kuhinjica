@@ -16,14 +16,17 @@ interface ISignUpModalProps {
     modalIsOpen: boolean
     closeModal: (param: boolean) => void
 }
-export const SignUpModal = ({ modalIsOpen, closeModal }: ISignUpModalProps) => {
+export const SignUpModal = ({
+    modalIsOpen,
+    closeModal,
+}: ISignUpModalProps): JSX.Element => {
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: any): void => {
         reset()
     }
     return (

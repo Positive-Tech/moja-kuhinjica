@@ -5,7 +5,7 @@ import location from '../../../../public/static/assets/images/blackLocation.svg'
 import earth from '../../../../public/static/assets/images/blackEarth.svg'
 import circle from '../../../../public/static/assets/images/blackCircle.svg'
 
-export const MobileFooter = () => {
+export const MobileFooter = (): JSX.Element => {
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>

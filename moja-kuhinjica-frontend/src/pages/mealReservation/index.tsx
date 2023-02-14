@@ -17,7 +17,7 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import cartIcon from '../../../public/static/assets/images/cart.svg'
 import styles from './MealReservation.module.scss'
 
-const MealReservation = () => {
+const MealReservation = (): JSX.Element => {
     const router = useRouter()
     const [active, setActive] = useState<number>(1)
     const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -28,7 +28,7 @@ const MealReservation = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
 
-    const handleWindowResize = () => {
+    const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 

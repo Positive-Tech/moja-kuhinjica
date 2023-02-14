@@ -16,7 +16,7 @@ import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './EditProfilePage.module.scss'
 
-const EditProfilePage = () => {
+const EditProfilePage = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
@@ -27,10 +27,10 @@ const EditProfilePage = () => {
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: any): void => {
         reset()
     }
-    const handleWindowResize = () => {
+    const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 

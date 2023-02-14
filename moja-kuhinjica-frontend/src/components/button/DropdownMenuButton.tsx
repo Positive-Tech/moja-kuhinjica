@@ -12,7 +12,7 @@ export const DropdownMenuButton = ({
     src,
     style,
     handleClick,
-}: IDropdownButtonProps) => {
+}: IDropdownButtonProps): JSX.Element => {
     return (
         <div className={styles.buttonWrapper}>
             <button

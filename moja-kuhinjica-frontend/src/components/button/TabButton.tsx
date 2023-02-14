@@ -12,7 +12,7 @@ export const TabButton = ({
     onClick,
     content,
     style,
-}: IDayButtonProps) => {
+}: IDayButtonProps): JSX.Element => {
     return (
         <button
             onClick={onClick}

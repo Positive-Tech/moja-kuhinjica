@@ -9,7 +9,7 @@ import password from 'public/static/assets/images/password.svg'
 
 import styles from './LoginPage.module.scss'
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
     const router = useRouter()
     const {
         register,
@@ -18,7 +18,7 @@ const LoginPage = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: any): void => {
         reset()
     }
     return (

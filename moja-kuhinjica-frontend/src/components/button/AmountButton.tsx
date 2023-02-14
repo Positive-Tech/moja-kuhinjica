@@ -8,7 +8,10 @@ interface IAmountButtonProps {
     style?: string
     labelStyle?: string
 }
-export const AmountButton = ({ style, labelStyle }: IAmountButtonProps) => {
+export const AmountButton = ({
+    style,
+    labelStyle,
+}: IAmountButtonProps): JSX.Element => {
     return (
         <div className={`${styles.amountWrapper} ${style}`}>
             <Image src={decrement} alt="" className={styles.button} />

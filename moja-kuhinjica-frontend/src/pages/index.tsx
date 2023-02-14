@@ -16,13 +16,13 @@ import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
 
-const Home = () => {
+const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
-    const handleClick = () => {
+    const handleClick = (): void => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
 
@@ -32,7 +32,7 @@ const Home = () => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
-    const handleWindowResize = () => {
+    const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 
@@ -46,12 +46,12 @@ const Home = () => {
         }
     }, [windowWidth])
 
-    const handleSignUpClick = () => {
+    const handleSignUpClick = (): void => {
         if (isMobile) router.push('/registration')
         else setShowSignUpModal(true)
     }
 
-    const handleLoginClick = () => {
+    const handleLoginClick = (): void => {
         if (isMobile) router.push('/login')
         else setShowLoginModal(true)
     }

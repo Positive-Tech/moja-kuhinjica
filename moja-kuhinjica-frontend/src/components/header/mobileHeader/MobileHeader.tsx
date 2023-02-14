@@ -14,7 +14,7 @@ export const MobileHeader = ({
     showProfileIcon,
     style,
     src,
-}: IMobileHeaderProps) => {
+}: IMobileHeaderProps): JSX.Element => {
     return (
         <div className={`${styles.container} ${style}`}>
             <Image

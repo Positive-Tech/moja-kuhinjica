@@ -19,7 +19,7 @@ export const SuccessNotificationModal = ({
     type,
     title,
     buttonText,
-}: ISignUpNotificationModalProps) => {
+}: ISignUpNotificationModalProps): JSX.Element => {
     return (
         <Modal
             isOpen={modalIsOpen}

@@ -2,9 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './ReservationItem.module.scss'
 import meal1 from '../../../public/static/assets/images/meal1.png'
-import { RegularButton } from '../button/RegularButton'
 
-export const ReservationItem = () => {
+export const ReservationItem = (): JSX.Element => {
     return (
         <div className={styles.container}>
             <div className={styles.rowDiv}>

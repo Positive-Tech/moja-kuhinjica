@@ -1,6 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
-import { useForm, FieldValues } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FormInput } from '../../input/FormInput'
 import { bgModal } from '../../../constants/constants'
@@ -12,18 +11,21 @@ interface ILoginModalProps {
     modalIsOpen: boolean
     closeModal: (param: boolean) => void
 }
-export type RegistrationFormFields = {
+export interface RegistrationFormFields {
     email: string
     password: string
 }
-export const LoginModal = ({ modalIsOpen, closeModal }: ILoginModalProps) => {
+export const LoginModal = ({
+    modalIsOpen,
+    closeModal,
+}: ILoginModalProps): JSX.Element => {
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: any): void => {
         reset()
     }
 

@@ -6,7 +6,7 @@ import circle from '../../../public/static/assets/images/c-circle.svg'
 import location from '../../../public/static/assets/images/locationFooter.svg'
 import earth from '../../../public/static/assets/images/earth.svg'
 
-export const Footer = () => {
+export const Footer = (): JSX.Element => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.rowDiv1}>

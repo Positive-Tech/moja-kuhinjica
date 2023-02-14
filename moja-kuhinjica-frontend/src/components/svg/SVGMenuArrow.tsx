@@ -1,6 +1,9 @@
 import React from 'react'
 
-export const SVGMenuArrow = (className: string, onClick: () => void) => {
+export const SVGMenuArrow = (
+    className: string,
+    onClick: () => void
+): JSX.Element => {
     return (
         <svg
             onClick={onClick}

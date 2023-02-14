@@ -15,13 +15,13 @@ import restaurantPic from 'public/static/assets/images/restaurantGallery.svg'
 import styles from './Profile.module.scss'
 import { MOBILE_WIDTH } from '@/constants/constants'
 
-const Profile = () => {
+const Profile = (): JSX.Element => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
 
-    const handleWindowResize = () => {
+    const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 

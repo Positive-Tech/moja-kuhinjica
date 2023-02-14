@@ -9,14 +9,14 @@ import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 
-const MyReservationsPage = () => {
+const MyReservationsPage = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
     const [reservationsExist, setReservationsExist] = useState<boolean>(true)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
 
-    const handleWindowResize = () => {
+    const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 

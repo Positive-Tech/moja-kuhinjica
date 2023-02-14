@@ -14,24 +14,29 @@ interface IHeaderProps {
     selectedButton?: number
     openLoginModal?: (param: boolean) => void
 }
-const Header = ({ type, selectedButton, openLoginModal }: IHeaderProps) => {
-    const [active, setActive] = useState<number>(
-        selectedButton ? selectedButton : 0
-    )
+const Header = ({
+    type,
+    selectedButton,
+    openLoginModal,
+}: IHeaderProps): JSX.Element => {
+    const [active, setActive] = useState<number | undefined>(selectedButton)
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
     const router = useRouter()
     const jwt = null
 
-    const handleClick = (buttonNumber: number, url: string) => {
+    const handleClick = (buttonNumber: number, url: string): void => {
         setActive(buttonNumber)
         router.push(url)
     }
 
-    const handleOpen = () => {
+    const handleOpen = (): void => {
         setMenuIsOpen(!menuIsOpen)
     }
 
-    const handleReservationClick = (buttonNumber: number, url: string) => {
+    const handleReservationClick = (
+        buttonNumber: number,
+        url: string
+    ): void => {
         setActive(buttonNumber)
         if (!!jwt) router.push(url)
         openLoginModal?.(true)
