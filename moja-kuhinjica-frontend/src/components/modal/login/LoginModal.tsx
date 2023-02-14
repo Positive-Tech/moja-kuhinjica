@@ -1,11 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
+import { FieldValues } from 'react-hook-form'
 import { FormInput } from '../../input/FormInput'
 import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
+import UserService from '@/service/User.service'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -25,8 +27,12 @@ export const LoginModal = ({
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data: any): void => {
-        reset()
+
+    const login = (data: FieldValues): void => {
+        UserService.login(data).then(
+            (res) => console.log(res)
+            // localStorage.setItem('token', res.access_token)
+        )
     }
 
     return (
@@ -40,7 +46,7 @@ export const LoginModal = ({
             <div className={styles.formContainer}>
                 <form
                     className={styles.formDiv}
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
                     <FormInput
