@@ -15,10 +15,10 @@ import { useRouter } from 'next/router'
 interface IMenuProps {
     closeMenu: () => void
 }
-const Menu = ({ closeMenu }: IMenuProps) => {
+const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
     const router = useRouter()
 
-    const navigate = (url: string) => {
+    const navigate = (url: string): void => {
         closeMenu()
         router.push(url)
     }

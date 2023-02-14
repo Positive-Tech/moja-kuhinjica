@@ -6,7 +6,11 @@ interface ITitleProps {
     style: string
     onClick?: () => void
 }
-export const Title = ({ content, style, onClick }: ITitleProps) => {
+export const Title = ({
+    content,
+    style,
+    onClick,
+}: ITitleProps): JSX.Element => {
     return (
         <label onClick={onClick} className={`${styles.title} ${style}`}>
             {content}

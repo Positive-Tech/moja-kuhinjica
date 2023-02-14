@@ -5,7 +5,10 @@ interface IHeaderButtonProps {
     content: string
     onClick: () => void
 }
-export const HomePageButton = ({ content, onClick }: IHeaderButtonProps) => {
+export const HomePageButton = ({
+    content,
+    onClick,
+}: IHeaderButtonProps): JSX.Element => {
     return (
         <button className={styles.button} onClick={onClick}>
             {content}

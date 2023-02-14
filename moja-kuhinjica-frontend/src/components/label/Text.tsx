@@ -5,6 +5,6 @@ interface ITextProps {
     content: string
     style: string
 }
-export const Text = ({ content, style }: ITextProps) => {
+export const Text = ({ content, style }: ITextProps): JSX.Element => {
     return <label className={`${styles.text} ${style}`}>{content}</label>
 }

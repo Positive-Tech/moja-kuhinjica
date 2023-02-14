@@ -10,7 +10,7 @@ export const RegularButton = ({
     content,
     onClick,
     style,
-}: IRegularButtonProps) => {
+}: IRegularButtonProps): JSX.Element => {
     return (
         <button onClick={onClick} className={`${styles.button} ${style}`}>
             {content}

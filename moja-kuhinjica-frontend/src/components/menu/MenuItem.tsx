@@ -10,10 +10,10 @@ import { AmountButton } from '../button/AmountButton'
 interface IMenuItemProps {
     type?: string
 }
-export const MenuItem = ({ type }: IMenuItemProps) => {
+export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
 
-    const isOrdering = () => type === 'ordering'
+    const isOrdering = (): boolean => type === 'ordering'
 
     return (
         <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>

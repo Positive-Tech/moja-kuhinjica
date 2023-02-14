@@ -5,7 +5,10 @@ interface IQuestionLabelProps {
     question: string
     answer: string
 }
-export const QuestionLabel = ({ question, answer }: IQuestionLabelProps) => {
+export const QuestionLabel = ({
+    question,
+    answer,
+}: IQuestionLabelProps): JSX.Element => {
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     return (
         <>

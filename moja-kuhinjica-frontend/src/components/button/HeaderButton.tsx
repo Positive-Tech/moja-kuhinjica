@@ -12,7 +12,7 @@ export const HeaderButton = ({
     onClick,
     content,
     headerType,
-}: IHeaderButtonProps) => {
+}: IHeaderButtonProps): JSX.Element => {
     return (
         <button
             className={

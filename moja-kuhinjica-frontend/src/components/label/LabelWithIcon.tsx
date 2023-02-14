@@ -7,7 +7,11 @@ interface ILabelWithIconProps {
     content: string
     style?: string
 }
-export const LabelWithIcon = ({ src, content, style }: ILabelWithIconProps) => {
+export const LabelWithIcon = ({
+    src,
+    content,
+    style,
+}: ILabelWithIconProps): JSX.Element => {
     return (
         <div className={styles.container}>
             <Image src={src} alt="" />

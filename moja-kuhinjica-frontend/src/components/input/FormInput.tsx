@@ -24,10 +24,10 @@ export const FormInput = ({
     name,
     errors,
     style,
-}: IFormInputProps) => {
+}: IFormInputProps): JSX.Element => {
     const [invalidInput, setInvalidInput] = useState(false)
 
-    const isValid = () => {
+    const isValid = (): void => {
         if (errors[name]?.message) {
             console.log(errors)
             setInvalidInput(true)

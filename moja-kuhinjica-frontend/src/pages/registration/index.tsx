@@ -8,11 +8,9 @@ import profile from '../../../public/static/assets/images/profile.svg'
 import email from '../../../public/static/assets/images/email.svg'
 import password from '../../../public/static/assets/images/password.svg'
 import mobile from '../../../public/static/assets/images/mobile.svg'
-import google from '../../../public/static/assets/images/google.svg'
-import mailSignUp from '../../../public/static/assets/images/mailSignUp.svg'
 import { useRouter } from 'next/router'
 
-const RegistrationPage = () => {
+const RegistrationPage = (): JSX.Element => {
     const router = useRouter()
     const {
         register,
@@ -21,7 +19,7 @@ const RegistrationPage = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: any): void => {
         reset()
     }
     return (
