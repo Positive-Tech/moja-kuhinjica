@@ -65,16 +65,6 @@ const Home = (): JSX.Element => {
         else setShowLoginModal(true)
     }
 
-    const getUser = (): void => {
-        const res = UserService.getLoggedInUser()
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
     return (
         <div className={styles.colDiv}>
             {showMenu && (
@@ -100,7 +90,6 @@ const Home = (): JSX.Element => {
                         onClick={() => setShowMenu(true)}
                     />
                     <label className={styles.title}>dunda</label>
-                    {/* <button onClick={() => getUser()}>dobavi usera</button> */}
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
