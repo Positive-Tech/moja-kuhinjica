@@ -15,6 +15,7 @@ import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
+import UserService from '@/service/User.service'
 
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
@@ -30,8 +31,8 @@ const Home = (): JSX.Element => {
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
-    const [loggedIn, setLoggedIn] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
     useEffect(() => {
         isLoggedIn()
@@ -64,9 +65,25 @@ const Home = (): JSX.Element => {
         else setShowLoginModal(true)
     }
 
+    const getUser = (): void => {
+        const res = UserService.getLoggedInUser()
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     return (
         <div className={styles.colDiv}>
-            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {showMenu && (
+                <Menu
+                    closeMenu={() => setShowMenu(false)}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                />
+            )}
             <Header
                 type="main"
                 selectedButton={1}
@@ -83,6 +100,7 @@ const Home = (): JSX.Element => {
                         onClick={() => setShowMenu(true)}
                     />
                     <label className={styles.title}>dunda</label>
+                    {/* <button onClick={() => getUser()}>dobavi usera</button> */}
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
