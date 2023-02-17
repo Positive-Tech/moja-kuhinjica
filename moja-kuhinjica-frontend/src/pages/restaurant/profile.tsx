@@ -20,11 +20,18 @@ const Profile = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
+
+    useEffect(() => {
+        isLoggedIn()
+    }, [])
 
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
-
+    const isLoggedIn = (): void => {
+        setLoggedIn(localStorage.getItem('token') != null ? true : false)
+    }
     useEffect(() => {
         handleWindowResize()
         window.addEventListener('resize', handleWindowResize)
@@ -137,6 +144,8 @@ const Profile = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
             />
         </div>
     )

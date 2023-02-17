@@ -3,26 +3,29 @@ import Image from 'next/image'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'
-import logo from '../../../public/static/assets/images/logo-moja-klopica.svg'
-import profileIcon from '../../../public/static/assets/images/profileHeader.svg'
-import logoutIcon from '../../../public/static/assets/images/logout.svg'
-import editProfileIcon from '../../../public/static/assets/images/editProfile.svg'
-import myReservationsIcon from '../../../public/static/assets/images/myReservations.svg'
+import logo from 'public/static/assets/images/logo-moja-klopica.svg'
+import profileIcon from 'public/static/assets/images/profileHeader.svg'
+import logoutIcon from 'public/static/assets/images/logout.svg'
+import editProfileIcon from 'public/static/assets/images/editProfile.svg'
+import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import styles from './Header.module.scss'
 interface IHeaderProps {
     type: string
     selectedButton?: number
     openLoginModal?: (param: boolean) => void
+    loggedIn?: boolean
+    setLoggedIn?: (param: boolean) => void
 }
 const Header = ({
     type,
     selectedButton,
     openLoginModal,
+    loggedIn,
+    setLoggedIn,
 }: IHeaderProps): JSX.Element => {
     const [active, setActive] = useState<number | undefined>(selectedButton)
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
     const router = useRouter()
-    const jwt = null
 
     const handleClick = (buttonNumber: number, url: string): void => {
         setActive(buttonNumber)
@@ -38,8 +41,17 @@ const Header = ({
         url: string
     ): void => {
         setActive(buttonNumber)
-        if (!!jwt) router.push(url)
+        if (loggedIn) {
+            router.push(url)
+            return
+        }
         openLoginModal?.(true)
+    }
+
+    const logout = (): void => {
+        localStorage.removeItem('token')
+        setLoggedIn?.(false)
+        router.push('/')
     }
 
     return (
@@ -56,7 +68,9 @@ const Header = ({
                 />
                 <HeaderButton
                     active={active === 2}
-                    onClick={() => handleReservationClick(2, '/reservation')}
+                    onClick={() =>
+                        handleReservationClick(2, '/mealReservation')
+                    }
                     content="Rezerviši"
                     headerType={type}
                 />
@@ -66,7 +80,7 @@ const Header = ({
                     content="O nama"
                     headerType={type}
                 />
-                {jwt == null && type === 'red' && (
+                {loggedIn && (
                     <div className={styles.profileIconWrapper}>
                         <Image
                             src={profileIcon}
@@ -94,6 +108,7 @@ const Header = ({
                                     <DropdownMenuButton
                                         content="Odjavi me"
                                         src={logoutIcon}
+                                        handleClick={() => logout()}
                                     />
                                 </div>
                             </div>

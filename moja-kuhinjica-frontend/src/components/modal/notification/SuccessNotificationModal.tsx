@@ -8,7 +8,7 @@ import successFilled from '../../../../public/static/assets/images/successFilled
 
 interface ISignUpNotificationModalProps {
     modalIsOpen: boolean
-    closeModal: (param: boolean) => void
+    closeModal: () => void
     type?: string
     title: string
     buttonText: string
@@ -23,7 +23,7 @@ export const SuccessNotificationModal = ({
     return (
         <Modal
             isOpen={modalIsOpen}
-            onRequestClose={() => closeModal(false)}
+            onRequestClose={closeModal}
             style={bgModal}
             className={styles.modalContainer}
             ariaHideApp={false}
@@ -42,10 +42,7 @@ export const SuccessNotificationModal = ({
                             </label>
                         </div>
                     )}
-                    <button
-                        className={styles.formButton}
-                        onClick={() => closeModal(false)}
-                    >
+                    <button className={styles.formButton} onClick={closeModal}>
                         {buttonText}
                     </button>
                 </div>

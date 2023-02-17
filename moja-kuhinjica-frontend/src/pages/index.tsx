@@ -30,11 +30,12 @@ const Home = (): JSX.Element => {
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
 
-    const handleWindowResize = (): void => {
-        setWindowWidth(window.innerWidth)
-    }
+    useEffect(() => {
+        isLoggedIn()
+    }, [])
 
     useEffect(() => {
         handleWindowResize()
@@ -45,6 +46,13 @@ const Home = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    const handleWindowResize = (): void => {
+        setWindowWidth(window.innerWidth)
+    }
+    const isLoggedIn = (): void => {
+        setLoggedIn(localStorage.getItem('token') != null ? true : false)
+    }
 
     const handleSignUpClick = (): void => {
         if (isMobile) router.push('/registration')
@@ -63,6 +71,8 @@ const Home = (): JSX.Element => {
                 type="main"
                 selectedButton={1}
                 openLoginModal={setShowLoginModal}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
             />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
@@ -76,16 +86,18 @@ const Home = (): JSX.Element => {
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
-                    <div className={styles.buttonWrapper}>
-                        <HomePageButton
-                            content="Registrujte se"
-                            onClick={handleSignUpClick}
-                        />
-                        <HomePageButton
-                            content="Ulogujte se"
-                            onClick={handleLoginClick}
-                        />
-                    </div>
+                    {!loggedIn && (
+                        <div className={styles.buttonWrapper}>
+                            <HomePageButton
+                                content="Registrujte se"
+                                onClick={handleSignUpClick}
+                            />
+                            <HomePageButton
+                                content="Ulogujte se"
+                                onClick={handleLoginClick}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className={styles.scrollDiv}>
                     <div className={styles.labelForScrollWrapper}>
@@ -167,6 +179,8 @@ const Home = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
             />
             <SignUpModal
                 modalIsOpen={showSignUpModal}

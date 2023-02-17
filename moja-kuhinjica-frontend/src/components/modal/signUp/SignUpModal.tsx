@@ -14,7 +14,7 @@ import mailSignUp from '../../../../public/static/assets/images/mailSignUp.svg'
 
 interface ISignUpModalProps {
     modalIsOpen: boolean
-    closeModal: (param: boolean) => void
+    closeModal: () => void
 }
 export const SignUpModal = ({
     modalIsOpen,
@@ -32,7 +32,7 @@ export const SignUpModal = ({
     return (
         <Modal
             isOpen={modalIsOpen}
-            onRequestClose={() => closeModal(false)}
+            onRequestClose={closeModal}
             style={bgModal}
             className={styles.modalContainer}
             ariaHideApp={false}

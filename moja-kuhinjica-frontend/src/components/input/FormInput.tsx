@@ -29,7 +29,6 @@ export const FormInput = ({
 
     const isValid = (): void => {
         if (errors[name]?.message) {
-            console.log(errors)
             setInvalidInput(true)
             return
         }
