@@ -49,7 +49,11 @@ export const FormInput = ({
             <input
                 className={
                     invalidInput
-                        ? `${styles.invalidInput} ${style}`
+                        ? `${
+                              isPhoneNumber
+                                  ? styles.phoneNumberInvalidInput
+                                  : styles.invalidInput
+                          } ${style}`
                         : `${
                               isPhoneNumber
                                   ? styles.phoneNumberInput

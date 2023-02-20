@@ -80,4 +80,19 @@
     @media only screen and (max-width: $breakpoint-large) {
         padding-left: 20%;
     }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 25%;
+    }
+}
+
+.phoneNumberInvalidInput {
+    @extend .invalidInput;
+
+    padding-left: 15%;
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 20%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 25%;
+    }
 }
