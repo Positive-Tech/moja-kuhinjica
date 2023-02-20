@@ -47,6 +47,10 @@
         padding-left: 10%;
         font-size: 18px;
     }
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 10%;
+        font-size: 16px;
+    }
 }
 
 .invalidInput {
@@ -61,15 +65,22 @@
 }
 
 .numberFormat {
+    display: flex;
     font-family: Poppins;
     font-size: 20px;
     padding-left: 7%;
     color: #333333cc;
     font-weight: lighter;
+    height: 100%;
+    align-items: center;
 
     @media only screen and (max-width: $breakpoint-large) {
         padding-left: 10%;
         font-size: 18px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 10%;
+        font-size: 16px;
     }
 }
 
@@ -77,6 +88,7 @@
     @extend .input;
 
     padding-left: 15%;
+
     @media only screen and (max-width: $breakpoint-large) {
         padding-left: 20%;
     }

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useForm, FieldValues } from 'react-hook-form'
 import { FormInput } from '@/components/input/FormInput'
+import { useRouter } from 'next/router'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
+import UserService from '@/service/User.service'
 import styles from './RegistrationPage.module.scss'
 import back from 'public/static/assets/images/backArrow.svg'
 import profile from 'public/static/assets/images/profile.svg'
@@ -10,15 +13,12 @@ import password from 'public/static/assets/images/password.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
 import successFilled from 'public/static/assets/images/successFilled.svg'
 import success from 'public/static/assets/images/success.svg'
-import { useRouter } from 'next/router'
-import { ErrorLabel } from '@/components/label/ErrorLabel'
-import UserService from '@/service/User.service'
 
 const RegistrationPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
-    const [showNotification, setShowNotification] = useState<boolean>(true)
-    const [userEmail, setUserEmail] = useState<string>('anjapesic@gmail.com')
+    const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [userEmail, setUserEmail] = useState<string>('')
     const router = useRouter()
     const {
         register,

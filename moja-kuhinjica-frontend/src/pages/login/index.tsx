@@ -21,10 +21,6 @@ const LoginPage = (): JSX.Element => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any): void => {
-        reset()
-    }
-
     const login = (inputData: FieldValues): void => {
         setShowError(false)
         const res = UserService.login(inputData)

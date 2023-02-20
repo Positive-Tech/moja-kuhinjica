@@ -30,7 +30,7 @@ export const FormInput = ({
     defaultValue,
 }: IFormInputProps): JSX.Element => {
     const [invalidInput, setInvalidInput] = useState(false)
-
+    const [inputType, setInputType] = useState(type)
     const isValid = (): void => {
         if (errors[name]?.message) {
             setInvalidInput(true)
@@ -63,7 +63,7 @@ export const FormInput = ({
                           } ${style}`
                 }
                 placeholder={placeholder}
-                type={type}
+                type={inputType}
                 value={defaultValue}
                 {...register(name, validationSchema)}
             ></input>
@@ -71,7 +71,16 @@ export const FormInput = ({
                 <Image src={errorIcon} alt="" className={styles.sideIcon} />
             )}
             {type === 'password' && !invalidInput && (
-                <Image src={hidePassword} alt="" className={styles.sideIcon} />
+                <Image
+                    src={hidePassword}
+                    alt=""
+                    className={styles.sideIcon}
+                    onClick={() =>
+                        setInputType(
+                            inputType === 'password' ? 'text' : 'password'
+                        )
+                    }
+                />
             )}
         </div>
     )

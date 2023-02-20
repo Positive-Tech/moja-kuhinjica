@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
 import { FormInput } from '../../input/FormInput'
+import UserService from '@/service/User.service'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
-import UserService from '@/service/User.service'
-import { ErrorLabel } from '@/components/label/ErrorLabel'
 
 interface ILoginModalProps {
     modalIsOpen: boolean

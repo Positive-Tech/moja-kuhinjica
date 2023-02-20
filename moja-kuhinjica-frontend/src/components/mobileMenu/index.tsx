@@ -12,17 +12,41 @@ import logoutIcon from '../../../public/static/assets/images/logout.svg'
 import profile from '../../../public/static/assets/images/profileHeader.svg'
 
 import { useRouter } from 'next/router'
+import UserService from '@/service/User.service'
 interface IMenuProps {
     closeMenu: () => void
     loggedIn?: boolean
     setLoggedIn?: (param: boolean) => void
 }
+interface LoggedInUser {
+    id: number
+    name: string
+    surname: string
+    phoneNumber: string
+    role: string
+}
+
 const Menu = ({
     closeMenu,
     loggedIn,
     setLoggedIn,
 }: IMenuProps): JSX.Element => {
+    const [user, setUser] = useState<LoggedInUser>()
     const router = useRouter()
+
+    useEffect(() => {
+        if (loggedIn) fetchLoggedInUser()
+    }, [loggedIn])
+
+    const fetchLoggedInUser = (): void => {
+        const res = UserService.getLoggedInUser()
+            .then((res) => {
+                setUser(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     const navigate = (url: string): void => {
         closeMenu()
@@ -81,6 +105,9 @@ const Menu = ({
                             content="Izmena profila"
                             src={editProfile}
                             style={styles.button}
+                            handleClick={() =>
+                                navigate('/editProfile/' + user?.id)
+                            }
                         />
                     )}
                     <DropdownMenuButton

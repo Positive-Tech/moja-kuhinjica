@@ -39,6 +39,13 @@ const EditProfilePage = (): JSX.Element => {
     const router = useRouter()
     const { id } = router.query
 
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm()
+
     useEffect(() => {
         if (!router.isReady) return
         fetchUser()
@@ -57,31 +64,27 @@ const EditProfilePage = (): JSX.Element => {
     const fetchUser = (): void => {
         const res = UserService.getUserById(id)
             .then((res) => {
-                let user = res.data
+                const user = res.data
                 user.phoneNumber = user.phoneNumber.split('+381')[1]
-                setUser(res.data)
+                setUser(user)
             })
             .catch((err) => {
                 console.log(err)
             })
     }
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm()
-    const onSubmit = (data: any): void => {
-        reset()
-    }
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 
     return (
         <div className={styles.colDiv}>
-            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {showMenu && (
+                <Menu
+                    closeMenu={() => setShowMenu(false)}
+                    loggedIn={localStorage.getItem('token') != null}
+                />
+            )}
 
             {isMobile ? (
                 <MobileHeader
@@ -97,7 +100,7 @@ const EditProfilePage = (): JSX.Element => {
                     <div className={styles.formWrapper}>
                         <form
                             className={styles.formDiv}
-                            onSubmit={handleSubmit(onSubmit)}
+                            onSubmit={handleSubmit((data) => console.log(data))}
                         >
                             <Image src={profileIcon} alt="" />
                             <FormInput
