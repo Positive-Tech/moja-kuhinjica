@@ -37,8 +37,8 @@ const Header = ({
     const router = useRouter()
 
     useEffect(() => {
-        fetchLoggedInUser()
-    }, [])
+        if (loggedIn) fetchLoggedInUser()
+    }, [loggedIn])
 
     const fetchLoggedInUser = (): void => {
         const res = UserService.getLoggedInUser()

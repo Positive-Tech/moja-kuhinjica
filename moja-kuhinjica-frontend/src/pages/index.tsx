@@ -15,7 +15,6 @@ import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
-import UserService from '@/service/User.service'
 
 interface LoggedInUser {
     id: number
@@ -60,7 +59,7 @@ const Home = (): JSX.Element => {
         setWindowWidth(window.innerWidth)
     }
     const isLoggedIn = (): void => {
-        setLoggedIn(localStorage.getItem('token') != null ? true : false)
+        setLoggedIn(localStorage.getItem('token') != null)
     }
 
     const handleSignUpClick = (): void => {
