@@ -14,6 +14,7 @@ interface IFormInputProps {
     errors: FieldErrors<FieldValues>
     style?: string
     isPhoneNumber?: boolean
+    defaultValue?: string
 }
 
 export const FormInput = ({
@@ -26,6 +27,7 @@ export const FormInput = ({
     errors,
     style,
     isPhoneNumber,
+    defaultValue,
 }: IFormInputProps): JSX.Element => {
     const [invalidInput, setInvalidInput] = useState(false)
 
@@ -62,6 +64,7 @@ export const FormInput = ({
                 }
                 placeholder={placeholder}
                 type={type}
+                value={defaultValue}
                 {...register(name, validationSchema)}
             ></input>
             {invalidInput && (

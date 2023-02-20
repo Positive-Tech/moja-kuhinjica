@@ -27,4 +27,11 @@ export default class UserService extends Component {
             process.env.NEXT_PUBLIC_BASE_URL + '/auth/profile'
         )
     }
+    public static async getUserById(
+        id: string | string[] | undefined
+    ): Promise<any> {
+        return await axiosInstance.get(
+            process.env.NEXT_PUBLIC_BASE_URL + '/client/' + id
+        )
+    }
 }

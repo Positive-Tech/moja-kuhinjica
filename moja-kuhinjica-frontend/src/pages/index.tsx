@@ -17,16 +17,17 @@ import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
 import UserService from '@/service/User.service'
 
+interface LoggedInUser {
+    id: number
+    name: string
+    surname: string
+    phoneNumber: string
+    role: string
+}
+
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
     const [showMenu, setShowMenu] = useState<boolean>(false)
-    const router = useRouter()
-    const ref = useRef<HTMLDivElement>(null)
-
-    const handleClick = (): void => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -34,6 +35,9 @@ const Home = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [loggedIn, setLoggedIn] = useState<boolean>(false)
     const [userEmail, setUserEmail] = useState<string>('')
+    const router = useRouter()
+    const ref = useRef<HTMLDivElement>(null)
+
     useEffect(() => {
         isLoggedIn()
     }, [])
@@ -47,6 +51,10 @@ const Home = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    const handleClick = (): void => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' })
+    }
 
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)

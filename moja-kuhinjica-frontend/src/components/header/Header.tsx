@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
@@ -9,12 +9,20 @@ import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
 import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import styles from './Header.module.scss'
+import UserService from '@/service/User.service'
 interface IHeaderProps {
     type: string
     selectedButton?: number
     openLoginModal?: (param: boolean) => void
     loggedIn?: boolean
     setLoggedIn?: (param: boolean) => void
+}
+interface LoggedInUser {
+    id: number
+    name: string
+    surname: string
+    phoneNumber: string
+    role: string
 }
 const Header = ({
     type,
@@ -25,7 +33,22 @@ const Header = ({
 }: IHeaderProps): JSX.Element => {
     const [active, setActive] = useState<number | undefined>(selectedButton)
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
+    const [user, setUser] = useState<LoggedInUser>()
     const router = useRouter()
+
+    useEffect(() => {
+        fetchLoggedInUser()
+    }, [])
+
+    const fetchLoggedInUser = (): void => {
+        const res = UserService.getLoggedInUser()
+            .then((res) => {
+                setUser(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     const handleClick = (buttonNumber: number, url: string): void => {
         setActive(buttonNumber)
@@ -102,7 +125,9 @@ const Header = ({
                                         content="Izmena profila"
                                         src={editProfileIcon}
                                         handleClick={() =>
-                                            router.push('/editProfile')
+                                            router.push(
+                                                '/editProfile/' + user?.id
+                                            )
                                         }
                                     />
                                     <DropdownMenuButton
