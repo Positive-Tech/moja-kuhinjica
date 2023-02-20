@@ -59,3 +59,25 @@
     position: absolute;
     right: 0;
 }
+
+.numberFormat {
+    font-family: Poppins;
+    font-size: 20px;
+    padding-left: 7%;
+    color: #333333cc;
+    font-weight: lighter;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 10%;
+        font-size: 18px;
+    }
+}
+
+.phoneNumberInput {
+    @extend .input;
+
+    padding-left: 15%;
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 20%;
+    }
+}

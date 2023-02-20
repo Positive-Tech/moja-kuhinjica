@@ -13,6 +13,7 @@ interface IFormInputProps {
     name: string
     errors: FieldErrors<FieldValues>
     style?: string
+    isPhoneNumber?: boolean
 }
 
 export const FormInput = ({
@@ -24,6 +25,7 @@ export const FormInput = ({
     name,
     errors,
     style,
+    isPhoneNumber,
 }: IFormInputProps): JSX.Element => {
     const [invalidInput, setInvalidInput] = useState(false)
 
@@ -41,11 +43,18 @@ export const FormInput = ({
     return (
         <div className={styles.wrapper}>
             <Image src={src} className={styles.icon} alt="" />
+            {isPhoneNumber && (
+                <label className={styles.numberFormat}>+381</label>
+            )}
             <input
                 className={
                     invalidInput
                         ? `${styles.invalidInput} ${style}`
-                        : `${styles.input} ${style}`
+                        : `${
+                              isPhoneNumber
+                                  ? styles.phoneNumberInput
+                                  : styles.input
+                          } ${style}`
                 }
                 placeholder={placeholder}
                 type={type}

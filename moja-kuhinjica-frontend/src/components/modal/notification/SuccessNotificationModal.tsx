@@ -12,6 +12,7 @@ interface ISignUpNotificationModalProps {
     type?: string
     title: string
     buttonText: string
+    email?: string
 }
 export const SuccessNotificationModal = ({
     modalIsOpen,
@@ -19,6 +20,7 @@ export const SuccessNotificationModal = ({
     type,
     title,
     buttonText,
+    email,
 }: ISignUpNotificationModalProps): JSX.Element => {
     return (
         <Modal
@@ -36,9 +38,8 @@ export const SuccessNotificationModal = ({
                         <div className={styles.contentDiv}>
                             <Image src={success} alt="" />
                             <label className={styles.contentLabel}>
-                                Poslat je email na peraperic@gmail.com. Potrebno
-                                je kliknuti na link u poruci kako bi aktivirali
-                                Vas profil.
+                                Poslat je email na {email}. Potrebno je kliknuti
+                                na link u poruci kako bi aktivirali Vas profil.
                             </label>
                         </div>
                     )}

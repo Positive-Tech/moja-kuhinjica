@@ -33,7 +33,7 @@ const Home = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [loggedIn, setLoggedIn] = useState<boolean>(false)
-
+    const [userEmail, setUserEmail] = useState<string>('')
     useEffect(() => {
         isLoggedIn()
     }, [])
@@ -63,6 +63,11 @@ const Home = (): JSX.Element => {
     const handleLoginClick = (): void => {
         if (isMobile) router.push('/login')
         else setShowLoginModal(true)
+    }
+
+    const showNotificationModal = (email: string): void => {
+        setUserEmail(email)
+        setShowNotification(true)
     }
 
     return (
@@ -192,13 +197,15 @@ const Home = (): JSX.Element => {
             <SignUpModal
                 modalIsOpen={showSignUpModal}
                 closeModal={() => setShowSignUpModal(false)}
+                openNotificationModal={(email) => showNotificationModal(email)}
             />
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
                 type="registration"
-                title="registracija uspešna"
+                title=""
                 buttonText="zatvori"
+                email={userEmail}
             />
         </div>
     )
