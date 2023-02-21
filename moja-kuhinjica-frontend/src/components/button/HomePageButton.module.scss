@@ -37,8 +37,10 @@
         font-size: 18px;
     }
     @media only screen and (max-width: $breakpoint-medium) {
-        height: 35%;
+        height: 100%;
         width: 35%;
+        max-height: 70px;
+        min-width: 90px;
         font-size: 16px;
     }
 }

@@ -19,6 +19,7 @@
     backdrop-filter: blur(1.5px);
     background-size: cover;
     background-position: 55%;
+    
 }
 
 .title {
@@ -36,10 +37,14 @@
     text-transform: uppercase;
 
     color: #c10016;
-    margin-top: 10%;
+    margin-top: 12%;
 
     @media only screen and (max-width: $breakpoint-ultrawide) {
         font-size: 130px;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        font-size: 96px;
+        margin-top: 15%;
     }
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 96px;
@@ -48,7 +53,6 @@
         font-size: 80px;
     }
     @media only screen and (max-width: $breakpoint-medium) {
-        margin-top: 50%;
         font-size: 80px;
     }
 }
@@ -110,9 +114,13 @@
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 24px;
+        margin-top: 50px;
+        display: block;
+        text-align: center;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 22px;
+        margin-top: 0px;
     }
 }
 
@@ -188,6 +196,13 @@
         font-size: 16px;
     }
     @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 12px;
+        width: 20%;
+        height: 50%;
+        border-radius: 7px;
+        border: 1px solid;
+    }
+    @media only screen and (max-width: $breakpoint-small) {
         font-size: 8px;
         width: 20%;
         height: 50%;
@@ -210,11 +225,25 @@
 
     @media only screen and (max-width: $breakpoint-medium) {
         margin-bottom: 10%;
-        height: 230px;
+    }
+
+    @media only screen and (max-width: $breakpoint-small) {
+        margin-bottom: 10%;
+        height: 40%;
     }
 }
 
 .aboutUsPicture {
     max-width: 100%;
     max-height: 100%;
+    @media only screen and (max-width: $breakpoint-large) {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

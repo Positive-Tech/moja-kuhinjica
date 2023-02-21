@@ -46,7 +46,7 @@
         width: 50%;
     }
     @media only screen and (max-width: $breakpoint-large) {
-        width: 60%;
+        width: 50%;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         backdrop-filter: blur(1.5px);
@@ -54,6 +54,8 @@
         width: 100%;
         margin-left: 0;
         margin-top: 0;
+        // position: relative;
+        // top: -275px;
         justify-content: flex-start;
     }
 }
@@ -83,7 +85,7 @@
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 80px;
         margin-left: 5%;
-        margin-top: 80%;
+        // margin-top: 80%;
     }
 }
 
@@ -104,6 +106,12 @@
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 30px;
         line-height: 40px;
+        // margin-left: 5%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 30px;
+        line-height: 40px;
+        margin-left: 5%;
     }
     @media only screen and (max-width: $breakpoint-small) {
         font-size: 20px;
@@ -120,16 +128,18 @@
     justify-content: space-between;
 
     @media only screen and (max-width: $breakpoint-ultrawide) {
+        margin-top: 15%;
         width: 35%;
     }
     @media only screen and (max-width: $breakpoint-1440p) {
-        width: 55%;
+        // width: 55%;
+        width: 95%;
     }
     @media only screen and (max-width: $breakpoint-1080p) {
         width: 65%;
     }
     @media only screen and (max-width: $breakpoint-900p) {
-        width: 60%;
+        width: 65%;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         width: 65%;
@@ -138,14 +148,18 @@
         width: 70%;
         justify-content: flex-start;
         gap: 5%;
-        margin-top: 15%;
+        margin-top: 18%;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         width: 90%;
         gap: 5%;
-        margin-top: 10%;
+        margin-top: 18%;
         margin-left: 5%;
+        // flex-direction: row;
     }
+    // @media only screen and (max-width: $breakpoint-small) {
+    //     width: 100%;
+    // }
 }
 
 .scrollDiv {
