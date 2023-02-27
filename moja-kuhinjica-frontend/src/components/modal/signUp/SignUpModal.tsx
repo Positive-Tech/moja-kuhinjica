@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal'
-import Image from 'next/image'
-import { useForm } from 'react-hook-form'
+import { useForm, FieldValues } from 'react-hook-form'
 import { FormInput } from '@/components/input/FormInput'
 import styles from './SignUpModal.module.scss'
 import { bgModal } from '@/constants/constants'
@@ -9,30 +8,59 @@ import profile from '../../../../public/static/assets/images/profile.svg'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
 import mobile from '../../../../public/static/assets/images/mobile.svg'
-import google from '../../../../public/static/assets/images/google.svg'
-import mailSignUp from '../../../../public/static/assets/images/mailSignUp.svg'
+import UserService from '@/service/User.service'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
 
 interface ISignUpModalProps {
     modalIsOpen: boolean
-    closeModal: (param: boolean) => void
+    closeModal: () => void
+    openNotificationModal: (email: string) => void
 }
 export const SignUpModal = ({
     modalIsOpen,
     closeModal,
+    openNotificationModal,
 }: ISignUpModalProps): JSX.Element => {
+    const [showError, setShowError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data: any): void => {
-        reset()
+
+    const signIn = (inputData: FieldValues): void => {
+        console.log(inputData)
+        UserService.signIn(inputData)
+            .then((res) => {
+                closeModal()
+                reset()
+                openNotificationModal(inputData.email)
+            })
+            .catch((err) => {
+                setErrorMessage(err.message)
+                setShowError(true)
+                console.log(err)
+            })
     }
+
+    const validate = (data: FieldValues): void => {
+        if (data.password === data.confirmPassword) {
+            delete data.confirmPassword
+            data.phoneNumber = `+381${data.phoneNumber}`
+            setShowError(false)
+            signIn(data)
+        } else {
+            setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
+            setShowError(true)
+        }
+    }
+
     return (
         <Modal
             isOpen={modalIsOpen}
-            onRequestClose={() => closeModal(false)}
+            onRequestClose={closeModal}
             style={bgModal}
             className={styles.modalContainer}
             ariaHideApp={false}
@@ -40,21 +68,37 @@ export const SignUpModal = ({
             <div className={styles.formContainer}>
                 <form
                     className={styles.formDiv}
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit((data) => validate(data))}
                 >
                     <label className={styles.formTitle}>Registrujte se</label>
+                    {showError && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
                         errors={errors}
                         name="name"
                         src={profile}
-                        placeholder="Ime i prezime"
+                        placeholder="Ime"
                         type="text"
                         validationSchema={{
                             required: 'name is required',
                             pattern: {
                                 value: /[A-Za-z]/,
                                 message: 'invalid name value',
+                            },
+                        }}
+                    />
+                    <FormInput
+                        register={register}
+                        errors={errors}
+                        name="surname"
+                        src={profile}
+                        placeholder="Prezime"
+                        type="text"
+                        validationSchema={{
+                            required: 'surname is required',
+                            pattern: {
+                                value: /[A-Za-z]/,
+                                message: 'invalid surname value',
                             },
                         }}
                     />
@@ -91,10 +135,25 @@ export const SignUpModal = ({
                     <FormInput
                         register={register}
                         errors={errors}
-                        name="telephoneNumber"
+                        name="confirmPassword"
+                        src={password}
+                        placeholder="Potvrdi šifru"
+                        type="password"
+                        validationSchema={{
+                            required: 'confirmed password is required',
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                message: 'invalid confirmed password value',
+                            },
+                        }}
+                    />
+                    <FormInput
+                        register={register}
+                        errors={errors}
+                        name="phoneNumber"
                         src={mobile}
-                        placeholder="Broj telefona"
-                        type="text"
+                        placeholder=""
+                        type="number"
                         validationSchema={{
                             required: 'telephone number is required',
                             pattern: {
@@ -102,25 +161,11 @@ export const SignUpModal = ({
                                 message: 'invalid telephone number value',
                             },
                         }}
+                        isPhoneNumber={true}
                     />
-                    <button className={styles.formButton}>Potvrdi</button>
-                    <div className={styles.separatorWrapper}>
-                        <div className={styles.separator}></div>
-                        <label className={styles.separatorLabel}>ili</label>
-                        <div className={styles.separator}></div>
-                    </div>
-                    <div className={styles.buttonWrapper2}>
-                        <Image
-                            src={google}
-                            alt=""
-                            className={styles.buttonImage}
-                        />
-                        <Image
-                            src={mailSignUp}
-                            alt=""
-                            className={styles.buttonImage}
-                        />
-                    </div>
+                    <button type="submit" className={styles.formButton}>
+                        Potvrdi
+                    </button>
                 </form>
             </div>
         </Modal>

@@ -19,22 +19,19 @@ import { MOBILE_WIDTH } from 'src/constants/constants'
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
     const [showMenu, setShowMenu] = useState<boolean>(false)
-    const router = useRouter()
-    const ref = useRef<HTMLDivElement>(null)
-
-    const handleClick = (): void => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
+    const [userEmail, setUserEmail] = useState<string>('')
+    const router = useRouter()
+    const ref = useRef<HTMLDivElement>(null)
 
-    const handleWindowResize = (): void => {
-        setWindowWidth(window.innerWidth)
-    }
+    useEffect(() => {
+        isLoggedIn()
+    }, [])
 
     useEffect(() => {
         handleWindowResize()
@@ -46,6 +43,17 @@ const Home = (): JSX.Element => {
         }
     }, [windowWidth])
 
+    const handleClick = (): void => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    const handleWindowResize = (): void => {
+        setWindowWidth(window.innerWidth)
+    }
+    const isLoggedIn = (): void => {
+        setLoggedIn(localStorage.getItem('token') != null)
+    }
+
     const handleSignUpClick = (): void => {
         if (isMobile) router.push('/registration')
         else setShowSignUpModal(true)
@@ -56,13 +64,26 @@ const Home = (): JSX.Element => {
         else setShowLoginModal(true)
     }
 
+    const showNotificationModal = (email: string): void => {
+        setUserEmail(email)
+        setShowNotification(true)
+    }
+
     return (
         <div className={styles.colDiv}>
-            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {showMenu && (
+                <Menu
+                    closeMenu={() => setShowMenu(false)}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
+                />
+            )}
             <Header
                 type="main"
                 selectedButton={1}
                 openLoginModal={setShowLoginModal}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
             />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
@@ -76,16 +97,18 @@ const Home = (): JSX.Element => {
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
-                    <div className={styles.buttonWrapper}>
-                        <HomePageButton
-                            content="Registrujte se"
-                            onClick={handleSignUpClick}
-                        />
-                        <HomePageButton
-                            content="Ulogujte se"
-                            onClick={handleLoginClick}
-                        />
-                    </div>
+                    {!loggedIn && (
+                        <div className={styles.buttonWrapper}>
+                            <HomePageButton
+                                content="Registrujte se"
+                                onClick={handleSignUpClick}
+                            />
+                            <HomePageButton
+                                content="Ulogujte se"
+                                onClick={handleLoginClick}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className={styles.scrollDiv}>
                     <div className={styles.labelForScrollWrapper}>
@@ -167,17 +190,21 @@ const Home = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
             />
             <SignUpModal
                 modalIsOpen={showSignUpModal}
                 closeModal={() => setShowSignUpModal(false)}
+                openNotificationModal={(email) => showNotificationModal(email)}
             />
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
                 type="registration"
-                title="registracija uspešna"
+                title=""
                 buttonText="zatvori"
+                email={userEmail}
             />
         </div>
     )

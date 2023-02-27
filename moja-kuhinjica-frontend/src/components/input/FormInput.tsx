@@ -13,6 +13,8 @@ interface IFormInputProps {
     name: string
     errors: FieldErrors<FieldValues>
     style?: string
+    isPhoneNumber?: boolean
+    defaultValue?: string
 }
 
 export const FormInput = ({
@@ -24,12 +26,13 @@ export const FormInput = ({
     name,
     errors,
     style,
+    isPhoneNumber,
+    defaultValue,
 }: IFormInputProps): JSX.Element => {
     const [invalidInput, setInvalidInput] = useState(false)
-
+    const [inputType, setInputType] = useState(type)
     const isValid = (): void => {
         if (errors[name]?.message) {
-            console.log(errors)
             setInvalidInput(true)
             return
         }
@@ -42,21 +45,42 @@ export const FormInput = ({
     return (
         <div className={styles.wrapper}>
             <Image src={src} className={styles.icon} alt="" />
+            {isPhoneNumber && (
+                <label className={styles.numberFormat}>+381</label>
+            )}
             <input
                 className={
                     invalidInput
-                        ? `${styles.invalidInput} ${style}`
-                        : `${styles.input} ${style}`
+                        ? `${
+                              isPhoneNumber
+                                  ? styles.phoneNumberInvalidInput
+                                  : styles.invalidInput
+                          } ${style}`
+                        : `${
+                              isPhoneNumber
+                                  ? styles.phoneNumberInput
+                                  : styles.input
+                          } ${style}`
                 }
                 placeholder={placeholder}
-                type={type}
+                type={inputType}
+                value={defaultValue}
                 {...register(name, validationSchema)}
             ></input>
             {invalidInput && (
                 <Image src={errorIcon} alt="" className={styles.sideIcon} />
             )}
             {type === 'password' && !invalidInput && (
-                <Image src={hidePassword} alt="" className={styles.sideIcon} />
+                <Image
+                    src={hidePassword}
+                    alt=""
+                    className={styles.sideIcon}
+                    onClick={() =>
+                        setInputType(
+                            inputType === 'password' ? 'text' : 'password'
+                        )
+                    }
+                />
             )}
         </div>
     )

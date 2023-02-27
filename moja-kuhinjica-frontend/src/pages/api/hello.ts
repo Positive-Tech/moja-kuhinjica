@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { JsonWebKeyInput } from 'crypto'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 interface Data {

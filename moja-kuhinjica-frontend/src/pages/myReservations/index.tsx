@@ -21,6 +21,7 @@ const MyReservationsPage = (): JSX.Element => {
     }
 
     useEffect(() => {
+        setReservationsExist(true)
         handleWindowResize()
         window.addEventListener('resize', handleWindowResize)
         if (windowWidth < MOBILE_WIDTH) setIsMobile(true)

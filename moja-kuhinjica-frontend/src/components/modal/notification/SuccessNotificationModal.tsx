@@ -8,10 +8,11 @@ import successFilled from '../../../../public/static/assets/images/successFilled
 
 interface ISignUpNotificationModalProps {
     modalIsOpen: boolean
-    closeModal: (param: boolean) => void
+    closeModal: () => void
     type?: string
     title: string
     buttonText: string
+    email?: string
 }
 export const SuccessNotificationModal = ({
     modalIsOpen,
@@ -19,11 +20,12 @@ export const SuccessNotificationModal = ({
     type,
     title,
     buttonText,
+    email,
 }: ISignUpNotificationModalProps): JSX.Element => {
     return (
         <Modal
             isOpen={modalIsOpen}
-            onRequestClose={() => closeModal(false)}
+            onRequestClose={closeModal}
             style={bgModal}
             className={styles.modalContainer}
             ariaHideApp={false}
@@ -36,16 +38,12 @@ export const SuccessNotificationModal = ({
                         <div className={styles.contentDiv}>
                             <Image src={success} alt="" />
                             <label className={styles.contentLabel}>
-                                Poslat je email na peraperic@gmail.com. Potrebno
-                                je kliknuti na link u poruci kako bi aktivirali
-                                Vas profil.
+                                Poslat je email na {email}. Potrebno je kliknuti
+                                na link u poruci kako bi aktivirali Vas profil.
                             </label>
                         </div>
                     )}
-                    <button
-                        className={styles.formButton}
-                        onClick={() => closeModal(false)}
-                    >
+                    <button className={styles.formButton} onClick={closeModal}>
                         {buttonText}
                     </button>
                 </div>

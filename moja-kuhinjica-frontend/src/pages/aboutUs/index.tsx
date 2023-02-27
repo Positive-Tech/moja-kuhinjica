@@ -20,10 +20,11 @@ const AboutUs = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
-    const handleWindowResize = (): void => {
-        setWindowWidth(window.innerWidth)
-    }
+    useEffect(() => {
+        isLoggedIn()
+    }, [])
 
     useEffect(() => {
         handleWindowResize()
@@ -34,6 +35,14 @@ const AboutUs = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    const handleWindowResize = (): void => {
+        setWindowWidth(window.innerWidth)
+    }
+
+    const isLoggedIn = (): void => {
+        setLoggedIn(localStorage.getItem('token') != null ? true : false)
+    }
 
     return (
         <div className={styles.colDiv}>
@@ -54,6 +63,8 @@ const AboutUs = (): JSX.Element => {
                     type="main"
                     selectedButton={3}
                     openLoginModal={setShowLoginModal}
+                    loggedIn={loggedIn}
+                    setLoggedIn={setLoggedIn}
                 />
             )}
             <div className={styles.menuRowDiv}>
@@ -193,6 +204,8 @@ const AboutUs = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
             />
         </div>
     )

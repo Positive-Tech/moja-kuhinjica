@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
-import { useForm } from 'react-hook-form'
+import { useForm, FieldValues } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { FormInput } from '@/components/input/FormInput'
 import back from 'public/static/assets/images/backArrow.svg'
@@ -8,8 +8,11 @@ import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 
 import styles from './LoginPage.module.scss'
+import UserService from '@/service/User.service'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
 
 const LoginPage = (): JSX.Element => {
+    const [showError, setShowError] = useState<boolean>(false)
     const router = useRouter()
     const {
         register,
@@ -18,8 +21,18 @@ const LoginPage = (): JSX.Element => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data: any): void => {
-        reset()
+    const login = (inputData: FieldValues): void => {
+        setShowError(false)
+        UserService.login(inputData)
+            .then((res) => {
+                localStorage.setItem('token', res.data.access_token)
+                router.push('/')
+                reset()
+            })
+            .catch((err) => {
+                setShowError(true)
+                console.log(err)
+            })
     }
     return (
         <div className={styles.container}>
@@ -27,9 +40,12 @@ const LoginPage = (): JSX.Element => {
                 <Image src={back} alt="" onClick={() => router.back()} />
                 <form
                     className={styles.formDiv}
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
+                    {showError && (
+                        <ErrorLabel content="Email ili lozinka nisu ispravni. Pokušajte ponovo." />
+                    )}
                     <FormInput
                         register={register}
                         errors={errors}

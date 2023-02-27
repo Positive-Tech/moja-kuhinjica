@@ -10,16 +10,34 @@ import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import email from 'public/static/assets/images/email.svg'
 import profile from 'public/static/assets/images/profile.svg'
-import password from '../../../public/static/assets/images/password.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './EditProfilePage.module.scss'
+import UserService from '@/service/User.service'
+import { useRouter } from 'next/router'
 
+interface User {
+    id: number
+    name: string
+    surname: string
+    phoneNumber: string
+    email: string
+}
+const emptyUser = {
+    id: 0,
+    name: '',
+    surname: '',
+    phoneNumber: '',
+    email: '',
+}
 const EditProfilePage = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+    const [user, setUser] = useState<User>(emptyUser)
+    const router = useRouter()
+    const { id } = router.query
 
     const {
         register,
@@ -27,12 +45,11 @@ const EditProfilePage = (): JSX.Element => {
         reset,
         formState: { errors },
     } = useForm()
-    const onSubmit = (data: any): void => {
-        reset()
-    }
-    const handleWindowResize = (): void => {
-        setWindowWidth(window.innerWidth)
-    }
+
+    useEffect(() => {
+        if (!router.isReady) return
+        fetchUser()
+    }, [id])
 
     useEffect(() => {
         handleWindowResize()
@@ -44,9 +61,31 @@ const EditProfilePage = (): JSX.Element => {
         }
     }, [windowWidth])
 
+    const fetchUser = (): void => {
+        UserService.getUserById(id)
+            .then((res) => {
+                const user = res.data
+                user.phoneNumber = user.phoneNumber.split('+381')[1]
+                setUser(user)
+                reset()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const handleWindowResize = (): void => {
+        setWindowWidth(window.innerWidth)
+    }
+
     return (
         <div className={styles.colDiv}>
-            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {showMenu && (
+                <Menu
+                    closeMenu={() => setShowMenu(false)}
+                    loggedIn={localStorage.getItem('token') != null}
+                />
+            )}
 
             {isMobile ? (
                 <MobileHeader
@@ -62,7 +101,7 @@ const EditProfilePage = (): JSX.Element => {
                     <div className={styles.formWrapper}>
                         <form
                             className={styles.formDiv}
-                            onSubmit={handleSubmit(onSubmit)}
+                            onSubmit={handleSubmit((data) => console.log(data))}
                         >
                             <Image src={profileIcon} alt="" />
                             <FormInput
@@ -70,7 +109,7 @@ const EditProfilePage = (): JSX.Element => {
                                 errors={errors}
                                 name="name"
                                 src={profile}
-                                placeholder="Ime i prezime"
+                                placeholder="Ime"
                                 type="text"
                                 validationSchema={{
                                     required: 'name is required',
@@ -79,6 +118,23 @@ const EditProfilePage = (): JSX.Element => {
                                         message: 'invalid name value',
                                     },
                                 }}
+                                defaultValue={user?.name}
+                            />
+                            <FormInput
+                                register={register}
+                                errors={errors}
+                                name="surname"
+                                src={profile}
+                                placeholder="Prezime"
+                                type="text"
+                                validationSchema={{
+                                    required: 'surname is required',
+                                    pattern: {
+                                        value: /[A-Za-z]/,
+                                        message: 'invalid surname value',
+                                    },
+                                }}
+                                defaultValue={user?.surname}
                             />
                             <FormInput
                                 register={register}
@@ -94,29 +150,16 @@ const EditProfilePage = (): JSX.Element => {
                                         message: 'invalid email value',
                                     },
                                 }}
+                                defaultValue={user?.email}
                             />
+
                             <FormInput
                                 register={register}
                                 errors={errors}
-                                name="password"
-                                src={password}
-                                placeholder="Šifra"
-                                type="password"
-                                validationSchema={{
-                                    required: 'password is required',
-                                    pattern: {
-                                        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                        message: 'invalid password value',
-                                    },
-                                }}
-                            />
-                            <FormInput
-                                register={register}
-                                errors={errors}
-                                name="telephoneNumber"
+                                name="phoneNumber"
                                 src={mobile}
-                                placeholder="Broj telefona"
-                                type="text"
+                                placeholder=""
+                                type="number"
                                 validationSchema={{
                                     required: 'telephone number is required',
                                     pattern: {
@@ -125,6 +168,8 @@ const EditProfilePage = (): JSX.Element => {
                                             'invalid telephone number value',
                                     },
                                 }}
+                                isPhoneNumber={true}
+                                defaultValue={user?.phoneNumber}
                             />
                             <button className={styles.formButton}>
                                 Potvrdi

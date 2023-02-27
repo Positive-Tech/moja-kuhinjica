@@ -19,6 +19,11 @@
     transform: translateY(-50%);
 }
 
+.input:-webkit-autofill,
+.input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
 .input {
     position: absolute;
     height: 100%;
@@ -33,6 +38,8 @@
     border: 0;
     border-bottom: 1px solid #333333cc;
     background: transparent;
+    padding-right: 5%;
+
     &::placeholder {
         color: #333333cc;
         font-weight: lighter;
@@ -40,7 +47,13 @@
 
     @media only screen and (max-width: $breakpoint-large) {
         padding-left: 10%;
+        padding-right: 10%;
         font-size: 18px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 10%;
+        padding-right: 10%;
+        font-size: 16px;
     }
 }
 
@@ -53,4 +66,61 @@
 .sideIcon {
     position: absolute;
     right: 0;
+}
+
+.numberFormat {
+    display: flex;
+    font-family: Poppins;
+    font-size: 20px;
+    padding-left: 7%;
+    color: #333333cc;
+    font-weight: lighter;
+    height: 100%;
+    align-items: center;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 10%;
+        font-size: 18px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 10%;
+        font-size: 16px;
+    }
+}
+
+.phoneNumberInput {
+    @extend .input;
+
+    padding-left: 15%;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 20%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 25%;
+    }
+}
+
+.phoneNumberInput::-webkit-outer-spin-button,
+.phoneNumberInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.phoneNumberInvalidInput::-webkit-outer-spin-button,
+.phoneNumberInvalidInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.phoneNumberInvalidInput {
+    @extend .invalidInput;
+
+    padding-left: 15%;
+    @media only screen and (max-width: $breakpoint-large) {
+        padding-left: 20%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        padding-left: 25%;
+    }
 }
