@@ -31,6 +31,8 @@ const MealReservation = (): JSX.Element => {
 
     useEffect(() => {
         isLoggedIn()
+        setMenuIsPresent(true)
+        setCartIsEmpty(false)
     }, [])
 
     useEffect(() => {

@@ -41,7 +41,7 @@ const Header = ({
     }, [loggedIn])
 
     const fetchLoggedInUser = (): void => {
-        const res = UserService.getLoggedInUser()
+        UserService.getLoggedInUser()
             .then((res) => {
                 setUser(res.data)
             })
@@ -126,7 +126,7 @@ const Header = ({
                                         src={editProfileIcon}
                                         handleClick={() =>
                                             router.push(
-                                                '/editProfile/' + user?.id
+                                                `/editProfile/${user?.id}`
                                             )
                                         }
                                     />

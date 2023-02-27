@@ -1,6 +1,5 @@
 import Document from 'next/document'
 import { Html, Head, Main, NextScript } from 'next/document'
-import JSXStyle from 'styled-jsx/style'
 
 export default class MyDocument extends Document {
     render(): JSX.Element {

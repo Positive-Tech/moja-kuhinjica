@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { useForm, FieldValues } from 'react-hook-form'
 import { FormInput } from '@/components/input/FormInput'
@@ -32,7 +32,7 @@ export const SignUpModal = ({
 
     const signIn = (inputData: FieldValues): void => {
         console.log(inputData)
-        const res = UserService.signIn(inputData)
+        UserService.signIn(inputData)
             .then((res) => {
                 closeModal()
                 reset()
@@ -48,7 +48,7 @@ export const SignUpModal = ({
     const validate = (data: FieldValues): void => {
         if (data.password === data.confirmPassword) {
             delete data.confirmPassword
-            data.phoneNumber = '+381' + data.phoneNumber
+            data.phoneNumber = `+381${data.phoneNumber}`
             setShowError(false)
             signIn(data)
         } else {
@@ -153,7 +153,7 @@ export const SignUpModal = ({
                         name="phoneNumber"
                         src={mobile}
                         placeholder=""
-                        type="text"
+                        type="number"
                         validationSchema={{
                             required: 'telephone number is required',
                             pattern: {

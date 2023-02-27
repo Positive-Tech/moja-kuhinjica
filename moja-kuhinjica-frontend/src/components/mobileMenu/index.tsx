@@ -39,7 +39,7 @@ const Menu = ({
     }, [loggedIn])
 
     const fetchLoggedInUser = (): void => {
-        const res = UserService.getLoggedInUser()
+        UserService.getLoggedInUser()
             .then((res) => {
                 setUser(res.data)
             })
@@ -106,7 +106,7 @@ const Menu = ({
                             src={editProfile}
                             style={styles.button}
                             handleClick={() =>
-                                navigate('/editProfile/' + user?.id)
+                                navigate(`/editProfile/${user?.id}`)
                             }
                         />
                     )}

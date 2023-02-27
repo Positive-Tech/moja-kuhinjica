@@ -29,8 +29,8 @@
         "@typescript-eslint/consistent-type-imports": "off",
         "import/no-duplicates": "off",
         "no-useless-escape": "off",
-        "prettier/prettier": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/restrict-plus-operands": "off"
+        "prettier/prettier": "off"
+        // "@typescript-eslint/no-unused-vars": "off",
+        // "@typescript-eslint/restrict-plus-operands": "off"
     }
 }

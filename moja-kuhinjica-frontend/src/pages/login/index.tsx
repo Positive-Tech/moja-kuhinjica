@@ -23,7 +23,7 @@ const LoginPage = (): JSX.Element => {
 
     const login = (inputData: FieldValues): void => {
         setShowError(false)
-        const res = UserService.login(inputData)
+        UserService.login(inputData)
             .then((res) => {
                 localStorage.setItem('token', res.data.access_token)
                 router.push('/')

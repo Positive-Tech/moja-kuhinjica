@@ -62,11 +62,12 @@ const EditProfilePage = (): JSX.Element => {
     }, [windowWidth])
 
     const fetchUser = (): void => {
-        const res = UserService.getUserById(id)
+        UserService.getUserById(id)
             .then((res) => {
                 const user = res.data
                 user.phoneNumber = user.phoneNumber.split('+381')[1]
                 setUser(user)
+                reset()
             })
             .catch((err) => {
                 console.log(err)
@@ -158,7 +159,7 @@ const EditProfilePage = (): JSX.Element => {
                                 name="phoneNumber"
                                 src={mobile}
                                 placeholder=""
-                                type="text"
+                                type="number"
                                 validationSchema={{
                                     required: 'telephone number is required',
                                     pattern: {

@@ -28,8 +28,7 @@ const RegistrationPage = (): JSX.Element => {
     } = useForm()
 
     const signIn = (inputData: FieldValues): void => {
-        console.log(inputData)
-        const res = UserService.signIn(inputData)
+        UserService.signIn(inputData)
             .then((res) => {
                 setUserEmail(inputData.email)
                 setShowNotification(true)
@@ -45,7 +44,7 @@ const RegistrationPage = (): JSX.Element => {
     const validate = (data: FieldValues): void => {
         if (data.password === data.confirmPassword) {
             delete data.confirmPassword
-            data.phoneNumber = '+381' + data.phoneNumber
+            data.phoneNumber = `+381${data.phoneNumber}`
             setShowError(false)
             signIn(data)
         } else {
@@ -154,7 +153,7 @@ const RegistrationPage = (): JSX.Element => {
                             name="phoneNumber"
                             src={mobile}
                             placeholder=""
-                            type="text"
+                            type="number"
                             validationSchema={{
                                 required: 'telephone number is required',
                                 pattern: {

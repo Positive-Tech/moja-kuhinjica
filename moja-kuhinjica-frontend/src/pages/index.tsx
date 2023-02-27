@@ -16,14 +16,6 @@ import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
 
-interface LoggedInUser {
-    id: number
-    name: string
-    surname: string
-    phoneNumber: string
-    role: string
-}
-
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
     const [showMenu, setShowMenu] = useState<boolean>(false)
