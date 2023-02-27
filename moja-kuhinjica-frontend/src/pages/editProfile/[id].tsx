@@ -90,13 +90,12 @@ const EditProfilePage = (): JSX.Element => {
         if (id) data.id = +id
         UserService.editUserProfile(data)
             .then((res) => {
-                console.log(res.data)
+                alert('successfully edited')
             })
             .catch((err) => {
                 console.log(err)
             })
     }
-
     return (
         <div className={styles.colDiv}>
             {showMenu && (
@@ -131,7 +130,11 @@ const EditProfilePage = (): JSX.Element => {
                                 />
                                 <label
                                     className={styles.changePasswordLabel}
-                                    onClick={() => setShowPasswordModal(true)}
+                                    onClick={() =>
+                                        isMobile
+                                            ? router.push('/passwordChange')
+                                            : setShowPasswordModal(true)
+                                    }
                                 >
                                     Promeni šifru
                                 </label>
