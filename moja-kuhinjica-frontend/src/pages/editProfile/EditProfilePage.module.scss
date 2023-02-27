@@ -27,11 +27,15 @@
     margin-left: 5%;
     font-size: 32px;
 
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        font-size: 36px;
+    }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 28px;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 18px;
+        margin-bottom: 5%;
     }
 }
 
@@ -45,6 +49,12 @@
     width: 60%;
     align-items: center;
 
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 70%;
+    }
     @media only screen and (max-width: $breakpoint-large) {
         width: 70%;
     }
@@ -78,6 +88,16 @@
     cursor: pointer;
     margin-top: 5%;
 
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        font-size: 30px;
+        width: 40%;
+        height: 8%;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 20px;
+        width: 40%;
+        height: 8%;
+    }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 18px;
         width: 40%;
@@ -95,6 +115,13 @@
     pointer-events: none;
     color: #333333;
     font-size: 18px;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        font-size: 24px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 18px;
+    }
 }
 
 .editableInput {
@@ -114,6 +141,16 @@
     justify-content: center;
     align-items: center;
     gap: 1%;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        gap: 2%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        gap: 1%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        gap: 2%;
+    }
 }
 
 .changePasswordLabel {
@@ -125,6 +162,13 @@
     cursor: pointer;
 
     color: rgba(51, 51, 51, 0.8);
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        font-size: 24px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 18px;
+    }
 }
 
 .passwordIcon {
