@@ -89,3 +89,44 @@
         height: 8%;
     }
 }
+
+.disabledInput {
+    font-weight: lighter;
+    pointer-events: none;
+    color: #333333;
+    font-size: 18px;
+}
+
+.editableInput {
+    @extend .disabledInput;
+    pointer-events: all;
+    font-weight: 400;
+}
+
+.emailInput {
+    @extend .disabledInput;
+    color: rgba(51, 51, 51, 0.5);
+}
+
+.changePasswordWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+}
+
+.changePasswordLabel {
+    display: flex;
+    align-items: center;
+    font-family: Poppins;
+    font-weight: lighter;
+    font-size: 18px;
+    cursor: pointer;
+
+    color: rgba(51, 51, 51, 0.8);
+}
+
+.passwordIcon {
+    height: 60%;
+}

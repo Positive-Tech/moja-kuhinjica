@@ -19,4 +19,8 @@ export default class UserService extends Component {
     ): Promise<any> {
         return await axiosInstance.get(`/client/${id}`)
     }
+
+    public static async editUserProfile(data: FieldValues): Promise<any> {
+        return await axiosInstance.patch('/client', data)
+    }
 }
