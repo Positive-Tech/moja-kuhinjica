@@ -17,6 +17,7 @@ import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './EditProfilePage.module.scss'
 import UserService from '@/service/User.service'
 import { useRouter } from 'next/router'
+import { ChangePasswordModal } from '@/components/modal/changePassword/ChangePasswordModal'
 
 interface User {
     id: number
@@ -40,6 +41,7 @@ const EditProfilePage = (): JSX.Element => {
     const [editSurname, setEditSurname] = useState<boolean>(false)
     const [editPhoneNumber, setEditPhoneNumber] = useState<boolean>(false)
     const [user, setUser] = useState<User>(emptyUser)
+    const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false)
     const router = useRouter()
     const { id } = router.query
 
@@ -127,7 +129,10 @@ const EditProfilePage = (): JSX.Element => {
                                     alt=""
                                     className={styles.passwordIcon}
                                 />
-                                <label className={styles.changePasswordLabel}>
+                                <label
+                                    className={styles.changePasswordLabel}
+                                    onClick={() => setShowPasswordModal(true)}
+                                >
                                     Promeni šifru
                                 </label>
                             </div>
@@ -220,6 +225,14 @@ const EditProfilePage = (): JSX.Element => {
                                 defaultValue={user?.phoneNumber}
                                 handleEditClick={() => setEditPhoneNumber(true)}
                             />
+                            {showPasswordModal && (
+                                <ChangePasswordModal
+                                    modalIsOpen={showPasswordModal}
+                                    closeModal={() =>
+                                        setShowPasswordModal(false)
+                                    }
+                                />
+                            )}
                             <button className={styles.formButton}>
                                 Potvrdi
                             </button>
