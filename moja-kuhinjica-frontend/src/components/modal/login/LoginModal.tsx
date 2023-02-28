@@ -9,6 +9,7 @@ import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
+import { Text } from '@/components/label/Text'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -91,6 +92,10 @@ export const LoginModal = ({
                         validationSchema={{
                             required: 'pass is required',
                         }}
+                    />
+                    <Text
+                        content="Zaboravili ste šifru?"
+                        style={styles.forgotPasswordLabel}
                     />
                     <button type="submit" className={styles.formButton}>
                         Potvrdi

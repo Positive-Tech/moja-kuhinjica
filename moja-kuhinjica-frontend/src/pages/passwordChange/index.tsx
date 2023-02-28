@@ -49,7 +49,12 @@ const ChangePasswordPage = (): JSX.Element => {
 
     return (
         <div className={styles.container}>
-            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
+            {showMenu && (
+                <Menu
+                    closeMenu={() => setShowMenu(false)}
+                    loggedIn={localStorage.getItem('token') != null}
+                />
+            )}
             <MobileHeader handleClick={() => setShowMenu(true)} />
             <div className={styles.wrapper}>
                 <form
