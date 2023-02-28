@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import styles from './Menu.module.scss'
 import closeIcon from '../../../public/static/assets/images/close.svg'
@@ -17,33 +17,12 @@ import { userLogout } from '@/reduxStore/actions/userActions'
 interface IMenuProps {
     closeMenu: () => void
 }
-interface LoggedInUser {
-    id: number
-    name: string
-    surname: string
-    phoneNumber: string
-    role: string
-}
 
 const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const user = useAppSelector((state) => state.auth.user)
-
-    // useEffect(() => {
-    //     if (loggedIn) fetchLoggedInUser()
-    // }, [loggedIn])
-
-    // const fetchLoggedInUser = (): void => {
-    //     UserService.getLoggedInUser()
-    //         .then((res) => {
-    //             setUser(res.data)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }
 
     const navigate = (url: string): void => {
         closeMenu()

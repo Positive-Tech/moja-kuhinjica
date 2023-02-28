@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
 import { FormInput } from '../../input/FormInput'
-import UserService from '@/service/User.service'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
@@ -36,17 +35,6 @@ export const LoginModal = ({
 
     const login = (inputData: FieldValues): void => {
         setShowError(false)
-        // UserService.login(inputData)
-        //     .then((res) => {
-        //         localStorage.setItem('token', res.data.access_token)
-        //         setLoggedIn(true)
-        //         closeModal()
-        //         reset()
-        //     })
-        //     .catch((err) => {
-        //         setShowError(true)
-        //         console.log(err)
-        //     })
         dispatch(userLogin(inputData))
         closeModal()
         reset()
