@@ -74,6 +74,7 @@ const Header = ({
     const logout = (): void => {
         localStorage.removeItem('token')
         setLoggedIn?.(false)
+        setMenuIsOpen(false)
         router.push('/')
     }
 
@@ -109,7 +110,7 @@ const Header = ({
                             src={profileIcon}
                             alt=""
                             className={styles.profileIcon}
-                            onClick={handleOpen}
+                            onClick={() => handleOpen()}
                         />
                         {menuIsOpen && (
                             <div className={styles.dropdownMenu}>

@@ -1,6 +1,6 @@
 import { axiosInstance } from 'src/config/axios'
 import { Component } from 'react'
-import { FieldValues } from 'react-hook-form'
+import { Field, FieldValues } from 'react-hook-form'
 export default class UserService extends Component {
     public static async login(data: FieldValues): Promise<any> {
         return await axiosInstance.post('/auth/login', data)
@@ -22,5 +22,9 @@ export default class UserService extends Component {
 
     public static async editUserProfile(data: FieldValues): Promise<any> {
         return await axiosInstance.patch('/client', data)
+    }
+
+    public static async changePassword(data: FieldValues): Promise<any> {
+        return await axiosInstance.patch('/client/password', data)
     }
 }

@@ -1,11 +1,12 @@
 import { FormInput } from '@/components/input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { bgModal } from '../../../constants/constants'
 import styles from './ChangePasswordModal.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
+import UserService from '@/service/User.service'
 
 interface IChangePasswordModalProps {
     modalIsOpen: boolean
@@ -16,12 +17,40 @@ export const ChangePasswordModal = ({
     closeModal,
 }: IChangePasswordModalProps): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
+
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm()
+
+    const validate = (data: FieldValues): void => {
+        if (data.newPassword === data.confirmPassword) {
+            delete data.confirmPassword
+            setShowError(false)
+            changePassword(data)
+            closeModal()
+        } else {
+            setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
+            setShowError(true)
+        }
+    }
+
+    const changePassword = (data: FieldValues): void => {
+        UserService.changePassword(data)
+            .then((res) => {
+                // alert('successfully edited')
+                // reset()
+            })
+            .catch((err) => {
+                setErrorMessage(err.response.data.message)
+                setShowError(true)
+                reset()
+                console.log(err)
+            })
+    }
 
     return (
         <Modal
@@ -34,12 +63,10 @@ export const ChangePasswordModal = ({
             <div className={styles.formContainer}>
                 <form
                     className={styles.formDiv}
-                    onSubmit={handleSubmit((data) => console.log(data))}
+                    onSubmit={handleSubmit((data) => validate(data))}
                 >
                     <label className={styles.formTitle}>Promeni šifru</label>
-                    {showError && (
-                        <ErrorLabel content="Email ili lozinka nisu ispravni. Pokušajte ponovo." />
-                    )}
+                    {showError && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
                         errors={errors}
@@ -67,7 +94,7 @@ export const ChangePasswordModal = ({
                     <FormInput
                         register={register}
                         errors={errors}
-                        name="confirmedPassword"
+                        name="confirmPassword"
                         src={passwordIcon}
                         placeholder="Potvrdi novu šifru"
                         type="password"

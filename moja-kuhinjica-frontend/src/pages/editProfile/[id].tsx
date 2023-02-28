@@ -90,7 +90,7 @@ const EditProfilePage = (): JSX.Element => {
         if (id) data.id = +id
         UserService.editUserProfile(data)
             .then((res) => {
-                alert('successfully edited')
+                // alert('successfully edited')
             })
             .catch((err) => {
                 console.log(err)

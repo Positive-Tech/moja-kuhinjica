@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { FieldValues, useForm } from 'react-hook-form'
+import { Field, FieldValues, useForm } from 'react-hook-form'
 import React, { useState } from 'react'
 import styles from './ChangePasswordPage.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
@@ -8,6 +8,7 @@ import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '@/components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import UserService from '@/service/User.service'
 
 const ChangePasswordPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
@@ -22,15 +23,28 @@ const ChangePasswordPage = (): JSX.Element => {
     } = useForm()
 
     const validate = (data: FieldValues): void => {
-        if (data.password === data.confirmPassword) {
+        if (data.newPassword === data.confirmPassword) {
             delete data.confirmPassword
-            data.phoneNumber = `+381${data.phoneNumber}`
             setShowError(false)
-            // changePassword(data)
+            changePassword(data)
         } else {
             setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
             setShowError(true)
         }
+    }
+
+    const changePassword = (data: FieldValues): void => {
+        UserService.changePassword(data)
+            .then((res) => {
+                // alert('successfully edited')
+                reset()
+            })
+            .catch((err) => {
+                setErrorMessage(err.response.data.message)
+                setShowError(true)
+                reset()
+                console.log(err)
+            })
     }
 
     return (
