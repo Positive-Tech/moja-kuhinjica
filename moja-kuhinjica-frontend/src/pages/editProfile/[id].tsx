@@ -1,6 +1,6 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useEffect, useState, useRef } from 'react'
+import { FieldValues, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
@@ -12,10 +12,12 @@ import email from 'public/static/assets/images/email.svg'
 import profile from 'public/static/assets/images/profile.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
+import passwordIcon from 'public/static/assets/images/password.svg'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './EditProfilePage.module.scss'
 import UserService from '@/service/User.service'
 import { useRouter } from 'next/router'
+import { ChangePasswordModal } from '@/components/modal/changePassword/ChangePasswordModal'
 
 interface User {
     id: number
@@ -35,7 +37,11 @@ const EditProfilePage = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
+    const [editName, setEditName] = useState<boolean>(false)
+    const [editSurname, setEditSurname] = useState<boolean>(false)
+    const [editPhoneNumber, setEditPhoneNumber] = useState<boolean>(false)
     const [user, setUser] = useState<User>(emptyUser)
+    const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false)
     const router = useRouter()
     const { id } = router.query
 
@@ -78,6 +84,18 @@ const EditProfilePage = (): JSX.Element => {
         setWindowWidth(window.innerWidth)
     }
 
+    const editUser = (data: FieldValues): void => {
+        delete data.email
+        data.phoneNumber = `+381${data.phoneNumber}`
+        if (id) data.id = +id
+        UserService.editUserProfile(data)
+            .then((res) => {
+                // alert('successfully edited')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
     return (
         <div className={styles.colDiv}>
             {showMenu && (
@@ -101,9 +119,26 @@ const EditProfilePage = (): JSX.Element => {
                     <div className={styles.formWrapper}>
                         <form
                             className={styles.formDiv}
-                            onSubmit={handleSubmit((data) => console.log(data))}
+                            onSubmit={handleSubmit((data) => editUser(data))}
                         >
                             <Image src={profileIcon} alt="" />
+                            <div className={styles.changePasswordWrapper}>
+                                <Image
+                                    src={passwordIcon}
+                                    alt=""
+                                    className={styles.passwordIcon}
+                                />
+                                <label
+                                    className={styles.changePasswordLabel}
+                                    onClick={() =>
+                                        isMobile
+                                            ? router.push('/passwordChange')
+                                            : setShowPasswordModal(true)
+                                    }
+                                >
+                                    Promeni šifru
+                                </label>
+                            </div>
                             <FormInput
                                 register={register}
                                 errors={errors}
@@ -119,6 +154,14 @@ const EditProfilePage = (): JSX.Element => {
                                     },
                                 }}
                                 defaultValue={user?.name}
+                                isEditable={true}
+                                style={
+                                    editName
+                                        ? styles.editableInput
+                                        : styles.disabledInput
+                                }
+                                handleEditClick={() => setEditName(true)}
+                                handleOnBlur={() => setEditName(false)}
                             />
                             <FormInput
                                 register={register}
@@ -134,7 +177,15 @@ const EditProfilePage = (): JSX.Element => {
                                         message: 'invalid surname value',
                                     },
                                 }}
+                                isEditable={true}
+                                style={
+                                    editSurname
+                                        ? styles.editableInput
+                                        : styles.disabledInput
+                                }
                                 defaultValue={user?.surname}
+                                handleOnBlur={() => setEditSurname(false)}
+                                handleEditClick={() => setEditSurname(true)}
                             />
                             <FormInput
                                 register={register}
@@ -150,6 +201,7 @@ const EditProfilePage = (): JSX.Element => {
                                         message: 'invalid email value',
                                     },
                                 }}
+                                style={styles.emailInput}
                                 defaultValue={user?.email}
                             />
 
@@ -169,8 +221,24 @@ const EditProfilePage = (): JSX.Element => {
                                     },
                                 }}
                                 isPhoneNumber={true}
+                                isEditable={true}
+                                style={
+                                    editPhoneNumber
+                                        ? styles.editableInput
+                                        : styles.disabledInput
+                                }
                                 defaultValue={user?.phoneNumber}
+                                handleOnBlur={() => setEditPhoneNumber(false)}
+                                handleEditClick={() => setEditPhoneNumber(true)}
                             />
+                            {showPasswordModal && (
+                                <ChangePasswordModal
+                                    modalIsOpen={showPasswordModal}
+                                    closeModal={() =>
+                                        setShowPasswordModal(false)
+                                    }
+                                />
+                            )}
                             <button className={styles.formButton}>
                                 Potvrdi
                             </button>

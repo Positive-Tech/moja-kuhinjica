@@ -63,9 +63,15 @@
     color: #c10016;
 }
 
-.sideIcon {
+.sideErrorIcon {
     position: absolute;
     right: 0;
+}
+
+.sideEditIcon {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
 }
 
 .numberFormat {

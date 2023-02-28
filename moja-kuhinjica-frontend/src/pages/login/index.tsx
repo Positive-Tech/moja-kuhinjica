@@ -10,6 +10,7 @@ import password from 'public/static/assets/images/password.svg'
 import styles from './LoginPage.module.scss'
 import UserService from '@/service/User.service'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
+import { Text } from '@/components/label/Text'
 
 const LoginPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
@@ -77,6 +78,10 @@ const LoginPage = (): JSX.Element => {
                             },
                         }}
                         style={styles.input}
+                    />
+                    <Text
+                        content="Zaboravili ste šifru?"
+                        style={styles.forgotPasswordLabel}
                     />
                     <button className={styles.formButton}>Potvrdi</button>
                 </form>

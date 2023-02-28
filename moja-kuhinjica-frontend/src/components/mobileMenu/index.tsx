@@ -73,7 +73,8 @@ const Menu = ({
                                 />
                             </div>
                             <label className={styles.userName}>
-                                Pera Perić
+                                {user?.name}&nbsp;
+                                {user?.surname}
                             </label>
                         </div>
                     )}
