@@ -211,7 +211,7 @@ const EditProfilePage = (): JSX.Element => {
                                 name="phoneNumber"
                                 src={mobile}
                                 placeholder=""
-                                type="text"
+                                type="number"
                                 validationSchema={{
                                     required: 'telephone number is required',
                                     pattern: {

@@ -85,12 +85,21 @@ export const FormInput = ({
                     ref(e)
                     inputRef.current = e // we can still assign to ref
                 }}
-                onFocus={(e) =>
-                    e.currentTarget.setSelectionRange(
-                        e.currentTarget.value.length,
-                        e.currentTarget.value.length
-                    )
-                }
+                onFocus={(e) => {
+                    if (type === 'number') {
+                        e.currentTarget.type = 'text'
+                        e.currentTarget.setSelectionRange(
+                            e.currentTarget.value.length,
+                            e.currentTarget.value.length
+                        )
+                        e.currentTarget.type = 'number'
+                    } else {
+                        e.currentTarget.setSelectionRange(
+                            e.currentTarget.value.length,
+                            e.currentTarget.value.length
+                        )
+                    }
+                }}
                 onBlur={() => handleOnBlur?.()}
             ></input>
             {invalidInput && (
