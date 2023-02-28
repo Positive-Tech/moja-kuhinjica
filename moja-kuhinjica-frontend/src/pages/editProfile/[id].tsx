@@ -98,12 +98,7 @@ const EditProfilePage = (): JSX.Element => {
     }
     return (
         <div className={styles.colDiv}>
-            {showMenu && (
-                <Menu
-                    closeMenu={() => setShowMenu(false)}
-                    loggedIn={localStorage.getItem('token') != null}
-                />
-            )}
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
 
             {isMobile ? (
                 <MobileHeader

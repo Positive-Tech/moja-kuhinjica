@@ -15,6 +15,8 @@ import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { setLoggedInUser } from '@/reduxStore/actions/userActions'
 
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
@@ -24,14 +26,16 @@ const Home = (): JSX.Element => {
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
-    const [loggedIn, setLoggedIn] = useState<boolean>(false)
     const [userEmail, setUserEmail] = useState<string>('')
+
+    const dispatch = useAppDispatch()
+    const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        isLoggedIn()
-    }, [])
+        if (isAuthorized) dispatch(setLoggedInUser())
+    }, [isAuthorized])
 
     useEffect(() => {
         handleWindowResize()
@@ -49,9 +53,6 @@ const Home = (): JSX.Element => {
 
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
-    }
-    const isLoggedIn = (): void => {
-        setLoggedIn(localStorage.getItem('token') != null)
     }
 
     const handleSignUpClick = (): void => {
@@ -71,19 +72,11 @@ const Home = (): JSX.Element => {
 
     return (
         <div className={styles.colDiv}>
-            {showMenu && (
-                <Menu
-                    closeMenu={() => setShowMenu(false)}
-                    loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
-                />
-            )}
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
                 type="main"
                 selectedButton={1}
                 openLoginModal={setShowLoginModal}
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
             />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
@@ -97,7 +90,7 @@ const Home = (): JSX.Element => {
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
-                    {!loggedIn && (
+                    {!isAuthorized && (
                         <div className={styles.buttonWrapper}>
                             <HomePageButton
                                 content="Registrujte se"
@@ -190,8 +183,6 @@ const Home = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
             />
             <SignUpModal
                 modalIsOpen={showSignUpModal}

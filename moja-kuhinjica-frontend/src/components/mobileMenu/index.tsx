@@ -12,11 +12,10 @@ import logoutIcon from '../../../public/static/assets/images/logout.svg'
 import profile from '../../../public/static/assets/images/profileHeader.svg'
 
 import { useRouter } from 'next/router'
-import UserService from '@/service/User.service'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { userLogout } from '@/reduxStore/actions/userActions'
 interface IMenuProps {
     closeMenu: () => void
-    loggedIn?: boolean
-    setLoggedIn?: (param: boolean) => void
 }
 interface LoggedInUser {
     id: number
@@ -26,27 +25,25 @@ interface LoggedInUser {
     role: string
 }
 
-const Menu = ({
-    closeMenu,
-    loggedIn,
-    setLoggedIn,
-}: IMenuProps): JSX.Element => {
-    const [user, setUser] = useState<LoggedInUser>()
+const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
+    const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
+    const user = useAppSelector((state) => state.auth.user)
 
-    useEffect(() => {
-        if (loggedIn) fetchLoggedInUser()
-    }, [loggedIn])
+    // useEffect(() => {
+    //     if (loggedIn) fetchLoggedInUser()
+    // }, [loggedIn])
 
-    const fetchLoggedInUser = (): void => {
-        UserService.getLoggedInUser()
-            .then((res) => {
-                setUser(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
+    // const fetchLoggedInUser = (): void => {
+    //     UserService.getLoggedInUser()
+    //         .then((res) => {
+    //             setUser(res.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }
 
     const navigate = (url: string): void => {
         closeMenu()
@@ -54,8 +51,7 @@ const Menu = ({
     }
 
     const logout = (): void => {
-        localStorage.removeItem('token')
-        setLoggedIn?.(false)
+        dispatch(userLogout())
         navigate('/')
     }
 
@@ -63,7 +59,7 @@ const Menu = ({
         <div className={styles.container}>
             <div className={styles.wrapper}>
                 <div className={styles.closeButtonWrapper}>
-                    {loggedIn && (
+                    {isAuthorized && (
                         <div className={styles.userNameWrapper}>
                             <div className={styles.pictureWrapper}>
                                 <Image
@@ -93,7 +89,7 @@ const Menu = ({
                         style={styles.button}
                         handleClick={() => navigate('/mealReservation')}
                     />
-                    {loggedIn && (
+                    {isAuthorized && (
                         <DropdownMenuButton
                             content="Moje rezervacije"
                             src={myReservations}
@@ -101,7 +97,7 @@ const Menu = ({
                             handleClick={() => navigate('/myReservations')}
                         />
                     )}
-                    {loggedIn && (
+                    {isAuthorized && (
                         <DropdownMenuButton
                             content="Izmena profila"
                             src={editProfile}
@@ -116,7 +112,7 @@ const Menu = ({
                         src={aboutUsIcon}
                         style={styles.button}
                     />
-                    {loggedIn && (
+                    {isAuthorized && (
                         <DropdownMenuButton
                             content="Odjavi se"
                             src={logoutIcon}

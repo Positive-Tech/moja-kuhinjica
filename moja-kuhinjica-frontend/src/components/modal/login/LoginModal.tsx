@@ -10,12 +10,12 @@ import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
 import { Text } from '@/components/label/Text'
+import { useAppDispatch } from '@/utils/hooks'
+import { userLogin } from '@/reduxStore/actions/userActions'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
     closeModal: () => void
-    loggedIn: boolean
-    setLoggedIn: (param: boolean) => void
 }
 export interface RegistrationFormFields {
     email: string
@@ -24,9 +24,8 @@ export interface RegistrationFormFields {
 export const LoginModal = ({
     modalIsOpen,
     closeModal,
-    loggedIn,
-    setLoggedIn,
 }: ILoginModalProps): JSX.Element => {
+    const dispatch = useAppDispatch()
     const [showError, setShowError] = useState<boolean>(false)
     const {
         register,
@@ -37,17 +36,20 @@ export const LoginModal = ({
 
     const login = (inputData: FieldValues): void => {
         setShowError(false)
-        UserService.login(inputData)
-            .then((res) => {
-                localStorage.setItem('token', res.data.access_token)
-                setLoggedIn(true)
-                closeModal()
-                reset()
-            })
-            .catch((err) => {
-                setShowError(true)
-                console.log(err)
-            })
+        // UserService.login(inputData)
+        //     .then((res) => {
+        //         localStorage.setItem('token', res.data.access_token)
+        //         setLoggedIn(true)
+        //         closeModal()
+        //         reset()
+        //     })
+        //     .catch((err) => {
+        //         setShowError(true)
+        //         console.log(err)
+        //     })
+        dispatch(userLogin(inputData))
+        closeModal()
+        reset()
     }
 
     return (

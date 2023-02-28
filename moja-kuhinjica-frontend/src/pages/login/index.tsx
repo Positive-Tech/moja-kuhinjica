@@ -6,13 +6,15 @@ import { FormInput } from '@/components/input/FormInput'
 import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
-
 import styles from './LoginPage.module.scss'
 import UserService from '@/service/User.service'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
+import { useAppDispatch } from 'src/utils/hooks'
+import { setLoggedInUser, userLogin } from '@/reduxStore/actions/userActions'
 
 const LoginPage = (): JSX.Element => {
+    const dispatch: any = useAppDispatch()
     const [showError, setShowError] = useState<boolean>(false)
     const router = useRouter()
     const {
@@ -23,17 +25,21 @@ const LoginPage = (): JSX.Element => {
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        setShowError(false)
-        UserService.login(inputData)
-            .then((res) => {
-                localStorage.setItem('token', res.data.access_token)
-                router.push('/')
-                reset()
-            })
-            .catch((err) => {
-                setShowError(true)
-                console.log(err)
-            })
+        // setShowError(false)
+        // UserService.login(inputData)
+        //     .then((res) => {
+        //         localStorage.setItem('token', res.data.access_token)
+        //         router.push('/')
+        //         reset()
+        //         dispatch(setLoggedInUser())
+        //     })
+        //     .catch((err) => {
+        //         setShowError(true)
+        //         console.log(err)
+        //     })
+        dispatch(userLogin(inputData))
+        router.push('/')
+        reset()
     }
     return (
         <div className={styles.container}>
