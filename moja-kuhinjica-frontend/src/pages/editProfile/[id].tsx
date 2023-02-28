@@ -161,6 +161,7 @@ const EditProfilePage = (): JSX.Element => {
                                         : styles.disabledInput
                                 }
                                 handleEditClick={() => setEditName(true)}
+                                handleOnBlur={() => setEditName(false)}
                             />
                             <FormInput
                                 register={register}
@@ -183,6 +184,7 @@ const EditProfilePage = (): JSX.Element => {
                                         : styles.disabledInput
                                 }
                                 defaultValue={user?.surname}
+                                handleOnBlur={() => setEditSurname(false)}
                                 handleEditClick={() => setEditSurname(true)}
                             />
                             <FormInput
@@ -209,7 +211,7 @@ const EditProfilePage = (): JSX.Element => {
                                 name="phoneNumber"
                                 src={mobile}
                                 placeholder=""
-                                type="number"
+                                type="text"
                                 validationSchema={{
                                     required: 'telephone number is required',
                                     pattern: {
@@ -226,6 +228,7 @@ const EditProfilePage = (): JSX.Element => {
                                         : styles.disabledInput
                                 }
                                 defaultValue={user?.phoneNumber}
+                                handleOnBlur={() => setEditPhoneNumber(false)}
                                 handleEditClick={() => setEditPhoneNumber(true)}
                             />
                             {showPasswordModal && (

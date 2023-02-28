@@ -18,6 +18,7 @@ interface IFormInputProps {
     defaultValue?: string
     isEditable?: boolean
     handleEditClick?: () => void
+    handleOnBlur?: () => void
 }
 
 export const FormInput = ({
@@ -33,11 +34,12 @@ export const FormInput = ({
     isEditable,
     defaultValue,
     handleEditClick,
+    handleOnBlur,
 }: IFormInputProps): JSX.Element => {
     const [invalidInput, setInvalidInput] = useState(false)
     const [inputType, setInputType] = useState(type)
-
-    const inputRef = useRef(null)
+    const { ref, ...rest } = register(name, validationSchema)
+    const inputRef = useRef<HTMLInputElement | null>(null)
 
     const isValid = (): void => {
         if (errors[name]?.message) {
@@ -49,6 +51,11 @@ export const FormInput = ({
     useEffect(() => {
         isValid()
     })
+
+    const handleClick = (): void => {
+        handleEditClick?.()
+        inputRef.current?.focus()
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -73,7 +80,18 @@ export const FormInput = ({
                 placeholder={placeholder}
                 type={inputType}
                 defaultValue={defaultValue}
-                {...register(name, validationSchema)}
+                {...rest}
+                ref={(e) => {
+                    ref(e)
+                    inputRef.current = e // we can still assign to ref
+                }}
+                onFocus={(e) =>
+                    e.currentTarget.setSelectionRange(
+                        e.currentTarget.value.length,
+                        e.currentTarget.value.length
+                    )
+                }
+                onBlur={() => handleOnBlur?.()}
             ></input>
             {invalidInput && (
                 <Image
@@ -87,7 +105,7 @@ export const FormInput = ({
                     src={editIcon}
                     alt=""
                     className={styles.sideEditIcon}
-                    onClick={() => handleEditClick?.()}
+                    onClick={() => handleClick()}
                 />
             )}
             {type === 'password' && !invalidInput && (

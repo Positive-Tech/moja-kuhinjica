@@ -36,8 +36,9 @@ const ChangePasswordPage = (): JSX.Element => {
     const changePassword = (data: FieldValues): void => {
         UserService.changePassword(data)
             .then((res) => {
-                // alert('successfully edited')
+                // notification for successful change
                 reset()
+                router.back()
             })
             .catch((err) => {
                 setErrorMessage(err.response.data.message)

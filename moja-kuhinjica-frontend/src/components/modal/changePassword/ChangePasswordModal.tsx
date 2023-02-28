@@ -31,7 +31,6 @@ export const ChangePasswordModal = ({
             delete data.confirmPassword
             setShowError(false)
             changePassword(data)
-            closeModal()
         } else {
             setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
             setShowError(true)
@@ -41,8 +40,9 @@ export const ChangePasswordModal = ({
     const changePassword = (data: FieldValues): void => {
         UserService.changePassword(data)
             .then((res) => {
-                // alert('successfully edited')
-                // reset()
+                // notification
+                reset()
+                closeModal()
             })
             .catch((err) => {
                 setErrorMessage(err.response.data.message)
