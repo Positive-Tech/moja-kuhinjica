@@ -18,7 +18,7 @@ import { MOBILE_WIDTH } from 'src/constants/constants'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { setLoggedInUser } from '@/reduxStore/actions/userActions'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
-import { PasswordResettingModal } from '@/components/modal/passwordResetting/PasswordResettingModal'
+import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
