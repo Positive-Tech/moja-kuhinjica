@@ -19,7 +19,6 @@
     backdrop-filter: blur(1.5px);
     background-size: cover;
     background-position: 55%;
-    
 }
 
 .title {
@@ -53,6 +52,7 @@
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 80px;
+        margin-top: 50%;
     }
 }
 
@@ -96,6 +96,7 @@
 
 .content {
     @extend .colDiv;
+    align-items: center;
 }
 
 .contentTitle {
@@ -244,5 +245,6 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+        max-height: 250px;
     }
 }

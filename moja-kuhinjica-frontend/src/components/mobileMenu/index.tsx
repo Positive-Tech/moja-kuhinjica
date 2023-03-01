@@ -66,7 +66,11 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         content="Rezerviši"
                         src={reservationIcon}
                         style={styles.button}
-                        handleClick={() => navigate('/mealReservation')}
+                        handleClick={() =>
+                            navigate(
+                                isAuthorized ? '/mealReservation' : 'login'
+                            )
+                        }
                     />
                     {isAuthorized && (
                         <DropdownMenuButton
@@ -90,6 +94,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         content="O nama"
                         src={aboutUsIcon}
                         style={styles.button}
+                        handleClick={() => navigate('/aboutUs')}
                     />
                     {isAuthorized && (
                         <DropdownMenuButton
