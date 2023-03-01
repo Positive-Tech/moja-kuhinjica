@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
@@ -15,6 +15,7 @@ import { userLogin } from '@/reduxStore/actions/userActions'
 interface ILoginModalProps {
     modalIsOpen: boolean
     closeModal: () => void
+    openPasswordForgettingModal: () => void
 }
 export interface RegistrationFormFields {
     email: string
@@ -23,6 +24,7 @@ export interface RegistrationFormFields {
 export const LoginModal = ({
     modalIsOpen,
     closeModal,
+    openPasswordForgettingModal,
 }: ILoginModalProps): JSX.Element => {
     const dispatch = useAppDispatch()
     const errorMessage = useAppSelector((state) => state.auth.authErrorMessage)
@@ -35,7 +37,7 @@ export const LoginModal = ({
 
     const login = (inputData: FieldValues): void => {
         dispatch<any>(userLogin(inputData))
-        if (!errorMessage) return
+        if (!!errorMessage) return
         closeModal()
         reset()
     }
@@ -84,6 +86,10 @@ export const LoginModal = ({
                     <Text
                         content="Zaboravili ste šifru?"
                         style={styles.forgotPasswordLabel}
+                        handleClick={() => {
+                            closeModal()
+                            openPasswordForgettingModal()
+                        }}
                     />
                     <button type="submit" className={styles.formButton}>
                         Potvrdi

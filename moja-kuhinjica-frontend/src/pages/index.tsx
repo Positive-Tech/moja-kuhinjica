@@ -17,6 +17,8 @@ import styles from 'src/styles/Home.module.scss'
 import { MOBILE_WIDTH } from 'src/constants/constants'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { setLoggedInUser } from '@/reduxStore/actions/userActions'
+import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
+import { PasswordResettingModal } from '@/components/modal/passwordResetting/PasswordResettingModal'
 
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
@@ -24,9 +26,14 @@ const Home = (): JSX.Element => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [showPasswordForgettingModal, setShowPasswordForgettingModal] =
+        useState<boolean>(false)
+    const [showPasswordResettingModal, setShowPasswordResettingModal] =
+        useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [userEmail, setUserEmail] = useState<string>('')
+    const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
 
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
@@ -183,6 +190,9 @@ const Home = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
+                openPasswordForgettingModal={() =>
+                    setShowPasswordForgettingModal(true)
+                }
             />
             <SignUpModal
                 modalIsOpen={showSignUpModal}
@@ -196,6 +206,19 @@ const Home = (): JSX.Element => {
                 title=""
                 buttonText="zatvori"
                 email={userEmail}
+            />
+            <PasswordForgettingModal
+                modalIsOpen={showPasswordForgettingModal}
+                closeModal={() => setShowPasswordForgettingModal(false)}
+                openNotificationModal={() =>
+                    setShowPasswordResettingModal(true)
+                }
+                setMessage={setResetPasswordMessage}
+            />
+            <PasswordResettingModal
+                modalIsOpen={showPasswordResettingModal}
+                closeModal={() => setShowPasswordResettingModal(false)}
+                infoContent={resetPasswordMessage}
             />
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { useForm, FieldValues } from 'react-hook-form'
 import { useRouter } from 'next/router'

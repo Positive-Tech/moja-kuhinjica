@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { LabelWithIcon } from '@/components/label/LabelWithIcon'
-import { LoginModal } from '@/components/modal/login/LoginModal'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from '@/components/mobileMenu'
@@ -16,7 +15,6 @@ import styles from './Profile.module.scss'
 import { MOBILE_WIDTH } from '@/constants/constants'
 
 const Profile = (): JSX.Element => {
-    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
@@ -41,11 +39,7 @@ const Profile = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header
-                    type="red"
-                    selectedButton={0}
-                    openLoginModal={setShowLoginModal}
-                />
+                <Header type="red" selectedButton={0} />
             )}
             <div className={styles.wrapper}>
                 <div className={styles.container}>
@@ -134,10 +128,6 @@ const Profile = (): JSX.Element => {
                 </div>
             </div>
             {isMobile ? <MobileFooter /> : <Footer />}
-            <LoginModal
-                modalIsOpen={showLoginModal}
-                closeModal={() => setShowLoginModal(false)}
-            />
         </div>
     )
 }

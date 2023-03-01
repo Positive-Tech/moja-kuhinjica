@@ -17,7 +17,7 @@ import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './EditProfilePage.module.scss'
 import UserService from '@/service/User.service'
 import { useRouter } from 'next/router'
-import { ChangePasswordModal } from '@/components/modal/changePassword/ChangePasswordModal'
+import { PasswordChangeModal } from '@/components/modal/passwordChange/PasswordChangeModal'
 
 interface User {
     id: number
@@ -227,7 +227,7 @@ const EditProfilePage = (): JSX.Element => {
                                 handleEditClick={() => setEditPhoneNumber(true)}
                             />
                             {showPasswordModal && (
-                                <ChangePasswordModal
+                                <PasswordChangeModal
                                     modalIsOpen={showPasswordModal}
                                     closeModal={() =>
                                         setShowPasswordModal(false)

@@ -6,7 +6,6 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Header from '@/components/header/Header'
 import { QuestionLabel } from '@/components/label/QuestionLabel'
 import { TabButton } from '@/components/button/TabButton'
-import { LoginModal } from '@/components/modal/login/LoginModal'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from 'src/components/mobileMenu'
@@ -16,7 +15,6 @@ import styles from './AboutUs.module.scss'
 
 const AboutUs = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
-    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
@@ -50,11 +48,7 @@ const AboutUs = (): JSX.Element => {
                     src={burgerMenuIcon}
                 />
             ) : (
-                <Header
-                    type="main"
-                    selectedButton={3}
-                    openLoginModal={setShowLoginModal}
-                />
+                <Header type="main" selectedButton={3} />
             )}
             <div className={styles.menuRowDiv}>
                 <TabButton
@@ -190,10 +184,6 @@ const AboutUs = (): JSX.Element => {
                 )}
             </div>
             {isMobile ? <MobileFooter /> : <Footer />}
-            <LoginModal
-                modalIsOpen={showLoginModal}
-                closeModal={() => setShowLoginModal(false)}
-            />
         </div>
     )
 }

@@ -1,5 +1,4 @@
 import UserService from '@/service/User.service'
-import { AnyAction, Dispatch } from 'redux'
 import { ActionTypes } from '../constants/actionTypes'
 
 export const setLoggedInUser = () => async (dispatch: any) => {

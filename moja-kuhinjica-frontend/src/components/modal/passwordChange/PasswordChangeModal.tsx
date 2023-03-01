@@ -3,8 +3,8 @@ import { ErrorLabel } from '@/components/label/ErrorLabel'
 import React, { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import Modal from 'react-modal'
-import { bgModal } from '../../../constants/constants'
-import styles from './ChangePasswordModal.module.scss'
+import { bgModal } from 'src/constants/constants'
+import styles from './PasswordChangeModal.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import UserService from '@/service/User.service'
 
@@ -12,7 +12,7 @@ interface IChangePasswordModalProps {
     modalIsOpen: boolean
     closeModal: () => void
 }
-export const ChangePasswordModal = ({
+export const PasswordChangeModal = ({
     modalIsOpen,
     closeModal,
 }: IChangePasswordModalProps): JSX.Element => {
