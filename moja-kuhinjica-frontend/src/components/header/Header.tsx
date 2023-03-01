@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
@@ -9,7 +9,6 @@ import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
 import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import styles from './Header.module.scss'
-import UserService from '@/service/User.service'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogout } from '@/reduxStore/actions/userActions'
 interface IHeaderProps {

@@ -9,7 +9,7 @@ import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
 import { Text } from '@/components/label/Text'
-import { useAppDispatch } from '@/utils/hooks'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogin } from '@/reduxStore/actions/userActions'
 
 interface ILoginModalProps {
@@ -25,7 +25,7 @@ export const LoginModal = ({
     closeModal,
 }: ILoginModalProps): JSX.Element => {
     const dispatch = useAppDispatch()
-    const [showError, setShowError] = useState<boolean>(false)
+    const errorMessage = useAppSelector((state) => state.auth.authErrorMessage)
     const {
         register,
         handleSubmit,
@@ -34,8 +34,8 @@ export const LoginModal = ({
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        setShowError(false)
-        dispatch(userLogin(inputData))
+        dispatch<any>(userLogin(inputData))
+        if (!errorMessage) return
         closeModal()
         reset()
     }
@@ -54,9 +54,7 @@ export const LoginModal = ({
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    {showError && (
-                        <ErrorLabel content="Email ili lozinka nisu ispravni. Pokušajte ponovo." />
-                    )}
+                    {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
                         errors={errors}

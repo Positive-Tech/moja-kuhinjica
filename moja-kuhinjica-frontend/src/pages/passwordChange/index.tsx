@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Field, FieldValues, useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import React, { useState } from 'react'
 import styles from './ChangePasswordPage.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'

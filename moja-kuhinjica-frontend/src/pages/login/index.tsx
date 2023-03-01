@@ -9,12 +9,12 @@ import password from 'public/static/assets/images/password.svg'
 import styles from './LoginPage.module.scss'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
-import { useAppDispatch } from 'src/utils/hooks'
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks'
 import { userLogin } from '@/reduxStore/actions/userActions'
 
 const LoginPage = (): JSX.Element => {
     const dispatch: any = useAppDispatch()
-    const [showError, setShowError] = useState<boolean>(false)
+    const errorMesssage = useAppSelector((state) => state.auth.authErrorMessage)
     const router = useRouter()
     const {
         register,
@@ -25,6 +25,7 @@ const LoginPage = (): JSX.Element => {
 
     const login = (inputData: FieldValues): void => {
         dispatch(userLogin(inputData))
+        if (!errorMesssage) return
         router.push('/')
         reset()
     }
@@ -37,9 +38,7 @@ const LoginPage = (): JSX.Element => {
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    {showError && (
-                        <ErrorLabel content="Email ili lozinka nisu ispravni. Pokušajte ponovo." />
-                    )}
+                    {errorMesssage && <ErrorLabel content={errorMesssage} />}
                     <FormInput
                         register={register}
                         errors={errors}

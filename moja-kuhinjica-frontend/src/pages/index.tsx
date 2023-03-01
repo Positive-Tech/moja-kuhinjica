@@ -34,7 +34,7 @@ const Home = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isAuthorized) dispatch(setLoggedInUser())
+        if (isAuthorized) dispatch<any>(setLoggedInUser())
     }, [isAuthorized])
 
     useEffect(() => {

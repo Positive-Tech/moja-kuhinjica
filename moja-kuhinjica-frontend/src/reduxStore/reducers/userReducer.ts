@@ -11,6 +11,7 @@ interface UserState {
     } | null
     token: string | null
     isAuthorized: boolean
+    authErrorMessage: string | null
 }
 
 const initialState: UserState = {
@@ -23,6 +24,7 @@ const initialState: UserState = {
     },
     token: '',
     isAuthorized: false,
+    authErrorMessage: '',
 }
 
 export const userReducer: Reducer<UserState> = (
@@ -40,6 +42,7 @@ export const userReducer: Reducer<UserState> = (
                 ...state,
                 token: action.payload.token,
                 isAuthorized: true,
+                authErrorMessage: null,
             }
         case ActionTypes.USER_LOGOUT:
             return {
@@ -47,6 +50,12 @@ export const userReducer: Reducer<UserState> = (
                 user: null,
                 token: null,
                 isAuthorized: false,
+                authErrorMessage: null,
+            }
+        case ActionTypes.ERROR:
+            return {
+                ...state,
+                authErrorMessage: action.payload.response.data.message,
             }
         default:
             return state

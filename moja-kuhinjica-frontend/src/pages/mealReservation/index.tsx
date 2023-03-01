@@ -27,10 +27,8 @@ const MealReservation = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
-    const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
     useEffect(() => {
-        isLoggedIn()
         setMenuIsPresent(true)
         setCartIsEmpty(false)
     }, [])
@@ -48,9 +46,6 @@ const MealReservation = (): JSX.Element => {
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
-    const isLoggedIn = (): void => {
-        setLoggedIn(localStorage.getItem('token') != null ? true : false)
-    }
 
     return (
         <div className={styles.colDiv}>
@@ -58,12 +53,7 @@ const MealReservation = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header
-                    type="red"
-                    selectedButton={2}
-                    loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
-                />
+                <Header type="red" selectedButton={2} />
             )}
             <div
                 className={

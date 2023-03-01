@@ -1,5 +1,5 @@
 import UserService from '@/service/User.service'
-import { AnyAction } from 'redux'
+import { AnyAction, Dispatch } from 'redux'
 import { ActionTypes } from '../constants/actionTypes'
 
 export const setLoggedInUser = () => async (dispatch: any) => {
@@ -22,6 +22,7 @@ export const userLogin = (inputData: any) => async (dispatch: any) => {
             },
         })
     } catch (err) {
+        console.log(err)
         dispatch({
             type: ActionTypes.ERROR,
             payload: err,
@@ -29,7 +30,7 @@ export const userLogin = (inputData: any) => async (dispatch: any) => {
     }
 }
 
-export const userLogout = () => {
+export const userLogout = (): { type: string } => {
     localStorage.removeItem('token')
 
     return {
