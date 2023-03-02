@@ -91,7 +91,13 @@ const Header = ({
                             onClick={() => handleOpen()}
                         />
                         {menuIsOpen && (
-                            <div className={styles.dropdownMenu}>
+                            <div
+                                className={
+                                    type === 'red'
+                                        ? styles.dropdownMenu
+                                        : styles.dropdownMenuHome
+                                }
+                            >
                                 <div className={styles.dropDownButtonWrapper}>
                                     <DropdownMenuButton
                                         content="Moje rezervacije"

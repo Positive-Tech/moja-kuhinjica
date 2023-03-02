@@ -30,7 +30,7 @@ const MealReservation = (): JSX.Element => {
 
     useEffect(() => {
         setMenuIsPresent(true)
-        setCartIsEmpty(false)
+        setCartIsEmpty(true)
     }, [])
 
     useEffect(() => {
