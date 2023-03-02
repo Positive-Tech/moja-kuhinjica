@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import pic from '../../../public/static/assets/images/meal1.png'
-import styles from './MenuItem.module.scss'
 import { RegularButton } from '../button/RegularButton'
 import { Title } from '../label/Title'
 import { Text } from '../label/Text'
 import { AmountButton } from '../button/AmountButton'
+import styles from './MenuItem.module.scss'
+import pic from '../../../public/static/assets/images/meal1.png'
 
 interface IMenuItemProps {
     type?: string

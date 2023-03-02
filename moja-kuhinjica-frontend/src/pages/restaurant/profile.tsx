@@ -6,12 +6,12 @@ import { LabelWithIcon } from '@/components/label/LabelWithIcon'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from '@/components/mobileMenu'
+import styles from './Profile.module.scss'
 import restaurantMap from 'public/static/assets/images/map.svg'
 import clock from 'public/static/assets/images/clock.svg'
 import location from 'public/static/assets/images/location.svg'
 import telephone from 'public/static/assets/images/telephone.svg'
 import restaurantPic from 'public/static/assets/images/restaurantGallery.svg'
-import styles from './Profile.module.scss'
 import { MOBILE_WIDTH } from '@/constants/constants'
 
 const Profile = (): JSX.Element => {

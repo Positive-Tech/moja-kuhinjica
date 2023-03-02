@@ -1,19 +1,19 @@
 import React from 'react'
-import Image from 'next/image'
-import styles from './Menu.module.scss'
-import closeIcon from '../../../public/static/assets/images/close.svg'
-import { DropdownMenuButton } from '@/components/button/DropdownMenuButton'
-import homeIcon from '../../../public/static/assets/images/homeIcon.svg'
-import reservationIcon from '../../../public/static/assets/images/reservationIcon.svg'
-import aboutUsIcon from '../../../public/static/assets/images/aboutUsIcon.svg'
-import myReservations from '../../../public/static/assets/images/myReservations.svg'
-import editProfile from '../../../public/static/assets/images/editProfile.svg'
-import logoutIcon from '../../../public/static/assets/images/logout.svg'
-import profile from '../../../public/static/assets/images/profileHeader.svg'
-
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogout } from '@/reduxStore/actions/userActions'
+import Image from 'next/image'
+import { DropdownMenuButton } from '@/components/button/DropdownMenuButton'
+import closeIcon from 'public/static/assets/images/close.svg'
+import homeIcon from 'public/static/assets/images/homeIcon.svg'
+import reservationIcon from 'public/static/assets/images/reservationIcon.svg'
+import aboutUsIcon from 'public/static/assets/images/aboutUsIcon.svg'
+import myReservations from 'public/static/assets/images/myReservations.svg'
+import editProfile from 'public/static/assets/images/editProfile.svg'
+import logoutIcon from 'public/static/assets/images/logout.svg'
+import profile from 'public/static/assets/images/profileHeader.svg'
+import styles from './Menu.module.scss'
+
 interface IMenuProps {
     closeMenu: () => void
 }

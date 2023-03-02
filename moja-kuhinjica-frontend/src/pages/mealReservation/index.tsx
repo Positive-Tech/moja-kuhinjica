@@ -10,12 +10,12 @@ import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
-import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import cartIcon from '../../../public/static/assets/images/cart.svg'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
+import cartIcon from 'public/static/assets/images/cart.svg'
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
@@ -29,7 +29,7 @@ const MealReservation = (): JSX.Element => {
     const [showCart, setShowCart] = useState<boolean>(false)
 
     useEffect(() => {
-        setMenuIsPresent(true)
+        setMenuIsPresent(false)
         setCartIsEmpty(true)
     }, [])
 

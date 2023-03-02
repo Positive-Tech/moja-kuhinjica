@@ -1,12 +1,12 @@
-import { FormInput } from '@/components/input/FormInput'
-import { ErrorLabel } from '@/components/label/ErrorLabel'
 import React, { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import Modal from 'react-modal'
+import UserService from '@/service/User.service'
+import { FormInput } from '@/components/input/FormInput'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { bgModal } from 'src/constants/constants'
 import styles from './PasswordChangeModal.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
-import UserService from '@/service/User.service'
 
 interface IChangePasswordModalProps {
     modalIsOpen: boolean

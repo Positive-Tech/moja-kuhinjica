@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { FieldValues, useForm } from 'react-hook-form'
-import { bgModal } from 'src/constants/constants'
-import styles from './PasswordForgettingModal.module.scss'
-import emailIcon from 'public/static/assets/images/email.svg'
+import UserService from '@/service/User.service'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { FormInput } from '@/components/input/FormInput'
 import { Text } from '@/components/label/Text'
-import UserService from '@/service/User.service'
+import { bgModal } from 'src/constants/constants'
+import styles from './PasswordForgettingModal.module.scss'
+import emailIcon from 'public/static/assets/images/email.svg'
 
 interface IPasswordForgettingModalProps {
     modalIsOpen: boolean

@@ -1,8 +1,8 @@
 import React from 'react'
 import Modal from 'react-modal'
+import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
 import styles from './PasswordResettingModal.module.scss'
-import { Text } from '@/components/label/Text'
 
 interface IPasswordResettingModalProps {
     modalIsOpen: boolean

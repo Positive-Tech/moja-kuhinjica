@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './MobileFooter.module.scss'
-import location from '../../../../public/static/assets/images/blackLocation.svg'
-import earth from '../../../../public/static/assets/images/blackEarth.svg'
-import circle from '../../../../public/static/assets/images/blackCircle.svg'
+import location from 'public/static/assets/images/blackLocation.svg'
+import earth from 'public/static/assets/images/blackEarth.svg'
+import circle from 'public/static/assets/images/blackCircle.svg'
 interface IMobileFooterProps {
     style?: string
 }
