@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useForm, FieldValues } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -9,12 +9,12 @@ import password from 'public/static/assets/images/password.svg'
 import styles from './LoginPage.module.scss'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
-import { useAppDispatch, useAppSelector } from 'src/utils/hooks'
+import { useAppDispatch } from 'src/utils/hooks'
 import { userLogin } from '@/reduxStore/actions/userActions'
 
 const LoginPage = (): JSX.Element => {
+    const [errorMessage, setErrorMessage] = useState<string>()
     const dispatch: any = useAppDispatch()
-    const errorMesssage = useAppSelector((state) => state.auth.authErrorMessage)
     const router = useRouter()
     const {
         register,
@@ -24,11 +24,20 @@ const LoginPage = (): JSX.Element => {
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        dispatch(userLogin(inputData))
-        if (!errorMesssage) return
-        router.push('/')
-        reset()
+        dispatch(
+            userLogin({
+                inputData,
+                onSuccess: () => {
+                    router.push('/')
+                    reset()
+                },
+                onError: (message: string) => {
+                    setErrorMessage(message)
+                },
+            })
+        )
     }
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -38,7 +47,7 @@ const LoginPage = (): JSX.Element => {
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    {errorMesssage && <ErrorLabel content={errorMesssage} />}
+                    {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
                         errors={errors}
@@ -64,10 +73,6 @@ const LoginPage = (): JSX.Element => {
                         type="password"
                         validationSchema={{
                             required: 'password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
-                            },
                         }}
                         style={styles.input}
                     />
