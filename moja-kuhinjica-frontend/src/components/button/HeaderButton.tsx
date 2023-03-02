@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './HeaderButton.module.scss'
 
+const HEADER_COLOR = 'red'
 interface IHeaderButtonProps {
     active: boolean
     onClick: () => void
@@ -17,7 +18,7 @@ export const HeaderButton = ({
         <button
             className={
                 active
-                    ? headerType === 'red'
+                    ? headerType === HEADER_COLOR
                         ? styles.navButtonProfileSelected
                         : styles.navButtonSelected
                     : styles.navButton

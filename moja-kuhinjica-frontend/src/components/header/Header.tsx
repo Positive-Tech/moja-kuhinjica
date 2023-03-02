@@ -11,6 +11,8 @@ import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import styles from './Header.module.scss'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogout } from '@/reduxStore/actions/userActions'
+
+const HEADER_TYPE = 'red'
 interface IHeaderProps {
     type: string
     selectedButton?: number
@@ -57,7 +59,11 @@ const Header = ({
     }
 
     return (
-        <div className={type === 'red' ? styles.redWrapper : styles.wrapper}>
+        <div
+            className={
+                type === HEADER_TYPE ? styles.redWrapper : styles.wrapper
+            }
+        >
             <div className={styles.logoWrapper}>
                 <Image src={logo} alt="" className={styles.logoImage} />
             </div>
@@ -93,7 +99,7 @@ const Header = ({
                         {menuIsOpen && (
                             <div
                                 className={
-                                    type === 'red'
+                                    type === HEADER_TYPE
                                         ? styles.dropdownMenu
                                         : styles.dropdownMenuHome
                                 }

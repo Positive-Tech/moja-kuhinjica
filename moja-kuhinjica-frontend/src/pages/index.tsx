@@ -11,14 +11,17 @@ import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from 'src/components/mobileMenu'
-import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
-import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
-import styles from 'src/styles/Home.module.scss'
-import { MOBILE_WIDTH } from 'src/constants/constants'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { setLoggedInUser } from '@/reduxStore/actions/userActions'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
+import { MOBILE_WIDTH } from 'src/constants/constants'
+import styles from 'src/styles/Home.module.scss'
+import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
+
+const HEADER_TYPE = 'main'
+const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
@@ -81,7 +84,7 @@ const Home = (): JSX.Element => {
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
-                type="main"
+                type={HEADER_TYPE}
                 selectedButton={1}
                 openLoginModal={setShowLoginModal}
             />
@@ -202,7 +205,7 @@ const Home = (): JSX.Element => {
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
-                type="registration"
+                type={NOTIFICATION_MODAL_TYPE}
                 title=""
                 buttonText="zatvori"
                 email={userEmail}
