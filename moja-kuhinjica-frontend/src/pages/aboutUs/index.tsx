@@ -26,7 +26,7 @@ const AboutUs = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
-    const [questions, setQuestions] = useState<Question[]>([])
+    const [questions, setQuestions] = useState<Question[]>()
 
     useEffect(() => {
         handleWindowResize()
@@ -73,7 +73,7 @@ const AboutUs = (): JSX.Element => {
             ) : (
                 <Header type="main" selectedButton={3} />
             )}
-            <>
+            <div className={styles.bottomWrapper}>
                 <div className={styles.menuRowDiv}>
                     <TabButton
                         active={active === 1}
@@ -206,8 +206,8 @@ const AboutUs = (): JSX.Element => {
                         </div>
                     )}
                 </div>
-            </>
-            {isMobile ? <MobileFooter /> : <Footer />}
+                {isMobile ? <MobileFooter style={styles.footer} /> : <Footer />}
+            </div>
         </div>
     )
 }

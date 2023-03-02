@@ -17,7 +17,12 @@ export const QuestionLabel = ({
                     showAnswer ? styles.openAnswerLabel : styles.labelWrapper
                 }
             >
-                <label className={styles.questionLabel}>{question}</label>
+                <label
+                    className={styles.questionLabel}
+                    onClick={() => setShowAnswer(!showAnswer)}
+                >
+                    {question}
+                </label>
                 <svg
                     className={
                         showAnswer ? styles.svgButtonRotated : styles.svgButton

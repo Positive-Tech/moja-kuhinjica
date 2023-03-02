@@ -2,5 +2,4 @@ export const ActionTypes = {
     SET_LOGGED_IN_USER: 'SET_LOGGED_IN_USER',
     USER_LOGIN: 'USER_LOGIN',
     USER_LOGOUT: 'USER_LOGOUT',
-    ERROR: 'ERROR',
 }

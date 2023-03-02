@@ -9,25 +9,25 @@ export const setLoggedInUser = () => async (dispatch: any) => {
     })
 }
 
-export const userLogin = (inputData: any) => async (dispatch: any) => {
-    try {
-        const { data } = await UserService.login(inputData)
-        localStorage.setItem('token', data.access_token)
+export const userLogin =
+    ({ inputData, onSuccess, onError }: any) =>
+    async (dispatch: any) => {
+        try {
+            const { data } = await UserService.login(inputData)
+            localStorage.setItem('token', data.access_token)
 
-        dispatch({
-            type: ActionTypes.USER_LOGIN,
-            payload: {
-                token: data.access_token,
-            },
-        })
-    } catch (err) {
-        console.log(err)
-        dispatch({
-            type: ActionTypes.ERROR,
-            payload: err,
-        })
+            dispatch({
+                type: ActionTypes.USER_LOGIN,
+                payload: {
+                    token: data.access_token,
+                },
+            })
+            onSuccess()
+        } catch (err) {
+            console.log(err)
+            onError(err.response.data.message)
+        }
     }
-}
 
 export const userLogout = (): { type: string } => {
     localStorage.removeItem('token')

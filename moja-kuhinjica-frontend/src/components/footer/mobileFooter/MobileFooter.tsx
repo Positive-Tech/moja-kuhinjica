@@ -4,10 +4,12 @@ import styles from './MobileFooter.module.scss'
 import location from '../../../../public/static/assets/images/blackLocation.svg'
 import earth from '../../../../public/static/assets/images/blackEarth.svg'
 import circle from '../../../../public/static/assets/images/blackCircle.svg'
-
-export const MobileFooter = (): JSX.Element => {
+interface IMobileFooterProps {
+    style?: string
+}
+export const MobileFooter = ({ style }: IMobileFooterProps): JSX.Element => {
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${style}`}>
             <div className={styles.wrapper}>
                 <button className={styles.mobileButton}>Početna</button>
                 <button className={styles.mobileButton}>Ponuda</button>

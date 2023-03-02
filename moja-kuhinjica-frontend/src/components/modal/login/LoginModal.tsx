@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
@@ -9,7 +9,7 @@ import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
 import { Text } from '@/components/label/Text'
-import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { useAppDispatch } from '@/utils/hooks'
 import { userLogin } from '@/reduxStore/actions/userActions'
 
 interface ILoginModalProps {
@@ -27,7 +27,7 @@ export const LoginModal = ({
     openPasswordForgettingModal,
 }: ILoginModalProps): JSX.Element => {
     const dispatch = useAppDispatch()
-    const errorMessage = useAppSelector((state) => state.auth.authErrorMessage)
+    const [errorMessage, setErrorMessage] = useState<string>()
     const {
         register,
         handleSubmit,
@@ -36,10 +36,18 @@ export const LoginModal = ({
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        dispatch<any>(userLogin(inputData))
-        if (!!errorMessage) return
-        closeModal()
-        reset()
+        dispatch<any>(
+            userLogin({
+                inputData,
+                onSuccess: () => {
+                    closeModal()
+                    reset()
+                },
+                onError: (message: string) => {
+                    setErrorMessage(message)
+                },
+            })
+        )
     }
 
     return (

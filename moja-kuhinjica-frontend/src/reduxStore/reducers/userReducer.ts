@@ -52,11 +52,6 @@ export const userReducer: Reducer<UserState> = (
                 isAuthorized: false,
                 authErrorMessage: null,
             }
-        case ActionTypes.ERROR:
-            return {
-                ...state,
-                authErrorMessage: action.payload.response.data.message,
-            }
         default:
             return state
     }

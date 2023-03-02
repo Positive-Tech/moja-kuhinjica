@@ -17,7 +17,8 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "useUnknownInCatchVariables": false
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"],
     "exclude": ["node_modules"]
