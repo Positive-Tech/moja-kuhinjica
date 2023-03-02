@@ -6,14 +6,16 @@ import { FormInput } from '@/components/input/FormInput'
 import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
+import loadingIcon from 'public/static/assets/images/loading.png'
 import styles from './LoginPage.module.scss'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
-import { useAppDispatch } from 'src/utils/hooks'
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks'
 import { userLogin } from '@/reduxStore/actions/userActions'
 
 const LoginPage = (): JSX.Element => {
     const [errorMessage, setErrorMessage] = useState<string>()
+    const isLoading = useAppSelector((state) => state.auth.inProgress)
     const dispatch: any = useAppDispatch()
     const router = useRouter()
     const {
@@ -80,7 +82,11 @@ const LoginPage = (): JSX.Element => {
                         content="Zaboravili ste šifru?"
                         style={styles.forgotPasswordLabel}
                     />
-                    <button className={styles.formButton}>Potvrdi</button>
+                    {isLoading ? (
+                        <Image src={loadingIcon} alt="" />
+                    ) : (
+                        <button className={styles.formButton}>Potvrdi</button>
+                    )}
                 </form>
             </div>
         </div>

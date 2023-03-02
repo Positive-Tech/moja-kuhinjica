@@ -12,19 +12,24 @@ export const setLoggedInUser = () => async (dispatch: any) => {
 export const userLogin =
     ({ inputData, onSuccess, onError }: any) =>
     async (dispatch: any) => {
+        dispatch({
+            type: ActionTypes.USER_LOGIN_IN_PROGRESS,
+        })
+
         try {
             const { data } = await UserService.login(inputData)
             localStorage.setItem('token', data.access_token)
 
             dispatch({
-                type: ActionTypes.USER_LOGIN,
-                payload: {
-                    token: data.access_token,
-                },
+                type: ActionTypes.USER_LOGIN_SUCCESS,
             })
             onSuccess()
         } catch (err) {
             console.log(err)
+            dispatch({
+                type: ActionTypes.USER_LOGIN_FAILED,
+                payload: err.response.data.message,
+            })
             onError(err.response.data.message)
         }
     }

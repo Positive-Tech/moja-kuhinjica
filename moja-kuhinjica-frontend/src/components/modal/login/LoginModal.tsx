@@ -8,9 +8,11 @@ import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
 import email from '../../../../public/static/assets/images/email.svg'
 import password from '../../../../public/static/assets/images/password.svg'
+import loadingIcon from 'public/static/assets/images/loading.png'
 import { Text } from '@/components/label/Text'
-import { useAppDispatch } from '@/utils/hooks'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogin } from '@/reduxStore/actions/userActions'
+import Image from 'next/image'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -28,6 +30,7 @@ export const LoginModal = ({
 }: ILoginModalProps): JSX.Element => {
     const dispatch = useAppDispatch()
     const [errorMessage, setErrorMessage] = useState<string>()
+    const isLoading = useAppSelector((state) => state.auth.inProgress)
     const {
         register,
         handleSubmit,
@@ -99,9 +102,13 @@ export const LoginModal = ({
                             openPasswordForgettingModal()
                         }}
                     />
-                    <button type="submit" className={styles.formButton}>
-                        Potvrdi
-                    </button>
+                    {isLoading ? (
+                        <Image src={loadingIcon} alt="" />
+                    ) : (
+                        <button type="submit" className={styles.formButton}>
+                            Potvrdi
+                        </button>
+                    )}
                 </form>
             </div>
         </Modal>

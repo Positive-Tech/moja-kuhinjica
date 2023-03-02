@@ -9,9 +9,9 @@ interface UserState {
         phoneNumber: string | null
         role: string | null
     } | null
-    token: string | null
+    inProgress: boolean
     isAuthorized: boolean
-    authErrorMessage: string | null
+    errorMessage: string
 }
 
 const initialState: UserState = {
@@ -22,9 +22,9 @@ const initialState: UserState = {
         phoneNumber: '',
         role: '',
     },
-    token: '',
+    inProgress: false,
     isAuthorized: false,
-    authErrorMessage: '',
+    errorMessage: '',
 }
 
 export const userReducer: Reducer<UserState> = (
@@ -37,12 +37,23 @@ export const userReducer: Reducer<UserState> = (
                 ...state,
                 user: action.payload,
             }
-        case ActionTypes.USER_LOGIN:
+        case ActionTypes.USER_LOGIN_SUCCESS:
             return {
                 ...state,
-                token: action.payload.token,
                 isAuthorized: true,
-                authErrorMessage: null,
+                inProgress: false,
+                errorMessage: null,
+            }
+        case ActionTypes.USER_LOGIN_FAILED:
+            return {
+                ...state,
+                inProgress: false,
+                errorMessage: action.payload,
+            }
+        case ActionTypes.USER_LOGIN_IN_PROGRESS:
+            return {
+                ...state,
+                inProgress: true,
             }
         case ActionTypes.USER_LOGOUT:
             return {
