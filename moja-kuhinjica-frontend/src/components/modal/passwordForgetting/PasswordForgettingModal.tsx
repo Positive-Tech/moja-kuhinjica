@@ -78,6 +78,10 @@ export const PasswordForgettingModal = ({
                         type="text"
                         validationSchema={{
                             required: 'email is required',
+                            pattern: {
+                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                message: 'invalid email value',
+                            },
                         }}
                         style={styles.passwordInput}
                     />
