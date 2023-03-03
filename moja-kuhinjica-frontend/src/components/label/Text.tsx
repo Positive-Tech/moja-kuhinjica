@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Label.module.scss'
 
 interface ITextProps {
-    content: string
+    content: string | undefined
     style: string
     handleClick?: () => void
 }

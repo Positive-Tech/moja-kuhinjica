@@ -83,4 +83,9 @@
 .errorLabel {
     font-family: Poppins;
     color: #c10016;
+    text-align: center;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
+    }
 }

@@ -82,6 +82,7 @@ const LoginPage = (): JSX.Element => {
                     <Text
                         content="Zaboravili ste šifru?"
                         style={styles.forgotPasswordLabel}
+                        handleClick={() => router.push('/forgottenPassword')}
                     />
                     <div className={styles.buttonWrapper}>
                         {isLoading ? (
