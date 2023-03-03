@@ -13,6 +13,7 @@ import styles from './LoginModal.module.scss'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 import loadingIcon from 'public/static/assets/images/loading.png'
+import { Oval, RotatingLines, ThreeDots } from 'react-loader-spinner'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -102,13 +103,26 @@ export const LoginModal = ({
                             openPasswordForgettingModal()
                         }}
                     />
-                    {isLoading ? (
-                        <Image src={loadingIcon} alt="" />
-                    ) : (
-                        <button type="submit" className={styles.formButton}>
-                            Potvrdi
-                        </button>
-                    )}
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button type="submit" className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
         </Modal>

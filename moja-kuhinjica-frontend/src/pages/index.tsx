@@ -12,7 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from 'src/components/mobileMenu'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { setLoggedInUser } from '@/reduxStore/actions/userActions'
+import { loadUser } from '@/reduxStore/actions/userActions'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 import { MOBILE_WIDTH } from 'src/constants/constants'
@@ -44,7 +44,7 @@ const Home = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isAuthorized) dispatch<any>(setLoggedInUser())
+        if (isAuthorized) dispatch<any>(loadUser())
     }, [isAuthorized])
 
     useEffect(() => {

@@ -32,7 +32,7 @@ export const userReducer: Reducer<UserState> = (
     action: any
 ) => {
     switch (action.type) {
-        case ActionTypes.SET_LOGGED_IN_USER:
+        case ActionTypes.LOAD_USER:
             return {
                 ...state,
                 user: action.payload,
@@ -50,7 +50,7 @@ export const userReducer: Reducer<UserState> = (
                 inProgress: false,
                 errorMessage: action.payload,
             }
-        case ActionTypes.USER_LOGIN_IN_PROGRESS:
+        case ActionTypes.USER_LOGIN_IN:
             return {
                 ...state,
                 inProgress: true,

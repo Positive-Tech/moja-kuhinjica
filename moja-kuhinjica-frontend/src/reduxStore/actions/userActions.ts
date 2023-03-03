@@ -1,10 +1,10 @@
 import UserService from '@/service/User.service'
 import { ActionTypes } from '../constants/actionTypes'
 
-export const setLoggedInUser = () => async (dispatch: any) => {
+export const loadUser = () => async (dispatch: any) => {
     const { data } = await UserService.getLoggedInUser()
     dispatch({
-        type: ActionTypes.SET_LOGGED_IN_USER,
+        type: ActionTypes.LOAD_USER,
         payload: data,
     })
 }
@@ -13,7 +13,7 @@ export const userLogin =
     ({ inputData, onSuccess, onError }: any) =>
     async (dispatch: any) => {
         dispatch({
-            type: ActionTypes.USER_LOGIN_IN_PROGRESS,
+            type: ActionTypes.USER_LOGIN_IN,
         })
 
         try {

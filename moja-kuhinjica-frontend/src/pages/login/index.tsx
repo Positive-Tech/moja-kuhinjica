@@ -12,6 +12,7 @@ import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 import loadingIcon from 'public/static/assets/images/loading.png'
+import { Oval } from 'react-loader-spinner'
 
 const LoginPage = (): JSX.Element => {
     const [errorMessage, setErrorMessage] = useState<string>()
@@ -82,11 +83,26 @@ const LoginPage = (): JSX.Element => {
                         content="Zaboravili ste šifru?"
                         style={styles.forgotPasswordLabel}
                     />
-                    {isLoading ? (
-                        <Image src={loadingIcon} alt="" />
-                    ) : (
-                        <button className={styles.formButton}>Potvrdi</button>
-                    )}
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
         </div>
