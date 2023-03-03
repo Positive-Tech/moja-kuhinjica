@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: aqua;
     gap: 10%;
 }
 
@@ -21,8 +22,19 @@
     font-size: 32px;
 }
 
-.confirmButton {
+.formButton {
+    width: 50%;
+    height: 50px;
+    background: #c10016;
+    border: 0;
+    color: white;
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: lighter;
     text-transform: uppercase;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 5%;
 }
 
 .buttonWrapper {
@@ -30,4 +42,35 @@
     justify-content: center;
     height: 30%;
     width: 60%;
+}
+
+.resetPassTitle {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.resetPassWrapper {
+    width: 80%;
+    height: 70%;
+}
+
+.formDiv {
+    width: 50%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+
+.formWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.passwordInput {
+    font-size: 16px;
 }
