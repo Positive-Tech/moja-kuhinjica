@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './MobileHeader.module.scss'
-import burgerMenuIcon from '../../../../public/static/assets/images/burgerMenuRed.svg'
-import profileIcon from '../../../../public/static/assets/images/profileHeader.svg'
+import burgerMenuIcon from 'public/static/assets/images/burgerMenuRed.svg'
+import profileIcon from 'public/static/assets/images/profileHeader.svg'
 interface IMobileHeaderProps {
     handleClick: () => void
     style?: string

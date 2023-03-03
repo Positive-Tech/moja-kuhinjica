@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
-import { Field, FieldValues, useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import React, { useState } from 'react'
-import styles from './ChangePasswordPage.module.scss'
-import passwordIcon from 'public/static/assets/images/password.svg'
+import UserService from '@/service/User.service'
 import { FormInput } from '@/components/input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '@/components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import UserService from '@/service/User.service'
+import styles from './ChangePasswordPage.module.scss'
+import passwordIcon from 'public/static/assets/images/password.svg'
 
 const ChangePasswordPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
@@ -50,12 +50,7 @@ const ChangePasswordPage = (): JSX.Element => {
 
     return (
         <div className={styles.container}>
-            {showMenu && (
-                <Menu
-                    closeMenu={() => setShowMenu(false)}
-                    loggedIn={localStorage.getItem('token') != null}
-                />
-            )}
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <MobileHeader handleClick={() => setShowMenu(true)} />
             <div className={styles.wrapper}>
                 <form

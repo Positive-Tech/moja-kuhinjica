@@ -1,54 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { userLogout } from '@/reduxStore/actions/userActions'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'
+import styles from './Header.module.scss'
 import logo from 'public/static/assets/images/logo-moja-klopica.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
 import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
-import styles from './Header.module.scss'
-import UserService from '@/service/User.service'
+
+const HEADER_TYPE = 'red'
 interface IHeaderProps {
     type: string
     selectedButton?: number
     openLoginModal?: (param: boolean) => void
-    loggedIn?: boolean
-    setLoggedIn?: (param: boolean) => void
 }
-interface LoggedInUser {
-    id: number
-    name: string
-    surname: string
-    phoneNumber: string
-    role: string
-}
+
 const Header = ({
     type,
     selectedButton,
     openLoginModal,
-    loggedIn,
-    setLoggedIn,
 }: IHeaderProps): JSX.Element => {
     const [active, setActive] = useState<number | undefined>(selectedButton)
     const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
-    const [user, setUser] = useState<LoggedInUser>()
     const router = useRouter()
-
-    useEffect(() => {
-        if (loggedIn) fetchLoggedInUser()
-    }, [loggedIn])
-
-    const fetchLoggedInUser = (): void => {
-        UserService.getLoggedInUser()
-            .then((res) => {
-                setUser(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
+    const dispatch = useAppDispatch()
+    const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
+    const user = useAppSelector((state) => state.auth.user)
 
     const handleClick = (buttonNumber: number, url: string): void => {
         setActive(buttonNumber)
@@ -64,7 +45,7 @@ const Header = ({
         url: string
     ): void => {
         setActive(buttonNumber)
-        if (loggedIn) {
+        if (isAuthorized) {
             router.push(url)
             return
         }
@@ -72,14 +53,17 @@ const Header = ({
     }
 
     const logout = (): void => {
-        localStorage.removeItem('token')
-        setLoggedIn?.(false)
+        dispatch(userLogout())
         setMenuIsOpen(false)
         router.push('/')
     }
 
     return (
-        <div className={type === 'red' ? styles.redWrapper : styles.wrapper}>
+        <div
+            className={
+                type === HEADER_TYPE ? styles.redWrapper : styles.wrapper
+            }
+        >
             <div className={styles.logoWrapper}>
                 <Image src={logo} alt="" className={styles.logoImage} />
             </div>
@@ -104,7 +88,7 @@ const Header = ({
                     content="O nama"
                     headerType={type}
                 />
-                {loggedIn && (
+                {isAuthorized && (
                     <div className={styles.profileIconWrapper}>
                         <Image
                             src={profileIcon}
@@ -113,7 +97,13 @@ const Header = ({
                             onClick={() => handleOpen()}
                         />
                         {menuIsOpen && (
-                            <div className={styles.dropdownMenu}>
+                            <div
+                                className={
+                                    type === HEADER_TYPE
+                                        ? styles.dropdownMenu
+                                        : styles.dropdownMenuHome
+                                }
+                            >
                                 <div className={styles.dropDownButtonWrapper}>
                                     <DropdownMenuButton
                                         content="Moje rezervacije"

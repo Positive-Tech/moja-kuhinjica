@@ -10,12 +10,12 @@ import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
-import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import cartIcon from '../../../public/static/assets/images/cart.svg'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
+import cartIcon from 'public/static/assets/images/cart.svg'
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
@@ -27,12 +27,10 @@ const MealReservation = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
-    const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
     useEffect(() => {
-        isLoggedIn()
-        setMenuIsPresent(true)
-        setCartIsEmpty(false)
+        setMenuIsPresent(false)
+        setCartIsEmpty(true)
     }, [])
 
     useEffect(() => {
@@ -48,9 +46,6 @@ const MealReservation = (): JSX.Element => {
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
-    const isLoggedIn = (): void => {
-        setLoggedIn(localStorage.getItem('token') != null ? true : false)
-    }
 
     return (
         <div className={styles.colDiv}>
@@ -58,12 +53,7 @@ const MealReservation = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header
-                    type="red"
-                    selectedButton={2}
-                    loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
-                />
+                <Header type="red" selectedButton={2} />
             )}
             <div
                 className={

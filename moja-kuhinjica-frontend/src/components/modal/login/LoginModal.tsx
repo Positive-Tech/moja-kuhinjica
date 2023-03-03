@@ -2,20 +2,21 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { userLogin } from '@/reduxStore/actions/userActions'
 import { FormInput } from '../../input/FormInput'
-import UserService from '@/service/User.service'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
+import { Text } from '@/components/label/Text'
 import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
-import email from '../../../../public/static/assets/images/email.svg'
-import password from '../../../../public/static/assets/images/password.svg'
-import { Text } from '@/components/label/Text'
+import email from 'public/static/assets/images/email.svg'
+import password from 'public/static/assets/images/password.svg'
+import { Oval } from 'react-loader-spinner'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
     closeModal: () => void
-    loggedIn: boolean
-    setLoggedIn: (param: boolean) => void
+    openPasswordForgettingModal: () => void
 }
 export interface RegistrationFormFields {
     email: string
@@ -24,10 +25,11 @@ export interface RegistrationFormFields {
 export const LoginModal = ({
     modalIsOpen,
     closeModal,
-    loggedIn,
-    setLoggedIn,
+    openPasswordForgettingModal,
 }: ILoginModalProps): JSX.Element => {
-    const [showError, setShowError] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
+    const [errorMessage, setErrorMessage] = useState<string>()
+    const isLoading = useAppSelector((state) => state.auth.inProgress)
     const {
         register,
         handleSubmit,
@@ -36,18 +38,18 @@ export const LoginModal = ({
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        setShowError(false)
-        UserService.login(inputData)
-            .then((res) => {
-                localStorage.setItem('token', res.data.access_token)
-                setLoggedIn(true)
-                closeModal()
-                reset()
+        dispatch<any>(
+            userLogin({
+                inputData,
+                onSuccess: () => {
+                    closeModal()
+                    reset()
+                },
+                onError: (message: string) => {
+                    setErrorMessage(message)
+                },
             })
-            .catch((err) => {
-                setShowError(true)
-                console.log(err)
-            })
+        )
     }
 
     return (
@@ -64,9 +66,7 @@ export const LoginModal = ({
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    {showError && (
-                        <ErrorLabel content="Email ili lozinka nisu ispravni. Pokušajte ponovo." />
-                    )}
+                    {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
                         errors={errors}
@@ -96,10 +96,31 @@ export const LoginModal = ({
                     <Text
                         content="Zaboravili ste šifru?"
                         style={styles.forgotPasswordLabel}
+                        handleClick={() => {
+                            closeModal()
+                            openPasswordForgettingModal()
+                        }}
                     />
-                    <button type="submit" className={styles.formButton}>
-                        Potvrdi
-                    </button>
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button type="submit" className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
         </Modal>

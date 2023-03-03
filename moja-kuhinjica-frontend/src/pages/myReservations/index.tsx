@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
-import styles from './MyReservationsPage.module.scss'
 import { ReservationItem } from '@/components/reservation/ReservationItem'
 import { Footer } from '@/components/footer/Footer'
 import Menu from '../../components/mobileMenu'
-import { MOBILE_WIDTH } from '@/constants/constants'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import { MOBILE_WIDTH } from '@/constants/constants'
+import styles from './MyReservationsPage.module.scss'
 
 const MyReservationsPage = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)

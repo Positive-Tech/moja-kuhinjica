@@ -1,6 +1,12 @@
 import type { AppProps } from 'next/app'
+import { Provider } from 'react-redux'
+import store from '../reduxStore/store'
 import '../styles/globals.scss'
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
-    return <Component {...pageProps} />
+    return (
+        <Provider store={store}>
+            <Component {...pageProps} />
+        </Provider>
+    )
 }

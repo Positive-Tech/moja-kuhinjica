@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { useForm, FieldValues } from 'react-hook-form'
+import UserService from '@/service/User.service'
 import { FormInput } from '@/components/input/FormInput'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
 import styles from './SignUpModal.module.scss'
 import { bgModal } from '@/constants/constants'
-import profile from '../../../../public/static/assets/images/profile.svg'
-import email from '../../../../public/static/assets/images/email.svg'
-import password from '../../../../public/static/assets/images/password.svg'
-import mobile from '../../../../public/static/assets/images/mobile.svg'
-import UserService from '@/service/User.service'
-import { ErrorLabel } from '@/components/label/ErrorLabel'
+import profile from 'public/static/assets/images/profile.svg'
+import email from 'public/static/assets/images/email.svg'
+import password from 'public/static/assets/images/password.svg'
+import mobile from 'public/static/assets/images/mobile.svg'
 
 interface ISignUpModalProps {
     modalIsOpen: boolean

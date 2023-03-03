@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { Text } from '../label/Text'
 import { AmountButton } from '../button/AmountButton'
 import styles from './CartItem.module.scss'
-import mealPic from '../../../public/static/assets/images/meal2.png'
-import bin from '../../../public/static/assets/images/bin.svg'
+import mealPic from 'public/static/assets/images/meal2.png'
+import bin from 'public/static/assets/images/bin.svg'
 
 interface ICartItemProps {
     item?: {

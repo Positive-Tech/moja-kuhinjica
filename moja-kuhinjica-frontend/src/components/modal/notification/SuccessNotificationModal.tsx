@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from 'react-modal'
 import Image from 'next/image'
-import styles from './SuccessNotificationModal.module.scss'
 import { bgModal } from '@/constants/constants'
-import success from '../../../../public/static/assets/images/success.svg'
-import successFilled from '../../../../public/static/assets/images/successFilled.svg'
+import styles from './SuccessNotificationModal.module.scss'
+import success from 'public/static/assets/images/success.svg'
+import successFilled from 'public/static/assets/images/successFilled.svg'
 
 interface ISignUpNotificationModalProps {
     modalIsOpen: boolean

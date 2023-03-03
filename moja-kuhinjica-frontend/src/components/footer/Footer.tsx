@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './Footer.module.scss'
-import logo from '../../../public/static/assets/images/logo-footer.svg'
-import circle from '../../../public/static/assets/images/c-circle.svg'
-import location from '../../../public/static/assets/images/locationFooter.svg'
-import earth from '../../../public/static/assets/images/earth.svg'
+import logo from 'public/static/assets/images/logo-footer.svg'
+import circle from 'public/static/assets/images/c-circle.svg'
+import location from 'public/static/assets/images/locationFooter.svg'
+import earth from 'public/static/assets/images/earth.svg'
 
 export const Footer = (): JSX.Element => {
     return (

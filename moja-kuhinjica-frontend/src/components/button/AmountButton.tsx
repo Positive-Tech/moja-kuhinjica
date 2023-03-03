@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import increment from 'public/static/assets/images/increment.svg'
+import decrement from 'public/static/assets/images/decrement.svg'
 import styles from './AmountButton.module.scss'
-import increment from '../../../public/static/assets/images/increment.svg'
-import decrement from '../../../public/static/assets/images/decrement.svg'
 
 interface IAmountButtonProps {
     style?: string

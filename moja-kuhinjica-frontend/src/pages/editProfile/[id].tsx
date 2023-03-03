@@ -1,23 +1,23 @@
 import React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
+import UserService from '@/service/User.service'
 import { Footer } from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import { FormInput } from '@/components/input/FormInput'
 import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
+import { PasswordChangeModal } from '@/components/modal/passwordChange/PasswordChangeModal'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import email from 'public/static/assets/images/email.svg'
 import profile from 'public/static/assets/images/profile.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import passwordIcon from 'public/static/assets/images/password.svg'
-import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './EditProfilePage.module.scss'
-import UserService from '@/service/User.service'
-import { useRouter } from 'next/router'
-import { ChangePasswordModal } from '@/components/modal/changePassword/ChangePasswordModal'
 
 interface User {
     id: number
@@ -98,12 +98,7 @@ const EditProfilePage = (): JSX.Element => {
     }
     return (
         <div className={styles.colDiv}>
-            {showMenu && (
-                <Menu
-                    closeMenu={() => setShowMenu(false)}
-                    loggedIn={localStorage.getItem('token') != null}
-                />
-            )}
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
 
             {isMobile ? (
                 <MobileHeader
@@ -232,7 +227,7 @@ const EditProfilePage = (): JSX.Element => {
                                 handleEditClick={() => setEditPhoneNumber(true)}
                             />
                             {showPasswordModal && (
-                                <ChangePasswordModal
+                                <PasswordChangeModal
                                     modalIsOpen={showPasswordModal}
                                     closeModal={() =>
                                         setShowPasswordModal(false)

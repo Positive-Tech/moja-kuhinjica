@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useForm, FieldValues } from 'react-hook-form'
+import { useAppDispatch, useAppSelector } from 'src/utils/hooks'
 import { useRouter } from 'next/router'
 import { FormInput } from '@/components/input/FormInput'
+import { ErrorLabel } from '@/components/label/ErrorLabel'
+import { Text } from '@/components/label/Text'
+import { userLogin } from '@/reduxStore/actions/userActions'
+import styles from './LoginPage.module.scss'
 import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
-
-import styles from './LoginPage.module.scss'
-import UserService from '@/service/User.service'
-import { ErrorLabel } from '@/components/label/ErrorLabel'
-import { Text } from '@/components/label/Text'
+import { Oval } from 'react-loader-spinner'
 
 const LoginPage = (): JSX.Element => {
-    const [showError, setShowError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>()
+    const isLoading = useAppSelector((state) => state.auth.inProgress)
+    const dispatch: any = useAppDispatch()
     const router = useRouter()
     const {
         register,
@@ -23,18 +26,20 @@ const LoginPage = (): JSX.Element => {
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        setShowError(false)
-        UserService.login(inputData)
-            .then((res) => {
-                localStorage.setItem('token', res.data.access_token)
-                router.push('/')
-                reset()
+        dispatch(
+            userLogin({
+                inputData,
+                onSuccess: () => {
+                    router.push('/')
+                    reset()
+                },
+                onError: (message: string) => {
+                    setErrorMessage(message)
+                },
             })
-            .catch((err) => {
-                setShowError(true)
-                console.log(err)
-            })
+        )
     }
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -44,9 +49,7 @@ const LoginPage = (): JSX.Element => {
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className={styles.formTitle}>Ulogujte se</label>
-                    {showError && (
-                        <ErrorLabel content="Email ili lozinka nisu ispravni. Pokušajte ponovo." />
-                    )}
+                    {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
                         errors={errors}
@@ -72,18 +75,34 @@ const LoginPage = (): JSX.Element => {
                         type="password"
                         validationSchema={{
                             required: 'password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
-                            },
                         }}
                         style={styles.input}
                     />
                     <Text
                         content="Zaboravili ste šifru?"
                         style={styles.forgotPasswordLabel}
+                        handleClick={() => router.push('/forgottenPassword')}
                     />
-                    <button className={styles.formButton}>Potvrdi</button>
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
         </div>

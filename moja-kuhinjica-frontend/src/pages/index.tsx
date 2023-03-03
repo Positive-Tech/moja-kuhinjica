@@ -11,10 +11,17 @@ import { SignUpModal } from '@/components/modal/signUp/SignUpModal'
 import { SuccessNotificationModal } from '@/components/modal/notification/SuccessNotificationModal'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from 'src/components/mobileMenu'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { loadUser } from '@/reduxStore/actions/userActions'
+import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
+import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
+import { MOBILE_WIDTH } from 'src/constants/constants'
+import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
-import styles from 'src/styles/Home.module.scss'
-import { MOBILE_WIDTH } from 'src/constants/constants'
+
+const HEADER_TYPE = 'main'
+const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
     const [active, setActive] = useState<number>(2)
@@ -22,16 +29,23 @@ const Home = (): JSX.Element => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [showPasswordForgettingModal, setShowPasswordForgettingModal] =
+        useState<boolean>(false)
+    const [showPasswordResettingModal, setShowPasswordResettingModal] =
+        useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
-    const [loggedIn, setLoggedIn] = useState<boolean>(false)
     const [userEmail, setUserEmail] = useState<string>('')
+    const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
+
+    const dispatch = useAppDispatch()
+    const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        isLoggedIn()
-    }, [])
+        if (isAuthorized) dispatch<any>(loadUser())
+    }, [isAuthorized])
 
     useEffect(() => {
         handleWindowResize()
@@ -49,9 +63,6 @@ const Home = (): JSX.Element => {
 
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
-    }
-    const isLoggedIn = (): void => {
-        setLoggedIn(localStorage.getItem('token') != null)
     }
 
     const handleSignUpClick = (): void => {
@@ -71,19 +82,11 @@ const Home = (): JSX.Element => {
 
     return (
         <div className={styles.colDiv}>
-            {showMenu && (
-                <Menu
-                    closeMenu={() => setShowMenu(false)}
-                    loggedIn={loggedIn}
-                    setLoggedIn={setLoggedIn}
-                />
-            )}
+            {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
-                type="main"
+                type={HEADER_TYPE}
                 selectedButton={1}
                 openLoginModal={setShowLoginModal}
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
             />
             <div className={styles.wrapper}>
                 <div className={styles.container}>
@@ -97,7 +100,7 @@ const Home = (): JSX.Element => {
                     <label className={styles.content}>
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
-                    {!loggedIn && (
+                    {!isAuthorized && (
                         <div className={styles.buttonWrapper}>
                             <HomePageButton
                                 content="Registrujte se"
@@ -190,8 +193,9 @@ const Home = (): JSX.Element => {
             <LoginModal
                 modalIsOpen={showLoginModal}
                 closeModal={() => setShowLoginModal(false)}
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
+                openPasswordForgettingModal={() =>
+                    setShowPasswordForgettingModal(true)
+                }
             />
             <SignUpModal
                 modalIsOpen={showSignUpModal}
@@ -201,10 +205,23 @@ const Home = (): JSX.Element => {
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
-                type="registration"
+                type={NOTIFICATION_MODAL_TYPE}
                 title=""
                 buttonText="zatvori"
                 email={userEmail}
+            />
+            <PasswordForgettingModal
+                modalIsOpen={showPasswordForgettingModal}
+                closeModal={() => setShowPasswordForgettingModal(false)}
+                openNotificationModal={() =>
+                    setShowPasswordResettingModal(true)
+                }
+                setMessage={setResetPasswordMessage}
+            />
+            <PasswordResettingModal
+                modalIsOpen={showPasswordResettingModal}
+                closeModal={() => setShowPasswordResettingModal(false)}
+                infoContent={resetPasswordMessage}
             />
         </div>
     )

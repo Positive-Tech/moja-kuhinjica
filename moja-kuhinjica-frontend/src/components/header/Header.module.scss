@@ -93,3 +93,8 @@
         width: 180px;
     }
 }
+
+.dropdownMenuHome {
+    @extend .dropdownMenu;
+    background-color: rgba(30, 30, 30, 0.3);
+}
