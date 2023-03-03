@@ -11,7 +11,6 @@ import styles from './LoginPage.module.scss'
 import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
-import loadingIcon from 'public/static/assets/images/loading.png'
 import { Oval } from 'react-loader-spinner'
 
 const LoginPage = (): JSX.Element => {

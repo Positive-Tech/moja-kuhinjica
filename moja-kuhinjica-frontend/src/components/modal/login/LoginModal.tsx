@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
@@ -12,8 +11,7 @@ import { bgModal } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
-import loadingIcon from 'public/static/assets/images/loading.png'
-import { Oval, RotatingLines, ThreeDots } from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
