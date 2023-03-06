@@ -2,15 +2,18 @@ import React, { useState } from 'react'
 import styles from '../EmailPages.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Title } from '@/components/label/Title'
-import { useRouter } from 'next/router'
 import { FormInput } from '@/components/input/FormInput'
 import { FieldValues, useForm } from 'react-hook-form'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
+import { useRouter } from 'next/router'
+import UserService from '@/service/User.service'
 
 const ResetPasswordPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const router = useRouter()
+    const { token } = router.query
+
     const {
         register,
         handleSubmit,
@@ -19,11 +22,28 @@ const ResetPasswordPage = (): JSX.Element => {
     } = useForm()
 
     const validate = (data: FieldValues): void => {
-        if (data.newPassword === data.confirmPassword) {
+        if (data.password === data.confirmPassword) {
+            delete data.confirmPassword
+            data.token = token
+            resetPassword(data)
+            reset()
         } else {
             setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
             setShowError(true)
         }
+    }
+
+    const resetPassword = (data: FieldValues): void => {
+        setShowError(false)
+        UserService.resetPassword(data)
+            .then((res) => {
+                router.push('/email/verification/reset')
+            })
+            .catch((err) => {
+                console.log(err)
+                setErrorMessage(err.response.data.message)
+                setShowError(true)
+            })
     }
 
     return (
@@ -42,7 +62,7 @@ const ResetPasswordPage = (): JSX.Element => {
                         <FormInput
                             register={register}
                             errors={errors}
-                            name="newPassword"
+                            name="password"
                             src={passwordIcon}
                             placeholder="Unesi novu šifru"
                             type="password"

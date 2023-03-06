@@ -11,7 +11,7 @@ const VerificationPage = (): JSX.Element => {
     const { type } = router.query
     return (
         <div className={styles.container}>
-            {(type === 'reset' || type == 'registration') && (
+            {(type === 'reset' || type === 'registration') && (
                 <div className={styles.wrapper}>
                     <Image src={successIcon} alt="" />
                     <Title

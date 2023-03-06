@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints.module.scss';
+
 .container {
     height: 100vh;
     width: 100vw;
@@ -13,7 +15,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aqua;
     gap: 10%;
 }
 
@@ -35,6 +36,10 @@
     border-radius: 15px;
     cursor: pointer;
     margin-top: 5%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 20px;
+    }
 }
 
 .buttonWrapper {
@@ -47,11 +52,24 @@
 .resetPassTitle {
     font-size: 32px;
     font-weight: 500;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 28px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 26px;
+    }
 }
 
 .resetPassWrapper {
     width: 80%;
     height: 70%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .formDiv {
@@ -62,6 +80,19 @@
     align-items: center;
     justify-content: center;
     gap: 10%;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 90%;
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 80%;
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 80%;
+        width: 100%;
+    }
 }
 
 .formWrapper {
@@ -73,4 +104,7 @@
 
 .passwordInput {
     font-size: 16px;
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 14px;
+    }
 }

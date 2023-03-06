@@ -116,7 +116,11 @@ const EditProfilePage = (): JSX.Element => {
                             className={styles.formDiv}
                             onSubmit={handleSubmit((data) => editUser(data))}
                         >
-                            <Image src={profileIcon} alt="" />
+                            <Image
+                                src={profileIcon}
+                                alt=""
+                                className={styles.profileIcon}
+                            />
                             <div className={styles.changePasswordWrapper}>
                                 <Image
                                     src={passwordIcon}

@@ -83,7 +83,7 @@ export const FormInput = ({
                 {...rest}
                 ref={(e) => {
                     ref(e)
-                    inputRef.current = e // we can still assign to ref
+                    inputRef.current = e
                 }}
                 onFocus={(e) => {
                     if (type === 'number') {

@@ -33,4 +33,9 @@ export default class UserService extends Component {
             params: { email: data.email },
         })
     }
+
+    public static async resetPassword(data: FieldValues): Promise<any> {
+        console.log(data)
+        return await axiosInstance.post('/auth/password/reset', data)
+    }
 }
