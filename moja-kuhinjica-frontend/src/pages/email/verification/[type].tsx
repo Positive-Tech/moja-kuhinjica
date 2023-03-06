@@ -13,7 +13,7 @@ const VerificationPage = (): JSX.Element => {
         <div className={styles.container}>
             {(type === 'reset' || type === 'registration') && (
                 <div className={styles.wrapper}>
-                    <Image src={successIcon} alt="" />
+                    <Image src={successIcon} alt="" className={styles.icon} />
                     <Title
                         content={
                             type === 'registration'
