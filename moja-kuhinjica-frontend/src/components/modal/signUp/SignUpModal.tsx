@@ -83,7 +83,7 @@ export const SignUpModal = ({
                             validationSchema={{
                                 required: 'Ime je obavezno.',
                                 pattern: {
-                                    value: /[A-Za-z]/,
+                                    value: /^[A-Za-z]+$/,
                                     message: 'Ime može da sadrži samo slova.',
                                 },
                             }}
@@ -98,7 +98,7 @@ export const SignUpModal = ({
                             validationSchema={{
                                 required: 'Prezime je obavezno.',
                                 pattern: {
-                                    value: /[A-Za-z]/,
+                                    value: /^[A-Za-z]+$/,
                                     message:
                                         'Prezime može da sadrži samo slova.',
                                 },

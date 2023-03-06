@@ -35,6 +35,8 @@
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 26px;
+        margin-top: 10%;
+        margin-bottom: 0;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 18px;
@@ -76,9 +78,12 @@
     align-items: center;
     gap: 3%;
     width: 80%;
-    height: 100%;
+    height: 95%;
     @media only screen and (max-width: $breakpoint-large) {
         height: 90%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 100%;
     }
 }
 
@@ -103,17 +108,18 @@
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 22px;
         width: 35%;
-        height: 7%;
+        height: 10%;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 20px;
         width: 40%;
-        height: 8%;
+        height: 10%;
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 18px;
         width: 40%;
-        height: 10%;
+        height: 20%;
+        margin-top: 0;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 16px;
@@ -133,6 +139,9 @@
     }
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 18px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 16px;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 14px;
@@ -188,7 +197,7 @@
         font-size: 18px;
     }
     @media only screen and (max-width: $breakpoint-large) {
-        font-size: 16px;
+        font-size: 14px;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 14px;
@@ -200,6 +209,25 @@
 }
 .profileIcon {
     @media only screen and (max-width: $breakpoint-large) {
-        height: 15%;
+        height: 40%;
     }
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 5%;
+}
+
+.changePasswordContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 5%;
+    height: 20%;
 }
