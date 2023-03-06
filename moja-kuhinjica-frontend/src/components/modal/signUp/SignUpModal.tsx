@@ -72,100 +72,103 @@ export const SignUpModal = ({
                 >
                     <label className={styles.formTitle}>Registrujte se</label>
                     {showError && <ErrorLabel content={errorMessage} />}
-                    <FormInput
-                        register={register}
-                        errors={errors}
-                        name="name"
-                        src={profile}
-                        placeholder="Ime"
-                        type="text"
-                        validationSchema={{
-                            required: 'name is required',
-                            pattern: {
-                                value: /[A-Za-z]/,
-                                message: 'invalid name value',
-                            },
-                        }}
-                    />
-                    <FormInput
-                        register={register}
-                        errors={errors}
-                        name="surname"
-                        src={profile}
-                        placeholder="Prezime"
-                        type="text"
-                        validationSchema={{
-                            required: 'surname is required',
-                            pattern: {
-                                value: /[A-Za-z]/,
-                                message: 'invalid surname value',
-                            },
-                        }}
-                    />
-                    <FormInput
-                        register={register}
-                        errors={errors}
-                        name="email"
-                        src={email}
-                        placeholder="Email"
-                        type="text"
-                        validationSchema={{
-                            required: 'email is required',
-                            pattern: {
-                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'invalid email value',
-                            },
-                        }}
-                    />
-                    <FormInput
-                        register={register}
-                        errors={errors}
-                        name="password"
-                        src={password}
-                        placeholder="Šifra"
-                        type="password"
-                        validationSchema={{
-                            required: 'password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
-                            },
-                        }}
-                    />
-                    <FormInput
-                        register={register}
-                        errors={errors}
-                        name="confirmPassword"
-                        src={password}
-                        placeholder="Potvrdi šifru"
-                        type="password"
-                        validationSchema={{
-                            required: 'confirmed password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid confirmed password value',
-                            },
-                        }}
-                    />
-                    <FormInput
-                        register={register}
-                        errors={errors}
-                        name="phoneNumber"
-                        src={mobile}
-                        placeholder=""
-                        type="number"
-                        validationSchema={{
-                            required: 'telephone number is required',
-                            pattern: {
-                                value: /^[0-9]{6,}$/,
-                                message: 'invalid telephone number value',
-                            },
-                        }}
-                        isPhoneNumber={true}
-                    />
-                    <button type="submit" className={styles.formButton}>
-                        Potvrdi
-                    </button>
+                    <div className={styles.inputWrapper}>
+                        <FormInput
+                            register={register}
+                            errors={errors}
+                            name="name"
+                            src={profile}
+                            placeholder="Ime"
+                            type="text"
+                            validationSchema={{
+                                required: 'Ime je obavezno.',
+                                pattern: {
+                                    value: /^[A-Za-z]+$/,
+                                    message: 'Ime može da sadrži samo slova.',
+                                },
+                            }}
+                        />
+                        <FormInput
+                            register={register}
+                            errors={errors}
+                            name="surname"
+                            src={profile}
+                            placeholder="Prezime"
+                            type="text"
+                            validationSchema={{
+                                required: 'Prezime je obavezno.',
+                                pattern: {
+                                    value: /^[A-Za-z]+$/,
+                                    message:
+                                        'Prezime može da sadrži samo slova.',
+                                },
+                            }}
+                        />
+                        <FormInput
+                            register={register}
+                            errors={errors}
+                            name="email"
+                            src={email}
+                            placeholder="Email"
+                            type="text"
+                            validationSchema={{
+                                required: 'Email adresa je obavezna.',
+                                pattern: {
+                                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                    message: 'Pogrešan format za email adresu.',
+                                },
+                            }}
+                        />
+                        <FormInput
+                            register={register}
+                            errors={errors}
+                            name="password"
+                            src={password}
+                            placeholder="Šifra"
+                            type="password"
+                            validationSchema={{
+                                required: 'Šifra je obavezna.',
+                                pattern: {
+                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                    message:
+                                        'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
+                                },
+                            }}
+                        />
+                        <FormInput
+                            register={register}
+                            errors={errors}
+                            name="confirmPassword"
+                            src={password}
+                            placeholder="Potvrdi šifru"
+                            type="password"
+                            validationSchema={{
+                                required: 'Ponovljena šifra je obavezna.',
+                            }}
+                        />
+                        <FormInput
+                            register={register}
+                            errors={errors}
+                            name="phoneNumber"
+                            src={mobile}
+                            placeholder=""
+                            type="number"
+                            validationSchema={{
+                                required: 'Broj telefona je obavezan.',
+                                pattern: {
+                                    value: /^[0-9]{6,}$/,
+                                    message:
+                                        'Broj telefona sadrži minimalno 6 brojeva.',
+                                },
+                            }}
+                            isPhoneNumber={true}
+                        />
+                    </div>
+                    <div className={styles.buttonWrapper}>
+                        <button type="submit" className={styles.formButton}>
+                            Potvrdi
+                        </button>
+                    </div>
                 </form>
             </div>
         </Modal>

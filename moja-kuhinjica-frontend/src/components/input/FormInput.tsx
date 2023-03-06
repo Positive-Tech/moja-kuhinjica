@@ -5,6 +5,7 @@ import styles from './FormInput.module.scss'
 import errorIcon from 'public/static/assets/images/error.svg'
 import hidePassword from 'public/static/assets/images/hidePassword.svg'
 import editIcon from 'public/static/assets/images/editIcon.svg'
+import { ErrorLabel } from '../label/ErrorLabel'
 interface IFormInputProps {
     src: string
     placeholder: string
@@ -58,77 +59,85 @@ export const FormInput = ({
     }
 
     return (
-        <div className={styles.wrapper}>
-            <Image src={src} className={styles.icon} alt="" />
-            {isPhoneNumber && (
-                <label className={styles.numberFormat}>+381</label>
-            )}
-            <input
-                className={
-                    invalidInput
-                        ? `${
-                              isPhoneNumber
-                                  ? styles.phoneNumberInvalidInput
-                                  : styles.invalidInput
-                          } ${style}`
-                        : `${
-                              isPhoneNumber
-                                  ? styles.phoneNumberInput
-                                  : styles.input
-                          } ${style}`
-                }
-                placeholder={placeholder}
-                type={inputType}
-                defaultValue={defaultValue}
-                {...rest}
-                ref={(e) => {
-                    ref(e)
-                    inputRef.current = e // we can still assign to ref
-                }}
-                onFocus={(e) => {
-                    if (type === 'number') {
-                        e.currentTarget.type = 'text'
-                        e.currentTarget.setSelectionRange(
-                            e.currentTarget.value.length,
-                            e.currentTarget.value.length
-                        )
-                        e.currentTarget.type = 'number'
-                    } else {
-                        e.currentTarget.setSelectionRange(
-                            e.currentTarget.value.length,
-                            e.currentTarget.value.length
-                        )
+        <>
+            <div className={styles.wrapper}>
+                <Image src={src} className={styles.icon} alt="" />
+                {isPhoneNumber && (
+                    <label className={styles.numberFormat}>+381</label>
+                )}
+                <input
+                    className={
+                        invalidInput
+                            ? `${
+                                  isPhoneNumber
+                                      ? styles.phoneNumberInvalidInput
+                                      : styles.invalidInput
+                              } ${style}`
+                            : `${
+                                  isPhoneNumber
+                                      ? styles.phoneNumberInput
+                                      : styles.input
+                              } ${style}`
                     }
-                }}
-                onBlur={() => handleOnBlur?.()}
-            ></input>
+                    placeholder={placeholder}
+                    type={inputType}
+                    defaultValue={defaultValue}
+                    {...rest}
+                    ref={(e) => {
+                        ref(e)
+                        inputRef.current = e
+                    }}
+                    onFocus={(e) => {
+                        if (type === 'number') {
+                            e.currentTarget.type = 'text'
+                            e.currentTarget.setSelectionRange(
+                                e.currentTarget.value.length,
+                                e.currentTarget.value.length
+                            )
+                            e.currentTarget.type = 'number'
+                        } else {
+                            e.currentTarget.setSelectionRange(
+                                e.currentTarget.value.length,
+                                e.currentTarget.value.length
+                            )
+                        }
+                    }}
+                    onBlur={() => handleOnBlur?.()}
+                ></input>
+                {invalidInput && (
+                    <Image
+                        src={errorIcon}
+                        alt=""
+                        className={styles.sideErrorIcon}
+                    />
+                )}
+                {isEditable && !invalidInput && (
+                    <Image
+                        src={editIcon}
+                        alt=""
+                        className={styles.sideEditIcon}
+                        onClick={() => handleClick()}
+                    />
+                )}
+                {type === 'password' && !invalidInput && (
+                    <Image
+                        src={hidePassword}
+                        alt=""
+                        className={styles.sideEditIcon}
+                        onClick={() =>
+                            setInputType(
+                                inputType === 'password' ? 'text' : 'password'
+                            )
+                        }
+                    />
+                )}
+            </div>
             {invalidInput && (
-                <Image
-                    src={errorIcon}
-                    alt=""
-                    className={styles.sideErrorIcon}
+                <ErrorLabel
+                    content={errors[name]?.message?.toString()}
+                    style={styles.errorLabel}
                 />
             )}
-            {isEditable && !invalidInput && (
-                <Image
-                    src={editIcon}
-                    alt=""
-                    className={styles.sideEditIcon}
-                    onClick={() => handleClick()}
-                />
-            )}
-            {type === 'password' && !invalidInput && (
-                <Image
-                    src={hidePassword}
-                    alt=""
-                    className={styles.sideEditIcon}
-                    onClick={() =>
-                        setInputType(
-                            inputType === 'password' ? 'text' : 'password'
-                        )
-                    }
-                />
-            )}
-        </div>
+        </>
     )
 }

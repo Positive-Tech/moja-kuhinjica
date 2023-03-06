@@ -87,7 +87,11 @@ export const PasswordChangeModal = ({
                         placeholder="Nova šifra"
                         type="password"
                         validationSchema={{
-                            required: 'pass is required',
+                            required: 'password is required',
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                message: 'invalid password value',
+                            },
                         }}
                         style={styles.passwordInput}
                     />

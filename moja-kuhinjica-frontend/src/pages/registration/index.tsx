@@ -75,10 +75,10 @@ const RegistrationPage = (): JSX.Element => {
                             placeholder="Ime"
                             type="text"
                             validationSchema={{
-                                required: 'name is required',
+                                required: 'Ime je obavezno.',
                                 pattern: {
-                                    value: /[A-Za-z]/,
-                                    message: 'invalid name value',
+                                    value: /^[A-Za-z]+$/,
+                                    message: 'Ime može da sadrži samo slova.',
                                 },
                             }}
                             style={styles.input}
@@ -91,10 +91,11 @@ const RegistrationPage = (): JSX.Element => {
                             placeholder="Prezime"
                             type="text"
                             validationSchema={{
-                                required: 'surname is required',
+                                required: 'Prezime je obavezno.',
                                 pattern: {
-                                    value: /[A-Za-z]/,
-                                    message: 'invalid surname value',
+                                    value: /^[A-Za-z]+$/,
+                                    message:
+                                        'Prezime može da sadrži samo slova.',
                                 },
                             }}
                             style={styles.input}
@@ -107,10 +108,10 @@ const RegistrationPage = (): JSX.Element => {
                             placeholder="Email"
                             type="text"
                             validationSchema={{
-                                required: 'email is required',
+                                required: 'Email adresa je obavezna.',
                                 pattern: {
                                     value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                    message: 'invalid email value',
+                                    message: 'Pogrešan format za email adresu.',
                                 },
                             }}
                             style={styles.input}
@@ -123,10 +124,11 @@ const RegistrationPage = (): JSX.Element => {
                             placeholder="Šifra"
                             type="password"
                             validationSchema={{
-                                required: 'password is required',
+                                required: 'Šifra je obavezna.',
                                 pattern: {
                                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                    message: 'invalid password value',
+                                    message:
+                                        'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                                 },
                             }}
                             style={styles.input}
@@ -139,11 +141,7 @@ const RegistrationPage = (): JSX.Element => {
                             placeholder="Potvrdi šifru"
                             type="password"
                             validationSchema={{
-                                required: 'confirmed password is required',
-                                pattern: {
-                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                    message: 'invalid confirmed password value',
-                                },
+                                required: 'Ponovljena šifra je obavezna.',
                             }}
                             style={styles.input}
                         />
@@ -155,10 +153,11 @@ const RegistrationPage = (): JSX.Element => {
                             placeholder=""
                             type="number"
                             validationSchema={{
-                                required: 'telephone number is required',
+                                required: 'Broj telefona je obavezan.',
                                 pattern: {
                                     value: /^[0-9]{6,}$/,
-                                    message: 'invalid telephone number value',
+                                    message:
+                                        'Broj telefona sadrži minimalno 6 brojeva.',
                                 },
                             }}
                             style={styles.input}

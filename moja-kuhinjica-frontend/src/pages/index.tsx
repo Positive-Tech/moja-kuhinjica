@@ -217,11 +217,13 @@ const Home = (): JSX.Element => {
                     setShowPasswordResettingModal(true)
                 }
                 setMessage={setResetPasswordMessage}
+                setUserEmail={setUserEmail}
             />
             <PasswordResettingModal
                 modalIsOpen={showPasswordResettingModal}
                 closeModal={() => setShowPasswordResettingModal(false)}
                 infoContent={resetPasswordMessage}
+                email={userEmail}
             />
         </div>
     )

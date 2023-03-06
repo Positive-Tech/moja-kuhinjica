@@ -14,12 +14,14 @@ interface IPasswordForgettingModalProps {
     closeModal: () => void
     openNotificationModal: () => void
     setMessage: (param: string) => void
+    setUserEmail: (param: string) => void
 }
 export const PasswordForgettingModal = ({
     modalIsOpen,
     closeModal,
     openNotificationModal,
     setMessage,
+    setUserEmail,
 }: IPasswordForgettingModalProps): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
@@ -33,8 +35,8 @@ export const PasswordForgettingModal = ({
     const resetPassword = (data: FieldValues): void => {
         UserService.forgotPassword(data)
             .then((res) => {
-                // notification
                 setMessage(res.data)
+                setUserEmail(data.email)
                 reset()
                 closeModal()
                 openNotificationModal()

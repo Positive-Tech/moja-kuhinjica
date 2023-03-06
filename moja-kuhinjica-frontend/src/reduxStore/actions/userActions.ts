@@ -13,7 +13,7 @@ export const userLogin =
     ({ inputData, onSuccess, onError }: any) =>
     async (dispatch: any) => {
         dispatch({
-            type: ActionTypes.USER_LOGIN_IN,
+            type: ActionTypes.USER_LOGIN,
         })
 
         try {

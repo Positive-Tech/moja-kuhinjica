@@ -1,0 +1,124 @@
+@import '../../styles/breakpoints.module.scss';
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    height: 50%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 70%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+        height: 60%;
+    }
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 32px;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 30px;
+    }
+}
+
+.formButton {
+    width: 50%;
+    height: 50px;
+    background: #c10016;
+    border: 0;
+    color: white;
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 5%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 20px;
+    }
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    width: 60%;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 20%;
+    }
+}
+
+.resetPassTitle {
+    font-size: 32px;
+    font-weight: 500;
+
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 28px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 26px;
+    }
+}
+
+.resetPassWrapper {
+    width: 80%;
+    height: 70%;
+
+    @media only screen and (max-width: $breakpoint-medium) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.formDiv {
+    width: 50%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 90%;
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 80%;
+        width: 60%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 80%;
+        width: 100%;
+    }
+}
+
+.formWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
