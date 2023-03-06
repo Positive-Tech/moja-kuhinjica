@@ -67,10 +67,11 @@ const ResetPasswordPage = (): JSX.Element => {
                             placeholder="Unesi novu šifru"
                             type="password"
                             validationSchema={{
-                                required: 'password is required',
+                                required: 'Šifra je obavezna.',
                                 pattern: {
                                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                    message: 'invalid password value',
+                                    message:
+                                        'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                                 },
                             }}
                             style={styles.passwordInput}
@@ -83,7 +84,7 @@ const ResetPasswordPage = (): JSX.Element => {
                             placeholder="Potvrdi novu šifru"
                             type="password"
                             validationSchema={{
-                                required: 'pass is required',
+                                required: 'Šifra je obavezna.',
                             }}
                             style={styles.passwordInput}
                         />
