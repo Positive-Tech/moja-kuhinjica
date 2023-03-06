@@ -50,7 +50,7 @@ export const userReducer: Reducer<UserState> = (
                 inProgress: false,
                 errorMessage: action.payload,
             }
-        case ActionTypes.USER_LOGIN_IN:
+        case ActionTypes.USER_LOGIN:
             return {
                 ...state,
                 inProgress: true,
@@ -63,6 +63,7 @@ export const userReducer: Reducer<UserState> = (
                 isAuthorized: false,
                 authErrorMessage: null,
             }
+
         default:
             return state
     }
