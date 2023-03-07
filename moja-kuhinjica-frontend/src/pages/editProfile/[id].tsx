@@ -18,6 +18,7 @@ import mobile from 'public/static/assets/images/mobile.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import styles from './EditProfilePage.module.scss'
+import { Oval } from 'react-loader-spinner'
 
 interface User {
     id: number
@@ -35,6 +36,7 @@ const emptyUser = {
 }
 const EditProfilePage = (): JSX.Element => {
     const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [editName, setEditName] = useState<boolean>(false)
@@ -85,14 +87,17 @@ const EditProfilePage = (): JSX.Element => {
     }
 
     const editUser = (data: FieldValues): void => {
+        setIsLoading(true)
         delete data.email
         data.phoneNumber = `+381${data.phoneNumber}`
         if (id) data.id = +id
         UserService.editUserProfile(data)
             .then((res) => {
                 // alert('successfully edited')
+                setIsLoading(false)
             })
             .catch((err) => {
+                setIsLoading(false)
                 console.log(err)
             })
     }
@@ -239,9 +244,29 @@ const EditProfilePage = (): JSX.Element => {
                                     style={styles.emailInput}
                                     defaultValue={user?.email}
                                 />
-                                <button className={styles.formButton}>
-                                    Potvrdi
-                                </button>
+                                <div className={styles.buttonWrapper}>
+                                    {isLoading ? (
+                                        <Oval
+                                            height={40}
+                                            width={40}
+                                            color="#c10016"
+                                            wrapperStyle={{}}
+                                            wrapperClass={styles.spinner}
+                                            visible={true}
+                                            ariaLabel="oval-loading"
+                                            secondaryColor="#c10016"
+                                            strokeWidth={4}
+                                            strokeWidthSecondary={4}
+                                        />
+                                    ) : (
+                                        <button
+                                            type="submit"
+                                            className={styles.formButton}
+                                        >
+                                            Potvrdi
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                             {showPasswordModal && (
                                 <PasswordChangeModal

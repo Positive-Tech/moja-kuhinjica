@@ -75,10 +75,10 @@ export const LoginModal = ({
                         placeholder="Email"
                         type="text"
                         validationSchema={{
-                            required: 'email is required',
+                            required: 'Email je obavezan.',
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'invalid email value',
+                                message: 'Pogrešan format email adrese.',
                             },
                         }}
                     />
@@ -90,7 +90,7 @@ export const LoginModal = ({
                         placeholder="Šifra"
                         type="password"
                         validationSchema={{
-                            required: 'pass is required',
+                            required: 'Šifra je obavezna.',
                         }}
                     />
                     <Text

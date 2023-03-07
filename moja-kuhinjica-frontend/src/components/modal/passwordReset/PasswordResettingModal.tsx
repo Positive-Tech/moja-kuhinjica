@@ -4,6 +4,7 @@ import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
 import styles from './PasswordResettingModal.module.scss'
 import UserService from '@/service/User.service'
+import { Oval } from 'react-loader-spinner'
 
 interface IPasswordResettingModalProps {
     modalIsOpen: boolean
@@ -22,12 +23,12 @@ export const PasswordResettingModal = ({
         setIsLoading(true)
         UserService.forgotPassword({ email: email })
             .then((res) => {
-                console.log(res)
+                setIsLoading(false)
             })
             .catch((err) => {
+                setIsLoading(false)
                 console.log(err)
             })
-        setIsLoading(false)
     }
 
     return (
@@ -56,6 +57,20 @@ export const PasswordResettingModal = ({
                                 handleClick={() => sendEmail()}
                             />
                         </div>
+                    )}
+                    {isLoading && (
+                        <Oval
+                            height={40}
+                            width={40}
+                            color="#c10016"
+                            wrapperStyle={{}}
+                            wrapperClass={styles.spinner}
+                            visible={true}
+                            ariaLabel="oval-loading"
+                            secondaryColor="#c10016"
+                            strokeWidth={4}
+                            strokeWidthSecondary={4}
+                        />
                     )}
                 </div>
             </div>

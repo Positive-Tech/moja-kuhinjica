@@ -13,9 +13,11 @@ import password from 'public/static/assets/images/password.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
 import successFilled from 'public/static/assets/images/successFilled.svg'
 import success from 'public/static/assets/images/success.svg'
+import { Oval } from 'react-loader-spinner'
 
 const RegistrationPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [userEmail, setUserEmail] = useState<string>('')
@@ -28,15 +30,18 @@ const RegistrationPage = (): JSX.Element => {
     } = useForm()
 
     const signIn = (inputData: FieldValues): void => {
+        setIsLoading(true)
         UserService.signIn(inputData)
             .then((res) => {
                 setUserEmail(inputData.email)
                 setShowNotification(true)
                 reset()
+                setIsLoading(false)
             })
             .catch((err) => {
                 setErrorMessage(err.message)
                 setShowError(true)
+                setIsLoading(false)
                 console.log(err)
             })
     }
@@ -163,7 +168,29 @@ const RegistrationPage = (): JSX.Element => {
                             style={styles.input}
                             isPhoneNumber={true}
                         />
-                        <button className={styles.formButton}>Potvrdi</button>
+                        <div className={styles.buttonWrapper}>
+                            {isLoading ? (
+                                <Oval
+                                    height={40}
+                                    width={40}
+                                    color="#c10016"
+                                    wrapperStyle={{}}
+                                    wrapperClass={styles.spinner}
+                                    visible={true}
+                                    ariaLabel="oval-loading"
+                                    secondaryColor="#c10016"
+                                    strokeWidth={4}
+                                    strokeWidthSecondary={4}
+                                />
+                            ) : (
+                                <button
+                                    type="submit"
+                                    className={styles.formButton}
+                                >
+                                    Potvrdi
+                                </button>
+                            )}
+                        </div>
                     </form>
                 </div>
             )}

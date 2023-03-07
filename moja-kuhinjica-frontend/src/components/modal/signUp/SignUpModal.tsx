@@ -10,6 +10,7 @@ import profile from 'public/static/assets/images/profile.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
+import { Oval } from 'react-loader-spinner'
 
 interface ISignUpModalProps {
     modalIsOpen: boolean
@@ -22,6 +23,7 @@ export const SignUpModal = ({
     openNotificationModal,
 }: ISignUpModalProps): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const {
         register,
@@ -31,16 +33,18 @@ export const SignUpModal = ({
     } = useForm()
 
     const signIn = (inputData: FieldValues): void => {
-        console.log(inputData)
+        setIsLoading(true)
         UserService.signIn(inputData)
             .then((res) => {
                 closeModal()
                 reset()
                 openNotificationModal(inputData.email)
+                setIsLoading(false)
             })
             .catch((err) => {
                 setErrorMessage(err.message)
                 setShowError(true)
+                setIsLoading(false)
                 console.log(err)
             })
     }
@@ -165,9 +169,24 @@ export const SignUpModal = ({
                         />
                     </div>
                     <div className={styles.buttonWrapper}>
-                        <button type="submit" className={styles.formButton}>
-                            Potvrdi
-                        </button>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button type="submit" className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>
