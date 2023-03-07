@@ -47,7 +47,7 @@ export const loadUser = createAsyncThunk(ActionTypes.LOAD_USER, async () => {
     return data
 })
 
-export const userReducer2 = createReducer(initialState, (builder) => {
+export const userReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(userLogout, (state) => {
             localStorage.removeItem('token')
