@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { userLogin } from '@/reduxStore/actions/userActions'
+// import { userLogin } from '@/reduxStore/actions/userActions'
+import { userLogin } from '@/reduxStore/reducers/userReducer'
 import { FormInput } from '../../input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
@@ -12,6 +13,7 @@ import styles from './LoginModal.module.scss'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
+import { useDispatch } from 'react-redux'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -27,7 +29,7 @@ export const LoginModal = ({
     closeModal,
     openPasswordForgettingModal,
 }: ILoginModalProps): JSX.Element => {
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector((state) => state.auth.inProgress)
     const {

@@ -12,7 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from 'src/components/mobileMenu'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { loadUser } from '@/reduxStore/actions/userActions'
+import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 import { MOBILE_WIDTH } from 'src/constants/constants'

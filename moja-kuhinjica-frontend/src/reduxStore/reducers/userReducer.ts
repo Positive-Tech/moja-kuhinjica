@@ -1,4 +1,5 @@
-import { Reducer } from '@reduxjs/toolkit'
+import UserService from '@/service/User.service'
+import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import { ActionTypes } from '../constants/actionTypes'
 
 interface UserState {
@@ -11,7 +12,7 @@ interface UserState {
     } | null
     inProgress: boolean
     isAuthorized: boolean
-    errorMessage: string
+    errorMessage: string | null | undefined
 }
 
 const initialState: UserState = {
@@ -24,47 +25,50 @@ const initialState: UserState = {
     },
     inProgress: false,
     isAuthorized: false,
-    errorMessage: '',
+    errorMessage: null,
 }
 
-export const userReducer: Reducer<UserState> = (
-    state = initialState,
-    action: any
-) => {
-    switch (action.type) {
-        case ActionTypes.LOAD_USER:
-            return {
-                ...state,
-                user: action.payload,
-            }
-        case ActionTypes.USER_LOGIN_SUCCESS:
-            return {
-                ...state,
-                isAuthorized: true,
-                inProgress: false,
-                errorMessage: null,
-            }
-        case ActionTypes.USER_LOGIN_FAILED:
-            return {
-                ...state,
-                inProgress: false,
-                errorMessage: action.payload,
-            }
-        case ActionTypes.USER_LOGIN:
-            return {
-                ...state,
-                inProgress: true,
-            }
-        case ActionTypes.USER_LOGOUT:
-            return {
-                ...state,
-                user: null,
-                token: null,
-                isAuthorized: false,
-                authErrorMessage: null,
-            }
-
-        default:
-            return state
+export const userLogout = createAction(ActionTypes.USER_LOGOUT)
+export const userLogin = createAsyncThunk(
+    ActionTypes.USER_LOGIN,
+    async ({ inputData, onSuccess, onError }: any) => {
+        try {
+            const { data } = await UserService.login(inputData)
+            localStorage.setItem('token', data.access_token)
+            onSuccess()
+        } catch (err) {
+            console.log(err)
+            onError(err.response.data.message)
+        }
     }
-}
+)
+export const loadUser = createAsyncThunk(ActionTypes.LOAD_USER, async () => {
+    const { data } = await UserService.getLoggedInUser()
+    return data
+})
+
+export const userReducer2 = createReducer(initialState, (builder) => {
+    builder
+        .addCase(userLogout, (state) => {
+            localStorage.removeItem('token')
+            state.user = null
+            state.isAuthorized = false
+            state.errorMessage = null
+        })
+        .addCase(userLogin.fulfilled, (state, action) => {
+            console.log(action.payload)
+            state.isAuthorized = true
+            state.inProgress = false
+            state.errorMessage = null
+        })
+        .addCase(userLogin.rejected, (state, action) => {
+            state.inProgress = false
+            state.errorMessage = action.error.message
+        })
+        .addCase(userLogin.pending, (state) => {
+            state.inProgress = true
+        })
+        .addCase(loadUser.fulfilled, (state, action) => {
+            state.user = action.payload
+        })
+})
