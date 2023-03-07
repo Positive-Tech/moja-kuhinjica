@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { userLogin } from '@/reduxStore/actions/userActions'
+import { userLogin } from '@/reduxStore/reducers/userReducer'
 import { FormInput } from '../../input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
@@ -38,7 +38,7 @@ export const LoginModal = ({
     } = useForm()
 
     const login = (inputData: FieldValues): void => {
-        dispatch<any>(
+        dispatch(
             userLogin({
                 inputData,
                 onSuccess: () => {

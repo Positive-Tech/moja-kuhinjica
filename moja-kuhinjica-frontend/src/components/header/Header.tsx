@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { userLogout } from '@/reduxStore/actions/userActions'
+import { userLogout } from '@/reduxStore/reducers/userReducer'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'

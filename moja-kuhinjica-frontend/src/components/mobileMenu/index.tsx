@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { userLogout } from '@/reduxStore/actions/userActions'
+import { userLogout } from '@/reduxStore/reducers/userReducer'
 import Image from 'next/image'
 import { DropdownMenuButton } from '@/components/button/DropdownMenuButton'
 import closeIcon from 'public/static/assets/images/close.svg'
