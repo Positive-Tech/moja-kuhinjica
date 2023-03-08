@@ -17,7 +17,7 @@ export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
 
     return (
         <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>
-            <div>
+            <div className={styles.pictureWrapper}>
                 <Image src={pic} alt="" className={styles.restaurantPicture} />
             </div>
             <div className={styles.titleWrapper}>
@@ -66,7 +66,7 @@ export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
                             : styles.contentLabel
                     }
                 >
-                    meni 1 -
+                    meni 1 -&nbsp;
                 </label>
                 <label
                     className={

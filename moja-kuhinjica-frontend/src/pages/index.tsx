@@ -24,7 +24,8 @@ const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
-    const [active, setActive] = useState<number>(2)
+    const today = new Date(Date.now())
+    const [active, setActive] = useState<number>(today.getDay())
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
@@ -144,7 +145,7 @@ const Home = (): JSX.Element => {
                         </label>
                     </div>
                     <label className={styles.titleLabel}>
-                        Dnevni meni - 21/01/2023
+                        {`Dnevni meni - ${today.toLocaleDateString()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
                         <TabButton
