@@ -9,8 +9,16 @@ import pic from '../../../public/static/assets/images/meal1.png'
 
 interface IMenuItemProps {
     type?: string
+    title: string
+    description: string
+    price: number
 }
-export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
+export const MenuItem = ({
+    type,
+    title,
+    description,
+    price,
+}: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
 
     const isOrdering = (): boolean => type === 'ordering'
@@ -23,7 +31,7 @@ export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
             <div className={styles.titleWrapper}>
                 <Title
                     onClick={() => setOpenDescription(!openDescription)}
-                    content="Piletina u sosu od šampinjona"
+                    content={title}
                     style={
                         isOrdering()
                             ? styles.orderingTitleLabel
@@ -47,9 +55,7 @@ export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
             {openDescription && (
                 <div className={styles.descriptionLabelDiv}>
                     <Text
-                        content="
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros"
+                        content={description}
                         style={
                             isOrdering()
                                 ? styles.orderingDescriptionLabel
@@ -75,7 +81,7 @@ export const MenuItem = ({ type }: IMenuItemProps): JSX.Element => {
                             : styles.priceLabel
                     }
                 >
-                    560 din
+                    {`${price} din`}
                 </label>
             </div>
             {isOrdering() && (

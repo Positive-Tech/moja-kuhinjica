@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
-import { MenuItem } from '@/components/menu/MenuItem'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
 import { CartItem } from '@/components/cart/CartItem'
@@ -116,11 +115,11 @@ const MealReservation = (): JSX.Element => {
                         </div>
                         {menuIsPresent ? (
                             <div className={styles.grid}>
+                                {/* <MenuItem type="ordering" />
                                 <MenuItem type="ordering" />
                                 <MenuItem type="ordering" />
                                 <MenuItem type="ordering" />
-                                <MenuItem type="ordering" />
-                                <MenuItem type="ordering" />
+                                <MenuItem type="ordering" /> */}
                             </div>
                         ) : (
                             <div className={styles.emptyMenuDiv}>

@@ -19,6 +19,7 @@ import { MOBILE_WIDTH } from 'src/constants/constants'
 import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
+import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
@@ -38,6 +39,8 @@ const Home = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [userEmail, setUserEmail] = useState<string>('')
     const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
+    const [allMenus, setAllMenus] = useState<IMenu[]>()
+    const [menu, setMenu] = useState<IMenu>()
 
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
@@ -47,6 +50,10 @@ const Home = (): JSX.Element => {
     useEffect(() => {
         if (isAuthorized) dispatch<any>(loadUser())
     }, [isAuthorized])
+
+    useEffect(() => {
+        fetchMenus()
+    }, [])
 
     useEffect(() => {
         handleWindowResize()
@@ -79,6 +86,17 @@ const Home = (): JSX.Element => {
     const showNotificationModal = (email: string): void => {
         setUserEmail(email)
         setShowNotification(true)
+    }
+
+    const fetchMenus = (): void => {
+        RestaurantService.fetchAllMenus()
+            .then((res) => {
+                setAllMenus(res.data)
+                setMenu(res.data[5])
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
@@ -180,13 +198,17 @@ const Home = (): JSX.Element => {
                         />
                     </div>
                     <div className={styles.menuGridDiv}>
-                        <MenuItem />
-                        <MenuItem />
-                        <MenuItem />
-                        <MenuItem />
-                        <MenuItem />
-                        <MenuItem />
-                        <MenuItem />
+                        {menu &&
+                            menu.meals.map((meal: IMeal) => {
+                                return (
+                                    <MenuItem
+                                        key={meal.id}
+                                        title={meal.title}
+                                        description={meal.description}
+                                        price={meal.price}
+                                    />
+                                )
+                            })}
                     </div>
                 </div>
             </div>
