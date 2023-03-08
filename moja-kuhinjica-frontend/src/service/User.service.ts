@@ -28,9 +28,11 @@ export default class UserService extends Component {
         return await axiosInstance.patch('/client/password', data)
     }
 
-    public static async forgotPassword(data: FieldValues): Promise<any> {
+    public static async forgotPassword(
+        data: FieldValues | undefined
+    ): Promise<any> {
         return await axiosInstance.get('/auth/password/forgot', {
-            params: { email: data.email },
+            params: { email: data?.email },
         })
     }
 
