@@ -9,10 +9,12 @@ import styles from './PasswordForgettingPage.module.scss'
 import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import UserService from '@/service/User.service'
+import { Oval } from 'react-loader-spinner'
 
 const PasswordForgettingPage = (): JSX.Element => {
     const [errorMessage, setErrorMessage] = useState<string>()
     const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [message, setMessage] = useState<string>()
     const router = useRouter()
     const {
@@ -23,11 +25,13 @@ const PasswordForgettingPage = (): JSX.Element => {
     } = useForm()
 
     const resetPassword = (data: FieldValues): void => {
+        setIsLoading(true)
         UserService.forgotPassword(data)
             .then((res) => {
                 setMessage(res.data)
                 setShowNotification(true)
                 reset()
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
@@ -35,6 +39,7 @@ const PasswordForgettingPage = (): JSX.Element => {
                 setErrorMessage(err.response.data.message)
                 reset()
                 console.log(err)
+                setIsLoading(false)
             })
     }
 
@@ -71,22 +76,40 @@ const PasswordForgettingPage = (): JSX.Element => {
                             placeholder="Email"
                             type="text"
                             validationSchema={{
-                                required: 'email is required',
+                                required: 'Obavezno polje.',
                                 pattern: {
                                     value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                    message: 'invalid email value',
+                                    message: 'Pogrešan format email adrese.',
                                 },
                             }}
                             style={styles.input}
                         />
                     )}
-                    <div className={styles.buttonWrapper}>
-                        <button className={styles.formButton}>
-                            {showNotification
-                                ? 'Otvori email'
-                                : 'Resetuj šifru'}
-                        </button>
-                    </div>
+                    {!showNotification && (
+                        <div className={styles.buttonWrapper}>
+                            {isLoading ? (
+                                <Oval
+                                    height={40}
+                                    width={40}
+                                    color="#c10016"
+                                    wrapperStyle={{}}
+                                    wrapperClass={styles.spinner}
+                                    visible={true}
+                                    ariaLabel="oval-loading"
+                                    secondaryColor="#c10016"
+                                    strokeWidth={4}
+                                    strokeWidthSecondary={4}
+                                />
+                            ) : (
+                                <button
+                                    type="submit"
+                                    className={styles.formButton}
+                                >
+                                    Resetuj šifru
+                                </button>
+                            )}
+                        </div>
+                    )}
                     {showNotification && (
                         <div className={styles.labelWrapper}>
                             <Text
