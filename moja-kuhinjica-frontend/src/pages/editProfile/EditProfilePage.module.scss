@@ -232,10 +232,6 @@
     height: 10%;
     width: 100%;
     margin-top: 5%;
-
-    @media only screen and (max-width: $breakpoint-large) {
-        margin-top: 0;
-    }
 }
 
 .spinner {

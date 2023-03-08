@@ -58,10 +58,10 @@ const LoginPage = (): JSX.Element => {
                         placeholder="Email"
                         type="text"
                         validationSchema={{
-                            required: 'email is required',
+                            required: 'Obavezno polje.',
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'invalid email value',
+                                message: 'Pogrešan format email adrese.',
                             },
                         }}
                         style={styles.input}
@@ -74,7 +74,7 @@ const LoginPage = (): JSX.Element => {
                         placeholder="Šifra"
                         type="password"
                         validationSchema={{
-                            required: 'password is required',
+                            required: 'Obavezno polje.',
                         }}
                         style={styles.input}
                     />
