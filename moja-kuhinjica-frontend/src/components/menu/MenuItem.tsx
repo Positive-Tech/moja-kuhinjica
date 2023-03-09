@@ -25,7 +25,13 @@ export const MenuItem = ({
 
     return (
         <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>
-            <div className={styles.pictureWrapper}>
+            <div
+                className={
+                    isOrdering()
+                        ? styles.orderingPictureWrapper
+                        : styles.pictureWrapper
+                }
+            >
                 <Image src={pic} alt="" className={styles.restaurantPicture} />
             </div>
             <div className={styles.titleWrapper}>

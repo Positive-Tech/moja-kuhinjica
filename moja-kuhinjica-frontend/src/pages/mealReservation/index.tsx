@@ -265,7 +265,12 @@ const MealReservation = (): JSX.Element => {
                     className={styles.openCartContainer}
                     onClick={() => setShowCart(false)}
                 >
-                    <div className={styles.openCartBottom}>
+                    <div
+                        className={styles.openCartBottom}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                        }}
+                    >
                         <Title content="korpa" style={styles.cartTitle} />
                         <div className={styles.scrollItemsDiv}>
                             <CartItem />
