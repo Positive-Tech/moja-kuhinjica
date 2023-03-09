@@ -39,10 +39,11 @@
     @extend .wrapper;
     width: 90%;
     height: 680px;
+    margin-bottom: 35%;
 
     @media only screen and (max-width: $breakpoint-900p) {
         width: 90%;
-        height: 630px;
+        height: 480px;
     }
     @media only screen and (max-width: $breakpoint-large) {
         width: 70%;
@@ -61,7 +62,6 @@
     border-radius: 40px;
     overflow: auto;
     overflow-y: hidden;
-    background-color: aliceblue;
 }
 
 .restaurantPicture {
@@ -74,8 +74,8 @@
     justify-content: center;
     align-items: center;
     margin-top: 5%;
-    height: 20%;
-    min-height: 20%;
+    height: 15%;
+    min-height: 15%;
     min-width: 100%;
 
     @media only screen and (max-width: $breakpoint-medium) {
@@ -165,7 +165,8 @@
 .priceWrapper {
     display: flex;
     width: 100%;
-    height: 10%;
+    height: 15%;
+    min-height: 15%;
     justify-content: center;
     align-items: center;
 }
@@ -200,7 +201,7 @@
     color: #333333;
 
     @media only screen and (max-width: $breakpoint-900p) {
-        font-size: 24px;
+        font-size: 22px;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 18px;
@@ -274,16 +275,20 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20%;
+    height: 25%;
+    min-height: 25%;
 
     @media only screen and (max-width: $breakpoint-900p) {
         width: 100%;
-        height: 20%;
+        height: 25%;
+        min-height: 25%;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         height: 18%;
+        min-height: 18%;
     }
     @media only screen and (max-width: $breakpoint-large) {
         height: 18%;
+        min-height: 18%;
     }
 }

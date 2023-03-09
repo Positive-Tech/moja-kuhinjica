@@ -15,10 +15,13 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
+import RestaurantService, { IMenu } from '@/service/Restaurant.service'
+import { MenuItem } from '@/components/menu/MenuItem'
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
-    const [active, setActive] = useState<number>(1)
+    const today = new Date(Date.now())
+    const [active, setActive] = useState<number>(today.getDay())
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [menuIsPresent, setMenuIsPresent] = useState<boolean>(true)
     const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(false)
@@ -26,10 +29,13 @@ const MealReservation = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
+    const [menuForWeek, setMenuForWeek] = useState<IMenu[]>()
+    const [menuForDay, setMenuForDay] = useState<IMenu>()
 
     useEffect(() => {
         setMenuIsPresent(false)
-        setCartIsEmpty(true)
+        setCartIsEmpty(false)
+        fetchMenus()
     }, [])
 
     useEffect(() => {
@@ -41,6 +47,17 @@ const MealReservation = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    const fetchMenus = (): void => {
+        RestaurantService.fetchAllMenus()
+            .then((res) => {
+                setMenuForWeek(res.data)
+                setMenuForDay(res.data[5])
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
@@ -56,12 +73,12 @@ const MealReservation = (): JSX.Element => {
             )}
             <div
                 className={
-                    menuIsPresent ? styles.container : styles.emptyMenuContainer
+                    menuForDay ? styles.container : styles.emptyMenuContainer
                 }
             >
                 <div
                     className={
-                        menuIsPresent
+                        menuForDay
                             ? styles.restaurantTitleWrapper
                             : styles.emptyMenuTitleWrapper
                     }
@@ -77,7 +94,7 @@ const MealReservation = (): JSX.Element => {
                     </label>
                 </div>
                 <label className={styles.titleLabel}>
-                    Dnevni meni - 21/01/2023
+                    {`Dnevni meni - ${today.toLocaleDateString()}`}
                 </label>
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
@@ -113,19 +130,25 @@ const MealReservation = (): JSX.Element => {
                                 content="SUB"
                             />
                         </div>
-                        {menuIsPresent ? (
+                        {menuForDay ? (
                             <div className={styles.grid}>
-                                {/* <MenuItem type="ordering" />
-                                <MenuItem type="ordering" />
-                                <MenuItem type="ordering" />
-                                <MenuItem type="ordering" />
-                                <MenuItem type="ordering" /> */}
+                                {menuForDay.meals.map((meal) => {
+                                    return (
+                                        <MenuItem
+                                            key={meal.id}
+                                            type="ordering"
+                                            title={meal.title}
+                                            description={meal.description}
+                                            price={meal.price}
+                                        />
+                                    )
+                                })}
                             </div>
                         ) : (
                             <div className={styles.emptyMenuDiv}>
                                 <Text
-                                    content="Dnevni meni za 20/1/2023 još uvek nije
-                                        objavljen."
+                                    content={`Dnevni meni za ${today.toLocaleDateString()} još uvek nije
+                                        objavljen.`}
                                     style={styles.emptyMenuLabel}
                                 />
                             </div>
