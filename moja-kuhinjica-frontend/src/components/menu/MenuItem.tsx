@@ -12,15 +12,17 @@ interface IMenuItemProps {
     title: string
     description: string
     price: number
+    handleClick?: () => void
 }
 export const MenuItem = ({
     type,
     title,
     description,
     price,
+    handleClick,
 }: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
-
+    const [amount, setAmount] = useState<number>(0)
     const isOrdering = (): boolean => type === 'ordering'
 
     return (
@@ -92,8 +94,13 @@ export const MenuItem = ({
             </div>
             {isOrdering() && (
                 <div className={styles.buttonContainer}>
-                    <AmountButton />
-                    <RegularButton content="Rezerviši" />
+                    <AmountButton setAmountInItem={setAmount} />
+                    <RegularButton
+                        content="Rezerviši"
+                        onClick={() => {
+                            console.log(amount)
+                        }}
+                    />
                 </div>
             )}
         </div>

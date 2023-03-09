@@ -15,7 +15,7 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
-import RestaurantService, { IMenu } from '@/service/Restaurant.service'
+import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
 import { MenuItem } from '@/components/menu/MenuItem'
 
 const MealReservation = (): JSX.Element => {
@@ -23,18 +23,15 @@ const MealReservation = (): JSX.Element => {
     const today = new Date(Date.now())
     const [active, setActive] = useState<number>(today.getDay())
     const [showNotification, setShowNotification] = useState<boolean>(false)
-    const [menuIsPresent, setMenuIsPresent] = useState<boolean>(true)
-    const [cartIsEmpty, setCartIsEmpty] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
     const [menuForWeek, setMenuForWeek] = useState<IMenu[]>()
     const [menuForDay, setMenuForDay] = useState<IMenu>()
+    const [cartItems, setCartItems] = useState<IMeal[]>([])
 
     useEffect(() => {
-        setMenuIsPresent(false)
-        setCartIsEmpty(false)
         fetchMenus()
     }, [])
 
@@ -47,6 +44,10 @@ const MealReservation = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    const isCartEmpty = (): boolean => {
+        return cartItems.length === 0
+    }
 
     const fetchMenus = (): void => {
         RestaurantService.fetchAllMenus()
@@ -140,6 +141,12 @@ const MealReservation = (): JSX.Element => {
                                             title={meal.title}
                                             description={meal.description}
                                             price={meal.price}
+                                            handleClick={() =>
+                                                setCartItems([
+                                                    ...cartItems,
+                                                    meal,
+                                                ])
+                                            }
                                         />
                                     )
                                 })}
@@ -156,7 +163,7 @@ const MealReservation = (): JSX.Element => {
                     </div>
                     <div className={styles.cartContainer}>
                         <div className={styles.cartWrapper}>
-                            {cartIsEmpty && (
+                            {isCartEmpty() && (
                                 <div className={styles.emptyCartDiv}>
                                     <Title
                                         content="korpa"
@@ -168,19 +175,23 @@ const MealReservation = (): JSX.Element => {
                                     />
                                 </div>
                             )}
-                            {!cartIsEmpty && (
+                            {!isCartEmpty() && (
                                 <div className={styles.cartDiv}>
                                     <Title
                                         content="korpa"
                                         style={styles.cartTitle}
                                     />
                                     <div className={styles.scrollItemsDiv}>
-                                        <CartItem />
-                                        <CartItem />
-                                        <CartItem />
-                                        <CartItem />
-                                        <CartItem />
-                                        <CartItem />
+                                        {cartItems.map((item) => {
+                                            console.log(cartItems)
+                                            return (
+                                                <CartItem
+                                                    key={item.id}
+                                                    meal={item}
+                                                    amount={2}
+                                                />
+                                            )
+                                        })}
                                     </div>
                                     <div className={styles.priceDiv}>
                                         <Text
@@ -220,7 +231,7 @@ const MealReservation = (): JSX.Element => {
                     className={styles.bottomCart}
                     onClick={() => setShowCart(true)}
                 >
-                    {cartIsEmpty ? (
+                    {isCartEmpty() ? (
                         <>
                             <div className={styles.emptyIconWrapper}>
                                 <Image
@@ -260,7 +271,7 @@ const MealReservation = (): JSX.Element => {
                     )}
                 </div>
             )}
-            {isMobile && showCart && !cartIsEmpty && (
+            {isMobile && showCart && !isCartEmpty && (
                 <div
                     className={styles.openCartContainer}
                     onClick={() => setShowCart(false)}
@@ -273,12 +284,12 @@ const MealReservation = (): JSX.Element => {
                     >
                         <Title content="korpa" style={styles.cartTitle} />
                         <div className={styles.scrollItemsDiv}>
+                            {/* <CartItem />
                             <CartItem />
                             <CartItem />
                             <CartItem />
                             <CartItem />
-                            <CartItem />
-                            <CartItem />
+                            <CartItem /> */}
                         </div>
                         <div className={styles.priceDiv}>
                             <Text content="Ukupno:" style={styles.priceLabel} />

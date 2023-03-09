@@ -7,10 +7,12 @@ import styles from './AmountButton.module.scss'
 interface IAmountButtonProps {
     style?: string
     labelStyle?: string
+    setAmountInItem?: (param: number) => void
 }
 export const AmountButton = ({
     style,
     labelStyle,
+    setAmountInItem,
 }: IAmountButtonProps): JSX.Element => {
     const [amount, setAmount] = useState<number>(0)
     return (
@@ -20,7 +22,10 @@ export const AmountButton = ({
                 alt=""
                 className={styles.button}
                 onClick={() => {
-                    if (amount > 0) setAmount(amount - 1)
+                    if (amount > 0) {
+                        setAmountInItem?.(amount - 1)
+                        setAmount(amount - 1)
+                    }
                 }}
             />
             <label className={`${styles.contentLabel} ${labelStyle}`}>
@@ -30,7 +35,10 @@ export const AmountButton = ({
                 src={increment}
                 alt=""
                 className={styles.button}
-                onClick={() => setAmount(amount + 1)}
+                onClick={() => {
+                    setAmountInItem?.(amount + 1)
+                    setAmount(amount + 1)
+                }}
             />
         </div>
     )
