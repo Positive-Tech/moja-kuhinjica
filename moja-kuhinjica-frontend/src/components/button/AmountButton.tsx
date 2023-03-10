@@ -4,7 +4,7 @@ import increment from 'public/static/assets/images/increment.svg'
 import decrement from 'public/static/assets/images/decrement.svg'
 import styles from './AmountButton.module.scss'
 import { useAppDispatch } from '@/utils/hooks'
-import { incrementMealAmount } from '@/reduxStore/reducers/restaurantReducer'
+import { changeMealAmount } from '@/reduxStore/reducers/restaurantReducer'
 import { IMeal } from '@/service/Restaurant.service'
 
 interface IAmountButtonProps {
@@ -28,6 +28,7 @@ export const AmountButton = ({
                 className={styles.button}
                 onClick={() => {
                     if (amount > 1) {
+                        dispatch(changeMealAmount({ meal, amount: -1 }))
                         setAmount(amount - 1)
                     }
                 }}
@@ -40,7 +41,7 @@ export const AmountButton = ({
                 alt=""
                 className={styles.button}
                 onClick={() => {
-                    dispatch(incrementMealAmount(meal))
+                    dispatch(changeMealAmount({ meal, amount: 1 }))
                     setAmount(amount + 1)
                 }}
             />

@@ -14,7 +14,7 @@ const initialState: RestaurantState = {
 export const addItemToCart = createAction<ICartItem>(
     ActionTypes.ADD_ITEM_TO_CART
 )
-export const incrementMealAmount = createAction<IMeal>(
+export const changeMealAmount = createAction<{ meal: IMeal; amount: number }>(
     ActionTypes.INCREMENT_MEAL_AMOUNT
 )
 
@@ -23,11 +23,14 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
         .addCase(addItemToCart, (state, action) => {
             state.cartItems = [...state.cartItems, action.payload]
         })
-        .addCase(incrementMealAmount, (state, action) => {
+        .addCase(changeMealAmount, (state, action) => {
             let items: any = []
             current(state).cartItems.map((item) => {
-                item.meal.id === action.payload.id
-                    ? items.push({ ...item, amount: item.amount + 1 })
+                item.meal.id === action.payload.meal.id
+                    ? items.push({
+                          ...item,
+                          amount: item.amount + action.payload.amount,
+                      })
                     : items.push(item)
             })
             state.cartItems = items
