@@ -9,9 +9,11 @@ import Menu from '@/components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import styles from './ChangePasswordPage.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
+import { Oval } from 'react-loader-spinner'
 
 const ChangePasswordPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const router = useRouter()
@@ -34,17 +36,20 @@ const ChangePasswordPage = (): JSX.Element => {
     }
 
     const changePassword = (data: FieldValues): void => {
+        setIsLoading(true)
         UserService.changePassword(data)
             .then((res) => {
                 // notification for successful change
                 reset()
                 router.back()
+                setIsLoading(false)
             })
             .catch((err) => {
                 setErrorMessage(err.response.data.message)
                 setShowError(true)
                 reset()
                 console.log(err)
+                setIsLoading(false)
             })
     }
 
@@ -67,11 +72,7 @@ const ChangePasswordPage = (): JSX.Element => {
                         placeholder="Stara šifra"
                         type="password"
                         validationSchema={{
-                            required: 'password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
-                            },
+                            required: 'Obavezno polje.',
                         }}
                         style={styles.input}
                     />
@@ -83,10 +84,11 @@ const ChangePasswordPage = (): JSX.Element => {
                         placeholder="Nova šifra"
                         type="password"
                         validationSchema={{
-                            required: 'password is required',
+                            required: 'Obavezno polje.',
                             pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
+                                message:
+                                    'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                             },
                         }}
                         style={styles.input}
@@ -99,15 +101,30 @@ const ChangePasswordPage = (): JSX.Element => {
                         placeholder="Potvrdi novu šifru"
                         type="password"
                         validationSchema={{
-                            required: 'password is required',
-                            pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
-                            },
+                            required: 'Obavezno polje.',
                         }}
                         style={styles.input}
                     />
-                    <button className={styles.formButton}>Potvrdi</button>
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button type="submit" className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
             <MobileFooter />

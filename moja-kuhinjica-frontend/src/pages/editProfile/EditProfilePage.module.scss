@@ -89,7 +89,7 @@
 
 .formButton {
     width: 35%;
-    height: 7%;
+    height: 100%;
     background: #c10016;
     border: 0;
     color: white;
@@ -98,33 +98,26 @@
     font-weight: lighter;
     border-radius: 15px;
     cursor: pointer;
-    margin-top: 5%;
 
     @media only screen and (max-width: $breakpoint-ultrawide) {
         font-size: 30px;
         width: 40%;
-        height: 8%;
     }
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 22px;
         width: 35%;
-        height: 10%;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 20px;
         width: 40%;
-        height: 10%;
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 18px;
         width: 40%;
-        height: 20%;
-        margin-top: 0;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 16px;
         width: 80%;
-        height: 10%;
     }
 }
 
@@ -230,4 +223,21 @@
     align-items: center;
     gap: 5%;
     height: 20%;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+.spinner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

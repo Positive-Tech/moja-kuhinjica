@@ -138,13 +138,13 @@
 
 .phoneNumberInput::-webkit-outer-spin-button,
 .phoneNumberInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    -webkit-appearance: none !important;
     margin: 0;
 }
 
 .phoneNumberInvalidInput::-webkit-outer-spin-button,
 .phoneNumberInvalidInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    -webkit-appearance: none !important;
     margin: 0;
 }
 

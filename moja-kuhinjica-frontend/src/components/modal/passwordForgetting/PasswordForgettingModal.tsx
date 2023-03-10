@@ -8,6 +8,7 @@ import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
 import styles from './PasswordForgettingModal.module.scss'
 import emailIcon from 'public/static/assets/images/email.svg'
+import { Oval } from 'react-loader-spinner'
 
 interface IPasswordForgettingModalProps {
     modalIsOpen: boolean
@@ -24,6 +25,7 @@ export const PasswordForgettingModal = ({
     setUserEmail,
 }: IPasswordForgettingModalProps): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const {
         register,
@@ -33,6 +35,7 @@ export const PasswordForgettingModal = ({
     } = useForm()
 
     const resetPassword = (data: FieldValues): void => {
+        setIsLoading(true)
         UserService.forgotPassword(data)
             .then((res) => {
                 setMessage(res.data)
@@ -40,12 +43,14 @@ export const PasswordForgettingModal = ({
                 reset()
                 closeModal()
                 openNotificationModal()
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
                 setErrorMessage(err.response.data.message)
                 setShowError(true)
                 reset()
+                setIsLoading(false)
                 console.log(err)
             })
     }
@@ -79,18 +84,35 @@ export const PasswordForgettingModal = ({
                         placeholder="Email"
                         type="text"
                         validationSchema={{
-                            required: 'email is required',
+                            required: 'Obavezno polje.',
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'invalid email value',
+                                message: 'Pogrešan format za email adresu.',
                             },
                         }}
                         style={styles.passwordInput}
                     />
 
-                    <button type="submit" className={styles.formButton}>
-                        Resetuj šifru
-                    </button>
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button type="submit" className={styles.formButton}>
+                                Resetuj šifru
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
         </Modal>

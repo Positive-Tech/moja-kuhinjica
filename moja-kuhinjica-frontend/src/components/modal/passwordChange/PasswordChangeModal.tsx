@@ -7,6 +7,7 @@ import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { bgModal } from 'src/constants/constants'
 import styles from './PasswordChangeModal.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
+import { Oval } from 'react-loader-spinner'
 
 interface IChangePasswordModalProps {
     modalIsOpen: boolean
@@ -17,6 +18,7 @@ export const PasswordChangeModal = ({
     closeModal,
 }: IChangePasswordModalProps): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
 
     const {
@@ -38,16 +40,19 @@ export const PasswordChangeModal = ({
     }
 
     const changePassword = (data: FieldValues): void => {
+        setIsLoading(true)
         UserService.changePassword(data)
             .then((res) => {
                 // notification
                 reset()
                 closeModal()
+                setIsLoading(false)
             })
             .catch((err) => {
                 setErrorMessage(err.response.data.message)
                 setShowError(true)
                 reset()
+                setIsLoading(false)
                 console.log(err)
             })
     }
@@ -75,7 +80,7 @@ export const PasswordChangeModal = ({
                         placeholder="Stara šifra"
                         type="password"
                         validationSchema={{
-                            required: 'old pass is required',
+                            required: 'Obavezno polje.',
                         }}
                         style={styles.passwordInput}
                     />
@@ -87,10 +92,11 @@ export const PasswordChangeModal = ({
                         placeholder="Nova šifra"
                         type="password"
                         validationSchema={{
-                            required: 'password is required',
+                            required: 'Obavezno polje.',
                             pattern: {
                                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                message: 'invalid password value',
+                                message:
+                                    'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                             },
                         }}
                         style={styles.passwordInput}
@@ -103,13 +109,30 @@ export const PasswordChangeModal = ({
                         placeholder="Potvrdi novu šifru"
                         type="password"
                         validationSchema={{
-                            required: 'pass is required',
+                            required: 'Obavezno polje.',
                         }}
                         style={styles.passwordInput}
                     />
-                    <button type="submit" className={styles.formButton}>
-                        Potvrdi
-                    </button>
+                    <div className={styles.buttonWrapper}>
+                        {isLoading ? (
+                            <Oval
+                                height={40}
+                                width={40}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        ) : (
+                            <button type="submit" className={styles.formButton}>
+                                Potvrdi
+                            </button>
+                        )}
+                    </div>
                 </form>
             </div>
         </Modal>

@@ -122,3 +122,20 @@
     display: flex;
     justify-content: center;
 }
+
+.confirmButtonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+.spinner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
