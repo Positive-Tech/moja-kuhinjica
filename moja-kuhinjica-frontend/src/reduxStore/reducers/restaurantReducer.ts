@@ -15,8 +15,9 @@ export const addItemToCart = createAction<ICartItem>(
     ActionTypes.ADD_ITEM_TO_CART
 )
 export const changeMealAmount = createAction<{ meal: IMeal; amount: number }>(
-    ActionTypes.INCREMENT_MEAL_AMOUNT
+    ActionTypes.CHANGE_MEAL_AMOUNT
 )
+export const removeCartItem = createAction<IMeal>(ActionTypes.REMOVE_CART_ITEM)
 
 export const restaurantReducer = createReducer(initialState, (builder) => {
     builder
@@ -32,6 +33,13 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
                           amount: item.amount + action.payload.amount,
                       })
                     : items.push(item)
+            })
+            state.cartItems = items
+        })
+        .addCase(removeCartItem, (state, action) => {
+            let items: any = []
+            current(state).cartItems.map((item) => {
+                if (item.meal.id !== action.payload.id) items.push(item)
             })
             state.cartItems = items
         })

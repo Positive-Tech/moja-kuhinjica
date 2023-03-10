@@ -14,13 +14,9 @@
 .itemContainer {
     @extend .rowDiv;
     align-items: center;
-    height: 40%;
+    height: 30%;
     border-bottom: 1px solid #c1001633;
     margin-bottom: 5%;
-
-    @media only screen and (max-width: $breakpoint-large) {
-        height: 35%;
-    }
 }
 
 .rowDiv1 {

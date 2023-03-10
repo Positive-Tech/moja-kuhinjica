@@ -189,7 +189,7 @@
     flex-direction: column;
     align-items: center;
     width: 90%;
-    overflow: auto;
+    min-height: 60%;
 }
 
 .cartTitle {
@@ -284,6 +284,8 @@
 }
 
 .scrollItemsDiv {
+    min-height: 50%;
+    width: 70%;
     overflow: scroll;
     padding: 5%;
     height: 80%;
