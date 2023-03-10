@@ -3,18 +3,23 @@ import Image from 'next/image'
 import increment from 'public/static/assets/images/increment.svg'
 import decrement from 'public/static/assets/images/decrement.svg'
 import styles from './AmountButton.module.scss'
+import { useAppDispatch } from '@/utils/hooks'
+import { incrementMealAmount } from '@/reduxStore/reducers/restaurantReducer'
+import { IMeal } from '@/service/Restaurant.service'
 
 interface IAmountButtonProps {
     style?: string
     labelStyle?: string
-    setAmountInItem?: (param: number) => void
+    meal: IMeal
 }
 export const AmountButton = ({
     style,
     labelStyle,
-    setAmountInItem,
+    meal,
 }: IAmountButtonProps): JSX.Element => {
-    const [amount, setAmount] = useState<number>(0)
+    const [amount, setAmount] = useState<number>(1)
+    const dispatch = useAppDispatch()
+
     return (
         <div className={`${styles.amountWrapper} ${style}`}>
             <Image
@@ -22,8 +27,7 @@ export const AmountButton = ({
                 alt=""
                 className={styles.button}
                 onClick={() => {
-                    if (amount > 0) {
-                        setAmountInItem?.(amount - 1)
+                    if (amount > 1) {
                         setAmount(amount - 1)
                     }
                 }}
@@ -36,7 +40,7 @@ export const AmountButton = ({
                 alt=""
                 className={styles.button}
                 onClick={() => {
-                    setAmountInItem?.(amount + 1)
+                    dispatch(incrementMealAmount(meal))
                     setAmount(amount + 1)
                 }}
             />

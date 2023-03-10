@@ -3,9 +3,8 @@ import Image from 'next/image'
 import { RegularButton } from '../button/RegularButton'
 import { Title } from '../label/Title'
 import { Text } from '../label/Text'
-import { AmountButton } from '../button/AmountButton'
 import styles from './MenuItem.module.scss'
-import pic from '../../../public/static/assets/images/meal1.png'
+import pic from 'public/static/assets/images/meal1.png'
 
 interface IMenuItemProps {
     type?: string
@@ -22,7 +21,6 @@ export const MenuItem = ({
     handleClick,
 }: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
-    const [amount, setAmount] = useState<number>(0)
     const isOrdering = (): boolean => type === 'ordering'
 
     return (
@@ -94,13 +92,8 @@ export const MenuItem = ({
             </div>
             {isOrdering() && (
                 <div className={styles.buttonContainer}>
-                    <AmountButton setAmountInItem={setAmount} />
-                    <RegularButton
-                        content="Rezerviši"
-                        onClick={() => {
-                            console.log(amount)
-                        }}
-                    />
+                    {/* <AmountButton setAmountInItem={setAmount} /> */}
+                    <RegularButton content="Rezerviši" onClick={handleClick} />
                 </div>
             )}
         </div>

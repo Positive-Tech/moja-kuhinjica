@@ -7,7 +7,7 @@ export interface IMenu {
     meals: IMeal[]
 }
 export interface IMeal {
-    id: string
+    id: number
     title: string
     price: number
     description: string
@@ -17,6 +17,11 @@ export interface IMeal {
 export interface IMealType {
     id: number
     name: string
+}
+
+export interface ICartItem {
+    meal: IMeal
+    amount: number
 }
 export default class RestaurantService extends Component {
     public static async fetchAllMenus(): Promise<any> {

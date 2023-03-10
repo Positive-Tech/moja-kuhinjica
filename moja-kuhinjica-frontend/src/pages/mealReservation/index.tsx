@@ -15,11 +15,19 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
-import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
+import RestaurantService, {
+    ICartItem,
+    IMeal,
+    IMenu,
+} from '@/service/Restaurant.service'
 import { MenuItem } from '@/components/menu/MenuItem'
+import { useAppDispatch, useAppSelector } from '@/utils/hooks'
+import { addItemToCart } from '@/reduxStore/reducers/restaurantReducer'
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
+    const cartItems = useAppSelector((state) => state.restaurant.cartItems)
     const today = new Date(Date.now())
     const [active, setActive] = useState<number>(today.getDay())
     const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -29,7 +37,6 @@ const MealReservation = (): JSX.Element => {
     const [showCart, setShowCart] = useState<boolean>(false)
     const [menuForWeek, setMenuForWeek] = useState<IMenu[]>()
     const [menuForDay, setMenuForDay] = useState<IMenu>()
-    const [cartItems, setCartItems] = useState<IMeal[]>([])
 
     useEffect(() => {
         fetchMenus()
@@ -60,10 +67,22 @@ const MealReservation = (): JSX.Element => {
             })
     }
 
+    const addToCart = (meal: IMeal): void => {
+        let cartItem: ICartItem = { meal: meal, amount: 1 }
+        dispatch(addItemToCart(cartItem))
+    }
+
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
 
+    const getTotalPrice = (): number => {
+        let totalPrice = 0
+        cartItems.forEach(
+            (item) => (totalPrice += item.meal.price * item.amount)
+        )
+        return totalPrice
+    }
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -141,12 +160,7 @@ const MealReservation = (): JSX.Element => {
                                             title={meal.title}
                                             description={meal.description}
                                             price={meal.price}
-                                            handleClick={() =>
-                                                setCartItems([
-                                                    ...cartItems,
-                                                    meal,
-                                                ])
-                                            }
+                                            handleClick={() => addToCart(meal)}
                                         />
                                     )
                                 })}
@@ -183,12 +197,10 @@ const MealReservation = (): JSX.Element => {
                                     />
                                     <div className={styles.scrollItemsDiv}>
                                         {cartItems.map((item) => {
-                                            console.log(cartItems)
                                             return (
                                                 <CartItem
-                                                    key={item.id}
-                                                    meal={item}
-                                                    amount={2}
+                                                    key={item.meal.id}
+                                                    meal={item.meal}
                                                 />
                                             )
                                         })}
@@ -200,7 +212,7 @@ const MealReservation = (): JSX.Element => {
                                         />
                                         <div className={styles.totalPriceDiv}>
                                             <Text
-                                                content="560"
+                                                content={getTotalPrice().toString()}
                                                 style={styles.totalPrice}
                                             />
                                             <Text
@@ -294,7 +306,10 @@ const MealReservation = (): JSX.Element => {
                         <div className={styles.priceDiv}>
                             <Text content="Ukupno:" style={styles.priceLabel} />
                             <div className={styles.totalPriceDiv}>
-                                <Text content="560" style={styles.totalPrice} />
+                                <Text
+                                    content={getTotalPrice().toString()}
+                                    style={styles.totalPrice}
+                                />
                                 <Text content="RSD" style={styles.totalPrice} />
                             </div>
                         </div>

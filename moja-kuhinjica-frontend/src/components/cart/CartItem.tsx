@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { Text } from '../label/Text'
 import { AmountButton } from '../button/AmountButton'
@@ -6,11 +6,21 @@ import styles from './CartItem.module.scss'
 import mealPic from 'public/static/assets/images/meal2.png'
 import bin from 'public/static/assets/images/bin.svg'
 import { IMeal } from '@/service/Restaurant.service'
+import { useAppSelector } from '@/utils/hooks'
 interface ICartItemPRops {
     meal: IMeal
-    amount: number
 }
-export const CartItem = ({ meal, amount }: ICartItemPRops): JSX.Element => {
+export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
+    const amount = useAppSelector(
+        (state) =>
+            state.restaurant.cartItems.find((item) => item.meal.id == meal.id)
+                ?.amount
+    )
+    const getTotalMealPrice = (): number => {
+        let totalPrice = 0
+        if (amount) totalPrice = meal.price * amount
+        return totalPrice
+    }
     return (
         <div className={styles.itemContainer}>
             <div className={styles.rowDiv1}>
@@ -26,6 +36,7 @@ export const CartItem = ({ meal, amount }: ICartItemPRops): JSX.Element => {
                     <AmountButton
                         style={styles.amountWrapper}
                         labelStyle={styles.amountLabel}
+                        meal={meal}
                     />
                 </div>
             </div>
@@ -36,7 +47,7 @@ export const CartItem = ({ meal, amount }: ICartItemPRops): JSX.Element => {
                 </div>
                 <div className={styles.priceDiv}>
                     <Text
-                        content={meal.price.toString()}
+                        content={getTotalMealPrice().toString()}
                         style={styles.price}
                     />
                     <Text content="RSD" style={styles.price} />
