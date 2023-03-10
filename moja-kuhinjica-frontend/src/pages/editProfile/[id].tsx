@@ -156,7 +156,7 @@ const EditProfilePage = (): JSX.Element => {
                                     validationSchema={{
                                         required: 'Ime je obavezno.',
                                         pattern: {
-                                            value: /^[A-Za-z]+$/,
+                                            value: /^[A-Za-z\s]+$/,
                                             message:
                                                 'Ime može da sadrži samo slova.',
                                         },
@@ -181,7 +181,7 @@ const EditProfilePage = (): JSX.Element => {
                                     validationSchema={{
                                         required: 'Prezime je obavezno.',
                                         pattern: {
-                                            value: /^[A-Za-z]+$/,
+                                            value: /^[A-Za-z\s]+$/,
                                             message:
                                                 'Prezime može da sadrži samo slova.',
                                         },
