@@ -13,6 +13,7 @@ interface IMenuItemProps {
     description: string
     price: number
     handleClick?: () => void
+    buttonIsActive?: boolean
 }
 export const MenuItem = ({
     type,
@@ -20,6 +21,7 @@ export const MenuItem = ({
     description,
     price,
     handleClick,
+    buttonIsActive,
 }: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
     const isOrdering = (): boolean => type === ORDERING
@@ -93,7 +95,11 @@ export const MenuItem = ({
             </div>
             {isOrdering() && (
                 <div className={styles.buttonContainer}>
-                    <RegularButton content="Rezerviši" onClick={handleClick} />
+                    <RegularButton
+                        content="Rezerviši"
+                        onClick={handleClick}
+                        isActive={buttonIsActive}
+                    />
                 </div>
             )}
         </div>

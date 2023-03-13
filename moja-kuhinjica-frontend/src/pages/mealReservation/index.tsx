@@ -15,7 +15,11 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { DAYS, MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
-import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
+import RestaurantService, {
+    ICartItem,
+    IMeal,
+    IMenu,
+} from '@/service/Restaurant.service'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { addItemToCart } from '@/reduxStore/reducers/restaurantReducer'
@@ -56,6 +60,9 @@ const MealReservation = (): JSX.Element => {
     }, [windowWidth])
 
     const isCartEmpty = (): boolean => !cartItems.length
+
+    const isItemInCart = (mealId: number): boolean =>
+        !!cartItems.find((item) => item.meal.id === mealId)
 
     const fetchMenus = (): void => {
         setIsLoading(true)
@@ -165,6 +172,9 @@ const MealReservation = (): JSX.Element => {
                                             description={meal.description}
                                             price={meal.price}
                                             handleClick={() => addToCart(meal)}
+                                            buttonIsActive={
+                                                !isItemInCart(meal.id)
+                                            }
                                         />
                                     )
                                 })}
@@ -231,6 +241,7 @@ const MealReservation = (): JSX.Element => {
                                     >
                                         <RegularButton
                                             content="Potvrdi rezervaciju"
+                                            isActive
                                             style={styles.confirmButton}
                                         />
                                     </div>
@@ -318,6 +329,7 @@ const MealReservation = (): JSX.Element => {
                         <RegularButton
                             content="Potvrdi rezervaciju"
                             style={styles.confirmButton}
+                            isActive
                         />
                     </div>
                 </div>
