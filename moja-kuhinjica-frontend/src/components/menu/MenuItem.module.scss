@@ -169,6 +169,7 @@
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 5%;
+    margin-top: 5%;
 
     @media only screen and (max-width: $breakpoint-medium) {
         height: 10%;
@@ -244,6 +245,7 @@
 .descriptionLabel {
     font-weight: lighter;
     font-size: 20px;
+    text-align: center;
 
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 20px;
@@ -265,6 +267,7 @@
 .orderingDescriptionLabel {
     font-weight: lighter;
     font-size: 18px;
+    text-align: center;
 
     @media only screen and (max-width: $breakpoint-900p) {
         font-size: 18px;
