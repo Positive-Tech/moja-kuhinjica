@@ -15,15 +15,12 @@ import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { DAYS, MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
-import RestaurantService, {
-    ICartItem,
-    IMeal,
-    IMenu,
-} from '@/service/Restaurant.service'
+import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { addItemToCart } from '@/reduxStore/reducers/restaurantReducer'
 import uuid from 'react-uuid'
+import { Oval } from 'react-loader-spinner'
 
 const ORDERING = 'ordering'
 const INITIAL_MEAL_AMOUNT = 1
@@ -40,6 +37,7 @@ const MealReservation = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
 
@@ -60,13 +58,16 @@ const MealReservation = (): JSX.Element => {
     const isCartEmpty = (): boolean => !cartItems.length
 
     const fetchMenus = (): void => {
+        setIsLoading(true)
         RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setMenusForWeek(res.data)
                 setMenuForDay(res.data[active - 1])
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
+                setIsLoading(false)
             })
     }
 
@@ -137,7 +138,23 @@ const MealReservation = (): JSX.Element => {
                                 )
                             })}
                         </div>
-                        {menuForDay ? (
+                        {isLoading && (
+                            <div className={styles.loadingBarWrapper}>
+                                <Oval
+                                    height={70}
+                                    width={70}
+                                    color="#c10016"
+                                    wrapperStyle={{}}
+                                    wrapperClass={styles.spinner}
+                                    visible={true}
+                                    ariaLabel="oval-loading"
+                                    secondaryColor="#c10016"
+                                    strokeWidth={4}
+                                    strokeWidthSecondary={4}
+                                />
+                            </div>
+                        )}
+                        {menuForDay && !isLoading && (
                             <div className={styles.grid}>
                                 {menuForDay.meals.map((meal) => {
                                     return (
@@ -152,7 +169,8 @@ const MealReservation = (): JSX.Element => {
                                     )
                                 })}
                             </div>
-                        ) : (
+                        )}
+                        {!isLoading && !menuForDay && (
                             <div className={styles.emptyMenuDiv}>
                                 <Text
                                     content={`Dnevni meni za ${today.toLocaleDateString()} još uvek nije

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { Text } from '../label/Text'
 import { AmountButton } from '../button/AmountButton'
@@ -17,7 +17,7 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
     const dispatch = useAppDispatch()
     const amount = useAppSelector(
         ({ restaurant: { cartItems } }) =>
-            cartItems.find((item) => item.meal.id == meal.id)?.amount
+            cartItems.find((item) => item.meal.id === meal.id)?.amount
     )
     const getTotalMealPrice = (): number =>
         amount ? meal.price * amount : NIL_PRICE

@@ -1,6 +1,5 @@
-import { ICartItem, IMeal, IMealType } from '@/service/Restaurant.service'
+import { ICartItem, IMeal } from '@/service/Restaurant.service'
 import { createAction, createReducer, current } from '@reduxjs/toolkit'
-import { stat } from 'fs'
 import { ActionTypes } from '../constants/actionTypes'
 
 interface RestaurantState {
@@ -28,7 +27,7 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
             const itemIndex = current(state).cartItems.findIndex(
                 (item) => item.meal.id === action.payload.meal.id
             )
-            let item = state.cartItems[itemIndex]
+            const item = state.cartItems[itemIndex]
             item.amount += action.payload.amount
             state.cartItems[itemIndex] = item
         })
