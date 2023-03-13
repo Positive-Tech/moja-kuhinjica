@@ -7,6 +7,9 @@ import { useAppDispatch } from '@/utils/hooks'
 import { changeMealAmount } from '@/reduxStore/reducers/restaurantReducer'
 import { IMeal } from '@/service/Restaurant.service'
 
+const FIRST_ELEMENT = 1
+const INCREMENT_VALUE = 1
+const DECREMENT_VALUE = -1
 interface IAmountButtonProps {
     style?: string
     labelStyle?: string
@@ -17,8 +20,13 @@ export const AmountButton = ({
     labelStyle,
     meal,
 }: IAmountButtonProps): JSX.Element => {
-    const [amount, setAmount] = useState<number>(1)
+    const [amount, setAmount] = useState<number>(FIRST_ELEMENT)
     const dispatch = useAppDispatch()
+
+    const changeAmount = (amountValue: number): void => {
+        dispatch(changeMealAmount({ meal, amount: amountValue }))
+        setAmount(amount + amountValue)
+    }
 
     return (
         <div className={`${styles.amountWrapper} ${style}`}>
@@ -27,10 +35,8 @@ export const AmountButton = ({
                 alt=""
                 className={styles.button}
                 onClick={() => {
-                    if (amount > 1) {
-                        dispatch(changeMealAmount({ meal, amount: -1 }))
-                        setAmount(amount - 1)
-                    }
+                    if (amount <= FIRST_ELEMENT) return
+                    changeAmount(DECREMENT_VALUE)
                 }}
             />
             <label className={`${styles.contentLabel} ${labelStyle}`}>
@@ -41,8 +47,7 @@ export const AmountButton = ({
                 alt=""
                 className={styles.button}
                 onClick={() => {
-                    dispatch(changeMealAmount({ meal, amount: 1 }))
-                    setAmount(amount + 1)
+                    changeAmount(INCREMENT_VALUE)
                 }}
             />
         </div>

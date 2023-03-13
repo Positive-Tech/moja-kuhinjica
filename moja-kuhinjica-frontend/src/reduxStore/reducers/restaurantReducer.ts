@@ -25,7 +25,7 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
             state.cartItems = [...state.cartItems, action.payload]
         })
         .addCase(changeMealAmount, (state, action) => {
-            let items: any = []
+            let items: ICartItem[] = []
             current(state).cartItems.map((item) => {
                 item.meal.id === action.payload.meal.id
                     ? items.push({
@@ -37,7 +37,7 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
             state.cartItems = items
         })
         .addCase(removeCartItem, (state, action) => {
-            let items: any = []
+            let items: ICartItem[] = []
             current(state).cartItems.map((item) => {
                 if (item.meal.id !== action.payload.id) items.push(item)
             })

@@ -8,21 +8,20 @@ import bin from 'public/static/assets/images/bin.svg'
 import { IMeal } from '@/service/Restaurant.service'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { removeCartItem } from '@/reduxStore/reducers/restaurantReducer'
+
+const NIL_PRICE = 0
 interface ICartItemPRops {
     meal: IMeal
 }
 export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
     const dispatch = useAppDispatch()
     const amount = useAppSelector(
-        (state) =>
-            state.restaurant.cartItems.find((item) => item.meal.id == meal.id)
-                ?.amount
+        ({ restaurant: { cartItems } }) =>
+            cartItems.find((item) => item.meal.id == meal.id)?.amount
     )
-    const getTotalMealPrice = (): number => {
-        let totalPrice = 0
-        if (amount) totalPrice = meal.price * amount
-        return totalPrice
-    }
+    const getTotalMealPrice = (): number =>
+        amount ? meal.price * amount : NIL_PRICE
+
     return (
         <div className={styles.itemContainer}>
             <div className={styles.rowDiv1}>

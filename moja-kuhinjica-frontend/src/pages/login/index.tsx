@@ -15,7 +15,7 @@ import { Oval } from 'react-loader-spinner'
 
 const LoginPage = (): JSX.Element => {
     const [errorMessage, setErrorMessage] = useState<string>()
-    const isLoading = useAppSelector((state) => state.auth.inProgress)
+    const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
     const dispatch: any = useAppDispatch()
     const router = useRouter()
     const {

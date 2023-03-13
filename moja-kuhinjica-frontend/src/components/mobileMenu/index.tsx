@@ -21,8 +21,10 @@ interface IMenuProps {
 const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
-    const user = useAppSelector((state) => state.auth.user)
+    const isAuthorized = useAppSelector(
+        ({ auth: { isAuthorized } }) => isAuthorized
+    )
+    const user = useAppSelector(({ auth: { user } }) => user)
 
     const navigate = (url: string): void => {
         closeMenu()

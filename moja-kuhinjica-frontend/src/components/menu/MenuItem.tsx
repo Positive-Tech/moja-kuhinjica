@@ -6,6 +6,7 @@ import { Text } from '../label/Text'
 import styles from './MenuItem.module.scss'
 import pic from 'public/static/assets/images/meal1.png'
 
+const ORDERING = 'ordering'
 interface IMenuItemProps {
     type?: string
     title: string
@@ -21,7 +22,7 @@ export const MenuItem = ({
     handleClick,
 }: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
-    const isOrdering = (): boolean => type === 'ordering'
+    const isOrdering = (): boolean => type === ORDERING
 
     return (
         <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>
@@ -92,7 +93,6 @@ export const MenuItem = ({
             </div>
             {isOrdering() && (
                 <div className={styles.buttonContainer}>
-                    {/* <AmountButton setAmountInItem={setAmount} /> */}
                     <RegularButton content="Rezerviši" onClick={handleClick} />
                 </div>
             )}

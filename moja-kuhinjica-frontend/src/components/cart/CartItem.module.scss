@@ -17,6 +17,12 @@
     height: 90px;
     border-bottom: 1px solid #c1001633;
     margin-bottom: 5%;
+    @media only screen and (max-width: $breakpoint-1440p) {
+        height: 110px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        height: 90px;
+    }
 }
 
 .rowDiv1 {
@@ -31,6 +37,14 @@
     border-radius: 20px;
     overflow-y: hidden;
 
+    @media only screen and (max-width: $breakpoint-1440p) {
+        height: 90px;
+        width: 100px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        height: 80px;
+        width: 95px;
+    }
     @media only screen and (max-width: $breakpoint-large) {
         height: 70px;
         width: 80px;

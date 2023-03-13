@@ -15,16 +15,15 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
-import { MOBILE_WIDTH } from 'src/constants/constants'
+import { DAYS, MOBILE_WIDTH } from 'src/constants/constants'
 import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
+import uuid from 'react-uuid'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
-
-const days = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
 
 const Home = (): JSX.Element => {
     const today = new Date(Date.now())
@@ -45,7 +44,9 @@ const Home = (): JSX.Element => {
     const [selectedMenu, setSelectedMenu] = useState<IMenu>()
 
     const dispatch = useAppDispatch()
-    const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
+    const isAuthorized = useAppSelector(
+        ({ auth: { isAuthorized } }) => isAuthorized
+    )
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
 
@@ -168,13 +169,16 @@ const Home = (): JSX.Element => {
                         {`Dnevni meni - ${today.toLocaleDateString()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
-                        {days.map((day, index) => {
+                        {DAYS.map((day, activeTabIndex) => {
                             return (
                                 <TabButton
-                                    active={active === index + 1}
+                                    key={uuid()}
+                                    active={active === activeTabIndex + 1}
                                     onClick={() => {
-                                        setActive(index + 1)
-                                        setSelectedMenu(allMenus[index])
+                                        setActive(activeTabIndex + 1)
+                                        setSelectedMenu(
+                                            allMenus[activeTabIndex]
+                                        )
                                     }}
                                     content={day}
                                 />
@@ -183,16 +187,18 @@ const Home = (): JSX.Element => {
                     </div>
                     <div className={styles.menuGridDiv}>
                         {selectedMenu &&
-                            selectedMenu.meals.map((meal: IMeal) => {
-                                return (
-                                    <MenuItem
-                                        key={meal.id}
-                                        title={meal.title}
-                                        description={meal.description}
-                                        price={meal.price}
-                                    />
-                                )
-                            })}
+                            selectedMenu.meals.map(
+                                ({ id, title, description, price }: IMeal) => {
+                                    return (
+                                        <MenuItem
+                                            key={id}
+                                            title={title}
+                                            description={description}
+                                            price={price}
+                                        />
+                                    )
+                                }
+                            )}
                     </div>
                 </div>
             </div>

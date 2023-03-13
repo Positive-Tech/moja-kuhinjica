@@ -268,25 +268,32 @@
     width: 80%;
     height: 100%;
 
+    @media only screen and (max-width: $breakpoint-1440p) {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 16px;
+    }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 14px;
     }
 }
 
 .confirmButton {
-    height: 10%;
+    height: 100%;
+    width: 100%;
 
-    @media only screen and (max-width: $breakpoint-1440p) {
-        width: 70%;
-        margin-bottom: 10%;
-    }
-    @media only screen and (max-width: $breakpoint-900p) {
-        width: 60%;
-        margin-bottom: 10%;
-    }
-    @media only screen and (max-width: $breakpoint-720p) {
-        width: 70%;
-    }
+    // @media only screen and (max-width: $breakpoint-1440p) {
+    //     width: 60%;
+    //     margin-bottom: 10%;
+    // }
+    // @media only screen and (max-width: $breakpoint-900p) {
+    //     width: 60%;
+    //     margin-bottom: 10%;
+    // }
+    // @media only screen and (max-width: $breakpoint-720p) {
+    //     width: 70%;
+    // }
 }
 
 .scrollItemsDiv {
@@ -381,4 +388,25 @@
 .totalPrice {
     @extend .priceLabel;
     font-weight: bold;
+}
+
+.confirmButtonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    min-height: 10%;
+
+    @media only screen and (max-width: $breakpoint-1440p) {
+        width: 80%;
+        margin-top: 8%;
+        margin-bottom: 8%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        width: 60%;
+        margin-bottom: 10%;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 70%;
+    }
 }

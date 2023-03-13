@@ -17,3 +17,4 @@ export const bgModal = {
 }
 
 export const MOBILE_WIDTH = 768
+export const DAYS = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']

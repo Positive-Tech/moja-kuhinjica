@@ -6,10 +6,9 @@ import { Footer } from '@/components/footer/Footer'
 import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { MOBILE_WIDTH } from '@/constants/constants'
+import { DAYS, MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MyReservationsPage.module.scss'
-
-const days = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
+import uuid from 'react-uuid'
 
 const MyReservationsPage = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
@@ -60,11 +59,14 @@ const MyReservationsPage = (): JSX.Element => {
                 </label>
                 <div className={styles.colDiv1}>
                     <div className={styles.menuRowDiv}>
-                        {days.map((day, index) => {
+                        {DAYS.map((day, activeTabIndex) => {
                             return (
                                 <TabButton
-                                    active={active === index + 1}
-                                    onClick={() => setActive(index + 1)}
+                                    key={uuid()}
+                                    active={active === activeTabIndex + 1}
+                                    onClick={() =>
+                                        setActive(activeTabIndex + 1)
+                                    }
                                     content={day}
                                 />
                             )

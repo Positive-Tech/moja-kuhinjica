@@ -12,7 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { MOBILE_WIDTH } from '@/constants/constants'
+import { DAYS, MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
@@ -23,13 +23,16 @@ import RestaurantService, {
 import { MenuItem } from '@/components/menu/MenuItem'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { addItemToCart } from '@/reduxStore/reducers/restaurantReducer'
+import uuid from 'react-uuid'
 
-const days = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
-
+const ORDERING = 'ordering'
+const INITIAL_MEAL_AMOUNT = 1
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const cartItems = useAppSelector((state) => state.restaurant.cartItems)
+    const cartItems = useAppSelector(
+        ({ restaurant: { cartItems } }) => cartItems
+    )
     const today = new Date(Date.now())
     const [active, setActive] = useState<number>(today.getDay())
     const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -54,7 +57,7 @@ const MealReservation = (): JSX.Element => {
         }
     }, [windowWidth])
 
-    const isCartEmpty = (): boolean => cartItems.length === 0
+    const isCartEmpty = (): boolean => !cartItems.length
 
     const fetchMenus = (): void => {
         RestaurantService.fetchWeeklyMenus()
@@ -68,8 +71,7 @@ const MealReservation = (): JSX.Element => {
     }
 
     const addToCart = (meal: IMeal): void => {
-        let cartItem: ICartItem = { meal: meal, amount: 1 }
-        dispatch(addItemToCart(cartItem))
+        dispatch(addItemToCart({ meal: meal, amount: INITIAL_MEAL_AMOUNT }))
     }
 
     const handleWindowResize = (): void => {
@@ -119,13 +121,16 @@ const MealReservation = (): JSX.Element => {
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
                         <div className={styles.menuRowDiv}>
-                            {days.map((day, index) => {
+                            {DAYS.map((day, activeTabIndex) => {
                                 return (
                                     <TabButton
-                                        active={active === index + 1}
+                                        key={uuid()}
+                                        active={active === activeTabIndex + 1}
                                         onClick={() => {
-                                            setActive(index + 1)
-                                            setMenuForDay(menusForWeek[index])
+                                            setActive(activeTabIndex + 1)
+                                            setMenuForDay(
+                                                menusForWeek[activeTabIndex]
+                                            )
                                         }}
                                         content={day}
                                     />
@@ -138,7 +143,7 @@ const MealReservation = (): JSX.Element => {
                                     return (
                                         <MenuItem
                                             key={meal.id}
-                                            type="ordering"
+                                            type={ORDERING}
                                             title={meal.title}
                                             description={meal.description}
                                             price={meal.price}
@@ -178,11 +183,11 @@ const MealReservation = (): JSX.Element => {
                                         style={styles.cartTitle}
                                     />
                                     <div className={styles.scrollItemsDiv}>
-                                        {cartItems.map((item) => {
+                                        {cartItems.map(({ meal }) => {
                                             return (
                                                 <CartItem
-                                                    key={item.meal.id}
-                                                    meal={item.meal}
+                                                    key={meal.id}
+                                                    meal={meal}
                                                 />
                                             )
                                         })}
@@ -203,10 +208,14 @@ const MealReservation = (): JSX.Element => {
                                             />
                                         </div>
                                     </div>
-                                    <RegularButton
-                                        content="Potvrdi rezervaciju"
-                                        style={styles.confirmButton}
-                                    />
+                                    <div
+                                        className={styles.confirmButtonWrapper}
+                                    >
+                                        <RegularButton
+                                            content="Potvrdi rezervaciju"
+                                            style={styles.confirmButton}
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -277,14 +286,7 @@ const MealReservation = (): JSX.Element => {
                         }}
                     >
                         <Title content="korpa" style={styles.cartTitle} />
-                        <div className={styles.scrollItemsDiv}>
-                            {/* <CartItem />
-                            <CartItem />
-                            <CartItem />
-                            <CartItem />
-                            <CartItem />
-                            <CartItem /> */}
-                        </div>
+                        <div className={styles.scrollItemsDiv}></div>
                         <div className={styles.priceDiv}>
                             <Text content="Ukupno:" style={styles.priceLabel} />
                             <div className={styles.totalPriceDiv}>
