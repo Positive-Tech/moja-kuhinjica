@@ -20,7 +20,6 @@ import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
-import { all } from 'axios'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
@@ -102,10 +101,6 @@ const Home = (): JSX.Element => {
             })
     }
 
-    const handleTabChange = (): void => {
-        setActive(active + 1)
-    }
-
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -166,7 +161,7 @@ const Home = (): JSX.Element => {
                             onClick={() => router.push('/restaurant/profile')}
                             className={styles.restaurantInfoLabel}
                         >
-                            opste informacije
+                            opšte informacije
                         </label>
                     </div>
                     <label className={styles.titleLabel}>

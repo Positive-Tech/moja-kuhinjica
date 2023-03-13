@@ -37,7 +37,7 @@ const MealReservation = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
-    const [menusForWeek, setMenusForWeek] = useState<IMenu[]>()
+    const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
 
     useEffect(() => {
@@ -54,16 +54,13 @@ const MealReservation = (): JSX.Element => {
         }
     }, [windowWidth])
 
-    const isCartEmpty = (): boolean => {
-        return cartItems.length === 0
-    }
+    const isCartEmpty = (): boolean => cartItems.length === 0
 
     const fetchMenus = (): void => {
         RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setMenusForWeek(res.data)
-                console.log(menusForWeek)
-                setMenuForDay(res.data[5])
+                setMenuForDay(res.data[active - 1])
             })
             .catch((err) => {
                 console.log(err)
@@ -113,7 +110,7 @@ const MealReservation = (): JSX.Element => {
                         onClick={() => router.push('/restaurant/profile')}
                         className={styles.restaurantInfoLabel}
                     >
-                        opste informacije
+                        opšte informacije
                     </label>
                 </div>
                 <label className={styles.titleLabel}>
@@ -126,7 +123,10 @@ const MealReservation = (): JSX.Element => {
                                 return (
                                     <TabButton
                                         active={active === index + 1}
-                                        onClick={() => setActive(index + 1)}
+                                        onClick={() => {
+                                            setActive(index + 1)
+                                            setMenuForDay(menusForWeek[index])
+                                        }}
                                         content={day}
                                     />
                                 )
@@ -235,8 +235,8 @@ const MealReservation = (): JSX.Element => {
                                 />
                             </div>
                             <label className={styles.cartInfo}>
-                                Vasa korpa je prazna, rezervisite neko jelo iz
-                                dnevnog menija
+                                Vaša korpa je prazna, rezervišite neko jelo iz
+                                dnevnog menija.
                             </label>
                         </>
                     ) : (

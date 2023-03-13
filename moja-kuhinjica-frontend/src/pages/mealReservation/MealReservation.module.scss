@@ -129,7 +129,6 @@
     padding-top: 5%;
     padding-bottom: 5%;
     justify-items: center;
-    // row-gap: 5%;
 
     @media only screen and (max-width: $breakpoint-medium) {
         grid-template-columns: repeat(2, 1fr [col-start]);
@@ -198,6 +197,12 @@
     margin-top: 5%;
     margin-bottom: 5%;
 
+    @media only screen and (max-width: $breakpoint-1080p) {
+        font-size: 30px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 24px;
+    }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 20px;
     }
@@ -212,6 +217,7 @@
 
 .priceDiv {
     @extend .rowDiv;
+    width: 90%;
     justify-content: space-between;
     align-items: flex-start;
     height: 10%;
@@ -268,30 +274,30 @@
 }
 
 .confirmButton {
+    height: 10%;
+
+    @media only screen and (max-width: $breakpoint-1440p) {
+        width: 70%;
+        margin-bottom: 10%;
+    }
     @media only screen and (max-width: $breakpoint-900p) {
         width: 60%;
-        height: 10%;
         margin-bottom: 10%;
     }
     @media only screen and (max-width: $breakpoint-720p) {
-        height: 10%;
-        width: 70%;
-    }
-    @media only screen and (max-width: $breakpoint-large) {
-        height: 7%;
         width: 70%;
     }
 }
 
 .scrollItemsDiv {
-    min-height: 50%;
-    width: 70%;
+    width: 80%;
     overflow: scroll;
     padding: 5%;
     height: 80%;
 
     @media only screen and (max-width: $breakpoint-large) {
         height: 50%;
+        width: 90%;
     }
 }
 
