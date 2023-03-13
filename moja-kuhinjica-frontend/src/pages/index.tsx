@@ -25,6 +25,8 @@ import { all } from 'axios'
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
 
+const days = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
+
 const Home = (): JSX.Element => {
     const today = new Date(Date.now())
     const [active, setActive] = useState<number>(today.getDay())
@@ -40,8 +42,8 @@ const Home = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [userEmail, setUserEmail] = useState<string>('')
     const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
-    const [allMenus, setAllMenus] = useState<IMenu[]>()
-    const [menu, setMenu] = useState<IMenu>()
+    const [allMenus, setAllMenus] = useState<IMenu[]>([])
+    const [selectedMenu, setSelectedMenu] = useState<IMenu>()
 
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
@@ -90,14 +92,18 @@ const Home = (): JSX.Element => {
     }
 
     const fetchMenus = (): void => {
-        RestaurantService.fetchAllMenus()
+        RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setAllMenus(res.data)
-                setMenu(res.data[5])
+                setSelectedMenu(res.data[active - 1])
             })
             .catch((err) => {
                 console.log(err)
             })
+    }
+
+    const handleTabChange = (): void => {
+        setActive(active + 1)
     }
 
     return (
@@ -167,40 +173,22 @@ const Home = (): JSX.Element => {
                         {`Dnevni meni - ${today.toLocaleDateString()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
-                        <TabButton
-                            active={active === 1}
-                            onClick={() => setActive(1)}
-                            content="PON"
-                        />
-                        <TabButton
-                            active={active === 2}
-                            onClick={() => setActive(2)}
-                            content="UTO"
-                        />
-                        <TabButton
-                            active={active === 3}
-                            onClick={() => setActive(3)}
-                            content="SRE"
-                        />
-                        <TabButton
-                            active={active === 4}
-                            onClick={() => setActive(4)}
-                            content="ČET"
-                        />
-                        <TabButton
-                            active={active === 5}
-                            onClick={() => setActive(5)}
-                            content="PET"
-                        />
-                        <TabButton
-                            active={active === 6}
-                            onClick={() => setActive(6)}
-                            content="SUB"
-                        />
+                        {days.map((day, index) => {
+                            return (
+                                <TabButton
+                                    active={active === index + 1}
+                                    onClick={() => {
+                                        setActive(index + 1)
+                                        setSelectedMenu(allMenus[index])
+                                    }}
+                                    content={day}
+                                />
+                            )
+                        })}
                     </div>
                     <div className={styles.menuGridDiv}>
-                        {menu &&
-                            menu.meals.map((meal: IMeal) => {
+                        {selectedMenu &&
+                            selectedMenu.meals.map((meal: IMeal) => {
                                 return (
                                     <MenuItem
                                         key={meal.id}

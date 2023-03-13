@@ -24,7 +24,7 @@ export interface ICartItem {
     amount: number
 }
 export default class RestaurantService extends Component {
-    public static async fetchAllMenus(): Promise<any> {
-        return await axiosInstance.get('/restaurant/1/menu/all')
+    public static async fetchWeeklyMenus(): Promise<any> {
+        return await axiosInstance.get('/restaurant/5/menu/week')
     }
 }

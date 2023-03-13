@@ -24,6 +24,8 @@ import { MenuItem } from '@/components/menu/MenuItem'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { addItemToCart } from '@/reduxStore/reducers/restaurantReducer'
 
+const days = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
+
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
     const dispatch = useAppDispatch()
@@ -35,7 +37,7 @@ const MealReservation = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
-    const [menuForWeek, setMenuForWeek] = useState<IMenu[]>()
+    const [menusForWeek, setMenusForWeek] = useState<IMenu[]>()
     const [menuForDay, setMenuForDay] = useState<IMenu>()
 
     useEffect(() => {
@@ -57,9 +59,10 @@ const MealReservation = (): JSX.Element => {
     }
 
     const fetchMenus = (): void => {
-        RestaurantService.fetchAllMenus()
+        RestaurantService.fetchWeeklyMenus()
             .then((res) => {
-                setMenuForWeek(res.data)
+                setMenusForWeek(res.data)
+                console.log(menusForWeek)
                 setMenuForDay(res.data[5])
             })
             .catch((err) => {
@@ -119,36 +122,15 @@ const MealReservation = (): JSX.Element => {
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
                         <div className={styles.menuRowDiv}>
-                            <TabButton
-                                active={active === 1}
-                                onClick={() => setActive(1)}
-                                content="PON"
-                            />
-                            <TabButton
-                                active={active === 2}
-                                onClick={() => setActive(2)}
-                                content="UTO"
-                            />
-                            <TabButton
-                                active={active === 3}
-                                onClick={() => setActive(3)}
-                                content="SRE"
-                            />
-                            <TabButton
-                                active={active === 4}
-                                onClick={() => setActive(4)}
-                                content="ČET"
-                            />
-                            <TabButton
-                                active={active === 5}
-                                onClick={() => setActive(5)}
-                                content="PET"
-                            />
-                            <TabButton
-                                active={active === 6}
-                                onClick={() => setActive(6)}
-                                content="SUB"
-                            />
+                            {days.map((day, index) => {
+                                return (
+                                    <TabButton
+                                        active={active === index + 1}
+                                        onClick={() => setActive(index + 1)}
+                                        content={day}
+                                    />
+                                )
+                            })}
                         </div>
                         {menuForDay ? (
                             <div className={styles.grid}>
