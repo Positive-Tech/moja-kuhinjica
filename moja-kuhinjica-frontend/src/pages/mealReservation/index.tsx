@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, isValidElement } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
@@ -12,13 +12,18 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { DAYS, MOBILE_WIDTH, routes } from '@/constants/constants'
+import {
+    DAYS,
+    INDEX_INCREMENT,
+    MOBILE_WIDTH,
+    routes,
+} from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
-    ICartItem,
     IMeal,
     IMenu,
+    IOrder,
 } from '@/service/Restaurant.service'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
@@ -27,7 +32,10 @@ import uuid from 'react-uuid'
 import { Oval } from 'react-loader-spinner'
 
 const ORDERING = 'ordering'
+const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
+const NIL_VALUE = -1
+
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
     const dispatch = useAppDispatch()
@@ -69,7 +77,7 @@ const MealReservation = (): JSX.Element => {
         RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setMenusForWeek(res.data)
-                setMenuForDay(res.data[active - 1])
+                setMenuForDay(res.data[active - INDEX_INCREMENT])
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -79,7 +87,13 @@ const MealReservation = (): JSX.Element => {
     }
 
     const addToCart = (meal: IMeal): void => {
-        dispatch(addItemToCart({ meal: meal, amount: INITIAL_MEAL_AMOUNT }))
+        dispatch(
+            addItemToCart({
+                meal: meal,
+                mealId: meal.id,
+                quantity: INITIAL_MEAL_AMOUNT,
+            })
+        )
     }
 
     const handleWindowResize = (): void => {
@@ -89,9 +103,30 @@ const MealReservation = (): JSX.Element => {
     const getTotalPrice = (): number => {
         let totalPrice = 0
         cartItems.forEach(
-            (item) => (totalPrice += item.meal.price * item.amount)
+            (item) => (totalPrice += item.meal.price * item.quantity)
         )
         return totalPrice
+    }
+
+    const createOrder = (): void => {
+        let order: IOrder = {
+            price: NIL_VALUE,
+            restaurantId: NIL_VALUE,
+            items: [],
+        }
+        order.price = getTotalPrice()
+        order.restaurantId = 5
+        order.items = cartItems.map(({ meal, ...item }) => item)
+        console.log(order)
+
+        RestaurantService.createOrder(order)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                alert(err.response.data.message)
+                console.log(err)
+            })
     }
     return (
         <div className={styles.colDiv}>
@@ -99,7 +134,7 @@ const MealReservation = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header type="red" selectedButton={2} />
+                <Header type={HEADER_TYPE} selectedButton={2} />
             )}
             <div
                 className={
@@ -135,9 +170,14 @@ const MealReservation = (): JSX.Element => {
                                 return (
                                     <TabButton
                                         key={uuid()}
-                                        active={active === activeTabIndex + 1}
+                                        active={
+                                            active ===
+                                            activeTabIndex + INDEX_INCREMENT
+                                        }
                                         onClick={() => {
-                                            setActive(activeTabIndex + 1)
+                                            setActive(
+                                                activeTabIndex + INDEX_INCREMENT
+                                            )
                                             setMenuForDay(
                                                 menusForWeek[activeTabIndex]
                                             )
@@ -245,6 +285,7 @@ const MealReservation = (): JSX.Element => {
                                             content="Potvrdi rezervaciju"
                                             isActive
                                             style={styles.confirmButton}
+                                            onClick={() => createOrder()}
                                         />
                                     </div>
                                 </div>
@@ -263,7 +304,7 @@ const MealReservation = (): JSX.Element => {
             {isMobile && !showCart && (
                 <div
                     className={styles.bottomCart}
-                    onClick={() => setShowCart(true)}
+                    onClick={() => !isCartEmpty() && setShowCart(true)}
                 >
                     {isCartEmpty() ? (
                         <>
@@ -290,7 +331,7 @@ const MealReservation = (): JSX.Element => {
                                     />
                                 </div>
                                 <label className={styles.cartInfo}>
-                                    5 rezervacija
+                                    {`${cartItems.length} rezervacija`}
                                 </label>
                             </div>
                             <div className={styles.priceWrapper}>
@@ -298,14 +339,14 @@ const MealReservation = (): JSX.Element => {
                                     Ukupno:
                                 </label>
                                 <label className={styles.totalPrice}>
-                                    1120 RSD
+                                    {`${getTotalPrice()} RSD`}
                                 </label>
                             </div>
                         </>
                     )}
                 </div>
             )}
-            {isMobile && showCart && !isCartEmpty && (
+            {isMobile && showCart && (
                 <div
                     className={styles.openCartContainer}
                     onClick={() => setShowCart(false)}
@@ -317,7 +358,11 @@ const MealReservation = (): JSX.Element => {
                         }}
                     >
                         <Title content="korpa" style={styles.cartTitle} />
-                        <div className={styles.scrollItemsDiv}></div>
+                        <div className={styles.scrollItemsDiv}>
+                            {cartItems.map(({ meal }) => {
+                                return <CartItem key={meal.id} meal={meal} />
+                            })}
+                        </div>
                         <div className={styles.priceDiv}>
                             <Text content="Ukupno:" style={styles.priceLabel} />
                             <div className={styles.totalPriceDiv}>
@@ -328,11 +373,14 @@ const MealReservation = (): JSX.Element => {
                                 <Text content="RSD" style={styles.totalPrice} />
                             </div>
                         </div>
-                        <RegularButton
-                            content="Potvrdi rezervaciju"
-                            style={styles.confirmButton}
-                            isActive
-                        />
+                        <div className={styles.confirmButtonWrapper}>
+                            <RegularButton
+                                content="Potvrdi rezervaciju"
+                                style={styles.confirmButton}
+                                isActive
+                                onClick={() => createOrder()}
+                            />
+                        </div>
                     </div>
                 </div>
             )}

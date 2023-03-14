@@ -28,7 +28,7 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
                 (item) => item.meal.id === action.payload.meal.id
             )
             const item = state.cartItems[itemIndex]
-            item.amount += action.payload.amount
+            item.quantity += action.payload.amount
             state.cartItems[itemIndex] = item
         })
         .addCase(removeCartItem, (state, action) => {

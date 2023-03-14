@@ -22,10 +22,26 @@ export interface IMealType {
 
 export interface ICartItem {
     meal: IMeal
-    amount: number
+    mealId: number
+    quantity: number
+}
+
+export interface IOrder {
+    price: number
+    restaurantId: number
+    items: {
+        mealId: number
+        quantity: number
+    }[]
 }
 export default class RestaurantService extends Component {
     public static async fetchWeeklyMenus(): Promise<any> {
         return await axiosInstance.get(axiosRoutes.restaurant.GET_WEEKLY_MENU)
+    }
+    public static async createOrder(data: IOrder): Promise<any> {
+        return await axiosInstance.post(
+            axiosRoutes.restaurant.CREATE_ORDER,
+            data
+        )
     }
 }

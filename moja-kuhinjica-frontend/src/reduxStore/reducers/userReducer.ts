@@ -27,8 +27,8 @@ export const userLogin = createAsyncThunk(
     ActionTypes.USER_LOGIN,
     async ({ inputData, onSuccess, onError }: any) => {
         try {
-            const { access_token } = await UserService.login(inputData)
-            localStorage.setItem('token', access_token)
+            const { data } = await UserService.login(inputData)
+            localStorage.setItem('token', data.access_token)
             onSuccess()
         } catch (err) {
             console.log(err)
@@ -50,7 +50,6 @@ export const userReducer = createReducer(initialState, (builder) => {
             state.errorMessage = null
         })
         .addCase(userLogin.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.isAuthorized = true
             state.inProgress = false
             state.errorMessage = null

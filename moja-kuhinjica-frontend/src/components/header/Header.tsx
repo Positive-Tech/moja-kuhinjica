@@ -71,21 +71,21 @@ const Header = ({
             <div className={styles.buttonWrapper}>
                 <HeaderButton
                     active={active === 1}
-                    onClick={() => handleClick(1, '/')}
+                    onClick={() => handleClick(1, routes.HOME_PAGE)}
                     content="Početna"
                     headerType={type}
                 />
                 <HeaderButton
                     active={active === 2}
                     onClick={() =>
-                        handleReservationClick(2, '/mealReservation')
+                        handleReservationClick(2, routes.MEAL_RESERVATION_PAGE)
                     }
                     content="Rezerviši"
                     headerType={type}
                 />
                 <HeaderButton
                     active={active === 3}
-                    onClick={() => handleClick(3, '/aboutUs')}
+                    onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
                     content="O nama"
                     headerType={type}
                 />

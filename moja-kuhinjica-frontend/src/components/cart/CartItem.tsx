@@ -17,7 +17,7 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
     const dispatch = useAppDispatch()
     const amount = useAppSelector(
         ({ restaurant: { cartItems } }) =>
-            cartItems.find((item) => item.meal.id === meal.id)?.amount
+            cartItems.find((item) => item.meal.id === meal.id)?.quantity
     )
     const getTotalMealPrice = (): number =>
         amount ? meal.price * amount : NIL_PRICE
