@@ -13,6 +13,7 @@ import editProfile from 'public/static/assets/images/editProfile.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import profile from 'public/static/assets/images/profileHeader.svg'
 import styles from './Menu.module.scss'
+import { routes } from '@/constants/constants'
 
 interface IMenuProps {
     closeMenu: () => void
@@ -33,7 +34,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
 
     const logout = (): void => {
         dispatch(userLogout())
-        navigate('/')
+        navigate(routes.HOME_PAGE)
     }
 
     return (
@@ -62,7 +63,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         content="Početna"
                         src={homeIcon}
                         style={styles.button}
-                        handleClick={() => navigate('/')}
+                        handleClick={() => navigate(routes.HOME_PAGE)}
                     />
                     <DropdownMenuButton
                         content="Rezerviši"
@@ -70,7 +71,9 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         style={styles.button}
                         handleClick={() =>
                             navigate(
-                                isAuthorized ? '/mealReservation' : 'login'
+                                isAuthorized
+                                    ? routes.MEAL_RESERVATION_PAGE
+                                    : routes.LOGIN_PAGE
                             )
                         }
                     />
@@ -79,7 +82,9 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                             content="Moje rezervacije"
                             src={myReservations}
                             style={styles.button}
-                            handleClick={() => navigate('/myReservations')}
+                            handleClick={() =>
+                                navigate(routes.MEAL_RESERVATION_PAGE)
+                            }
                         />
                     )}
                     {isAuthorized && (
@@ -88,7 +93,9 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                             src={editProfile}
                             style={styles.button}
                             handleClick={() =>
-                                navigate(`/editProfile/${user?.id}`)
+                                navigate(
+                                    `${routes.EDIT_PROFILE_PAGE}/${user?.id}`
+                                )
                             }
                         />
                     )}
@@ -96,7 +103,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         content="O nama"
                         src={aboutUsIcon}
                         style={styles.button}
-                        handleClick={() => navigate('/aboutUs')}
+                        handleClick={() => navigate(routes.ABOUT_US_PAGE)}
                     />
                     {isAuthorized && (
                         <DropdownMenuButton

@@ -6,9 +6,11 @@ import { Footer } from '@/components/footer/Footer'
 import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { DAYS, MOBILE_WIDTH } from '@/constants/constants'
+import { DAYS, INDEX_INCREMENT, MOBILE_WIDTH } from '@/constants/constants'
 import styles from './MyReservationsPage.module.scss'
 import uuid from 'react-uuid'
+
+const FIRST_ELEMENT = 0
 
 const MyReservationsPage = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
@@ -38,7 +40,7 @@ const MyReservationsPage = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header type="red" selectedButton={0} />
+                <Header type="red" selectedButton={FIRST_ELEMENT} />
             )}
             <div
                 className={
@@ -63,9 +65,14 @@ const MyReservationsPage = (): JSX.Element => {
                             return (
                                 <TabButton
                                     key={uuid()}
-                                    active={active === activeTabIndex + 1}
+                                    active={
+                                        active ===
+                                        activeTabIndex + INDEX_INCREMENT
+                                    }
                                     onClick={() =>
-                                        setActive(activeTabIndex + 1)
+                                        setActive(
+                                            activeTabIndex + INDEX_INCREMENT
+                                        )
                                     }
                                     content={day}
                                 />

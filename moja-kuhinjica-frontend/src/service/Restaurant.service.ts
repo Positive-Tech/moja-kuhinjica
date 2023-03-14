@@ -1,5 +1,6 @@
 import { axiosInstance } from 'src/config/axios'
 import { Component } from 'react'
+import { axiosRoutes } from '@/constants/constants'
 
 export interface IMenu {
     id: string
@@ -25,6 +26,6 @@ export interface ICartItem {
 }
 export default class RestaurantService extends Component {
     public static async fetchWeeklyMenus(): Promise<any> {
-        return await axiosInstance.get('/restaurant/5/menu/week')
+        return await axiosInstance.get(axiosRoutes.restaurant.GET_WEEKLY_MENU)
     }
 }

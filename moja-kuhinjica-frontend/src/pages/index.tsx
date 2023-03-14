@@ -15,7 +15,12 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
-import { DAYS, MOBILE_WIDTH } from 'src/constants/constants'
+import {
+    DAYS,
+    INDEX_INCREMENT,
+    MOBILE_WIDTH,
+    routes,
+} from 'src/constants/constants'
 import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
@@ -51,7 +56,7 @@ const Home = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isAuthorized) dispatch<any>(loadUser())
+        if (isAuthorized) dispatch(loadUser())
     }, [isAuthorized])
 
     useEffect(() => {
@@ -77,12 +82,12 @@ const Home = (): JSX.Element => {
     }
 
     const handleSignUpClick = (): void => {
-        if (isMobile) router.push('/registration')
+        if (isMobile) router.push(routes.REGISTRATION_PAGE)
         else setShowSignUpModal(true)
     }
 
     const handleLoginClick = (): void => {
-        if (isMobile) router.push('/login')
+        if (isMobile) router.push(routes.LOGIN_PAGE)
         else setShowLoginModal(true)
     }
 
@@ -95,7 +100,7 @@ const Home = (): JSX.Element => {
         RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setAllMenus(res.data)
-                setSelectedMenu(res.data[active - 1])
+                setSelectedMenu(res.data[active - INDEX_INCREMENT])
             })
             .catch((err) => {
                 console.log(err)
@@ -107,7 +112,7 @@ const Home = (): JSX.Element => {
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
                 type={HEADER_TYPE}
-                selectedButton={1}
+                selectedButton={INDEX_INCREMENT}
                 openLoginModal={setShowLoginModal}
             />
             <div className={styles.wrapper}>
@@ -159,7 +164,9 @@ const Home = (): JSX.Element => {
                             Restoran Top FOOD 021
                         </label>
                         <label
-                            onClick={() => router.push('/restaurant/profile')}
+                            onClick={() =>
+                                router.push(routes.RESTAURANT_PROFILE_PAGE)
+                            }
                             className={styles.restaurantInfoLabel}
                         >
                             opšte informacije
@@ -173,9 +180,14 @@ const Home = (): JSX.Element => {
                             return (
                                 <TabButton
                                     key={uuid()}
-                                    active={active === activeTabIndex + 1}
+                                    active={
+                                        active ===
+                                        activeTabIndex + INDEX_INCREMENT
+                                    }
                                     onClick={() => {
-                                        setActive(activeTabIndex + 1)
+                                        setActive(
+                                            activeTabIndex + INDEX_INCREMENT
+                                        )
                                         setSelectedMenu(
                                             allMenus[activeTabIndex]
                                         )

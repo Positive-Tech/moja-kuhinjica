@@ -12,7 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { DAYS, MOBILE_WIDTH } from '@/constants/constants'
+import { DAYS, MOBILE_WIDTH, routes } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
@@ -117,7 +117,9 @@ const MealReservation = (): JSX.Element => {
                         Restoran Top FOOD 021
                     </label>
                     <label
-                        onClick={() => router.push('/restaurant/profile')}
+                        onClick={() =>
+                            router.push(routes.RESTAURANT_PROFILE_PAGE)
+                        }
                         className={styles.restaurantInfoLabel}
                     >
                         opšte informacije
