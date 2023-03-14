@@ -1,4 +1,4 @@
-import React, { useState, useEffect, isValidElement } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
@@ -109,7 +109,7 @@ const MealReservation = (): JSX.Element => {
     }
 
     const createOrder = (): void => {
-        let order: IOrder = {
+        const order: IOrder = {
             price: NIL_VALUE,
             restaurantId: NIL_VALUE,
             items: [],
