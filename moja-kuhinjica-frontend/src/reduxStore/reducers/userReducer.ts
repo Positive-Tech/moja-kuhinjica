@@ -1,15 +1,9 @@
-import UserService from '@/service/User.service'
+import UserService, { ILoggedInUser } from '@/service/User.service'
 import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import { ActionTypes } from '../constants/actionTypes'
 
 interface UserState {
-    user: {
-        id: number | null
-        name: string | null
-        surname: string | null
-        phoneNumber: string | null
-        role: string | null
-    } | null
+    user: ILoggedInUser | null
     inProgress: boolean
     isAuthorized: boolean
     errorMessage: string | null | undefined
@@ -17,7 +11,7 @@ interface UserState {
 
 const initialState: UserState = {
     user: {
-        id: null,
+        id: '',
         name: '',
         surname: '',
         phoneNumber: '',
@@ -43,7 +37,7 @@ export const userLogin = createAsyncThunk(
     }
 )
 export const loadUser = createAsyncThunk(ActionTypes.LOAD_USER, async () => {
-    const { data } = await UserService.getLoggedInUser()
+    const data = await UserService.getLoggedInUser()
     return data
 })
 
@@ -56,7 +50,6 @@ export const userReducer = createReducer(initialState, (builder) => {
             state.errorMessage = null
         })
         .addCase(userLogin.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.isAuthorized = true
             state.inProgress = false
             state.errorMessage = null

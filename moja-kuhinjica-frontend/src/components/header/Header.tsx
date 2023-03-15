@@ -11,6 +11,7 @@ import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
 import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
+import { routes } from '@/constants/constants'
 
 const HEADER_TYPE = 'red'
 interface IHeaderProps {
@@ -55,7 +56,7 @@ const Header = ({
     const logout = (): void => {
         dispatch(userLogout())
         setMenuIsOpen(false)
-        router.push('/')
+        router.push(routes.HOME_PAGE)
     }
 
     return (
@@ -70,21 +71,21 @@ const Header = ({
             <div className={styles.buttonWrapper}>
                 <HeaderButton
                     active={active === 1}
-                    onClick={() => handleClick(1, '/')}
+                    onClick={() => handleClick(1, routes.HOME_PAGE)}
                     content="Početna"
                     headerType={type}
                 />
                 <HeaderButton
                     active={active === 2}
                     onClick={() =>
-                        handleReservationClick(2, '/mealReservation')
+                        handleReservationClick(2, routes.MEAL_RESERVATION_PAGE)
                     }
                     content="Rezerviši"
                     headerType={type}
                 />
                 <HeaderButton
                     active={active === 3}
-                    onClick={() => handleClick(3, '/aboutUs')}
+                    onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
                     content="O nama"
                     headerType={type}
                 />
@@ -109,7 +110,9 @@ const Header = ({
                                         content="Moje rezervacije"
                                         src={myReservationsIcon}
                                         handleClick={() =>
-                                            router.push('/myReservations')
+                                            router.push(
+                                                routes.MY_RESERVATIONS_PAGE
+                                            )
                                         }
                                     />
                                     <DropdownMenuButton
@@ -117,7 +120,7 @@ const Header = ({
                                         src={editProfileIcon}
                                         handleClick={() =>
                                             router.push(
-                                                `/editProfile/${user?.id}`
+                                                `${routes.EDIT_PROFILE_PAGE}/${user?.id}`
                                             )
                                         }
                                     />
