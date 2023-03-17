@@ -107,6 +107,13 @@ const Home = (): JSX.Element => {
             })
     }
 
+    const getDate = () => {
+        const dateArrReversed = selectedMenu?.date.split('-')
+        const dateArr = dateArrReversed?.reverse()
+        const date = dateArr?.join('/')
+        return date
+    }
+
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -173,7 +180,7 @@ const Home = (): JSX.Element => {
                         </label>
                     </div>
                     <label className={styles.titleLabel}>
-                        {`Dnevni meni - ${today.toLocaleDateString()}`}
+                        {`Dnevni meni - ${getDate()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
                         {DAYS.map((day, activeTabIndex) => {
@@ -200,13 +207,20 @@ const Home = (): JSX.Element => {
                     <div className={styles.menuGridDiv}>
                         {selectedMenu &&
                             selectedMenu.meals.map(
-                                ({ id, title, description, price }: IMeal) => {
+                                ({
+                                    id,
+                                    title,
+                                    description,
+                                    price,
+                                    image,
+                                }: IMeal) => {
                                     return (
                                         <MenuItem
                                             key={id}
                                             title={title}
                                             description={description}
                                             price={price}
+                                            image={image}
                                         />
                                     )
                                 }
