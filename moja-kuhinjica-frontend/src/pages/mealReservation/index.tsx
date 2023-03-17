@@ -128,6 +128,13 @@ const MealReservation = (): JSX.Element => {
                 console.log(err)
             })
     }
+
+    const getDate = () => {
+        const dateArrReversed = menuForDay?.date.split('-')
+        const dateArr = dateArrReversed?.reverse()
+        const date = dateArr?.join('/')
+        return date
+    }
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -161,7 +168,7 @@ const MealReservation = (): JSX.Element => {
                     </label>
                 </div>
                 <label className={styles.titleLabel}>
-                    {`Dnevni meni - ${today.toLocaleDateString()}`}
+                    {`Dnevni meni - ${getDate()}`}
                 </label>
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
@@ -205,7 +212,7 @@ const MealReservation = (): JSX.Element => {
                         )}
                         {menuForDay && !isLoading && (
                             <div className={styles.grid}>
-                                {menuForDay.meals.map((meal) => {
+                                {menuForDay.meals.map((meal: IMeal) => {
                                     return (
                                         <MenuItem
                                             key={meal.id}
@@ -213,6 +220,7 @@ const MealReservation = (): JSX.Element => {
                                             title={meal.title}
                                             description={meal.description}
                                             price={meal.price}
+                                            image={meal.image}
                                             handleClick={() => addToCart(meal)}
                                             buttonIsActive={
                                                 !isItemInCart(meal.id)
