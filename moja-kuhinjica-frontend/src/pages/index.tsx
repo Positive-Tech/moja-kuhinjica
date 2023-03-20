@@ -109,9 +109,7 @@ const Home = (): JSX.Element => {
 
     const getDate = () => {
         const dateArrReversed = selectedMenu?.date.split('-')
-        const dateArr = dateArrReversed?.reverse()
-        const date = dateArr?.join('/')
-        return date
+        return dateArrReversed?.reverse()?.join('/')
     }
 
     return (
@@ -205,26 +203,25 @@ const Home = (): JSX.Element => {
                         })}
                     </div>
                     <div className={styles.menuGridDiv}>
-                        {selectedMenu &&
-                            selectedMenu.meals.map(
-                                ({
-                                    id,
-                                    title,
-                                    description,
-                                    price,
-                                    image,
-                                }: IMeal) => {
-                                    return (
-                                        <MenuItem
-                                            key={id}
-                                            title={title}
-                                            description={description}
-                                            price={price}
-                                            image={image}
-                                        />
-                                    )
-                                }
-                            )}
+                        {selectedMenu?.meals?.map(
+                            ({
+                                id,
+                                title,
+                                description,
+                                price,
+                                image,
+                            }: IMeal) => {
+                                return (
+                                    <MenuItem
+                                        key={id}
+                                        title={title}
+                                        description={description}
+                                        price={price}
+                                        image={image}
+                                    />
+                                )
+                            }
+                        )}
                     </div>
                 </div>
             </div>

@@ -131,9 +131,7 @@ const MealReservation = (): JSX.Element => {
 
     const getDate = () => {
         const dateArrReversed = menuForDay?.date.split('-')
-        const dateArr = dateArrReversed?.reverse()
-        const date = dateArr?.join('/')
-        return date
+        return dateArrReversed?.reverse()?.join('/')
     }
     return (
         <div className={styles.colDiv}>
@@ -212,7 +210,7 @@ const MealReservation = (): JSX.Element => {
                         )}
                         {menuForDay && !isLoading && (
                             <div className={styles.grid}>
-                                {menuForDay.meals.map((meal: IMeal) => {
+                                {menuForDay?.meals?.map((meal: IMeal) => {
                                     return (
                                         <MenuItem
                                             key={meal.id}
