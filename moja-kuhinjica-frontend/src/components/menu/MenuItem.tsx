@@ -6,6 +6,9 @@ import { Text } from '../label/Text'
 import styles from './MenuItem.module.scss'
 import pic from 'public/static/assets/images/meal1.png'
 
+const IMAGE_WIDTH = 500
+const IMAGE_HEIGHT = 500
+
 const ORDERING = 'ordering'
 interface IMenuItemProps {
     type?: string
@@ -41,8 +44,8 @@ export const MenuItem = ({
                     src={image ? image : pic}
                     alt=""
                     className={styles.restaurantPicture}
-                    width={500}
-                    height={500}
+                    width={IMAGE_WIDTH}
+                    height={IMAGE_HEIGHT}
                 />
             </div>
             <div className={styles.titleWrapper}>
