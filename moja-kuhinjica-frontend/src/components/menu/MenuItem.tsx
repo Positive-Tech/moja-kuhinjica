@@ -38,10 +38,11 @@ export const MenuItem = ({
                 }
             >
                 <Image
-                    src={image}
+                    src={image ? image : pic}
                     alt=""
                     className={styles.restaurantPicture}
-                    fill
+                    width={500}
+                    height={500}
                 />
             </div>
             <div className={styles.titleWrapper}>

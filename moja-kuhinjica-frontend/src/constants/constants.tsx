@@ -33,7 +33,7 @@ export const axiosRoutes = {
     },
 
     restaurant: {
-        GET_WEEKLY_MENU: '/restaurant/4/menu/week',
+        GET_WEEKLY_MENU: '/restaurant/5/menu/week',
         CREATE_ORDER: '/order',
     },
 
