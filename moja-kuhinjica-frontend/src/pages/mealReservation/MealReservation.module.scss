@@ -42,7 +42,6 @@
 
 .emptyMenuTitleWrapper {
     @extend .restaurantTitleWrapper;
-    margin-top: 12%;
 }
 
 .restaurantTitle {
@@ -55,11 +54,11 @@
 
     @media only screen and (max-width: $breakpoint-720p) {
         font-size: 35px;
-        margin-top: 5%;
+        margin-top: 10%;
     }
     @media only screen and (max-width: $breakpoint-large) {
         font-size: 30px;
-        margin-top: 6%;
+        margin-top: 12%;
     }
     @media only screen and (max-width: $breakpoint-medium) {
         font-size: 30px;
@@ -172,16 +171,13 @@
     align-items: center;
     background: rgba(217, 217, 217, 0.22);
     border-radius: 40px;
-    height: 40%;
+    max-height: 580px;
     width: 100%;
     position: -webkit-sticky;
     position: sticky;
     top: 5%;
+    padding-bottom: 10px;
     overflow-y: hidden;
-
-    @media only screen and (max-width: $breakpoint-large) {
-        height: 35%;
-    }
 }
 
 .cartDiv {
