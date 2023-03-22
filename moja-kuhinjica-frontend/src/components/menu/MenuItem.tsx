@@ -6,6 +6,9 @@ import { Text } from '../label/Text'
 import styles from './MenuItem.module.scss'
 import pic from 'public/static/assets/images/meal1.png'
 
+const IMAGE_WIDTH = 500
+const IMAGE_HEIGHT = 500
+
 const ORDERING = 'ordering'
 interface IMenuItemProps {
     type?: string
@@ -14,12 +17,14 @@ interface IMenuItemProps {
     price: number
     handleClick?: () => void
     buttonIsActive?: boolean
+    image: string
 }
 export const MenuItem = ({
     type,
     title,
     description,
     price,
+    image,
     handleClick,
     buttonIsActive,
 }: IMenuItemProps): JSX.Element => {
@@ -35,7 +40,13 @@ export const MenuItem = ({
                         : styles.pictureWrapper
                 }
             >
-                <Image src={pic} alt="" className={styles.restaurantPicture} />
+                <Image
+                    src={image ? image : pic}
+                    alt=""
+                    className={styles.restaurantPicture}
+                    width={IMAGE_WIDTH}
+                    height={IMAGE_HEIGHT}
+                />
             </div>
             <div className={styles.titleWrapper}>
                 <Title
