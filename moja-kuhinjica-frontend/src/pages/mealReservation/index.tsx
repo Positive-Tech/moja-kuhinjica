@@ -129,7 +129,7 @@ const MealReservation = (): JSX.Element => {
             })
     }
 
-    const getDate = () => {
+    const getDate = (): string | undefined => {
         const dateArrReversed = menuForDay?.date.split('-')
         return dateArrReversed?.reverse()?.join('/')
     }
