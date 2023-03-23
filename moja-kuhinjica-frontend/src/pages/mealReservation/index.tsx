@@ -53,7 +53,7 @@ const MealReservation = (): JSX.Element => {
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
 
-    const hasMeals = menuForDay && !!menuForDay.meals.length
+    const hasMeals = Boolean(menuForDay?.meals?.length)
 
     useEffect(() => {
         fetchMenus()
