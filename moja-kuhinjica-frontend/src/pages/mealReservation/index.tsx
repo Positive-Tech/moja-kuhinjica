@@ -27,14 +27,20 @@ import RestaurantService, {
 } from '@/service/Restaurant.service'
 import { MenuItem } from '@/components/menu/MenuItem'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
-import { addItemToCart } from '@/reduxStore/reducers/restaurantReducer'
+import {
+    addItemToCart,
+    emptyCart,
+} from '@/reduxStore/reducers/restaurantReducer'
 import uuid from 'react-uuid'
 import { Oval } from 'react-loader-spinner'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
-const NIL_VALUE = -1
+dayjs.extend(utc)
+const currentDateTime = dayjs.utc().format()
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
@@ -109,19 +115,19 @@ const MealReservation = (): JSX.Element => {
     }
 
     const createOrder = (): void => {
+        const items = cartItems.map(({ meal, ...item }) => item)
         const order: IOrder = {
-            price: NIL_VALUE,
-            restaurantId: NIL_VALUE,
-            items: [],
+            date: currentDateTime,
+            price: getTotalPrice(),
+            restaurantId: 5,
+            items,
         }
-        order.price = getTotalPrice()
-        order.restaurantId = 5
-        order.items = cartItems.map(({ meal, ...item }) => item)
         console.log(order)
 
         RestaurantService.createOrder(order)
             .then((res) => {
                 console.log(res)
+                dispatch(emptyCart())
             })
             .catch((err) => {
                 alert(err.response.data.message)
