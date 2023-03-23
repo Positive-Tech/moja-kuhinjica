@@ -53,6 +53,8 @@ const MealReservation = (): JSX.Element => {
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
 
+    const hasMeals = Boolean(menuForDay?.meals?.length)
+
     useEffect(() => {
         fetchMenus()
     }, [])
@@ -141,14 +143,10 @@ const MealReservation = (): JSX.Element => {
             ) : (
                 <Header type={HEADER_TYPE} selectedButton={2} />
             )}
-            <div
-                className={
-                    menuForDay ? styles.container : styles.emptyMenuContainer
-                }
-            >
+            <div className={styles.container}>
                 <div
                     className={
-                        menuForDay
+                        hasMeals
                             ? styles.restaurantTitleWrapper
                             : styles.emptyMenuTitleWrapper
                     }
@@ -208,7 +206,7 @@ const MealReservation = (): JSX.Element => {
                                 />
                             </div>
                         )}
-                        {menuForDay && !isLoading && (
+                        {hasMeals && !isLoading && (
                             <div className={styles.grid}>
                                 {menuForDay?.meals?.map((meal: IMeal) => {
                                     return (
@@ -228,7 +226,7 @@ const MealReservation = (): JSX.Element => {
                                 })}
                             </div>
                         )}
-                        {!isLoading && !menuForDay && (
+                        {!isLoading && !hasMeals && (
                             <div className={styles.emptyMenuDiv}>
                                 <Text
                                     content={`Dnevni meni za ${today.toLocaleDateString()} još uvek nije
@@ -299,7 +297,6 @@ const MealReservation = (): JSX.Element => {
                         </div>
                     </div>
                 </div>
-                {isMobile ? <MobileFooter /> : <Footer />}
             </div>
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
@@ -390,6 +387,7 @@ const MealReservation = (): JSX.Element => {
                     </div>
                 </div>
             )}
+            {isMobile ? <MobileFooter /> : <Footer />}
         </div>
     )
 }
