@@ -107,7 +107,7 @@ const Home = (): JSX.Element => {
             })
     }
 
-    const getDate = () => {
+    const getDate = (): string | undefined => {
         const dateArrReversed = selectedMenu?.date.split('-')
         return dateArrReversed?.reverse()?.join('/')
     }
