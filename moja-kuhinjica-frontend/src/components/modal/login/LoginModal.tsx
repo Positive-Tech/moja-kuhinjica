@@ -30,6 +30,7 @@ export const LoginModal = ({
     const dispatch = useAppDispatch()
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
+
     const {
         register,
         handleSubmit,

@@ -32,7 +32,10 @@ const Header = ({
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const user = useAppSelector((state) => state.auth.user)
 
-    const handleClick = (buttonNumber: number, url: string): void => {
+    const handleClick = (
+        buttonNumber: number | undefined,
+        url: string
+    ): void => {
         setActive(buttonNumber)
         router.push(url)
     }
@@ -71,7 +74,9 @@ const Header = ({
             <div className={styles.buttonWrapper}>
                 <HeaderButton
                     active={active === 1}
-                    onClick={() => handleClick(1, routes.HOME_PAGE)}
+                    onClick={() =>
+                        handleClick(selectedButton, routes.HOME_PAGE)
+                    }
                     content="Početna"
                     headerType={type}
                 />
