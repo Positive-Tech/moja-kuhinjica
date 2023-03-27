@@ -27,6 +27,7 @@ export interface ICartItem {
 }
 
 export interface IOrder {
+    date: string
     price: number
     restaurantId: number
     items: Array<{
