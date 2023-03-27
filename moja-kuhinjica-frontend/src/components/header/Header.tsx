@@ -12,12 +12,13 @@ import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
 import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import { routes } from '@/constants/constants'
+import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
 
 const HEADER_TYPE = 'red'
 interface IHeaderProps {
     type: string
     selectedButton?: number
-    openLoginModal?: (param: boolean) => void
+    openLoginModal?: (param1: boolean) => void
 }
 
 const Header = ({
@@ -51,11 +52,11 @@ const Header = ({
         setActive(buttonNumber)
         if (isAuthorized) {
             router.push(url)
-            return
         } else {
+            openLoginModal?.(true)
             setActive(selectedButton)
+            dispatch(setRedirectToReservations(true))
         }
-        openLoginModal?.(true)
     }
 
     const logout = (): void => {

@@ -7,11 +7,13 @@ import { userLogin } from '@/reduxStore/reducers/userReducer'
 import { FormInput } from '../../input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
-import { bgModal } from '../../../constants/constants'
+import { bgModal, routes } from '../../../constants/constants'
 import styles from './LoginModal.module.scss'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
+import { useRouter } from 'next/router'
+import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -30,6 +32,10 @@ export const LoginModal = ({
     const dispatch = useAppDispatch()
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
+    const redirectToReservations = useAppSelector(
+        ({ navigation: { redirectToReservations } }) => redirectToReservations
+    )
+    const router = useRouter()
 
     const {
         register,
@@ -45,6 +51,9 @@ export const LoginModal = ({
                 onSuccess: () => {
                     closeModal()
                     reset()
+                    redirectToReservations &&
+                        router.push(routes.MEAL_RESERVATION_PAGE)
+                    dispatch(setRedirectToReservations(false))
                 },
                 onError: (message: string) => {
                     setErrorMessage(message)
