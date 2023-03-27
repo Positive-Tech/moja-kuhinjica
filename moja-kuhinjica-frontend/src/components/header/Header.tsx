@@ -52,6 +52,8 @@ const Header = ({
         if (isAuthorized) {
             router.push(url)
             return
+        } else {
+            setActive(selectedButton)
         }
         openLoginModal?.(true)
     }
@@ -74,9 +76,7 @@ const Header = ({
             <div className={styles.buttonWrapper}>
                 <HeaderButton
                     active={active === 1}
-                    onClick={() =>
-                        handleClick(selectedButton, routes.HOME_PAGE)
-                    }
+                    onClick={() => handleClick(1, routes.HOME_PAGE)}
                     content="Početna"
                     headerType={type}
                 />

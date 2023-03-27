@@ -16,6 +16,7 @@ import aboutUsPic from 'public/static/assets/images/aboutUs.png'
 import styles from './AboutUs.module.scss'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
+import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 
 interface Question {
     id: number
@@ -32,6 +33,10 @@ const AboutUs = (): JSX.Element => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showPasswordForgettingModal, setShowPasswordForgettingModal] =
         useState<boolean>(false)
+    const [showPasswordResettingModal, setShowPasswordResettingModal] =
+        useState<boolean>(false)
+    const [userEmail, setUserEmail] = useState<string>('')
+    const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
 
     useEffect(() => {
         handleWindowResize()
@@ -116,15 +121,21 @@ const AboutUs = (): JSX.Element => {
                         setShowPasswordForgettingModal(true)
                     }
                 />
-                {/* <PasswordForgettingModal
-                modalIsOpen={showPasswordForgettingModal}
-                closeModal={() => setShowPasswordForgettingModal(false)}
-                openNotificationModal={() =>
-                    setShowPasswordResettingModal(true)
-                }
-                setMessage={setResetPasswordMessage}
-                setUserEmail={setUserEmail}
-            /> */}
+                <PasswordForgettingModal
+                    modalIsOpen={showPasswordForgettingModal}
+                    closeModal={() => setShowPasswordForgettingModal(false)}
+                    openNotificationModal={() =>
+                        setShowPasswordResettingModal(true)
+                    }
+                    setMessage={setResetPasswordMessage}
+                    setUserEmail={setUserEmail}
+                />
+                <PasswordResettingModal
+                    modalIsOpen={showPasswordResettingModal}
+                    closeModal={() => setShowPasswordResettingModal(false)}
+                    infoContent={resetPasswordMessage}
+                    email={userEmail}
+                />
                 <div className={styles.tabWrapper}>
                     {active === 1 && (
                         <div className={styles.aboutUsContainer}>
