@@ -3,14 +3,6 @@ import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
 import { FieldValues } from 'react-hook-form'
 import { ActionTypes } from '../constants/actionTypes'
 
-interface ILoginResponse {
-    access_token: string
-}
-
-interface IRejectWithValue {
-    rejectValue: string
-}
-
 interface ILoginPayoload {
     inputData: FieldValues
     onSuccess: () => void
