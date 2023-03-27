@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogout } from '@/reduxStore/reducers/userReducer'
@@ -31,6 +31,17 @@ const Header = ({
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const user = useAppSelector((state) => state.auth.user)
+
+    let menuRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        let handler = (e: MouseEvent): void => {
+            if (!menuRef.current?.contains(e.target as Node)) {
+                setMenuIsOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handler)
+    })
 
     const handleClick = (buttonNumber: number, url: string): void => {
         setActive(buttonNumber)
@@ -104,6 +115,7 @@ const Header = ({
                                         ? styles.dropdownMenu
                                         : styles.dropdownMenuHome
                                 }
+                                ref={menuRef}
                             >
                                 <div className={styles.dropDownButtonWrapper}>
                                     <DropdownMenuButton
