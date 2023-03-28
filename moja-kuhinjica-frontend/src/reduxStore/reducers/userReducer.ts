@@ -70,12 +70,10 @@ export const userReducer = createReducer(initialState, (builder) => {
             state.errorMessage = null
         })
         .addCase(userLogin.fulfilled, (state, action) => {
-            action.payload !== undefined
-                ? ((state.isAuthorized = true),
-                  (state.inProgress = false),
-                  (state.errorMessage = null))
-                : ((state.inProgress = false),
-                  (state.errorMessage = 'Invalid response'))
+            const isAuthorized = Boolean(action.payload)
+            state.inProgress = false
+            state.isAuthorized = isAuthorized
+            state.errorMessage = isAuthorized ? null : 'Invalid response'
         })
         .addCase(userLogin.rejected, (state, action) => {
             state.inProgress = false
