@@ -26,6 +26,8 @@ import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
 import uuid from 'react-uuid'
+import { Oval } from 'react-loader-spinner'
+import { Text } from '@/components/label/Text'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
@@ -48,8 +50,11 @@ const Home = (): JSX.Element => {
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [userEmail, setUserEmail] = useState<string>('')
     const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const [allMenus, setAllMenus] = useState<IMenu[]>([])
     const [selectedMenu, setSelectedMenu] = useState<IMenu>()
+
+    const hasMeals = Boolean(selectedMenu?.meals?.length)
 
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector(
@@ -105,13 +110,16 @@ const Home = (): JSX.Element => {
     }
 
     const fetchMenus = (): void => {
+        setIsLoading(true)
         RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setAllMenus(res.data)
                 setSelectedMenu(res.data[active - INDEX_INCREMENT])
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
+                setIsLoading(false)
             })
     }
 
@@ -210,27 +218,54 @@ const Home = (): JSX.Element => {
                             )
                         })}
                     </div>
-                    <div className={styles.menuGridDiv}>
-                        {selectedMenu?.meals?.map(
-                            ({
-                                id,
-                                title,
-                                description,
-                                price,
-                                image,
-                            }: IMeal) => {
-                                return (
-                                    <MenuItem
-                                        key={id}
-                                        title={title}
-                                        description={description}
-                                        price={price}
-                                        image={image}
-                                    />
-                                )
-                            }
-                        )}
-                    </div>
+                    {isLoading && (
+                        <div className={styles.loadingBarWrapper}>
+                            <Oval
+                                height={70}
+                                width={70}
+                                color="#c10016"
+                                wrapperStyle={{}}
+                                wrapperClass={styles.spinner}
+                                visible={true}
+                                ariaLabel="oval-loading"
+                                secondaryColor="#c10016"
+                                strokeWidth={4}
+                                strokeWidthSecondary={4}
+                            />
+                        </div>
+                    )}
+                    {hasMeals && !isLoading && (
+                        <div className={styles.menuGridDiv}>
+                            {selectedMenu?.meals?.map(
+                                ({
+                                    id,
+                                    title,
+                                    description,
+                                    price,
+                                    image,
+                                }: IMeal) => {
+                                    return (
+                                        <MenuItem
+                                            key={id}
+                                            title={title}
+                                            description={description}
+                                            price={price}
+                                            image={image}
+                                        />
+                                    )
+                                }
+                            )}
+                        </div>
+                    )}
+                    {!isLoading && !hasMeals && (
+                        <div className={styles.emptyMenuDiv}>
+                            <Text
+                                content={`Dnevni meni za ${getDate()} još uvek nije
+                                        objavljen.`}
+                                style={styles.emptyMenuLabel}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
             {isMobile ? <MobileFooter /> : <Footer />}
