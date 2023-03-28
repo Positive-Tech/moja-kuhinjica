@@ -18,7 +18,7 @@ const HEADER_TYPE = 'red'
 interface IHeaderProps {
     type: string
     selectedButton?: number
-    openLoginModal?: (param1: boolean) => void
+    openLoginModal?: (shouldOpen: boolean) => void
 }
 
 const Header = ({
@@ -50,13 +50,11 @@ const Header = ({
         url: string
     ): void => {
         setActive(buttonNumber)
-        if (isAuthorized) {
-            router.push(url)
-        } else {
-            openLoginModal?.(true)
-            setActive(selectedButton)
-            dispatch(setRedirectToReservations(true))
-        }
+        isAuthorized
+            ? router.push(url)
+            : (openLoginModal?.(true),
+              setActive(selectedButton),
+              dispatch(setRedirectToReservations(true)))
     }
 
     const logout = (): void => {

@@ -24,6 +24,12 @@ interface Question {
     answer: string
     deletedDate: string
 }
+
+const BUTTON_ONE = 1
+const BUTTON_TWO = 2
+const BUTTON_THREE = 3
+const BUTTON_FOUR = 4
+
 const AboutUs = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
     const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -83,33 +89,33 @@ const AboutUs = (): JSX.Element => {
             ) : (
                 <Header
                     type="main"
-                    selectedButton={3}
+                    selectedButton={BUTTON_THREE}
                     openLoginModal={setShowLoginModal}
                 />
             )}
             <div className={styles.bottomWrapper}>
                 <div className={styles.menuRowDiv}>
                     <TabButton
-                        active={active === 1}
-                        onClick={() => setActive(1)}
+                        active={active === BUTTON_ONE}
+                        onClick={() => setActive(BUTTON_ONE)}
                         content="O nama"
                         style={styles.tabButton}
                     />
                     <TabButton
-                        active={active === 2}
-                        onClick={() => setActive(2)}
+                        active={active === BUTTON_TWO}
+                        onClick={() => setActive(BUTTON_TWO)}
                         style={styles.tabButton}
                         content="FAQ"
                     />
                     <TabButton
-                        active={active === 3}
-                        onClick={() => setActive(3)}
+                        active={active === BUTTON_THREE}
+                        onClick={() => setActive(BUTTON_THREE)}
                         style={styles.tabButton}
                         content="Politika privatnosti"
                     />
                     <TabButton
-                        active={active === 4}
-                        onClick={() => setActive(4)}
+                        active={active === BUTTON_FOUR}
+                        onClick={() => setActive(BUTTON_FOUR)}
                         style={styles.tabButton}
                         content="Uslovi korišćenja"
                     />
