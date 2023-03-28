@@ -1,6 +1,13 @@
 import UserService, { ILoggedInUser } from '@/service/User.service'
 import { createAction, createAsyncThunk, createReducer } from '@reduxjs/toolkit'
+import { FieldValues } from 'react-hook-form'
 import { ActionTypes } from '../constants/actionTypes'
+
+interface ILoginPayoload {
+    inputData: FieldValues
+    onSuccess: () => void
+    onError: (error: string) => void
+}
 
 interface UserState {
     user: ILoggedInUser | null
@@ -23,16 +30,29 @@ const initialState: UserState = {
 }
 
 export const userLogout = createAction(ActionTypes.USER_LOGOUT)
-export const userLogin = createAsyncThunk(
+export const userLogin = createAsyncThunk<
+    { access_token: string },
+    {
+        inputData: FieldValues
+        onSuccess: () => void
+        onError: (error: string) => void
+    },
+    { rejectValue: string }
+>(
     ActionTypes.USER_LOGIN,
-    async ({ inputData, onSuccess, onError }: any) => {
+    async (
+        { inputData, onSuccess, onError }: ILoginPayoload,
+        { rejectWithValue }
+    ) => {
         try {
             const { data } = await UserService.login(inputData)
             localStorage.setItem('token', data.access_token)
             onSuccess()
+
+            return { access_token: data.access_token }
         } catch (err) {
-            console.log(err)
             onError(err.response.data.message)
+            return rejectWithValue(err.response.data.message)
         }
     }
 )
@@ -50,9 +70,12 @@ export const userReducer = createReducer(initialState, (builder) => {
             state.errorMessage = null
         })
         .addCase(userLogin.fulfilled, (state, action) => {
-            state.isAuthorized = true
-            state.inProgress = false
-            state.errorMessage = null
+            action.payload !== undefined
+                ? ((state.isAuthorized = true),
+                  (state.inProgress = false),
+                  (state.errorMessage = null))
+                : ((state.inProgress = false),
+                  (state.errorMessage = 'Invalid response'))
         })
         .addCase(userLogin.rejected, (state, action) => {
             state.inProgress = false
