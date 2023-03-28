@@ -1,5 +1,5 @@
 import { ICartItem, IMeal } from '@/service/Restaurant.service'
-import { createAction, createReducer, current } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 import { ActionTypes } from '../constants/actionTypes'
 
 interface RestaurantState {

@@ -1,4 +1,3 @@
-import { routes } from '@/constants/constants'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { ActionTypes } from '../constants/actionTypes'
 

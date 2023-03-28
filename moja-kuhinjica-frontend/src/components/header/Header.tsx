@@ -33,6 +33,12 @@ const Header = ({
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const user = useAppSelector((state) => state.auth.user)
 
+    const handleUnauthorized = (): void => {
+        openLoginModal?.(true)
+        setActive(selectedButton)
+        dispatch(setRedirectToReservations(true))
+    }
+
     const handleClick = (
         buttonNumber: number | undefined,
         url: string
@@ -50,11 +56,7 @@ const Header = ({
         url: string
     ): void => {
         setActive(buttonNumber)
-        isAuthorized
-            ? router.push(url)
-            : (openLoginModal?.(true),
-              setActive(selectedButton),
-              dispatch(setRedirectToReservations(true)))
+        isAuthorized ? router.push(url) : handleUnauthorized()
     }
 
     const logout = (): void => {
