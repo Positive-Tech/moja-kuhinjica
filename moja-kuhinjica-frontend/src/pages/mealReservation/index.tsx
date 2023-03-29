@@ -40,7 +40,6 @@ const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
 dayjs.extend(utc)
-const currentDateTime = dayjs.utc().format()
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
@@ -58,6 +57,7 @@ const MealReservation = (): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
+    const [activeDay, setActiveDay] = useState<number>(0)
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
 
@@ -116,10 +116,20 @@ const MealReservation = (): JSX.Element => {
         return totalPrice
     }
 
+    const generateDateForWeekday = (activeDay: number): string => {
+        const today = dayjs()
+        let date = today.day(activeDay + 1)
+
+        if (date.isAfter(today)) {
+            date = date.startOf('day')
+        }
+        return date.utc(true).format()
+    }
+
     const createOrder = (): void => {
         const items = cartItems.map(({ meal, ...item }) => item)
         const order: IOrder = {
-            date: currentDateTime,
+            date: generateDateForWeekday(activeDay),
             price: getTotalPrice(),
             restaurantId: 5,
             items,
@@ -141,6 +151,16 @@ const MealReservation = (): JSX.Element => {
         const dateArrReversed = menuForDay?.date.split('-')
         return dateArrReversed?.reverse()?.join('/')
     }
+
+    const handleTabClickWithCartItems = (): void => {
+        if (cartItems.length) {
+            const result = confirm(
+                `Da li zelite da potvrdite narudzbinu za ${getDate()} ?`
+            )
+            result ? createOrder() : dispatch(emptyCart())
+        }
+    }
+
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -190,6 +210,8 @@ const MealReservation = (): JSX.Element => {
                                             setMenuForDay(
                                                 menusForWeek[activeTabIndex]
                                             )
+                                            setActiveDay(activeTabIndex)
+                                            handleTabClickWithCartItems()
                                         }}
                                         content={day}
                                     />
