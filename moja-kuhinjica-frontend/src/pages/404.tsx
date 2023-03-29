@@ -1,8 +1,9 @@
 import Link from 'next/link'
+import styles from './404page.module.scss'
 
 const NotFound = (): JSX.Element => {
     return (
-        <div className="not-found">
+        <div className={styles.notFound}>
             <h1>404</h1>
             <h2>Stranica ne postoji</h2>
             <Link href="/" style={{ textDecoration: 'none' }}>

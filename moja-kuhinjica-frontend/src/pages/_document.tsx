@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
                     />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&family=Poppins:wght@300;400&family=Londrina+Solid&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans&family=Poppins:wght@400;500;600;700;800&family=Londrina+Solid&display=swap"
                         rel="stylesheet"
                     />
                     <link rel="shortcut icon" href="/logo-moja-klopica.svg" />
