@@ -14,6 +14,9 @@ import { MOBILE_WIDTH } from '@/constants/constants'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import aboutUsPic from 'public/static/assets/images/aboutUs.png'
 import styles from './AboutUs.module.scss'
+import { LoginModal } from '@/components/modal/login/LoginModal'
+import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
+import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 
 interface Question {
     id: number
@@ -21,12 +24,25 @@ interface Question {
     answer: string
     deletedDate: string
 }
+
+const BUTTON_ONE = 1
+const BUTTON_TWO = 2
+const BUTTON_THREE = 3
+const BUTTON_FOUR = 4
+
 const AboutUs = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [questions, setQuestions] = useState<Question[]>()
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+    const [showPasswordForgettingModal, setShowPasswordForgettingModal] =
+        useState<boolean>(false)
+    const [showPasswordResettingModal, setShowPasswordResettingModal] =
+        useState<boolean>(false)
+    const [userEmail, setUserEmail] = useState<string>('')
+    const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
 
     useEffect(() => {
         handleWindowResize()
@@ -71,35 +87,61 @@ const AboutUs = (): JSX.Element => {
                     src={burgerMenuIcon}
                 />
             ) : (
-                <Header type="main" selectedButton={3} />
+                <Header
+                    type="main"
+                    selectedButton={BUTTON_THREE}
+                    openLoginModal={setShowLoginModal}
+                />
             )}
             <div className={styles.bottomWrapper}>
                 <div className={styles.menuRowDiv}>
                     <TabButton
-                        active={active === 1}
-                        onClick={() => setActive(1)}
+                        active={active === BUTTON_ONE}
+                        onClick={() => setActive(BUTTON_ONE)}
                         content="O nama"
                         style={styles.tabButton}
                     />
                     <TabButton
-                        active={active === 2}
-                        onClick={() => setActive(2)}
+                        active={active === BUTTON_TWO}
+                        onClick={() => setActive(BUTTON_TWO)}
                         style={styles.tabButton}
                         content="FAQ"
                     />
                     <TabButton
-                        active={active === 3}
-                        onClick={() => setActive(3)}
+                        active={active === BUTTON_THREE}
+                        onClick={() => setActive(BUTTON_THREE)}
                         style={styles.tabButton}
                         content="Politika privatnosti"
                     />
                     <TabButton
-                        active={active === 4}
-                        onClick={() => setActive(4)}
+                        active={active === BUTTON_FOUR}
+                        onClick={() => setActive(BUTTON_FOUR)}
                         style={styles.tabButton}
                         content="Uslovi korišćenja"
                     />
                 </div>
+                <LoginModal
+                    modalIsOpen={showLoginModal}
+                    closeModal={() => setShowLoginModal(false)}
+                    openPasswordForgettingModal={() =>
+                        setShowPasswordForgettingModal(true)
+                    }
+                />
+                <PasswordForgettingModal
+                    modalIsOpen={showPasswordForgettingModal}
+                    closeModal={() => setShowPasswordForgettingModal(false)}
+                    openNotificationModal={() =>
+                        setShowPasswordResettingModal(true)
+                    }
+                    setMessage={setResetPasswordMessage}
+                    setUserEmail={setUserEmail}
+                />
+                <PasswordResettingModal
+                    modalIsOpen={showPasswordResettingModal}
+                    closeModal={() => setShowPasswordResettingModal(false)}
+                    infoContent={resetPasswordMessage}
+                    email={userEmail}
+                />
                 <div className={styles.tabWrapper}>
                     {active === 1 && (
                         <div className={styles.aboutUsContainer}>

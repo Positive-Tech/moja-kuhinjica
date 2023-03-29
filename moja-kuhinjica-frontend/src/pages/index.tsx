@@ -33,6 +33,9 @@ const NOTIFICATION_MODAL_TYPE = 'registration'
 const Home = (): JSX.Element => {
     const today = new Date(Date.now())
     const [active, setActive] = useState<number>(today.getDay())
+    const [activeNavigationTab, setActiveNavigationTab] = useState<
+        number | undefined
+    >(1)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
     const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
@@ -91,6 +94,11 @@ const Home = (): JSX.Element => {
         else setShowLoginModal(true)
     }
 
+    const handleLoginModalClose = (): void => {
+        setShowLoginModal(false)
+        setActiveNavigationTab(1)
+    }
+
     const showNotificationModal = (email: string): void => {
         setUserEmail(email)
         setShowNotification(true)
@@ -107,7 +115,7 @@ const Home = (): JSX.Element => {
             })
     }
 
-    const getDate = () => {
+    const getDate = (): string | undefined => {
         const dateArrReversed = selectedMenu?.date.split('-')
         return dateArrReversed?.reverse()?.join('/')
     }
@@ -117,7 +125,7 @@ const Home = (): JSX.Element => {
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
                 type={HEADER_TYPE}
-                selectedButton={INDEX_INCREMENT}
+                selectedButton={activeNavigationTab}
                 openLoginModal={setShowLoginModal}
             />
             <div className={styles.wrapper}>
@@ -228,7 +236,7 @@ const Home = (): JSX.Element => {
             {isMobile ? <MobileFooter /> : <Footer />}
             <LoginModal
                 modalIsOpen={showLoginModal}
-                closeModal={() => setShowLoginModal(false)}
+                closeModal={() => handleLoginModalClose()}
                 openPasswordForgettingModal={() =>
                     setShowPasswordForgettingModal(true)
                 }

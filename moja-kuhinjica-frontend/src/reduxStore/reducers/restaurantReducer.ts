@@ -1,5 +1,5 @@
 import { ICartItem, IMeal } from '@/service/Restaurant.service'
-import { createAction, createReducer, current } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 import { ActionTypes } from '../constants/actionTypes'
 
 interface RestaurantState {
@@ -17,6 +17,7 @@ export const changeMealAmount = createAction<{ meal: IMeal; amount: number }>(
     ActionTypes.CHANGE_MEAL_AMOUNT
 )
 export const removeCartItem = createAction<IMeal>(ActionTypes.REMOVE_CART_ITEM)
+export const emptyCart = createAction(ActionTypes.EMPTY_CART)
 
 export const restaurantReducer = createReducer(initialState, (builder) => {
     builder
@@ -24,17 +25,24 @@ export const restaurantReducer = createReducer(initialState, (builder) => {
             state.cartItems = [...state.cartItems, action.payload]
         })
         .addCase(changeMealAmount, (state, action) => {
-            const itemIndex = current(state).cartItems.findIndex(
-                (item) => item.meal.id === action.payload.meal.id
-            )
-            const item = state.cartItems[itemIndex]
-            item.quantity += action.payload.amount
-            state.cartItems[itemIndex] = item
+            const updatedCartItems = state.cartItems.map((item) => {
+                if (item.meal.id === action.payload.meal.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity + action.payload.amount,
+                    }
+                }
+                return item
+            })
+            state.cartItems = updatedCartItems
         })
         .addCase(removeCartItem, (state, action) => {
-            const itemIndex = current(state).cartItems.findIndex(
-                (item) => item.meal.id === action.payload.id
+            const updatedCartItems = state.cartItems.filter(
+                (item) => item.meal.id !== action.payload.id
             )
-            state.cartItems.splice(itemIndex, 1)
+            state.cartItems = updatedCartItems
+        })
+        .addCase(emptyCart, (state) => {
+            state.cartItems = []
         })
 })
