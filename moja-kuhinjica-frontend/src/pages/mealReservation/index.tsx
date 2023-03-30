@@ -12,12 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import {
-    DAYS,
-    INDEX_INCREMENT,
-    MOBILE_WIDTH,
-    routes,
-} from '@/constants/constants'
+import { INDEX_INCREMENT, MOBILE_WIDTH, routes } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
@@ -35,6 +30,7 @@ import uuid from 'react-uuid'
 import { Oval } from 'react-loader-spinner'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import 'dayjs/locale/sr'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -60,6 +56,20 @@ const MealReservation = (): JSX.Element => {
     const [activeDay, setActiveDay] = useState<number>(0)
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
+    const weekdayArr: string[] = []
+
+    const weekdays = (): string[] => {
+        dayjs.locale('sr')
+
+        menusForWeek?.map(({ date }: IMenu) => {
+            const formattedDate = dayjs(date)
+                .format('ddd')
+                .toUpperCase()
+                .replace('.', '')
+            weekdayArr.push(formattedDate)
+        })
+        return weekdayArr
+    }
 
     useEffect(() => {
         fetchMenus()
@@ -195,7 +205,7 @@ const MealReservation = (): JSX.Element => {
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
                         <div className={styles.menuRowDiv}>
-                            {DAYS.map((day, activeTabIndex) => {
+                            {weekdays().map((day, activeTabIndex) => {
                                 return (
                                     <TabButton
                                         key={uuid()}
