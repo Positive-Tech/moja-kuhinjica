@@ -117,6 +117,9 @@ const Home = (): JSX.Element => {
 
     const getDate = (): string | undefined => {
         const dateArrReversed = selectedMenu?.date.split('-')
+        if (dateArrReversed === undefined) {
+            return 'ovaj dan jos nije definisan'
+        }
         return dateArrReversed?.reverse()?.join('/')
     }
 
@@ -186,7 +189,7 @@ const Home = (): JSX.Element => {
                         </label>
                     </div>
                     <label className={styles.titleLabel}>
-                        {`Dnevni meni - ${getDate()}`}
+                        {`Dnevni meni za ${getDate()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
                         {DAYS.map((day, activeTabIndex) => {

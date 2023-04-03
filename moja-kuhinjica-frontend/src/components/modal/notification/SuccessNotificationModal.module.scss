@@ -72,3 +72,13 @@
     color: #c10016;
     font-size: 16px;
 }
+
+.confirmationModalButtons {
+    display: flex;
+    gap: 20px;
+
+    & > button {
+        min-width: 200px;
+        padding: 5px 50px;
+    }
+}

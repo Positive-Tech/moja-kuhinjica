@@ -31,6 +31,8 @@ import { Oval } from 'react-loader-spinner'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/sr'
+import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
+import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -54,6 +56,12 @@ const MealReservation = (): JSX.Element => {
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
     const [activeDay, setActiveDay] = useState<number>(0)
+    const [reservationModalIsOpen, setReservationModalIsOpen] =
+        useState<boolean>(false)
+    const [confirmationModalIsOpen, setConfirmationModalIsOpen] =
+        useState<boolean>(false)
+    const [isError, setIsError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
     const weekdayArr: string[] = []
@@ -84,6 +92,25 @@ const MealReservation = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+            if (confirmationModalIsOpen) {
+                event.preventDefault()
+                event.returnValue = ''
+                document.body.style.pointerEvents = 'none'
+                return
+            }
+            document.body.style.pointerEvents = 'auto'
+        }
+
+        window.addEventListener('beforeunload', handleBeforeUnload)
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+            document.body.style.pointerEvents = 'auto'
+        }
+    }, [confirmationModalIsOpen])
 
     const isCartEmpty = (): boolean => !cartItems.length
 
@@ -148,27 +175,35 @@ const MealReservation = (): JSX.Element => {
 
         RestaurantService.createOrder(order)
             .then((res) => {
-                console.log(res)
+                setReservationModalIsOpen(true)
                 dispatch(emptyCart())
+                console.log(res)
             })
             .catch((err) => {
-                alert(err.response.data.message)
+                setIsError(true)
+                setErrorMessage(err.response.data.message)
+                setReservationModalIsOpen(true)
                 console.log(err)
             })
     }
 
     const getDate = (): string | undefined => {
         const dateArrReversed = menuForDay?.date.split('-')
+        if (dateArrReversed === undefined) {
+            return 'ovaj dan jos nije definisan'
+        }
         return dateArrReversed?.reverse()?.join('/')
     }
 
     const handleTabClickWithCartItems = (): void => {
         if (cartItems.length) {
-            const result = confirm(
-                `Da li zelite da potvrdite narudzbinu za ${getDate()} ?`
-            )
-            result ? createOrder() : dispatch(emptyCart())
+            setConfirmationModalIsOpen(true)
         }
+    }
+
+    const handleOrderConfirmation = (): void => {
+        createOrder()
+        setConfirmationModalIsOpen(false)
     }
 
     return (
@@ -179,6 +214,34 @@ const MealReservation = (): JSX.Element => {
             ) : (
                 <Header type={HEADER_TYPE} selectedButton={2} />
             )}
+            <ReservationNotificationModal
+                title={
+                    !isError
+                        ? 'Rezervacija je uspešna'
+                        : 'Neuspesna reservacija'
+                }
+                text={
+                    !isError
+                        ? 'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
+                        : 'Ne mozete rezervisati nakon 10c'
+                }
+                modalIsOpen={reservationModalIsOpen}
+                closeModal={() => {
+                    setReservationModalIsOpen(false)
+                }}
+                buttonText="OK"
+                isError={isError}
+            />
+            <ReservationConfirmationModal
+                title="Potvrdite rezervaciju"
+                text={`Da li zelite da potvrdite narudzbinu za ${getDate()} ?`}
+                modalIsOpen={confirmationModalIsOpen}
+                confirmOrder={handleOrderConfirmation}
+                closeModal={() => {
+                    setConfirmationModalIsOpen(false)
+                }}
+                buttonText="OK"
+            />
             <div className={styles.container}>
                 <div
                     className={
@@ -200,7 +263,7 @@ const MealReservation = (): JSX.Element => {
                     </label>
                 </div>
                 <label className={styles.titleLabel}>
-                    {`Dnevni meni - ${getDate()}`}
+                    {`Dnevni meni za ${getDate()}`}
                 </label>
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
@@ -327,7 +390,9 @@ const MealReservation = (): JSX.Element => {
                                             content="Potvrdi rezervaciju"
                                             isActive
                                             style={styles.confirmButton}
-                                            onClick={() => createOrder()}
+                                            onClick={() =>
+                                                setConfirmationModalIsOpen(true)
+                                            }
                                         />
                                     </div>
                                 </div>
