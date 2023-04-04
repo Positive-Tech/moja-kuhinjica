@@ -37,6 +37,7 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
+const ADD_ONE = 1
 dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
@@ -71,10 +72,12 @@ const MealReservation = (): JSX.Element => {
 
         menusForWeek?.map(({ date }: IMenu) => {
             const formattedDate = dayjs(date)
-                .format('ddd')
-                .toUpperCase()
+                .format('ddd ')
+                .toLocaleUpperCase()
                 .replace('.', '')
+
             weekdayArr.push(formattedDate)
+            return formattedDate
         })
         return weekdayArr
     }
@@ -86,8 +89,7 @@ const MealReservation = (): JSX.Element => {
     useEffect(() => {
         handleWindowResize()
         window.addEventListener('resize', handleWindowResize)
-        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
-        else setIsMobile(false)
+        setIsMobile(windowWidth < MOBILE_WIDTH)
         return () => {
             window.removeEventListener('resize', handleWindowResize)
         }
@@ -134,7 +136,7 @@ const MealReservation = (): JSX.Element => {
     const addToCart = (meal: IMeal): void => {
         dispatch(
             addItemToCart({
-                meal: meal,
+                meal,
                 mealId: meal.id,
                 quantity: INITIAL_MEAL_AMOUNT,
             })
@@ -154,13 +156,13 @@ const MealReservation = (): JSX.Element => {
     }
 
     const generateDateForWeekday = (activeDay: number): string => {
-        const today = dayjs()
-        let date = today.day(activeDay + 1)
+        const date = dayjs()
+        let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
 
-        if (date.isAfter(today)) {
-            date = date.startOf('day')
+        if (dateForCreatingOrder.isAfter(today)) {
+            dateForCreatingOrder = dateForCreatingOrder.startOf('day')
         }
-        return date.utc(true).format()
+        return dateForCreatingOrder.utc(true).format()
     }
 
     const createOrder = (): void => {
@@ -171,13 +173,11 @@ const MealReservation = (): JSX.Element => {
             restaurantId: 5,
             items,
         }
-        console.log(order)
 
         RestaurantService.createOrder(order)
-            .then((res) => {
+            .then(() => {
                 setReservationModalIsOpen(true)
                 dispatch(emptyCart())
-                console.log(res)
             })
             .catch((err) => {
                 setIsError(true)
@@ -189,16 +189,14 @@ const MealReservation = (): JSX.Element => {
 
     const getDate = (): string | undefined => {
         const dateArrReversed = menuForDay?.date.split('-')
-        if (dateArrReversed === undefined) {
+        if (!dateArrReversed) {
             return 'ovaj dan jos nije definisan'
         }
         return dateArrReversed?.reverse()?.join('/')
     }
 
     const handleTabClickWithCartItems = (): void => {
-        if (cartItems.length) {
-            setConfirmationModalIsOpen(true)
-        }
+        cartItems.length && setConfirmationModalIsOpen(true)
     }
 
     const handleOrderConfirmation = (): void => {
@@ -223,7 +221,7 @@ const MealReservation = (): JSX.Element => {
                 text={
                     !isError
                         ? 'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
-                        : 'Ne mozete rezervisati nakon 10c'
+                        : errorMessage
                 }
                 modalIsOpen={reservationModalIsOpen}
                 closeModal={() => {
