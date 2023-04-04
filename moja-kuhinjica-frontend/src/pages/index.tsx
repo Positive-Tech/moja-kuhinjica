@@ -226,7 +226,7 @@ const Home = (): JSX.Element => {
                                 color="#c10016"
                                 wrapperStyle={{}}
                                 wrapperClass={styles.spinner}
-                                visible={true}
+                                visible
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
                                 strokeWidth={4}
