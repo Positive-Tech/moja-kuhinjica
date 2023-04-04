@@ -83,6 +83,7 @@ export const FormInput = ({
                     type={inputType}
                     defaultValue={defaultValue}
                     {...rest}
+                    accept="text/plain"
                     ref={(e) => {
                         ref(e)
                         inputRef.current = e
