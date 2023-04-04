@@ -12,12 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import {
-    DAYS,
-    INDEX_INCREMENT,
-    MOBILE_WIDTH,
-    routes,
-} from '@/constants/constants'
+import { INDEX_INCREMENT, MOBILE_WIDTH, routes } from '@/constants/constants'
 import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
@@ -35,12 +30,15 @@ import uuid from 'react-uuid'
 import { Oval } from 'react-loader-spinner'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import 'dayjs/locale/sr'
+import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
+import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
+const ADD_ONE = 1
 dayjs.extend(utc)
-const currentDateTime = dayjs.utc().format()
 
 const MealReservation = (): JSX.Element => {
     const router = useRouter()
@@ -58,8 +56,31 @@ const MealReservation = (): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
+    const [activeDay, setActiveDay] = useState<number>(0)
+    const [reservationModalIsOpen, setReservationModalIsOpen] =
+        useState<boolean>(false)
+    const [confirmationModalIsOpen, setConfirmationModalIsOpen] =
+        useState<boolean>(false)
+    const [isError, setIsError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
+    const weekdayArr: string[] = []
+
+    const weekdays = (): string[] => {
+        dayjs.locale('sr')
+
+        menusForWeek?.map(({ date }: IMenu) => {
+            const formattedDate = dayjs(date)
+                .format('ddd ')
+                .toLocaleUpperCase()
+                .replace('.', '')
+
+            weekdayArr.push(formattedDate)
+            return formattedDate
+        })
+        return weekdayArr
+    }
 
     useEffect(() => {
         fetchMenus()
@@ -68,12 +89,30 @@ const MealReservation = (): JSX.Element => {
     useEffect(() => {
         handleWindowResize()
         window.addEventListener('resize', handleWindowResize)
-        if (windowWidth < MOBILE_WIDTH) setIsMobile(true)
-        else setIsMobile(false)
+        setIsMobile(windowWidth < MOBILE_WIDTH)
         return () => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+            if (confirmationModalIsOpen) {
+                event.preventDefault()
+                event.returnValue = ''
+                document.body.style.pointerEvents = 'none'
+                return
+            }
+            document.body.style.pointerEvents = 'auto'
+        }
+
+        window.addEventListener('beforeunload', handleBeforeUnload)
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+            document.body.style.pointerEvents = 'auto'
+        }
+    }, [confirmationModalIsOpen])
 
     const isCartEmpty = (): boolean => !cartItems.length
 
@@ -97,7 +136,7 @@ const MealReservation = (): JSX.Element => {
     const addToCart = (meal: IMeal): void => {
         dispatch(
             addItemToCart({
-                meal: meal,
+                meal,
                 mealId: meal.id,
                 quantity: INITIAL_MEAL_AMOUNT,
             })
@@ -116,31 +155,55 @@ const MealReservation = (): JSX.Element => {
         return totalPrice
     }
 
+    const generateDateForWeekday = (activeDay: number): string => {
+        const date = dayjs()
+        let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
+
+        if (dateForCreatingOrder.isAfter(today)) {
+            dateForCreatingOrder = dateForCreatingOrder.startOf('day')
+        }
+        return dateForCreatingOrder.utc(true).format()
+    }
+
     const createOrder = (): void => {
         const items = cartItems.map(({ meal, ...item }) => item)
         const order: IOrder = {
-            date: currentDateTime,
+            date: generateDateForWeekday(activeDay),
             price: getTotalPrice(),
             restaurantId: 5,
             items,
         }
-        console.log(order)
 
         RestaurantService.createOrder(order)
-            .then((res) => {
-                console.log(res)
+            .then(() => {
+                setReservationModalIsOpen(true)
                 dispatch(emptyCart())
             })
             .catch((err) => {
-                alert(err.response.data.message)
+                setIsError(true)
+                setErrorMessage(err.response.data.message)
+                setReservationModalIsOpen(true)
                 console.log(err)
             })
     }
 
     const getDate = (): string | undefined => {
         const dateArrReversed = menuForDay?.date.split('-')
+        if (!dateArrReversed) {
+            return 'ovaj dan jos nije definisan'
+        }
         return dateArrReversed?.reverse()?.join('/')
     }
+
+    const handleTabClickWithCartItems = (): void => {
+        cartItems.length && setConfirmationModalIsOpen(true)
+    }
+
+    const handleOrderConfirmation = (): void => {
+        createOrder()
+        setConfirmationModalIsOpen(false)
+    }
+
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -149,6 +212,34 @@ const MealReservation = (): JSX.Element => {
             ) : (
                 <Header type={HEADER_TYPE} selectedButton={2} />
             )}
+            <ReservationNotificationModal
+                title={
+                    !isError
+                        ? 'Rezervacija je uspešna'
+                        : 'Neuspesna reservacija'
+                }
+                text={
+                    !isError
+                        ? 'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
+                        : errorMessage
+                }
+                modalIsOpen={reservationModalIsOpen}
+                closeModal={() => {
+                    setReservationModalIsOpen(false)
+                }}
+                buttonText="OK"
+                isError={isError}
+            />
+            <ReservationConfirmationModal
+                title="Potvrdite rezervaciju"
+                text={`Da li zelite da potvrdite narudzbinu za ${getDate()} ?`}
+                modalIsOpen={confirmationModalIsOpen}
+                confirmOrder={handleOrderConfirmation}
+                closeModal={() => {
+                    setConfirmationModalIsOpen(false)
+                }}
+                buttonText="OK"
+            />
             <div className={styles.container}>
                 <div
                     className={
@@ -170,12 +261,12 @@ const MealReservation = (): JSX.Element => {
                     </label>
                 </div>
                 <label className={styles.titleLabel}>
-                    {`Dnevni meni - ${getDate()}`}
+                    {`Dnevni meni za ${getDate()}`}
                 </label>
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
                         <div className={styles.menuRowDiv}>
-                            {DAYS.map((day, activeTabIndex) => {
+                            {weekdays().map((day, activeTabIndex) => {
                                 return (
                                     <TabButton
                                         key={uuid()}
@@ -190,6 +281,8 @@ const MealReservation = (): JSX.Element => {
                                             setMenuForDay(
                                                 menusForWeek[activeTabIndex]
                                             )
+                                            setActiveDay(activeTabIndex)
+                                            handleTabClickWithCartItems()
                                         }}
                                         content={day}
                                     />
@@ -295,7 +388,9 @@ const MealReservation = (): JSX.Element => {
                                             content="Potvrdi rezervaciju"
                                             isActive
                                             style={styles.confirmButton}
-                                            onClick={() => createOrder()}
+                                            onClick={() =>
+                                                setConfirmationModalIsOpen(true)
+                                            }
                                         />
                                     </div>
                                 </div>
