@@ -37,7 +37,10 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
-const ADD_ONE = 1
+const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
+const RESERVATION_FAIL = 'Neuspešna rezervacija'
+const RESERVATION_SUCCESS_MESSAGE =
+    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
 dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
@@ -63,6 +66,7 @@ const MealReservation = (): JSX.Element => {
         useState<boolean>(false)
     const [isError, setIsError] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
+    const [isTabClick, setIsTabClick] = useState<boolean>(false)
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
     const weekdayArr: string[] = []
@@ -157,9 +161,9 @@ const MealReservation = (): JSX.Element => {
 
     const generateDateForWeekday = (activeDay: number): string => {
         const date = dayjs()
-        let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
+        let dateForCreatingOrder = date.day(activeDay)
 
-        if (dateForCreatingOrder.isAfter(today)) {
+        if (dateForCreatingOrder.isAfter(date)) {
             dateForCreatingOrder = dateForCreatingOrder.startOf('day')
         }
         return dateForCreatingOrder.utc(true).format()
@@ -178,6 +182,7 @@ const MealReservation = (): JSX.Element => {
             .then(() => {
                 setReservationModalIsOpen(true)
                 dispatch(emptyCart())
+                setIsError(false)
             })
             .catch((err) => {
                 setIsError(true)
@@ -196,7 +201,16 @@ const MealReservation = (): JSX.Element => {
     }
 
     const handleTabClickWithCartItems = (): void => {
-        cartItems.length && setConfirmationModalIsOpen(true)
+        if (cartItems.length) {
+            setConfirmationModalIsOpen(true)
+            setIsTabClick(true)
+        }
+    }
+
+    const handleOrderCancellation = (): void => {
+        dispatch(emptyCart())
+        setConfirmationModalIsOpen(false)
+        setIsTabClick(false)
     }
 
     const handleOrderConfirmation = (): void => {
@@ -213,16 +227,8 @@ const MealReservation = (): JSX.Element => {
                 <Header type={HEADER_TYPE} selectedButton={2} />
             )}
             <ReservationNotificationModal
-                title={
-                    !isError
-                        ? 'Rezervacija je uspešna'
-                        : 'Neuspesna reservacija'
-                }
-                text={
-                    !isError
-                        ? 'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
-                        : errorMessage
-                }
+                title={!isError ? RESERVATION_SUCCESS : RESERVATION_FAIL}
+                text={!isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage}
                 modalIsOpen={reservationModalIsOpen}
                 closeModal={() => {
                     setReservationModalIsOpen(false)
@@ -236,7 +242,9 @@ const MealReservation = (): JSX.Element => {
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={handleOrderConfirmation}
                 closeModal={() => {
-                    setConfirmationModalIsOpen(false)
+                    isTabClick
+                        ? handleOrderCancellation()
+                        : setConfirmationModalIsOpen(false)
                 }}
                 buttonText="OK"
             />

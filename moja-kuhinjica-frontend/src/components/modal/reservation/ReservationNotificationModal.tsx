@@ -25,6 +25,7 @@ export const ReservationNotificationModal = ({
         <Modal
             isOpen={modalIsOpen}
             style={bgModal}
+            onRequestClose={closeModal}
             className={styles.modalContainer}
             ariaHideApp={false}
         >
