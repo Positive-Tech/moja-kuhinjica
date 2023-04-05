@@ -21,7 +21,7 @@ export const PasswordResettingModal = ({
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const sendEmail = (): void => {
         setIsLoading(true)
-        UserService.forgotPassword({ email: email })
+        UserService.forgotPassword({ email })
             .then((res) => {
                 setIsLoading(false)
             })
