@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { Text } from '../label/Text'
 import { AmountButton } from '../button/AmountButton'
 import styles from './CartItem.module.scss'
-import mealPic from 'public/static/assets/images/meal2.png'
 import bin from 'public/static/assets/images/bin.svg'
 import { IMeal } from '@/service/Restaurant.service'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
@@ -27,9 +26,13 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
             <div className={styles.rowDiv1}>
                 <div className={styles.pictureWrapper}>
                     <Image
-                        src={mealPic}
+                        src={meal.image}
                         alt=""
                         className={styles.mealPicture}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        style={{ width: '100%', height: '100%' }}
                     />
                 </div>
                 <div className={styles.mealNameWrapper}>

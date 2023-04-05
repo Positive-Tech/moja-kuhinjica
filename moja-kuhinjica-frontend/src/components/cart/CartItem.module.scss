@@ -17,6 +17,7 @@
     height: 90px;
     border-bottom: 1px solid #c1001633;
     margin-bottom: 5%;
+
     @media only screen and (max-width: $breakpoint-1440p) {
         height: 110px;
     }
@@ -66,11 +67,11 @@
     font-size: 14px;
     margin-bottom: 5%;
 
-    @media only screen and (max-width: $breakpoint-1080p) {
-        font-size: 16px;
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 11px;
     }
-    @media only screen and (max-width: $breakpoint-900p) {
-        font-size: 14px;
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 10px;
     }
 }
 

@@ -33,10 +33,10 @@ const Header = ({
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
     const user = useAppSelector((state) => state.auth.user)
 
-    let menuRef = useRef<HTMLDivElement>(null)
+    const menuRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        let handler = (e: MouseEvent): void => {
+        const handler = (e: MouseEvent): void => {
             if (!menuRef.current?.contains(e.target as Node)) {
                 setMenuIsOpen(false)
             }

@@ -6,7 +6,7 @@ const initialState = {}
 const middleware = [thunk]
 const store = configureStore({
     reducer: reducers,
-    middleware: middleware,
+    middleware,
     preloadedState: initialState,
 })
 
