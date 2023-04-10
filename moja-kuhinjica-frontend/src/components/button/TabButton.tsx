@@ -10,11 +10,14 @@ export const TabButton = ({
     active,
     onClick,
     content,
+    style,
 }: IDayButtonProps): JSX.Element => {
     return (
         <button
             onClick={onClick}
-            className={`${active ? `dayButton dayButton--selected` : `dayButton`}`}
+            className={`${
+                active ? `dayButton dayButton--selected` : `dayButton`
+            } ${style}`}
         >
             {content}
         </button>

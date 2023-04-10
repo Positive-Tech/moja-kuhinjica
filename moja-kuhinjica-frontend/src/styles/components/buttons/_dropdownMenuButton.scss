@@ -1,5 +1,3 @@
-@import '../../styles/breakpoints.module.scss';
-
 .buttonWrapper {
     width: 100%;
     height: 50px;
@@ -35,7 +33,7 @@
     }
 }
 
-.icon {
+.dropdownIcon {
     position: absolute;
     left: 10%;
 

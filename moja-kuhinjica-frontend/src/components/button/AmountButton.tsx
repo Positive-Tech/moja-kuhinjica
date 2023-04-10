@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import increment from 'public/static/assets/images/increment.svg'
 import decrement from 'public/static/assets/images/decrement.svg'
-import styles from './AmountButton.module.scss'
 import { useAppDispatch } from '@/utils/hooks'
 import { changeMealAmount } from '@/reduxStore/reducers/restaurantReducer'
 import { IMeal } from '@/service/Restaurant.service'
@@ -29,23 +28,21 @@ export const AmountButton = ({
     }
 
     return (
-        <div className={`${styles.amountWrapper} ${style}`}>
+        <div className={`amountWrapper ${style}`}>
             <Image
                 src={decrement}
                 alt=""
-                className={styles.button}
+                className="amountButton"
                 onClick={() => {
                     if (amount <= FIRST_ELEMENT) return
                     changeAmount(DECREMENT_VALUE)
                 }}
             />
-            <label className={`${styles.contentLabel} ${labelStyle}`}>
-                {amount}
-            </label>
+            <label className={`contentLabel ${labelStyle}`}>{amount}</label>
             <Image
                 src={increment}
                 alt=""
-                className={styles.button}
+                className="amountButton"
                 onClick={() => {
                     changeAmount(INCREMENT_VALUE)
                 }}

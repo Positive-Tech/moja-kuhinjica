@@ -9,6 +9,7 @@ interface IRegularButtonProps {
 export const RegularButton = ({
     content,
     onClick,
+    style,
     isActive,
 }: IRegularButtonProps): JSX.Element => {
     return (
@@ -16,8 +17,8 @@ export const RegularButton = ({
             onClick={onClick}
             className={
                 isActive
-                    ? `regularButton`
-                    : `regularButton regularButton--disabled`
+                    ? `regularButton ${style}`
+                    : ` regularButton regularButton--disabled ${style}`
             }
             disabled={!isActive}
         >

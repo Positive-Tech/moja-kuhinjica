@@ -1,5 +1,3 @@
-@import '../../styles/breakpoints.module.scss';
-
 .navButton {
     width: 25%;
     height: 40%;
@@ -36,14 +34,12 @@
         height: 50%;
         font-size: 18px;
     }
-}
 
-.navButtonSelected {
-    @extend .navButton;
-    border: 2px solid #c10016;
-}
+    &--selected {
+        border: 2px solid #c10016;
+    }
 
-.navButtonProfileSelected {
-    @extend .navButtonSelected;
-    border: 2px solid white;
+    &--selectedProfile {
+        border: 2px solid white;
+    }
 }
