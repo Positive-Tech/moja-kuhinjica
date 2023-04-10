@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './RegularButton.module.scss'
 
 interface IRegularButtonProps {
     onClick?: () => void
@@ -10,7 +9,6 @@ interface IRegularButtonProps {
 export const RegularButton = ({
     content,
     onClick,
-    style,
     isActive,
 }: IRegularButtonProps): JSX.Element => {
     return (
@@ -18,8 +16,8 @@ export const RegularButton = ({
             onClick={onClick}
             className={
                 isActive
-                    ? `${styles.button} ${style}`
-                    : `${styles.disabledButton} ${style}`
+                    ? `regularButton`
+                    : `regularButton regularButton--disabled`
             }
             disabled={!isActive}
         >
