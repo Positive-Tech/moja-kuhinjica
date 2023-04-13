@@ -20,6 +20,11 @@ import { Oval } from 'react-loader-spinner'
 
 const FIRST_ELEMENT = 0
 
+interface IGenerateWeekdays {
+    dayofweek: string
+    date: string
+}
+
 const MyReservationsPage = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
     const [reservationsExist, setReservationsExist] = useState<boolean>(true)
@@ -92,12 +97,12 @@ const MyReservationsPage = (): JSX.Element => {
         })
     }
 
-    const generateWeekDays = (): { dayofweek: string; date: string }[] => {
+    const generateWeekDays = (): IGenerateWeekdays[] => {
         const today: Dayjs = dayjs().startOf('day')
         const endOfWeek: Dayjs = today.add(6, 'day').endOf('day')
 
         dayjs.locale('sr')
-        const days: { dayofweek: string; date: string }[] = []
+        const days: IGenerateWeekdays[] = []
 
         let day = dayjs(today)
         while (day.isBefore(endOfWeek)) {

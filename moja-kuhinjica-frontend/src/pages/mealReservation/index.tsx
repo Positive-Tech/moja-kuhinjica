@@ -28,7 +28,7 @@ import {
 } from '@/reduxStore/reducers/restaurantReducer'
 import uuid from 'react-uuid'
 import { Oval } from 'react-loader-spinner'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/sr'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'

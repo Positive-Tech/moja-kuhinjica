@@ -72,7 +72,7 @@ export default class RestaurantService extends Component {
 
     public static async fetchMyReservations(isCurrent: boolean): Promise<any> {
         return await axiosInstance.get(
-            axiosRoutes.restaurant.GET_MY_RESERVATIONS + isCurrent
+            axiosRoutes.restaurant.GET_MY_RESERVATIONS + isCurrent.toString()
         )
     }
 }
