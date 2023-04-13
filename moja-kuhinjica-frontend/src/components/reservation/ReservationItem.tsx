@@ -1,30 +1,46 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './ReservationItem.module.scss'
-import meal1 from 'public/static/assets/images/meal1.png'
 
-export const ReservationItem = (): JSX.Element => {
+interface IReservationItemProps {
+    itemsLength: number
+    index: number
+    quantity: number
+    mealName: string
+    mealImage: string
+}
+
+export const ReservationItem = ({
+    itemsLength,
+    index,
+    quantity,
+    mealName,
+    mealImage,
+}: IReservationItemProps): JSX.Element => {
     return (
         <div className={styles.container}>
             <div className={styles.rowDiv}>
                 <div className={styles.pictureWrapper}>
-                    <Image src={meal1} alt="" className={styles.mealPicture} />
+                    <Image
+                        src={mealImage}
+                        alt=""
+                        className={styles.mealPicture}
+                        width={500}
+                        height={500}
+                    />
                 </div>
                 <div className={styles.contentWrapper}>
-                    <label className={styles.titleLabel}>
-                        Pasulj sa kobasicom
-                    </label>
+                    <label className={styles.titleLabel}>{mealName}</label>
                     <label className={styles.contentLabel}>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros.
+                        {quantity} porcija
                     </label>
-                    <label className={styles.contentLabel}>1 porcija</label>
                     <div className={styles.buttonContainer}>
                         <div className={styles.buttonWrapper}>
-                            <label className={styles.priceLabel}>560 din</label>
-                            <button className={styles.cancelButton}>
-                                Otkaži
-                            </button>
+                            {index === itemsLength - 1 && (
+                                <button className={styles.cancelButton}>
+                                    Otkaži rezervaciju
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
