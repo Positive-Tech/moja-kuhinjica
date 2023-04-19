@@ -5,7 +5,6 @@ import { userLogout } from '@/reduxStore/reducers/userReducer'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'
-import styles from './Header.module.scss'
 import logo from 'public/static/assets/images/logo-moja-klopica.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
@@ -79,13 +78,19 @@ const Header = ({
     return (
         <div
             className={
-                type === HEADER_TYPE ? styles.redWrapper : styles.wrapper
+                type === HEADER_TYPE
+                    ? 'headerWrapper headerWrapper--red'
+                    : 'headerWrapper'
             }
         >
-            <div className={styles.logoWrapper}>
-                <Image src={logo} alt="" className={styles.logoImage} />
+            <div className="headerWrapper__logoWrapper">
+                <Image
+                    src={logo}
+                    alt=""
+                    className="headerWrapper__logoWrapper__logoImage"
+                />
             </div>
-            <div className={styles.buttonWrapper}>
+            <div className="headerWrapper__buttonWrapper">
                 <HeaderButton
                     active={active === 1}
                     onClick={() => handleClick(1, routes.HOME_PAGE)}
@@ -107,23 +112,23 @@ const Header = ({
                     headerType={type}
                 />
                 {isAuthorized && (
-                    <div className={styles.profileIconWrapper}>
+                    <div className="headerWrapper__buttonWrapper__profileIconWrapper">
                         <Image
                             src={profileIcon}
                             alt=""
-                            className={styles.profileIcon}
+                            className="headerWrapper__buttonWrapper__profileIconWrapper__profileIcon"
                             onClick={() => handleOpen()}
                         />
                         {menuIsOpen && (
                             <div
                                 className={
                                     type === HEADER_TYPE
-                                        ? styles.dropdownMenu
-                                        : styles.dropdownMenuHome
+                                        ? "headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu"
+                                        : "headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu--home"
                                 }
                                 ref={menuRef}
                             >
-                                <div className={styles.dropDownButtonWrapper}>
+                                <div className="headerWrapper__buttonWrapper__profileIconWrapper__dropDownButtonWrapper">
                                     <DropdownMenuButton
                                         content="Moje rezervacije"
                                         src={myReservationsIcon}

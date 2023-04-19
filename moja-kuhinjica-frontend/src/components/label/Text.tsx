@@ -12,7 +12,7 @@ export const Text = ({
     handleClick,
 }: ITextProps): JSX.Element => {
     return (
-        <label className={`${styles.text} ${style}`} onClick={handleClick}>
+        <label className={`$textLabel ${style}`} onClick={handleClick}>
             {content}
         </label>
     )

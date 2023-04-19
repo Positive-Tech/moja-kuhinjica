@@ -32,37 +32,43 @@ export const MenuItem = ({
     const isOrdering = (): boolean => type === ORDERING
 
     return (
-        <div className={isOrdering() ? styles.orderingWrapper : styles.wrapper}>
+        <div
+            className={
+                isOrdering()
+                    ? 'menuItemWrapper menuItemWrapper--ordering'
+                    : 'menuItemWrapper'
+            }
+        >
             <div
                 className={
                     isOrdering()
-                        ? styles.orderingPictureWrapper
-                        : styles.pictureWrapper
+                        ? 'pictureWrapper pictureWrapper--ordering'
+                        : 'pictureWrapper'
                 }
             >
                 <Image
                     src={image ? image : pic}
                     alt=""
-                    className={styles.restaurantPicture}
+                    className="pictureWrapper__restaurantPicture"
                     width={IMAGE_WIDTH}
                     height={IMAGE_HEIGHT}
                 />
             </div>
-            <div className={styles.titleWrapper}>
+            <div className="titleWrapper">
                 <Title
                     onClick={() => setOpenDescription(!openDescription)}
                     content={title}
                     style={
                         isOrdering()
-                            ? styles.orderingTitleLabel
-                            : styles.titleLabel
+                            ? 'titleWrapper__orderingTitleLabel'
+                            : 'titleWrapper__titleLabel'
                     }
                 />
                 <svg
                     className={
                         openDescription
-                            ? styles.svgSeparatorRotated
-                            : styles.svgSeparator
+                            ? 'titleWrapper__svgSeparator titleWrapper__svgSeparator--rotated'
+                            : 'titleWrapper__svgSeparator'
                     }
                     onClick={() => setOpenDescription(!openDescription)}
                     width="19"
@@ -73,23 +79,23 @@ export const MenuItem = ({
                 </svg>
             </div>
             {openDescription && (
-                <div className={styles.descriptionLabelDiv}>
+                <div className="descriptionLabelDiv">
                     <Text
                         content={description}
                         style={
                             isOrdering()
-                                ? styles.orderingDescriptionLabel
-                                : styles.descriptionLabel
+                                ? 'descriptionLabelDiv descriptionLabelDiv__descriptionLabel--ordering'
+                                : 'descriptionLabelDiv__descriptionLabel'
                         }
                     />
                 </div>
             )}
-            <div className={styles.priceWrapper}>
+            <div className="priceWrapper">
                 <label
                     className={
                         isOrdering()
-                            ? styles.orderingContentLabel
-                            : styles.contentLabel
+                            ? 'priceWrapper__contentLabel priceWrapper__contentLabel--ordering'
+                            : 'priceWrapper__contentLabel'
                     }
                 >
                     meni 1 -&nbsp;
@@ -97,15 +103,15 @@ export const MenuItem = ({
                 <label
                     className={
                         isOrdering()
-                            ? styles.orderingPriceLabel
-                            : styles.priceLabel
+                            ? 'priceWrapper__contentLabel priceWrapper__contentLabel--ordering--orderingPriceLabel'
+                            : 'priceWrapper__contentLabel priceWrapper__contentLabel--priceLabel'
                     }
                 >
                     {`${price} din`}
                 </label>
             </div>
             {isOrdering() && (
-                <div className={styles.buttonContainer}>
+                <div className="buttonContainer">
                     <RegularButton
                         content="Rezerviši"
                         onClick={handleClick}

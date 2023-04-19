@@ -1,28 +1,35 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './ReservationItem.module.scss'
 import meal1 from 'public/static/assets/images/meal1.png'
 
 export const ReservationItem = (): JSX.Element => {
     return (
-        <div className={styles.container}>
-            <div className={styles.rowDiv}>
-                <div className={styles.pictureWrapper}>
-                    <Image src={meal1} alt="" className={styles.mealPicture} />
+        <div className="reservationContainer">
+            <div className="reservationContainer__rowDiv">
+                <div className="reservationContainer__rowDiv__pictureWrapper">
+                    <Image
+                        src={meal1}
+                        alt=""
+                        className="reservationContainer__rowDiv__pictureWrapper__mealPicture"
+                    />
                 </div>
-                <div className={styles.contentWrapper}>
-                    <label className={styles.titleLabel}>
+                <div className="reservationContainer__rowDiv__contentWrapper">
+                    <label className="reservationContainer__rowDiv__contentWrapper__titleLabel">
                         Pasulj sa kobasicom
                     </label>
-                    <label className={styles.contentLabel}>
+                    <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing
                         elit. Donec odio. Quisque volutpat mattis eros.
                     </label>
-                    <label className={styles.contentLabel}>1 porcija</label>
-                    <div className={styles.buttonContainer}>
-                        <div className={styles.buttonWrapper}>
-                            <label className={styles.priceLabel}>560 din</label>
-                            <button className={styles.cancelButton}>
+                    <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
+                        1 porcija
+                    </label>
+                    <div className="reservationContainer__rowDiv__contentWrapper__buttonContainer">
+                        <div className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper">
+                            <label className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper__priceLabel">
+                                560 din
+                            </label>
+                            <button className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper__cancelButton">
                                 Otkaži
                             </button>
                         </div>

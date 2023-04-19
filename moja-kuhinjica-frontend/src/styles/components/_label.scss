@@ -1,34 +1,29 @@
-@import '../../styles/breakpoints.module.scss';
-
-.container {
+.labelWithIconContainer {
     display: flex;
     width: 100%;
     gap: 15px;
-}
 
-.content {
-    font-family: Poppins;
-    font-weight: 500;
-    font-size: 20px;
-    color: #333333;
+    &__content {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 20px;
+        color: #333333;
+    }
 }
 
 .openAnswerLabel {
+    @include flex-options(space-between, center, row);
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
     height: 90px;
 
     @media only screen and (max-width: $breakpoint-medium) {
         height: 60px;
     }
-}
 
-.labelWrapper {
-    @extend .openAnswerLabel;
-    border-bottom: 1px solid rgba(193, 0, 22, 0.2);
+    &--labelWrapper {
+        border-bottom: 1px solid rgba(193, 0, 22, 0.2);
+    }
 }
 
 .questionLabel {
@@ -48,11 +43,10 @@
     transform: rotate(90deg);
     fill: #c10016;
     cursor: pointer;
-}
 
-.svgButtonRotated {
-    @extend .svgButton;
-    transform: rotate(-90deg);
+    &--rotated {
+        transform: rotate(-90deg);
+    }
 }
 
 .answerText {
@@ -66,7 +60,7 @@
     }
 }
 
-.title {
+.titleLabel {
     font-family: Poppins;
     font-weight: 700;
     color: #333333;
@@ -74,7 +68,7 @@
     width: 80%;
 }
 
-.text {
+.textLabel {
     font-family: Poppins;
     font-weight: 300;
     color: #333333;

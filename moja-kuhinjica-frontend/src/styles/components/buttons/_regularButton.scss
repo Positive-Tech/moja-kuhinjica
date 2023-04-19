@@ -12,17 +12,17 @@
     border: none;
     background: #c10016;
 
-    @include responsive-rule($breakpoint-900p) {
+    @media only screen and (max-width: $breakpoint-900p) {
         width: 80%;
         height: 40%;
         font-size: 18px;
     }
-    @include responsive-rule($breakpoint-large) {
+    @media only screen and (max-width: $breakpoint-large) {
         width: 90%;
         height: 50%;
         font-size: 16px;
     }
-    @include responsive-rule($breakpoint-medium) {
+    @media only screen and (max-width: $breakpoint-medium) {
         width: 90%;
         font-size: 16px;
         margin: 5px;

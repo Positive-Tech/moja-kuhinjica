@@ -1,0 +1,58 @@
+.mobileMenuContainer {
+    @include flex-options(center, center, row);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #c10016f7;
+    z-index: 1;
+
+    &__wrapper {
+        @include flex-column;
+        width: 85%;
+        height: 90%;
+
+        &__buttonWrapper {
+            @include flex-column;
+            height: 95%;
+            width: 80%;
+            gap: 2%;
+
+            &__button {
+                border: 0;
+                padding-left: 30%;
+                font-size: 24px;
+            }
+        }
+
+        &__closeButtonWrapper {
+            @include flex-options(center, center, row);
+            height: 5%;
+            width: 100%;
+            margin-bottom: 10%;
+
+            &__userNameWrapper {
+                @include flex-row-vertical-center;
+                width: 80%;
+                height: 100%;
+                gap: 5%;
+            }
+            &__pictureWrapper {
+                height: 100%;
+                width: 20%;
+                overflow: auto;
+                overflow-y: hidden;
+
+                &__profilePicture {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+            &__userName {
+                font-family: Nunito;
+                font-weight: 400;
+                font-size: 28px;
+                color: #ffffff;
+            }
+        }
+    }
+}
