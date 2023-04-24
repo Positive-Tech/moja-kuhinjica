@@ -36,6 +36,7 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
+const ADD_ONE = 1
 const INITIAL_MEAL_AMOUNT = 1
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
@@ -69,12 +70,12 @@ const MealReservation = (): JSX.Element => {
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
-    const weekdayArr: string[] = []
 
     const weekdays = (): string[] => {
         dayjs.locale('sr')
+        const weekdayArr: string[] = []
 
-        menusForWeek?.map(({ date }: IMenu) => {
+        sortMenusByDate(menusForWeek)?.map(({ date }: IMenu) => {
             const formattedDate = dayjs(date)
                 .format('ddd ')
                 .toLocaleUpperCase()
@@ -159,9 +160,17 @@ const MealReservation = (): JSX.Element => {
         return totalPrice
     }
 
+    const sortMenusByDate = (menus: IMenu[]): IMenu[] => {
+        return menus.sort((a: IMenu, b: IMenu) => {
+            const dateA = new Date(a.date)
+            const dateB = new Date(b.date)
+            return dateA.getTime() - dateB.getTime()
+        })
+    }
+
     const generateDateForWeekday = (activeDay: number): string => {
         const date = dayjs()
-        let dateForCreatingOrder = date.day(activeDay)
+        let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
 
         if (dateForCreatingOrder.isAfter(date)) {
             dateForCreatingOrder = dateForCreatingOrder.startOf('day')
@@ -177,7 +186,7 @@ const MealReservation = (): JSX.Element => {
             restaurantId: 5,
             items,
         }
-
+        console.log(JSON.stringify(order))
         RestaurantService.createOrder(order)
             .then(() => {
                 setReservationModalIsOpen(true)

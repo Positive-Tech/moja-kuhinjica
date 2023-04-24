@@ -15,17 +15,14 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
-import {
-    DAYS,
-    INDEX_INCREMENT,
-    MOBILE_WIDTH,
-    routes,
-} from 'src/constants/constants'
+import { INDEX_INCREMENT, MOBILE_WIDTH, routes } from 'src/constants/constants'
 import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
 import uuid from 'react-uuid'
+import dayjs from 'dayjs'
+import 'dayjs/locale/sr'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
@@ -75,6 +72,30 @@ const Home = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    const sortMenusByDate = (menus: IMenu[]): IMenu[] => {
+        return menus.sort((a: IMenu, b: IMenu) => {
+            const dateA = new Date(a.date)
+            const dateB = new Date(b.date)
+            return dateA.getTime() - dateB.getTime()
+        })
+    }
+
+    const weekdays = (): string[] => {
+        dayjs.locale('sr')
+        const weekdayArr: string[] = []
+
+        sortMenusByDate(allMenus)?.map(({ date }: IMenu) => {
+            const formattedDate = dayjs(date)
+                .format('ddd ')
+                .toLocaleUpperCase()
+                .replace('.', '')
+
+            weekdayArr.push(formattedDate)
+            return formattedDate
+        })
+        return weekdayArr
+    }
 
     const handleClick = (): void => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
@@ -192,7 +213,7 @@ const Home = (): JSX.Element => {
                         {`Dnevni meni za ${getDate()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
-                        {DAYS.map((day, activeTabIndex) => {
+                        {weekdays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
                                     key={uuid()}
