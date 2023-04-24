@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { FormInput } from '@/components/input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
-import styles from './PasswordForgettingPage.module.scss'
 import back from 'public/static/assets/images/backArrow.svg'
 import emailIcon from 'public/static/assets/images/email.svg'
 import UserService from '@/service/User.service'
@@ -46,14 +45,14 @@ const PasswordForgettingPage = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
+        <div className="forgetContainer">
+            <div className="forgetContainer__wrapper">
                 <Image src={back} alt="" onClick={() => router.back()} />
                 <form
-                    className={styles.formDiv}
+                    className="forgetContainer__wrapper__formDiv"
                     onSubmit={handleSubmit((data) => resetPassword(data))}
                 >
-                    <label className={styles.formTitle}>
+                    <label className="forgetContainer__wrapper__formDiv__formTitle">
                         {showNotification
                             ? 'Proverite svoj email'
                             : 'Zaboravili ste šifru?'}
@@ -64,7 +63,7 @@ const PasswordForgettingPage = (): JSX.Element => {
                                 ? message
                                 : 'Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.'
                         }
-                        style={styles.infoLabel}
+                        style="forgetContainer__wrapper__formDiv__infoLabel"
                     />
                     {!showNotification && errorMessage && (
                         <ErrorLabel content={errorMessage} />
@@ -84,18 +83,18 @@ const PasswordForgettingPage = (): JSX.Element => {
                                     message: 'Pogrešan format email adrese.',
                                 },
                             }}
-                            style={styles.input}
+                            style="forgetContainer__wrapper__formDiv__input"
                         />
                     )}
                     {!showNotification && (
-                        <div className={styles.buttonWrapper}>
+                        <div className="forgetContainer__wrapper__formDiv__buttonWrapper">
                             {isLoading ? (
                                 <Oval
                                     height={40}
                                     width={40}
                                     color="#c10016"
                                     wrapperStyle={{}}
-                                    wrapperClass={styles.spinner}
+                                    wrapperClass="forgetContainer__wrapper__formDiv__buttonWrapper__spinner"
                                     visible={true}
                                     ariaLabel="oval-loading"
                                     secondaryColor="#c10016"
@@ -105,7 +104,7 @@ const PasswordForgettingPage = (): JSX.Element => {
                             ) : (
                                 <button
                                     type="submit"
-                                    className={styles.formButton}
+                                    className="forgetContainer__wrapper__formDiv__buttonWrapper__formButton"
                                 >
                                     Resetuj šifru
                                 </button>
@@ -113,16 +112,16 @@ const PasswordForgettingPage = (): JSX.Element => {
                         </div>
                     )}
                     {showNotification && (
-                        <div className={styles.labelWrapper}>
+                        <div className="forgetContainer__wrapper__formDiv__labelWrapper">
                             {!isLoading ? (
                                 <>
                                     <Text
                                         content="Nije Vam stigao email?"
-                                        style={styles.infoLabel}
+                                        style="forgetContainer__wrapper__formDiv__labelWrapper__infoLabel"
                                     />
                                     <Text
                                         content="Pošalji ponovo"
-                                        style={styles.buttonLabel}
+                                        style="forgetContainer__wrapper__formDiv__labelWrapper__infoLabel forgetContainer__wrapper__formDiv__labelWrapper__infoLabel--buttonLabel"
                                         handleClick={() =>
                                             resetPassword(inputData)
                                         }
@@ -134,7 +133,7 @@ const PasswordForgettingPage = (): JSX.Element => {
                                     width={40}
                                     color="#c10016"
                                     wrapperStyle={{}}
-                                    wrapperClass={styles.spinner}
+                                    wrapperClass="forgetContainer__wrapper__formDiv__labelWrapper__spinner"
                                     visible={true}
                                     ariaLabel="oval-loading"
                                     secondaryColor="#c10016"

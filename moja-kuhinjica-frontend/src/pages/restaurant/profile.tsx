@@ -6,7 +6,6 @@ import { LabelWithIcon } from '@/components/label/LabelWithIcon'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import Menu from '@/components/mobileMenu'
-import styles from './Profile.module.scss'
 import restaurantMap from 'public/static/assets/images/map.svg'
 import clock from 'public/static/assets/images/clock.svg'
 import location from 'public/static/assets/images/location.svg'
@@ -34,37 +33,37 @@ const Profile = (): JSX.Element => {
     }, [windowWidth])
 
     return (
-        <div className={styles.colDiv}>
+        <div className="profilePage">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
                 <Header type="red" selectedButton={0} />
             )}
-            <div className={styles.wrapper}>
-                <div className={styles.container}>
-                    <div className={styles.mainContainer}>
-                        <div className={styles.mainWrapper}>
-                            <div className={styles.contentContainer}>
-                                <label className={styles.name}>
+            <div className="profilePage__wrapper">
+                <div className="profilePage__wrapper__container">
+                    <div className="profilePage__wrapper__container__mainContainer">
+                        <div className="profilePage__wrapper__container__mainContainer__mainWrapper">
+                            <div className="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer">
+                                <label className="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer__name">
                                     Restoran Top Food 021
                                 </label>
                                 <LabelWithIcon
                                     src={clock}
                                     content="Ponedeljak-Petak, 12h-15h"
-                                    style={styles.infoLabel}
+                                    style="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer__infoLabel"
                                 />
                                 <LabelWithIcon
                                     src={location}
-                                    style={styles.infoLabel}
+                                    style="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer__infoLabel"
                                     content="Svetozara Miletića 26, 21000 Novi Sad"
                                 />
                                 <LabelWithIcon
-                                    style={styles.infoLabel}
+                                    style="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer__infoLabel"
                                     src={telephone}
                                     content="0644226471"
                                 />
-                                <label className={styles.description}>
+                                <label className="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer__description">
                                     Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. Nullam mi elit, commodo nec
                                     ante id, ornare efficitur dui. Nulla in quam
@@ -76,55 +75,59 @@ const Profile = (): JSX.Element => {
                                     eget metus a dictum.
                                 </label>
                             </div>
-                            <div className={styles.pictureWrapper}>
+                            <div className="profilePage__wrapper__container__mainContainer__mainWrapper__pictureWrapper">
                                 <Image
                                     src={restaurantMap}
                                     alt=""
-                                    className={styles.mapImage}
+                                    className="profilePage__wrapper__container__mainContainer__mainWrapper__pictureWrapper__mapImage"
                                 />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={styles.galleryWrapper}>
-                <label className={styles.title}>Galerija</label>
-                <div className={styles.galleryColDiv}>
+            <div className="profilePage__galleryWrapper">
+                <label className="profilePage__galleryWrapper__title">
+                    Galerija
+                </label>
+                <div className="profilePage__galleryWrapper__galleryColDiv">
                     {!isMobile && (
-                        <div className={styles.grid}>
+                        <div className="profilePage__galleryWrapper__galleryColDiv__grid">
                             <Image
                                 src={restaurantPic}
                                 alt=""
-                                className={styles.gridImage}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
                             />
                             <Image
                                 src={restaurantPic}
                                 alt=""
-                                className={styles.gridImage}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
                             />
                             <Image
                                 src={restaurantPic}
                                 alt=""
-                                className={styles.gridImage}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
                             />
                             <Image
                                 src={restaurantPic}
                                 alt=""
-                                className={styles.gridImage}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
                             />
                             <Image
                                 src={restaurantPic}
                                 alt=""
-                                className={styles.gridImage}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
                             />
                             <Image
                                 src={restaurantPic}
                                 alt=""
-                                className={styles.gridImage}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
                             />
                         </div>
                     )}
-                    {isMobile && <div className={styles.gallerySlider}></div>}
+                    {isMobile && (
+                        <div className="profilePage__galleryWrapper__galleryColDiv__gallerySlider"></div>
+                    )}
                 </div>
             </div>
             {isMobile ? <MobileFooter /> : <Footer />}

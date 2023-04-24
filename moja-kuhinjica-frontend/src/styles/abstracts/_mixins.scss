@@ -8,6 +8,19 @@
     align-items: center;
 }
 
+@mixin row-div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+@mixin col-div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
 @mixin flex-column {
     @include flex;
     flex-direction: column;
@@ -23,6 +36,14 @@
     justify-content: $justify-content;
     align-items: $align-items;
     flex-direction: $flex-direction;
+}
+
+@mixin spinner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @mixin error-page {

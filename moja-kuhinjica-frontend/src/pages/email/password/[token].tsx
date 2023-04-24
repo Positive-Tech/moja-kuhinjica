@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styles from '../EmailPages.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Title } from '@/components/label/Title'
 import { FormInput } from '@/components/input/FormInput'
@@ -53,16 +52,16 @@ const ResetPasswordPage = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.resetPassWrapper}>
+        <div className="resetVerifyContainer">
+            <div className="resetVerifyContainer__resetPassWrapper">
                 <Title
                     content="Resetovanje šifre"
-                    style={styles.resetPassTitle}
+                    style="resetVerifyContainer__resetPassWrapper__resetPassTitle"
                 />
-                <div className={styles.formWrapper}>
+                <div className="resetVerifyContainer__resetPassWrapper__formWrapper">
                     <form
                         onSubmit={handleSubmit((data) => validate(data))}
-                        className={styles.formDiv}
+                        className="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv"
                     >
                         {showError && <ErrorLabel content={errorMessage} />}
                         <FormInput
@@ -80,7 +79,7 @@ const ResetPasswordPage = (): JSX.Element => {
                                         'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                                 },
                             }}
-                            style={styles.passwordInput}
+                            style="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__passwordInput"
                         />
                         <FormInput
                             register={register}
@@ -92,16 +91,16 @@ const ResetPasswordPage = (): JSX.Element => {
                             validationSchema={{
                                 required: 'Šifra je obavezna.',
                             }}
-                            style={styles.passwordInput}
+                            style="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__passwordInput"
                         />
-                        <div className={styles.confirmButtonWrapper}>
+                        <div className="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__confirmButtonWrapper">
                             {isLoading ? (
                                 <Oval
                                     height={40}
                                     width={40}
                                     color="#c10016"
                                     wrapperStyle={{}}
-                                    wrapperClass={styles.spinner}
+                                    wrapperClass="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__confirmButtonWrapper__spinner"
                                     visible={true}
                                     ariaLabel="oval-loading"
                                     secondaryColor="#c10016"
@@ -111,7 +110,7 @@ const ResetPasswordPage = (): JSX.Element => {
                             ) : (
                                 <button
                                     type="submit"
-                                    className={styles.formButton}
+                                    className="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__confirmButtonWrapper__formButton"
                                 >
                                     Resetuj šifru
                                 </button>

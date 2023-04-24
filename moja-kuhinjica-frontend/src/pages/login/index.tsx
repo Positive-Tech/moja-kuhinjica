@@ -7,7 +7,6 @@ import { FormInput } from '@/components/input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { Text } from '@/components/label/Text'
 import { userLogin } from '@/reduxStore/reducers/userReducer'
-import styles from './LoginPage.module.scss'
 import back from 'public/static/assets/images/backArrow.svg'
 import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
@@ -42,14 +41,16 @@ const LoginPage = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
+        <div className="loginContainer">
+            <div className="loginContainer__wrapper">
                 <Image src={back} alt="" onClick={() => router.back()} />
                 <form
-                    className={styles.formDiv}
+                    className="loginContainer__wrapper__formDiv"
                     onSubmit={handleSubmit((data) => login(data))}
                 >
-                    <label className={styles.formTitle}>Ulogujte se</label>
+                    <label className="loginContainer__wrapper__formDiv__formTitle">
+                        Ulogujte se
+                    </label>
                     {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
@@ -65,7 +66,7 @@ const LoginPage = (): JSX.Element => {
                                 message: 'Pogrešan format email adrese.',
                             },
                         }}
-                        style={styles.input}
+                        style="loginContainer__wrapper__formDiv__input"
                     />
                     <FormInput
                         register={register}
@@ -77,23 +78,23 @@ const LoginPage = (): JSX.Element => {
                         validationSchema={{
                             required: 'Obavezno polje.',
                         }}
-                        style={styles.input}
+                        style="loginContainer__wrapper__formDiv__input"
                     />
                     <Text
                         content="Zaboravili ste šifru?"
-                        style={styles.forgotPasswordLabel}
+                        style="loginContainer__wrapper__formDiv__forgotPasswordLabel"
                         handleClick={() =>
                             router.push(routes.FORGOTTEN_PASSWORD_PAGE)
                         }
                     />
-                    <div className={styles.buttonWrapper}>
+                    <div className="loginContainer__wrapper__formDiv__buttonWrapper">
                         {isLoading ? (
                             <Oval
                                 height={40}
                                 width={40}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="loginContainer__wrapper__formDiv__buttonWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -101,7 +102,7 @@ const LoginPage = (): JSX.Element => {
                                 strokeWidthSecondary={4}
                             />
                         ) : (
-                            <button className={styles.formButton}>
+                            <button className="loginContainer__wrapper__formDiv__buttonWrapper__formButton">
                                 Potvrdi
                             </button>
                         )}

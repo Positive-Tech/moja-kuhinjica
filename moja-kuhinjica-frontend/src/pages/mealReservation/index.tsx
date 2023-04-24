@@ -13,7 +13,6 @@ import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { INDEX_INCREMENT, MOBILE_WIDTH, routes } from '@/constants/constants'
-import styles from './MealReservation.module.scss'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
     IMeal,
@@ -219,7 +218,7 @@ const MealReservation = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.colDiv}>
+        <div className="mealReservation">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
@@ -248,32 +247,32 @@ const MealReservation = (): JSX.Element => {
                 }}
                 buttonText="OK"
             />
-            <div className={styles.container}>
+            <div className="mealReservation__container">
                 <div
                     className={
                         hasMeals
-                            ? styles.restaurantTitleWrapper
-                            : styles.emptyMenuTitleWrapper
+                            ? 'mealReservation__container__restaurantTitleWrapper'
+                            : 'mealReservation__container__restaurantTitleWrapper mealReservation__container__restaurantTitleWrapper--empty'
                     }
                 >
-                    <label className={styles.restaurantTitle}>
+                    <label className="mealReservation__container__restaurantTitleWrapper__restaurantTitle">
                         Restoran Top FOOD 021
                     </label>
                     <label
                         onClick={() =>
                             router.push(routes.RESTAURANT_PROFILE_PAGE)
                         }
-                        className={styles.restaurantInfoLabel}
+                        className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel"
                     >
                         opšte informacije
                     </label>
                 </div>
-                <label className={styles.titleLabel}>
+                <label className="mealReservation__container__titleLabel">
                     {`Dnevni meni za ${getDate()}`}
                 </label>
-                <div className={styles.menuDiv}>
-                    <div className={styles.menuColDiv}>
-                        <div className={styles.menuRowDiv}>
+                <div className="mealReservation__container__menuDiv">
+                    <div className="mealReservation__container__menuDiv__menuColDiv">
+                        <div className="mealReservation__container__menuDiv__menuColDiv__menuRowDiv">
                             {weekdays().map((day, activeTabIndex) => {
                                 return (
                                     <TabButton
@@ -298,13 +297,13 @@ const MealReservation = (): JSX.Element => {
                             })}
                         </div>
                         {isLoading && (
-                            <div className={styles.loadingBarWrapper}>
+                            <div className="mealReservation__container__menuDiv__menuColDiv__loadingBarWrapper">
                                 <Oval
                                     height={70}
                                     width={70}
                                     color="#c10016"
                                     wrapperStyle={{}}
-                                    wrapperClass={styles.spinner}
+                                    wrapperClass="mealReservation__container__menuDiv__menuColDiv__loadingBarWrapper__spinner"
                                     visible={true}
                                     ariaLabel="oval-loading"
                                     secondaryColor="#c10016"
@@ -314,7 +313,7 @@ const MealReservation = (): JSX.Element => {
                             </div>
                         )}
                         {hasMeals && !isLoading && (
-                            <div className={styles.grid}>
+                            <div className="mealReservation__container__menuDiv__menuColDiv__grid">
                                 {menuForDay?.meals?.map((meal: IMeal) => {
                                     return (
                                         <MenuItem
@@ -334,36 +333,36 @@ const MealReservation = (): JSX.Element => {
                             </div>
                         )}
                         {!isLoading && !hasMeals && (
-                            <div className={styles.emptyMenuDiv}>
+                            <div className="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv">
                                 <Text
                                     content={`Dnevni meni za ${today.toLocaleDateString()} još uvek nije
                                         objavljen.`}
-                                    style={styles.emptyMenuLabel}
+                                    style="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                                 />
                             </div>
                         )}
                     </div>
-                    <div className={styles.cartContainer}>
-                        <div className={styles.cartWrapper}>
+                    <div className="mealReservation__container__menuDiv__cartContainer">
+                        <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper">
                             {isCartEmpty() && (
-                                <div className={styles.emptyCartDiv}>
+                                <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv">
                                     <Title
                                         content="korpa"
-                                        style={styles.cartTitle}
+                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
                                     <Text
                                         content="Vaša korpa je prazna, rezervišite jelo iz dnevnog menija."
-                                        style={styles.emptyCartLabel}
+                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
                                     />
                                 </div>
                             )}
                             {!isCartEmpty() && (
-                                <div className={styles.cartDiv}>
+                                <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv">
                                     <Title
                                         content="korpa"
-                                        style={styles.cartTitle}
+                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__cartTitle"
                                     />
-                                    <div className={styles.scrollItemsDiv}>
+                                    <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__scrollItemsDiv">
                                         {cartItems.map(({ meal }) => {
                                             return (
                                                 <CartItem
@@ -373,29 +372,27 @@ const MealReservation = (): JSX.Element => {
                                             )
                                         })}
                                     </div>
-                                    <div className={styles.priceDiv}>
+                                    <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv">
                                         <Text
                                             content="Ukupno:"
-                                            style={styles.priceLabel}
+                                            style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__priceLabel"
                                         />
-                                        <div className={styles.totalPriceDiv}>
+                                        <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__totalPriceDiv">
                                             <Text
                                                 content={getTotalPrice().toString()}
-                                                style={styles.totalPrice}
+                                                style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__totalPriceDiv__totalPrice"
                                             />
                                             <Text
                                                 content="RSD"
-                                                style={styles.totalPrice}
+                                                style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__totalPriceDiv__totalPrice"
                                             />
                                         </div>
                                     </div>
-                                    <div
-                                        className={styles.confirmButtonWrapper}
-                                    >
+                                    <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__confirmButtonWrapper">
                                         <RegularButton
                                             content="Potvrdi rezervaciju"
                                             isActive
-                                            style={styles.confirmButton}
+                                            style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__confirmButtonWrapper__confirmButton"
                                             onClick={() =>
                                                 setConfirmationModalIsOpen(true)
                                             }
@@ -415,42 +412,42 @@ const MealReservation = (): JSX.Element => {
             />
             {isMobile && !showCart && (
                 <div
-                    className={styles.bottomCart}
+                    className="mealReservation__bottomCart"
                     onClick={() => !isCartEmpty() && setShowCart(true)}
                 >
                     {isCartEmpty() ? (
                         <>
-                            <div className={styles.emptyIconWrapper}>
+                            <div className="mealReservation__bottomCart__emptyIconWrapper">
                                 <Image
                                     src={cartIcon}
                                     alt=""
-                                    className={styles.cartIcon}
+                                    className="mealReservation__bottomCart__emptyIconWrapper__cartIcon"
                                 />
                             </div>
-                            <label className={styles.cartInfo}>
+                            <label className="mealReservation__bottomCart__cartInfo">
                                 Vaša korpa je prazna, rezervišite neko jelo iz
                                 dnevnog menija.
                             </label>
                         </>
                     ) : (
                         <>
-                            <div className={styles.amountWrapper}>
-                                <div className={styles.iconWrapper}>
+                            <div className="mealReservation__bottomCart__amountWrapper">
+                                <div className="mealReservation__bottomCart__amountWrapper__iconWrapper">
                                     <Image
                                         src={cartIcon}
                                         alt=""
-                                        className={styles.cartIcon}
+                                        className="mealReservation__bottomCart__amountWrapper__iconWrapper__cartIcon"
                                     />
                                 </div>
-                                <label className={styles.cartInfo}>
+                                <label className="mealReservation__bottomCart__amountWrapper__cartInfo">
                                     {`${cartItems.length} rezervacija`}
                                 </label>
                             </div>
-                            <div className={styles.priceWrapper}>
-                                <label className={styles.priceLabel}>
+                            <div className="mealReservation__bottomCart__priceWrapper">
+                                <label className="mealReservation__bottomCart__priceWrapper__priceLabel">
                                     Ukupno:
                                 </label>
-                                <label className={styles.totalPrice}>
+                                <label className="mealReservation__bottomCart__priceWrapper__totalPrice">
                                     {`${getTotalPrice()} RSD`}
                                 </label>
                             </div>
@@ -460,35 +457,44 @@ const MealReservation = (): JSX.Element => {
             )}
             {isMobile && showCart && (
                 <div
-                    className={styles.openCartContainer}
+                    className="mealReservation__openCartContainer"
                     onClick={() => setShowCart(false)}
                 >
                     <div
-                        className={styles.openCartBottom}
+                        className="mealReservation__openCartContainer__openCartBottom"
                         onClick={(e) => {
                             e.stopPropagation()
                         }}
                     >
-                        <Title content="korpa" style={styles.cartTitle} />
-                        <div className={styles.scrollItemsDiv}>
+                        <Title
+                            content="korpa"
+                            style="mealReservation__openCartContainer__openCartBottom__cartTitle"
+                        />
+                        <div className="mealReservation__openCartContainer__openCartBottom__scrollItemsDiv">
                             {cartItems.map(({ meal }) => {
                                 return <CartItem key={meal.id} meal={meal} />
                             })}
                         </div>
-                        <div className={styles.priceDiv}>
-                            <Text content="Ukupno:" style={styles.priceLabel} />
-                            <div className={styles.totalPriceDiv}>
+                        <div className="mealReservation__openCartContainer__openCartBottom__priceDiv">
+                            <Text
+                                content="Ukupno:"
+                                style="mealReservation__openCartContainer__openCartBottom__priceDiv__priceLabel"
+                            />
+                            <div className="mealReservation__openCartContainer__openCartBottom__priceDiv__totalPriceDiv">
                                 <Text
                                     content={getTotalPrice().toString()}
-                                    style={styles.totalPrice}
+                                    style="mealReservation__openCartContainer__openCartBottom__priceDiv__totalPriceDiv__totalPrice"
                                 />
-                                <Text content="RSD" style={styles.totalPrice} />
+                                <Text
+                                    content="RSD"
+                                    style="mealReservation__openCartContainer__openCartBottom__priceDiv__totalPriceDiv__totalPrice"
+                                />
                             </div>
                         </div>
-                        <div className={styles.confirmButtonWrapper}>
+                        <div className="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper">
                             <RegularButton
                                 content="Potvrdi rezervaciju"
-                                style={styles.confirmButton}
+                                style="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper__confirmButton"
                                 isActive
                                 onClick={() => createOrder()}
                             />

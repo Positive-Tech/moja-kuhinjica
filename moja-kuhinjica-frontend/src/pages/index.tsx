@@ -21,7 +21,6 @@ import {
     MOBILE_WIDTH,
     routes,
 } from 'src/constants/constants'
-import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
@@ -124,27 +123,29 @@ const Home = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.colDiv}>
+        <div className="homeDiv">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <Header
                 type={HEADER_TYPE}
                 selectedButton={activeNavigationTab}
                 openLoginModal={setShowLoginModal}
             />
-            <div className={styles.wrapper}>
-                <div className={styles.container}>
+            <div className="homeDiv__wrapper">
+                <div className="homeDiv__wrapper__container">
                     <Image
                         src={burgerMenuIcon}
                         alt=""
-                        className={styles.menuIcon}
+                        className="homeDiv__wrapper__container__menuIcon"
                         onClick={() => setShowMenu(true)}
                     />
-                    <label className={styles.title}>dunda</label>
-                    <label className={styles.content}>
+                    <label className="homeDiv__wrapper__container__title">
+                        dunda
+                    </label>
+                    <label className="homeDiv__wrapper__container__content">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing.
                     </label>
                     {!isAuthorized && (
-                        <div className={styles.buttonWrapper}>
+                        <div className="homeDiv__wrapper__container__buttonWrapper">
                             <HomePageButton
                                 content="Registrujte se"
                                 onClick={handleSignUpClick}
@@ -156,16 +157,16 @@ const Home = (): JSX.Element => {
                         </div>
                     )}
                 </div>
-                <div className={styles.scrollDiv}>
-                    <div className={styles.labelForScrollWrapper}>
+                <div className="homeDiv__wrapper__scrollDiv">
+                    <div className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper">
                         <label
-                            className={styles.labelForScroll}
+                            className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper__labelForScroll"
                             onClick={handleClick}
                         >
                             Ponuda
                         </label>
                         <Image
-                            className={styles.labelForScrollIcon}
+                            className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper__labelForScrollIcon"
                             src={scrollArrowIcon}
                             alt=""
                             onClick={handleClick}
@@ -173,25 +174,25 @@ const Home = (): JSX.Element => {
                     </div>
                 </div>
             </div>
-            <div className={styles.menuWrapper} ref={ref}>
-                <div className={styles.menuColDiv}>
-                    <div className={styles.restaurantTitleWrapper}>
-                        <label className={styles.restaurantTitle}>
+            <div className="homeDiv__menuWrapper" ref={ref}>
+                <div className="homeDiv__menuWrapper__menuColDiv">
+                    <div className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper">
+                        <label className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantTitle">
                             Restoran Top FOOD 021
                         </label>
                         <label
                             onClick={() =>
                                 router.push(routes.RESTAURANT_PROFILE_PAGE)
                             }
-                            className={styles.restaurantInfoLabel}
+                            className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantInfoLabel"
                         >
                             opšte informacije
                         </label>
                     </div>
-                    <label className={styles.titleLabel}>
+                    <label className="homeDiv__menuWrapper__menuColDiv__titleLabel">
                         {`Dnevni meni za ${getDate()}`}
                     </label>
-                    <div className={styles.menuRowDiv}>
+                    <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
                         {DAYS.map((day, activeTabIndex) => {
                             return (
                                 <TabButton
@@ -213,7 +214,7 @@ const Home = (): JSX.Element => {
                             )
                         })}
                     </div>
-                    <div className={styles.menuGridDiv}>
+                    <div className="homeDiv__menuWrapper__menuColDiv__menuGridDiv">
                         {selectedMenu?.meals?.map(
                             ({
                                 id,
