@@ -16,15 +16,16 @@
     width: 50%;
 
     @media only screen and (max-width: $breakpoint-720p) {
-        height: 70%;
-        width: 65%;
+        height: 60%;
+        width: 70%;
     }
     @media only screen and (max-width: $breakpoint-large) {
-        height: 70%;
-        width: 60%;
+        height: 60%;
+        width: 70%;
     }
     @media only screen and (max-width: $breakpoint-medium) {
-        display: none;
+        height: 65%;
+        width: 70%;
     }
 
     &__formContainer {
@@ -158,6 +159,10 @@
             &__confirmationModalButtons {
                 display: flex;
                 gap: 20px;
+
+                @media only screen and (max-width: $breakpoint-medium) {
+                    flex-direction: column;
+                }
 
                 & > button {
                     min-width: 200px;

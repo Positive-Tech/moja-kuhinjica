@@ -335,7 +335,7 @@ const MealReservation = (): JSX.Element => {
                         {!isLoading && !hasMeals && (
                             <div className="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv">
                                 <Text
-                                    content={`Dnevni meni za ${today.toLocaleDateString()} još uvek nije
+                                    content={`Dnevni meni za ${getDate()} još uvek nije
                                         objavljen.`}
                                     style="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                                 />
