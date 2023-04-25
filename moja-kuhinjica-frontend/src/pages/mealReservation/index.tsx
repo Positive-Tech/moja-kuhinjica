@@ -33,6 +33,7 @@ import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/sr'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
+import { generateWeekdays } from 'src/utils/dateUtils'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -69,21 +70,6 @@ const MealReservation = (): JSX.Element => {
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
-
-    const weekdays = (): string[] => {
-        dayjs.locale('sr')
-        const weekdaysArr: string[] = []
-        let date = dayjs().startOf('week')
-        for (let i = 0; i < 6; i++) {
-            const formattedDate = date
-                .format('ddd')
-                .toLocaleUpperCase()
-                .replace('.', '')
-            weekdaysArr.push(formattedDate)
-            date = date.add(1, 'day')
-        }
-        return weekdaysArr
-    }
 
     useEffect(() => {
         fetchMenus()
@@ -273,7 +259,7 @@ const MealReservation = (): JSX.Element => {
                 <div className={styles.menuDiv}>
                     <div className={styles.menuColDiv}>
                         <div className={styles.menuRowDiv}>
-                            {weekdays().map((day, activeTabIndex) => {
+                            {generateWeekdays().map((day, activeTabIndex) => {
                                 const date = dayjs()
                                     .startOf('week')
                                     .add(activeTabIndex, 'day')

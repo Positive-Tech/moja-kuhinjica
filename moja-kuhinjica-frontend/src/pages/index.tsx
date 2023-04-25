@@ -21,6 +21,7 @@ import {
     MOBILE_WIDTH,
     routes,
 } from 'src/constants/constants'
+import { generateWeekdays } from 'src/utils/dateUtils'
 import styles from 'src/styles/Home.module.scss'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
@@ -58,21 +59,6 @@ const Home = (): JSX.Element => {
     )
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
-
-    const weekdays = (): string[] => {
-        dayjs.locale('sr')
-        const weekdaysArr: string[] = []
-        let date = dayjs().startOf('week')
-        for (let i = 0; i < 6; i++) {
-            const formattedDate = date
-                .format('ddd')
-                .toLocaleUpperCase()
-                .replace('.', '')
-            weekdaysArr.push(formattedDate)
-            date = date.add(1, 'day')
-        }
-        return weekdaysArr
-    }
 
     useEffect(() => {
         if (isAuthorized) dispatch(loadUser())
@@ -122,9 +108,9 @@ const Home = (): JSX.Element => {
 
     const fetchMenus = (): void => {
         RestaurantService.fetchWeeklyMenus()
-            .then((res) => {
-                setAllMenus(res.data)
-                setSelectedMenu(res.data[active])
+            .then(({ data }) => {
+                setAllMenus(data)
+                setSelectedMenu(data?.[active])
             })
             .catch((err) => {
                 console.log(err)
@@ -208,12 +194,12 @@ const Home = (): JSX.Element => {
                         {`Dnevni meni za ${getDate()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
-                        {weekdays().map((day, activeTabIndex) => {
+                        {generateWeekdays().map((day, activeTabIndex) => {
                             const date = dayjs()
                                 .startOf('week')
                                 .add(activeTabIndex, 'day')
-                            const menu = allMenus.find((m) =>
-                                dayjs(m.date).isSame(date, 'day')
+                            const menu = allMenus.find((menuItem) =>
+                                dayjs(menuItem.date).isSame(date, 'day')
                             )
                             return (
                                 <TabButton
