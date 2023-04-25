@@ -26,13 +26,14 @@ import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
 import uuid from 'react-uuid'
+import dayjs from 'dayjs'
+import 'dayjs/locale/sr'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
-    const today = new Date(Date.now())
-    const [active, setActive] = useState<number>(today.getDay())
+    const [active, setActive] = useState(dayjs().day())
     const [activeNavigationTab, setActiveNavigationTab] = useState<
         number | undefined
     >(1)
@@ -57,6 +58,21 @@ const Home = (): JSX.Element => {
     )
     const router = useRouter()
     const ref = useRef<HTMLDivElement>(null)
+
+    const weekdays = (): string[] => {
+        dayjs.locale('sr')
+        const weekdaysArr: string[] = []
+        let date = dayjs().startOf('week')
+        for (let i = 0; i < 6; i++) {
+            const formattedDate = date
+                .format('ddd')
+                .toLocaleUpperCase()
+                .replace('.', '')
+            weekdaysArr.push(formattedDate)
+            date = date.add(1, 'day')
+        }
+        return weekdaysArr
+    }
 
     useEffect(() => {
         if (isAuthorized) dispatch(loadUser())
@@ -108,7 +124,7 @@ const Home = (): JSX.Element => {
         RestaurantService.fetchWeeklyMenus()
             .then((res) => {
                 setAllMenus(res.data)
-                setSelectedMenu(res.data[active - INDEX_INCREMENT])
+                setSelectedMenu(res.data[active])
             })
             .catch((err) => {
                 console.log(err)
@@ -192,7 +208,13 @@ const Home = (): JSX.Element => {
                         {`Dnevni meni za ${getDate()}`}
                     </label>
                     <div className={styles.menuRowDiv}>
-                        {DAYS.map((day, activeTabIndex) => {
+                        {weekdays().map((day, activeTabIndex) => {
+                            const date = dayjs()
+                                .startOf('week')
+                                .add(activeTabIndex, 'day')
+                            const menu = allMenus.find((m) =>
+                                dayjs(m.date).isSame(date, 'day')
+                            )
                             return (
                                 <TabButton
                                     key={uuid()}
@@ -204,9 +226,7 @@ const Home = (): JSX.Element => {
                                         setActive(
                                             activeTabIndex + INDEX_INCREMENT
                                         )
-                                        setSelectedMenu(
-                                            allMenus[activeTabIndex]
-                                        )
+                                        setSelectedMenu(menu)
                                     }}
                                     content={day}
                                 />
