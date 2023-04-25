@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints.module.scss';
+
 .modalContainer {
     top: 50%;
     left: 50%;
@@ -14,6 +16,18 @@
     border: white;
     height: 60%;
     width: 45%;
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 60%;
+        width: 70%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 60%;
+        width: 70%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 65%;
+        width: 70%;
+    }
 }
 
 .formContainer {
@@ -43,6 +57,9 @@
     color: #333333;
     text-align: center;
     text-transform: uppercase;
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 28px;
+    }
 }
 
 .formButton {
@@ -76,6 +93,9 @@
 .confirmationModalButtons {
     display: flex;
     gap: 20px;
+    @media only screen and (max-width: $breakpoint-medium) {
+        flex-direction: column;
+    }
 
     & > button {
         min-width: 200px;
