@@ -1,0 +1,115 @@
+.itemContainer {
+    @include flex-row-vertical-center;
+    height: 90px;
+    border-bottom: 1px solid #c1001633;
+    margin-bottom: 5%;
+
+    @media only screen and (max-width: $breakpoint-1440p) {
+        height: 110px;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        height: 90px;
+    }
+
+    &__rowDiv1 {
+        @include flex;
+        align-items: flex-start;
+        width: 80%;
+
+        &__pictureWrapper {
+            height: 80px;
+            width: 95px;
+            overflow: auto;
+            border-radius: 20px;
+            overflow-y: hidden;
+
+            @media only screen and (max-width: $breakpoint-1440p) {
+                height: 90px;
+                width: 100px;
+            }
+            @media only screen and (max-width: $breakpoint-900p) {
+                height: 80px;
+                width: 95px;
+            }
+            @media only screen and (max-width: $breakpoint-large) {
+                height: 70px;
+                width: 80px;
+            }
+
+            &__mealPicture {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+    }
+
+    &__mealNameWrapper {
+        @include flex-column;
+        margin-left: 5%;
+        width: 50%;
+
+        &__mealName {
+            font-size: 14px;
+            margin-bottom: 5%;
+
+            @media only screen and (max-width: $breakpoint-720p) {
+                font-size: 11px;
+            }
+            @media only screen and (max-width: $breakpoint-large) {
+                font-size: 10px;
+            }
+        }
+    }
+
+    &__amountWrapper {
+        justify-content: flex-start;
+        height: 20%;
+
+        @media only screen and (max-width: $breakpoint-1080p) {
+            height: 30%;
+        }
+        @media only screen and (max-width: $breakpoint-900p) {
+            height: 20%;
+        }
+    }
+
+    &__amountLabel {
+        font-size: 16px;
+    }
+
+    &__priceWrapper {
+        @include flex-column;
+        width: 20%;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        &__binWrapper {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+
+            &__binButton {
+                cursor: pointer;
+            }
+
+            &__priceDiv {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                gap: 10%;
+
+                &__price {
+                    font-size: 14px;
+
+                    @media only screen and (max-width: $breakpoint-1080p) {
+                        font-size: 16px;
+                    }
+                    @media only screen and (max-width: $breakpoint-900p) {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

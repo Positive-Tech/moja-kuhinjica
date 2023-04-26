@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './MobileHeader.module.scss'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenuRed.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 interface IMobileHeaderProps {
@@ -16,19 +15,19 @@ export const MobileHeader = ({
     src,
 }: IMobileHeaderProps): JSX.Element => {
     return (
-        <div className={`${styles.container} ${style}`}>
+        <div className={`mobileHeaderContainer ${style}`}>
             <Image
                 src={src ? src : burgerMenuIcon}
                 alt=""
-                className={styles.burgerMenu}
+                className="mobileHeaderContainer__burgerMenu"
                 onClick={handleClick}
             />
             {showProfileIcon && (
-                <div className={styles.pictureWrapper}>
+                <div className="mobileHeaderContainer__pictureWrapper">
                     <Image
                         src={profileIcon}
                         alt=""
-                        className={styles.profile}
+                        className="mobileHeaderContainer__pictureWrapper__profile"
                     />
                 </div>
             )}

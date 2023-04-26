@@ -7,7 +7,6 @@ import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '@/components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import styles from './ChangePasswordPage.module.scss'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 
@@ -54,15 +53,17 @@ const ChangePasswordPage = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className="changePassContainer">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             <MobileHeader handleClick={() => setShowMenu(true)} />
-            <div className={styles.wrapper}>
+            <div className="changePassContainer__wrapper">
                 <form
-                    className={styles.formDiv}
+                    className="changePassContainer__wrapper__formDiv"
                     onSubmit={handleSubmit((data) => validate(data))}
                 >
-                    <label className={styles.formTitle}>Promeni šifru</label>
+                    <label className="changePassContainer__wrapper__formDiv__formTitle">
+                        Promeni šifru
+                    </label>
                     {showError && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
@@ -74,7 +75,7 @@ const ChangePasswordPage = (): JSX.Element => {
                         validationSchema={{
                             required: 'Obavezno polje.',
                         }}
-                        style={styles.input}
+                        style="changePassContainer__wrapper__formDiv__input"
                     />
                     <FormInput
                         register={register}
@@ -91,7 +92,7 @@ const ChangePasswordPage = (): JSX.Element => {
                                     'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                             },
                         }}
-                        style={styles.input}
+                        style="changePassContainer__wrapper__formDiv__input"
                     />
                     <FormInput
                         register={register}
@@ -103,16 +104,16 @@ const ChangePasswordPage = (): JSX.Element => {
                         validationSchema={{
                             required: 'Obavezno polje.',
                         }}
-                        style={styles.input}
+                        style="changePassContainer__wrapper__formDiv__input"
                     />
-                    <div className={styles.buttonWrapper}>
+                    <div className="changePassContainer__wrapper__formDiv__buttonWrapper">
                         {isLoading ? (
                             <Oval
                                 height={40}
                                 width={40}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="changePassContainer__wrapper__formDiv__buttonWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -120,7 +121,10 @@ const ChangePasswordPage = (): JSX.Element => {
                                 strokeWidthSecondary={4}
                             />
                         ) : (
-                            <button type="submit" className={styles.formButton}>
+                            <button
+                                type="submit"
+                                className="changePassContainer__wrapper__formDiv__buttonWrapper__formButton"
+                            >
                                 Potvrdi
                             </button>
                         )}

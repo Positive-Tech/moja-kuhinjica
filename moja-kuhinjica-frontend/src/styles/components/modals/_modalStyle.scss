@@ -1,0 +1,188 @@
+.modalContainer {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 30px;
+
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.05);
+    overflow: visible;
+    background-color: #e7e7e7e5;
+    backdrop-filter: blur(10px);
+    border: white;
+    height: 60%;
+    width: 50%;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        height: 60%;
+        width: 70%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        height: 60%;
+        width: 70%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        height: 65%;
+        width: 70%;
+    }
+
+    &__formContainer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        &__formDiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 80%;
+            height: 100%;
+
+            &__formTitle {
+                font-family: Poppins;
+                font-weight: 500;
+                font-size: 32px;
+
+                color: #333333;
+                text-align: center;
+                text-transform: uppercase;
+
+                @media only screen and (max-width: $breakpoint-large) {
+                    font-size: 28px;
+                }
+
+                &__contentDiv {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 15px;
+
+                    &__contentLabel {
+                        font-family: Poppins;
+                        font-weight: 400;
+                        color: #c10016;
+                        font-size: 16px;
+                    }
+                }
+                &__formButton {
+                    width: 70%;
+                    height: 50px;
+                    background: #c10016;
+                    border: 0;
+                    color: white;
+                    font-family: Poppins;
+                    font-size: 22px;
+                    text-transform: uppercase;
+                    border-radius: 15px;
+                    cursor: pointer;
+                    margin-top: 5%;
+                }
+            }
+
+            &__forgotPasswordLabel {
+                font-size: 16px;
+                color: rgba(51, 51, 51, 0.6);
+                text-align: start;
+                width: 100%;
+                cursor: pointer;
+
+                @media only screen and (max-width: $breakpoint-900p) {
+                    font-size: 16px;
+                }
+                @media only screen and (max-width: $breakpoint-large) {
+                    font-size: 14px;
+                }
+            }
+            &__buttonWrapper {
+                display: flex;
+                width: 100%;
+                height: 10%;
+                justify-content: center;
+                align-items: center;
+                margin-top: 5%;
+
+                &__spinner {
+                    @include spinner;
+                }
+
+                &__formButton {
+                    width: 70%;
+                    height: 50px;
+                    background: #c10016;
+                    border: 0;
+                    color: white;
+                    font-family: Poppins;
+                    font-size: 22px;
+                    font-weight: lighter;
+                    text-transform: uppercase;
+                    border-radius: 15px;
+                    cursor: pointer;
+                }
+            }
+
+            &__infoLabel {
+                font-size: 16px;
+                color: #333333cc;
+                margin-bottom: 5%;
+            }
+
+            &__passwordInput {
+                font-size: 18px;
+            }
+
+            &__labelWrapper {
+                display: flex;
+                justify-content: center;
+                gap: 1%;
+                width: 100%;
+
+                &__mailLabel {
+                    font-size: 18px;
+                    color: #333333cc;
+                    text-align: center;
+
+                    @media only screen and (max-width: $breakpoint-large) {
+                        font-size: 16px;
+                    }
+                    &--button {
+                        color: #c10016;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &__confirmationModalButtons {
+                display: flex;
+                gap: 20px;
+
+                @media only screen and (max-width: $breakpoint-medium) {
+                    flex-direction: column;
+                }
+
+                & > button {
+                    min-width: 200px;
+                    padding: 5px 50px;
+                }
+
+                &__formButton {
+                    width: 70%;
+                    height: 50px;
+                    background: #c10016;
+                    border: 0;
+                    color: white;
+                    font-family: Poppins;
+                    font-size: 22px;
+                    text-transform: uppercase;
+                    border-radius: 15px;
+                    cursor: pointer;
+                    margin-top: 5%;
+                }
+            }
+        }
+    }
+}

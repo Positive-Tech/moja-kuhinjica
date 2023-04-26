@@ -67,15 +67,17 @@ export const LoginModal = ({
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={bgModal}
-            className={styles.modalContainerLogin}
+            className="modalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
+            <div className="modalContainer__formContainer">
                 <form
-                    className={styles.formDiv}
+                    className="modalContainer__formContainer__formDiv"
                     onSubmit={handleSubmit((data) => login(data))}
                 >
-                    <label className={styles.formTitle}>Ulogujte se</label>
+                    <label className="modalContainer__formContainer__formDiv__formTitle">
+                        Ulogujte se
+                    </label>
                     {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
                         register={register}
@@ -105,20 +107,20 @@ export const LoginModal = ({
                     />
                     <Text
                         content="Zaboravili ste šifru?"
-                        style={styles.forgotPasswordLabel}
+                        style="modalContainer__formContainer__formDiv__forgotPasswordLabel"
                         handleClick={() => {
                             closeModal()
                             openPasswordForgettingModal()
                         }}
                     />
-                    <div className={styles.buttonWrapper}>
+                    <div className="modalContainer__formContainer__formDiv__buttonWrapper">
                         {isLoading ? (
                             <Oval
                                 height={40}
                                 width={40}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="modalContainer__formContainer__formDiv__buttonWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -126,7 +128,10 @@ export const LoginModal = ({
                                 strokeWidthSecondary={4}
                             />
                         ) : (
-                            <button type="submit" className={styles.formButton}>
+                            <button
+                                type="submit"
+                                className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
+                            >
                                 Potvrdi
                             </button>
                         )}

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
-import styles from './PasswordResettingModal.module.scss'
 import UserService from '@/service/User.service'
 import { Oval } from 'react-loader-spinner'
 
@@ -36,24 +35,27 @@ export const PasswordResettingModal = ({
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={bgModal}
-            className={styles.modalContainer}
+            className="modalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
-                <div className={styles.formDiv}>
-                    <label className={styles.formTitle}>
+            <div className="modalContainer__formContainer">
+                <div className="modalContainer__formContainer__formDiv">
+                    <label className="modalContainer__formContainer__formDiv__formTitle">
                         Proverite svoj email
                     </label>
-                    <Text content={infoContent} style={styles.infoLabel} />
+                    <Text
+                        content={infoContent}
+                        style="modalContainer__formContainer__formDiv__infoLabel"
+                    />
                     {!isLoading && (
-                        <div className={styles.labelWrapper}>
+                        <div className="modalContainer__formContainer__formDiv__labelWrapper">
                             <Text
                                 content="Nije Vam stigao email?"
-                                style={styles.infoLabel}
+                                style="modalContainer__formContainer__formDiv__labelWrapper__mailLabel"
                             />
                             <Text
                                 content="Pošalji ponovo"
-                                style={styles.buttonLabel}
+                                style="modalContainer__formContainer__formDiv__labelWrapper__mailLabel modalContainer__formContainer__formDiv__labelWrapper__mailLabel--button"
                                 handleClick={() => sendEmail()}
                             />
                         </div>
@@ -64,7 +66,7 @@ export const PasswordResettingModal = ({
                             width={40}
                             color="#c10016"
                             wrapperStyle={{}}
-                            wrapperClass={styles.spinner}
+                            wrapperClass="modalContainer__formContainer__formDiv__buttonWrapper__spinner"
                             visible={true}
                             ariaLabel="oval-loading"
                             secondaryColor="#c10016"

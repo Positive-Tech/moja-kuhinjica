@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form'
-import styles from './FormInput.module.scss'
 import errorIcon from 'public/static/assets/images/error.svg'
 import hidePassword from 'public/static/assets/images/hidePassword.svg'
 import editIcon from 'public/static/assets/images/editIcon.svg'
@@ -60,23 +59,25 @@ export const FormInput = ({
 
     return (
         <>
-            <div className={styles.wrapper}>
-                <Image src={src} className={styles.icon} alt="" />
+            <div className="formInputWrapper">
+                <Image src={src} className="formInputWrapper__icon" alt="" />
                 {isPhoneNumber && (
-                    <label className={styles.numberFormat}>+381</label>
+                    <label className="formInputWrapper__numberFormat">
+                        +381
+                    </label>
                 )}
                 <input
                     className={
                         invalidInput
                             ? `${
                                   isPhoneNumber
-                                      ? styles.phoneNumberInvalidInput
-                                      : styles.invalidInput
+                                      ? 'formInputWrapper__invalidInput formInputWrapper__invalidInput--phoneNumber'
+                                      : 'formInputWrapper__invalidInput'
                               } ${style}`
                             : `${
                                   isPhoneNumber
-                                      ? styles.phoneNumberInput
-                                      : styles.input
+                                      ? 'formInputWrapper__input formInputWrapper__input--phoneNumber'
+                                      : 'formInputWrapper__input'
                               } ${style}`
                     }
                     placeholder={placeholder}
@@ -109,14 +110,14 @@ export const FormInput = ({
                     <Image
                         src={errorIcon}
                         alt=""
-                        className={styles.sideErrorIcon}
+                        className="formInputWrapper__sideErrorIcon"
                     />
                 )}
                 {isEditable && !invalidInput && (
                     <Image
                         src={editIcon}
                         alt=""
-                        className={styles.sideEditIcon}
+                        className="formInputWrapper__sideEditIcon"
                         onClick={() => handleClick()}
                     />
                 )}
@@ -124,7 +125,7 @@ export const FormInput = ({
                     <Image
                         src={hidePassword}
                         alt=""
-                        className={styles.sideEditIcon}
+                        className="formInputWrapper__sideEditIcon"
                         onClick={() =>
                             setInputType(
                                 inputType === 'password' ? 'text' : 'password'
@@ -136,7 +137,7 @@ export const FormInput = ({
             {invalidInput && (
                 <ErrorLabel
                     content={errors[name]?.message?.toString()}
-                    style={styles.errorLabel}
+                    style="formInputWrapper__errorLabel"
                 />
             )}
         </>

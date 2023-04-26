@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './Label.module.scss'
 
 interface ILabelWithIconProps {
     src: string
@@ -13,9 +12,11 @@ export const LabelWithIcon = ({
     style,
 }: ILabelWithIconProps): JSX.Element => {
     return (
-        <div className={styles.container}>
+        <div className="labelWithIconContainer">
             <Image src={src} alt="" />
-            <label className={`${styles.content} ${style}`}>{content}</label>
+            <label className={`labelWithIconContainer__content ${style}`}>
+                {content}
+            </label>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import styles from '../EmailPages.module.scss'
 import successIcon from 'public/static/assets/images/successFilled.svg'
 import { Title } from '@/components/label/Title'
 import { RegularButton } from '@/components/button/RegularButton'
@@ -14,22 +13,26 @@ const VerificationPage = (): JSX.Element => {
     const router = useRouter()
     const { type } = router.query
     return (
-        <div className={styles.container}>
+        <div className="resetVerifyContainer">
             {(type === RESET_TYPE || type === REGISTRATION_TYPE) && (
-                <div className={styles.wrapper}>
-                    <Image src={successIcon} alt="" className={styles.icon} />
+                <div className="resetVerifyContainer__wrapper">
+                    <Image
+                        src={successIcon}
+                        alt=""
+                        className="resetVerifyContainer__wrapper__icon"
+                    />
                     <Title
                         content={
                             type === REGISTRATION_TYPE
                                 ? 'Vaš nalog je uspešno verifikovan'
                                 : 'Vaša šifra je uspešno resetovana'
                         }
-                        style={styles.title}
+                        style="resetVerifyContainer__wrapper__title"
                     />
-                    <div className={styles.buttonWrapper}>
+                    <div className="resetVerifyContainer__wrapper__buttonWrapper">
                         <RegularButton
                             content="Nazad na početnu"
-                            style={styles.confirmButton}
+                            style="resetVerifyContainer__wrapper__buttonWrapper__confirmButton"
                             onClick={() => router.push(routes.HOME_PAGE)}
                             isActive
                         />

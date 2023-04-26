@@ -1,0 +1,135 @@
+.resetVerifyContainer {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__resetPassWrapper {
+        width: 80%;
+        height: 70%;
+
+        @media only screen and (max-width: $breakpoint-medium) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__formWrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+
+            &__formDiv {
+                width: 50%;
+                height: 70%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10%;
+
+                @media only screen and (max-width: $breakpoint-720p) {
+                    height: 90%;
+                    width: 60%;
+                }
+                @media only screen and (max-width: $breakpoint-large) {
+                    height: 80%;
+                    width: 60%;
+                }
+                @media only screen and (max-width: $breakpoint-medium) {
+                    height: 80%;
+                    width: 100%;
+                }
+
+                &__confirmButtonWrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 10%;
+                    width: 100%;
+                    margin-top: 5%;
+
+                    &__spinner {
+                        @include spinner;
+                    }
+
+                    &__formButton {
+                        width: 50%;
+                        height: 50px;
+                        background: #c10016;
+                        border: 0;
+                        color: white;
+                        font-family: Poppins;
+                        font-size: 22px;
+                        font-weight: lighter;
+                        text-transform: uppercase;
+                        border-radius: 15px;
+                        cursor: pointer;
+                        margin-top: 5%;
+
+                        @media only screen and (max-width: $breakpoint-medium) {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__resetPassTitle {
+            font-size: 32px;
+            font-weight: 500;
+
+            @media only screen and (max-width: $breakpoint-large) {
+                font-size: 28px;
+            }
+            @media only screen and (max-width: $breakpoint-medium) {
+                font-size: 26px;
+            }
+        }
+    }
+
+    &__wrapper {
+        height: 50%;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10%;
+
+        @media only screen and (max-width: $breakpoint-large) {
+            width: 70%;
+        }
+        @media only screen and (max-width: $breakpoint-medium) {
+            width: 100%;
+        }
+        @media only screen and (max-width: $breakpoint-medium) {
+            width: 100%;
+            height: 60%;
+        }
+
+        &__title {
+            text-transform: uppercase;
+            font-size: 32px;
+
+            @media only screen and (max-width: $breakpoint-large) {
+                font-size: 30px;
+            }
+        }
+
+        &__buttonWrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30%;
+            width: 60%;
+
+            @media only screen and (max-width: $breakpoint-large) {
+                height: 20%;
+            }
+        }
+    }
+}
