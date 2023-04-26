@@ -2,7 +2,6 @@ import React from 'react'
 import Modal from 'react-modal'
 import Image from 'next/image'
 import { bgModal } from '@/constants/constants'
-import styles from './SuccessNotificationModal.module.scss'
 import success from 'public/static/assets/images/success.svg'
 import successFilled from 'public/static/assets/images/successFilled.svg'
 
@@ -27,23 +26,32 @@ export const SuccessNotificationModal = ({
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={bgModal}
-            className={styles.modalContainer}
+            className="modalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
-                <div className={styles.formDiv}>
+            <div className="modalContainer__formContainer">
+                <div className="modalContainer__formContainer__formDiv">
                     <Image src={successFilled} alt="" />
-                    <label className={styles.formTitle}>{title}</label>
+                    <label
+                        className={
+                            'modalContainer__formContainer__formDiv__formTitle'
+                        }
+                    >
+                        {title}
+                    </label>
                     {type === 'registration' && (
-                        <div className={styles.contentDiv}>
+                        <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
                             <Image src={success} alt="" />
-                            <label className={styles.contentLabel}>
+                            <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
                                 Poslat je email na {email}. Potrebno je kliknuti
                                 na link u poruci kako bi aktivirali Vas profil.
                             </label>
                         </div>
                     )}
-                    <button className={styles.formButton} onClick={closeModal}>
+                    <button
+                        className="modalContainer__formContainer__formDiv__formTitle__formButton"
+                        onClick={closeModal}
+                    >
                         {buttonText}
                     </button>
                 </div>

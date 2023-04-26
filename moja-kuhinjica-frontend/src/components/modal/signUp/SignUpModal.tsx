@@ -4,7 +4,6 @@ import { useForm, FieldValues } from 'react-hook-form'
 import UserService from '@/service/User.service'
 import { FormInput } from '@/components/input/FormInput'
 import { ErrorLabel } from '@/components/label/ErrorLabel'
-import styles from './SignUpModal.module.scss'
 import { bgModal } from '@/constants/constants'
 import profile from 'public/static/assets/images/profile.svg'
 import email from 'public/static/assets/images/email.svg'
@@ -66,17 +65,19 @@ export const SignUpModal = ({
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={bgModal}
-            className={styles.modalContainer}
+            className="signUpModalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
+            <div className="signUpModalContainer__formContainer">
                 <form
-                    className={styles.formDiv}
+                    className="signUpModalContainer__formContainer__formDiv"
                     onSubmit={handleSubmit((data) => validate(data))}
                 >
-                    <label className={styles.formTitle}>Registrujte se</label>
+                    <label className="signUpModalContainer__formContainer__formDiv__formTitle">
+                        Registrujte se
+                    </label>
                     {showError && <ErrorLabel content={errorMessage} />}
-                    <div className={styles.inputWrapper}>
+                    <div className="signUpModalContainer__formContainer__formDiv__inputWrapper">
                         <FormInput
                             register={register}
                             errors={errors}
@@ -168,14 +169,14 @@ export const SignUpModal = ({
                             isPhoneNumber={true}
                         />
                     </div>
-                    <div className={styles.buttonWrapper}>
+                    <div className="signUpModalContainer__formContainer__formDiv__buttonWrapper">
                         {isLoading ? (
                             <Oval
                                 height={40}
                                 width={40}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="signUpModalContainer__formContainer__formDiv__buttonWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -183,7 +184,10 @@ export const SignUpModal = ({
                                 strokeWidthSecondary={4}
                             />
                         ) : (
-                            <button type="submit" className={styles.formButton}>
+                            <button
+                                type="submit"
+                                className="signUpModalContainer__formContainer__formDiv__buttonWrapper__formButton"
+                            >
                                 Potvrdi
                             </button>
                         )}

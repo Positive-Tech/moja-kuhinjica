@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './DropdownMenuButton.module.scss'
+
 interface IDropdownButtonProps {
     content: string
     src: string
@@ -14,14 +14,14 @@ export const DropdownMenuButton = ({
     handleClick,
 }: IDropdownButtonProps): JSX.Element => {
     return (
-        <div className={styles.buttonWrapper}>
+        <div className="buttonWrapper">
             <button
                 onClick={handleClick}
-                className={`${styles.dropDownMenuButton} ${style}`}
+                className={`dropDownMenuButton ${style}`}
             >
                 {content}
             </button>
-            <Image src={src} alt="" className={styles.icon} />
+            <Image src={src} alt="" className="dropdownIcon" />
         </div>
     )
 }

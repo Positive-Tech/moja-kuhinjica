@@ -12,7 +12,7 @@ export const Title = ({
     onClick,
 }: ITitleProps): JSX.Element => {
     return (
-        <label onClick={onClick} className={`${styles.title} ${style}`}>
+        <label onClick={onClick} className={`titleLabel ${style}`}>
             {content}
         </label>
     )

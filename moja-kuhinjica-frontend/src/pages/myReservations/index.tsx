@@ -138,7 +138,7 @@ const MyReservationsPage = (): JSX.Element => {
     }, [windowWidth])
 
     return (
-        <div className={styles.colDiv}>
+        <div className={'myReservationsPage'}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
@@ -147,23 +147,25 @@ const MyReservationsPage = (): JSX.Element => {
             )}
             <div
                 className={
-                    reservationsExist ? styles.container : styles.emptyContainer
+                    reservationsExist
+                        ? 'myReservationsPage__container'
+                        : 'myReservationsPage__emptyContainer'
                 }
             >
                 <label
                     className={
                         reservationsExist
-                            ? styles.titleLabel
-                            : styles.emptyTitleLabel
+                            ? 'myReservationsPage__container__titleLabel'
+                            : 'myReservationsPage__container__titleLabel myReservationsPage__container__titleLabel--empty'
                     }
                 >
                     Moje rezervacije
                 </label>
-                <label className={styles.infoLabel}>
+                <label className="myReservationsPage__container__infoLabel">
                     Rezervacije se mogu otkazati do 10 časova
                 </label>
-                <div className={styles.colDiv1}>
-                    <div className={styles.menuRowDiv}>
+                <div className="myReservationsPage__colDiv">
+                    <div className="myReservationsPage__colDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
@@ -183,16 +185,17 @@ const MyReservationsPage = (): JSX.Element => {
                             )
                         })}
                     </div>
-
-                    <label className={styles.titleLabel}>{activeDate}</label>
+                    <label className="myReservationsPage__colDiv__titleLabel">
+                        {activeDate}
+                    </label>
                     {isLoading && (
-                        <div className={styles.loadingBarWrapper}>
+                        <div className="myReservationsPage__colDiv__loadingBarWrapper">
                             <Oval
                                 height={70}
                                 width={70}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="myReservationsPage__colDiv__loadingBarWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -201,15 +204,15 @@ const MyReservationsPage = (): JSX.Element => {
                             />
                         </div>
                     )}
-                    {!myReservations && (
-                        <div className={styles.rowDiv}>
-                            <label className={styles.infoLabel}>
+                    {!reservationsExist && (
+                        <div className="myReservationsPage__colDiv__rowDiv">
+                            <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
                                 Nema rezervacija za ovaj datum.
                             </label>
                         </div>
                     )}
                     {myReservations && (
-                        <div className={styles.reservationWrapper}>
+                        <div className="myReservationsPage__colDiv__reservationWrapper">
                             {resForDay?.map(
                                 ({
                                     id,
@@ -217,14 +220,10 @@ const MyReservationsPage = (): JSX.Element => {
                                     items,
                                 }: IMyReservations) => (
                                     <>
-                                        <label
-                                            className={styles.restaurantLabel}
-                                        >
+                                        <label className="myReservationsPage__colDiv__reservationWrapper__restaurantLabel">
                                             {restaurant.restaurantName}
                                         </label>
-                                        <label
-                                            className={styles.reservationLabel}
-                                        >
+                                        <label className="myReservationsPage__colDiv__reservationWrapper__reservationLabel">
                                             Rezervacija {id}
                                         </label>
                                         {items.map(

@@ -12,7 +12,6 @@ import myReservations from 'public/static/assets/images/myReservations.svg'
 import editProfile from 'public/static/assets/images/editProfile.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import profile from 'public/static/assets/images/profileHeader.svg'
-import styles from './Menu.module.scss'
 import { routes } from '@/constants/constants'
 
 interface IMenuProps {
@@ -38,19 +37,19 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
-                <div className={styles.closeButtonWrapper}>
+        <div className="mobileMenuContainer">
+            <div className="mobileMenuContainer__wrapper">
+                <div className="mobileMenuContainer__wrapper__closeButtonWrapper">
                     {isAuthorized && (
-                        <div className={styles.userNameWrapper}>
-                            <div className={styles.pictureWrapper}>
+                        <div className="mobileMenuContainer__wrapper__closeButtonWrapper__userNameWrapper">
+                            <div className="mobileMenuContainer__wrapper__closeButtonWrapper__pictureWrapper">
                                 <Image
                                     src={profile}
                                     alt=""
-                                    className={styles.profilePicture}
+                                    className="mobileMenuContainer__wrapper__closeButtonWrapper__pictureWrapper__profilePicture"
                                 />
                             </div>
-                            <label className={styles.userName}>
+                            <label className="mobileMenuContainer__wrapper__closeButtonWrapper__userName">
                                 {user?.name}&nbsp;
                                 {user?.surname}
                             </label>
@@ -58,17 +57,17 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                     )}
                     <Image src={closeIcon} alt="" onClick={closeMenu} />
                 </div>
-                <div className={styles.buttonWrapper}>
+                <div className="mobileMenuContainer__wrapper__buttonWrapper">
                     <DropdownMenuButton
                         content="Početna"
                         src={homeIcon}
-                        style={styles.button}
+                        style="mobileMenuContainer__wrapper__buttonWrapper__button"
                         handleClick={() => navigate(routes.HOME_PAGE)}
                     />
                     <DropdownMenuButton
                         content="Rezerviši"
                         src={reservationIcon}
-                        style={styles.button}
+                        style="mobileMenuContainer__wrapper__buttonWrapper__button"
                         handleClick={() =>
                             navigate(
                                 isAuthorized
@@ -81,7 +80,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         <DropdownMenuButton
                             content="Moje rezervacije"
                             src={myReservations}
-                            style={styles.button}
+                            style="mobileMenuContainer__wrapper__buttonWrapper__button"
                             handleClick={() =>
                                 navigate(routes.MEAL_RESERVATION_PAGE)
                             }
@@ -91,7 +90,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         <DropdownMenuButton
                             content="Izmena profila"
                             src={editProfile}
-                            style={styles.button}
+                            style="mobileMenuContainer__wrapper__buttonWrapper__button"
                             handleClick={() =>
                                 navigate(
                                     `${routes.EDIT_PROFILE_PAGE}/${user?.id}`
@@ -102,14 +101,14 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                     <DropdownMenuButton
                         content="O nama"
                         src={aboutUsIcon}
-                        style={styles.button}
+                        style="mobileMenuContainer__wrapper__buttonWrapper__button"
                         handleClick={() => navigate(routes.ABOUT_US_PAGE)}
                     />
                     {isAuthorized && (
                         <DropdownMenuButton
                             content="Odjavi se"
                             src={logoutIcon}
-                            style={styles.button}
+                            style="mobileMenuContainer__wrapper__buttonWrapper__button"
                             handleClick={() => logout()}
                         />
                     )}

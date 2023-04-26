@@ -60,19 +60,19 @@ const RegistrationPage = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className="registrationContainer">
             {!showNotification && (
-                <div className={styles.wrapper}>
+                <div className="registrationContainer__wrapper">
                     <Image src={back} alt="" onClick={() => router.back()} />
                     <form
-                        className={styles.formDiv}
+                        className="registrationContainer__wrapper__formDiv"
                         onSubmit={handleSubmit((data) => validate(data))}
                     >
-                        <label className={styles.formTitle}>
+                        <label className="registrationContainer__wrapper__formDiv__formTitle">
                             Registrujte se
                         </label>
                         {showError && <ErrorLabel content={errorMessage} />}
-                        <div className={styles.inputWrapper}>
+                        <div className="registrationContainer__wrapper__formDiv__inputWrapper">
                             <FormInput
                                 register={register}
                                 errors={errors}
@@ -88,7 +88,7 @@ const RegistrationPage = (): JSX.Element => {
                                             'Ime može da sadrži samo slova.',
                                     },
                                 }}
-                                style={styles.input}
+                                style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                             />
                             <FormInput
                                 register={register}
@@ -105,7 +105,7 @@ const RegistrationPage = (): JSX.Element => {
                                             'Prezime može da sadrži samo slova.',
                                     },
                                 }}
-                                style={styles.input}
+                                style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                             />
                             <FormInput
                                 register={register}
@@ -122,7 +122,7 @@ const RegistrationPage = (): JSX.Element => {
                                             'Pogrešan format za email adresu.',
                                     },
                                 }}
-                                style={styles.input}
+                                style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                             />
                             <FormInput
                                 register={register}
@@ -139,7 +139,7 @@ const RegistrationPage = (): JSX.Element => {
                                             'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                                     },
                                 }}
-                                style={styles.input}
+                                style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                             />
                             <FormInput
                                 register={register}
@@ -151,7 +151,7 @@ const RegistrationPage = (): JSX.Element => {
                                 validationSchema={{
                                     required: 'Ponovljena šifra je obavezna.',
                                 }}
-                                style={styles.input}
+                                style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                             />
                             <FormInput
                                 register={register}
@@ -168,18 +168,18 @@ const RegistrationPage = (): JSX.Element => {
                                             'Broj telefona sadrži minimalno 6 brojeva.',
                                     },
                                 }}
-                                style={styles.input}
+                                style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                                 isPhoneNumber={true}
                             />
                         </div>
-                        <div className={styles.buttonWrapper}>
+                        <div className="registrationContainer__wrapper__formDiv__inputWrapper__buttonWrapper">
                             {isLoading ? (
                                 <Oval
                                     height={40}
                                     width={40}
                                     color="#c10016"
                                     wrapperStyle={{}}
-                                    wrapperClass={styles.spinner}
+                                    wrapperClass="registrationContainer__wrapper__formDiv__inputWrapper__buttonWrapper__spinner"
                                     visible={true}
                                     ariaLabel="oval-loading"
                                     secondaryColor="#c10016"
@@ -189,7 +189,7 @@ const RegistrationPage = (): JSX.Element => {
                             ) : (
                                 <button
                                     type="submit"
-                                    className={styles.formButton}
+                                    className="registrationContainer__wrapper__formDiv__inputWrapper__buttonWrapper__formButton"
                                 >
                                     Potvrdi
                                 </button>
@@ -199,20 +199,20 @@ const RegistrationPage = (): JSX.Element => {
                 </div>
             )}
             {showNotification && (
-                <div className={styles.notificationContainer}>
-                    <div className={styles.notificationDiv}>
+                <div className="registrationContainer__notificationContainer">
+                    <div className="registrationContainer__notificationContainer__notificationDiv">
                         <Image src={successFilled} alt="" />
 
-                        <div className={styles.contentDiv}>
+                        <div className="registrationContainer__notificationContainer__notificationDiv__contentDiv">
                             <Image src={success} alt="" />
-                            <label className={styles.contentLabel}>
+                            <label className="registrationContainer__notificationContainer__notificationDiv__contentDiv__contentLabel">
                                 Poslat je email na {userEmail}. Potrebno je
                                 kliknuti na link u poruci kako bi aktivirali Vas
                                 profil.
                             </label>
                         </div>
                         <button
-                            className={styles.notificationButton}
+                            className="registrationContainer__notificationContainer__notificationDiv__notificationButton"
                             onClick={() => router.push(routes.HOME_PAGE)}
                         >
                             zatvori

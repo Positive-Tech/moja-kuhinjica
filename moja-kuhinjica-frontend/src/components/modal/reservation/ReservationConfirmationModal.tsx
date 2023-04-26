@@ -1,7 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { bgModal } from '@/constants/constants'
-import styles from '../notification/SuccessNotificationModal.module.scss'
 
 interface IReservationConfirmationModalProps {
     modalIsOpen: boolean
@@ -23,25 +22,29 @@ export const ReservationConfirmationModal = ({
             isOpen={modalIsOpen}
             style={bgModal}
             onRequestClose={closeModal}
-            className={styles.modalContainer}
+            className="modalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
-                <div className={styles.formDiv}>
-                    <label className={styles.formTitle}>{title}</label>
+            <div className="modalContainer__formContainer">
+                <div className="modalContainer__formContainer__formDiv">
+                    <label className="modalContainer__formContainer__formDiv__formTitle">
+                        {title}
+                    </label>
 
-                    <div className={styles.contentDiv}>
-                        <label className={styles.contentLabel}>{text}</label>
+                    <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
+                        <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
+                            {text}
+                        </label>
                     </div>
-                    <div className={styles.confirmationModalButtons}>
+                    <div className="modalContainer__formContainer__formDiv__confirmationModalButtons">
                         <button
-                            className={styles.formButton}
+                            className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
                             onClick={confirmOrder}
                         >
                             Potvrdi
                         </button>
                         <button
-                            className={styles.formButton}
+                            className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
                             onClick={closeModal}
                         >
                             Otkaži
