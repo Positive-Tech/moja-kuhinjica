@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { RegularButton } from '../button/RegularButton'
 import { Title } from '../label/Title'
 import { Text } from '../label/Text'
-import styles from './MenuItem.module.scss'
 import pic from 'public/static/assets/images/meal1.png'
 
 const IMAGE_WIDTH = 500
