@@ -32,6 +32,7 @@ import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/sr'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
+import { generateWeekdays } from 'src/utils/dateUtils'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -50,7 +51,7 @@ const MealReservation = (): JSX.Element => {
         ({ restaurant: { cartItems } }) => cartItems
     )
     const today = new Date(Date.now())
-    const [active, setActive] = useState<number>(today.getDay())
+    const [active, setActive] = useState(dayjs().day())
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -69,22 +70,6 @@ const MealReservation = (): JSX.Element => {
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
-
-    const weekdays = (): string[] => {
-        dayjs.locale('sr')
-        const weekdayArr: string[] = []
-
-        sortMenusByDate(menusForWeek)?.map(({ date }: IMenu) => {
-            const formattedDate = dayjs(date)
-                .format('ddd ')
-                .toLocaleUpperCase()
-                .replace('.', '')
-
-            weekdayArr.push(formattedDate)
-            return formattedDate
-        })
-        return weekdayArr
-    }
 
     useEffect(() => {
         fetchMenus()
@@ -126,9 +111,9 @@ const MealReservation = (): JSX.Element => {
     const fetchMenus = (): void => {
         setIsLoading(true)
         RestaurantService.fetchWeeklyMenus()
-            .then((res) => {
-                setMenusForWeek(res.data)
-                setMenuForDay(res.data[active - INDEX_INCREMENT])
+            .then(({ data }) => {
+                setMenusForWeek(data)
+                setMenuForDay(data[active])
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -282,7 +267,13 @@ const MealReservation = (): JSX.Element => {
                 <div className="mealReservation__container__menuDiv">
                     <div className="mealReservation__container__menuDiv__menuColDiv">
                         <div className="mealReservation__container__menuDiv__menuColDiv__menuRowDiv">
-                            {weekdays().map((day, activeTabIndex) => {
+                            {generateWeekdays().map((day, activeTabIndex) => {
+                                const date = dayjs()
+                                    .startOf('week')
+                                    .add(activeTabIndex, 'day')
+                                const menu = menusForWeek.find((menuItem) =>
+                                    dayjs(menuItem.date).isSame(date, 'day')
+                                )
                                 return (
                                     <TabButton
                                         key={uuid()}
@@ -294,11 +285,7 @@ const MealReservation = (): JSX.Element => {
                                             setActive(
                                                 activeTabIndex + INDEX_INCREMENT
                                             )
-                                            setMenuForDay(
-                                                menusForWeek[activeTabIndex]
-                                            )
-                                            setActiveDay(activeTabIndex)
-                                            handleTabClickWithCartItems()
+                                            setMenuForDay(menu)
                                         }}
                                         content={day}
                                     />

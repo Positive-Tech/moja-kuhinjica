@@ -21,6 +21,7 @@ import {
     MOBILE_WIDTH,
     routes,
 } from 'src/constants/constants'
+import { generateWeekdays } from 'src/utils/dateUtils'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
@@ -29,14 +30,15 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/sr'
 import { Oval } from 'react-loader-spinner'
 import { Text } from '@/components/label/Text'
+import dayjs from 'dayjs'
+import 'dayjs/locale/sr'
 
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
-    const today = new Date(Date.now())
-    const [active, setActive] = useState<number>(today.getDay())
+    const [active, setActive] = useState(dayjs().day())
     const [activeNavigationTab, setActiveNavigationTab] = useState<
         number | undefined
     >(1)
@@ -138,9 +140,9 @@ const Home = (): JSX.Element => {
     const fetchMenus = (): void => {
         setIsLoading(true)
         RestaurantService.fetchWeeklyMenus()
-            .then((res) => {
-                setAllMenus(res.data)
-                setSelectedMenu(res.data[active - INDEX_INCREMENT])
+            .then(({ data }) => {
+                setAllMenus(data)
+                setSelectedMenu(data?.[active])
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -228,7 +230,14 @@ const Home = (): JSX.Element => {
                         {`Dnevni meni za ${getDate()}`}
                     </label>
                     <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
-                        {weekdays().map((day, activeTabIndex) => {
+
+                        {generateWeekdays().map((day, activeTabIndex) => {
+                            const date = dayjs()
+                                .startOf('week')
+                                .add(activeTabIndex, 'day')
+                            const menu = allMenus.find((menuItem) =>
+                                dayjs(menuItem.date).isSame(date, 'day')
+                            )
                             return (
                                 <TabButton
                                     key={uuid()}
@@ -240,9 +249,7 @@ const Home = (): JSX.Element => {
                                         setActive(
                                             activeTabIndex + INDEX_INCREMENT
                                         )
-                                        setSelectedMenu(
-                                            allMenus[activeTabIndex]
-                                        )
+                                        setSelectedMenu(menu)
                                     }}
                                     content={day}
                                 />
