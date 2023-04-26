@@ -117,6 +117,7 @@ const Home = (): JSX.Element => {
             .then(({ data }) => {
                 setAllMenus(data)
                 setSelectedMenu(data?.[active])
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)

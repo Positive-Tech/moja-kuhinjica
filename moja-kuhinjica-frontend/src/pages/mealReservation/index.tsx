@@ -111,9 +111,9 @@ const MealReservation = (): JSX.Element => {
     const fetchMenus = (): void => {
         setIsLoading(true)
         RestaurantService.fetchWeeklyMenus()
-            .then((res) => {
-                setMenusForWeek(res.data)
-                setMenuForDay(res.data[active])
+            .then(({ data }) => {
+                setMenusForWeek(data)
+                setMenuForDay(data[active])
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -263,8 +263,8 @@ const MealReservation = (): JSX.Element => {
                                 const date = dayjs()
                                     .startOf('week')
                                     .add(activeTabIndex, 'day')
-                                const menu = menusForWeek.find((m) =>
-                                    dayjs(m.date).isSame(date, 'day')
+                                const menu = menusForWeek.find((menuItem) =>
+                                    dayjs(menuItem.date).isSame(date, 'day')
                                 )
                                 return (
                                     <TabButton
