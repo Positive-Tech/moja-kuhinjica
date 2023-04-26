@@ -16,7 +16,6 @@ import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 import {
-    DAYS,
     INDEX_INCREMENT,
     MOBILE_WIDTH,
     routes,

@@ -7,7 +7,6 @@ import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { DAYS, INDEX_INCREMENT, MOBILE_WIDTH } from '@/constants/constants'
-import styles from './MyReservationsPage.module.scss'
 import uuid from 'react-uuid'
 
 const FIRST_ELEMENT = 0
