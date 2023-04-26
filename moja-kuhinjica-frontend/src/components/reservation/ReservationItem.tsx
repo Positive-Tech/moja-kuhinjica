@@ -15,7 +15,7 @@ export const ReservationItem = ({
     index,
     quantity,
     mealName,
-    mealImage,
+    mealImage
 }: IReservationItemProps): JSX.Element => {
     return (
         <div className={styles.container}>
@@ -34,15 +34,6 @@ export const ReservationItem = ({
                     <label className={styles.contentLabel}>
                         {quantity} porcija
                     </label>
-                    <div className={styles.buttonContainer}>
-                        <div className={styles.buttonWrapper}>
-                            {index === itemsLength - 1 && (
-                                <button className={styles.cancelButton}>
-                                    Otkaži rezervaciju
-                                </button>
-                            )}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -98,11 +98,14 @@
     width: 100%;
     border-bottom: 1px solid rgba(193, 0, 22, 0.2);
     margin-bottom: 3%;
+    padding-bottom: 3%;
 
     @media only screen and (max-width: $breakpoint-medium) {
         margin-top: 5%;
     }
 }
+
+
 
 .restaurantLabel {
     font-family: Poppins;
@@ -125,6 +128,75 @@
     color: #333333;
 
     @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
+    }
+}
+
+.cancelButton {
+    font-family: Poppins;
+    font-weight: lighter;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0;
+    font-size: 20px;
+    width: 20%;
+    height: 50%;
+    padding: 7px;
+
+    color: white;
+    border: none;
+    background: #c10016;
+
+    @media only screen and (max-width: $breakpoint-900p) {
+        font-size: 20px;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 18px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        font-size: 16px;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        font-size: 14px;
+    }
+}
+
+.buttonWrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 45%;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 55%;
+    }
+    @media only screen and (max-width: $breakpoint-medium) {
+        width: 80%;
+        gap: 10%;
+    }
+}
+.re{
+    display: flex;
+    flex-direction: column;
+}
+
+.priceLabel {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 28px;
+    color: #c10016;
+
+    @media only screen and (max-width: $breakpoint-720p) {
+        font-size: 24px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
         font-size: 20px;
     }
     @media only screen and (max-width: $breakpoint-medium) {

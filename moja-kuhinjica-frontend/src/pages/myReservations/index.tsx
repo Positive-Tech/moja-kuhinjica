@@ -17,8 +17,13 @@ import RestaurantService, {
 import 'dayjs/locale/sr'
 import dayjs, { Dayjs } from 'dayjs'
 import { Oval } from 'react-loader-spinner'
+import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
+import { RegularButton } from '@/components/button/RegularButton'
+import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 
 const FIRST_ELEMENT = 0
+const CANCELING_SUCCESS = 'Otkazivanje je uspešno'
+const CANCELING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
 interface IGenerateWeekdays {
     dayofweek: string
@@ -33,6 +38,12 @@ const MyReservationsPage = (): JSX.Element => {
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [myReservations, setMyReservations] = useState<IMyReservations[]>()
+    const [confirmationModalIsOpen, setConfirmationModalIsOpen] =
+        useState<boolean>(false)
+    const [selectedReservationId, setSelectedReservationId] = useState<
+        number | null
+    >(null)
+    const [isTabClick, setIsTabClick] = useState<boolean>(false)
     const [activeDate, setActiveDate] = useState<string>(
         dayjs().format('DD-MM-YYYY')
     )
@@ -137,6 +148,14 @@ const MyReservationsPage = (): JSX.Element => {
         }
     }, [windowWidth])
 
+    const handleOrderRemoving = (): void => {
+        setConfirmationModalIsOpen(false)
+    }
+    const handleOrderCancellation = (): void => {
+        setConfirmationModalIsOpen(false)
+        setIsTabClick(false)
+    }
+
     return (
         <div className={styles.colDiv}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -145,6 +164,31 @@ const MyReservationsPage = (): JSX.Element => {
             ) : (
                 <Header type="red" selectedButton={FIRST_ELEMENT} />
             )}
+
+            <ReservationConfirmationModal
+                title="Potvrdite otkazivanje"
+                text={`Da li zelite da potvrdite otkazivanje narudžbine za ${selectedReservationId}?`}
+                modalIsOpen={confirmationModalIsOpen}
+                confirmOrder={handleOrderRemoving}
+                closeModal={() => {
+                    isTabClick
+                        ? handleOrderCancellation()
+                        : setConfirmationModalIsOpen(false)
+                }}
+                buttonText="OK"
+            />
+            {/* 
+            <ReservationNotificationModal
+                title={!isError ? CANCELING_SUCCESS : CANCELING_FAIL}
+                text={!isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage}
+                modalIsOpen={reservationModalIsOpen}
+                closeModal={() => {
+                    setReservationModalIsOpen(false)
+                }}
+                buttonText="OK"
+                isError={isError}
+            />
+*/}
             <div
                 className={
                     reservationsExist ? styles.container : styles.emptyContainer
@@ -215,8 +259,9 @@ const MyReservationsPage = (): JSX.Element => {
                                     id,
                                     restaurant,
                                     items,
+                                    price,
                                 }: IMyReservations) => (
-                                    <>
+                                    <div className={styles.re}>
                                         <label
                                             className={styles.restaurantLabel}
                                         >
@@ -247,7 +292,25 @@ const MyReservationsPage = (): JSX.Element => {
                                                 />
                                             )
                                         )}
-                                    </>
+                                        <div className={styles.buttonWrapper}>
+                                            <label
+                                                className={styles.priceLabel}
+                                            >
+                                                {price} din
+                                            </label>
+                                            <RegularButton
+                                                content="Otkaži rezervaciju"
+                                                isActive
+                                                style={styles.cancelButton}
+                                                onClick={() => {
+                                                    setSelectedReservationId(id)
+                                                    setConfirmationModalIsOpen(
+                                                        true
+                                                    )
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
                                 )
                             )}
                         </div>
