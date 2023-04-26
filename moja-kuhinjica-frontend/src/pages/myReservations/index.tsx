@@ -35,7 +35,7 @@ const MyReservationsPage = (): JSX.Element => {
     }, [windowWidth])
 
     return (
-        <div className={styles.colDiv}>
+        <div className={'myReservationsPage'}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
@@ -44,23 +44,25 @@ const MyReservationsPage = (): JSX.Element => {
             )}
             <div
                 className={
-                    reservationsExist ? styles.container : styles.emptyContainer
+                    reservationsExist
+                        ? 'myReservationsPage__container'
+                        : 'myReservationsPage__emptyContainer'
                 }
             >
                 <label
                     className={
                         reservationsExist
-                            ? styles.titleLabel
-                            : styles.emptyTitleLabel
+                            ? 'myReservationsPage__container__titleLabel'
+                            : 'myReservationsPage__container__titleLabel myReservationsPage__container__titleLabel--empty'
                     }
                 >
                     Moje rezervacije
                 </label>
-                <label className={styles.infoLabel}>
+                <label className="myReservationsPage__container__infoLabel">
                     Rezervacije se mogu otkazati do 10 časova
                 </label>
-                <div className={styles.colDiv1}>
-                    <div className={styles.menuRowDiv}>
+                <div className="myReservationsPage__colDiv">
+                    <div className="myReservationsPage__colDiv__menuRowDiv">
                         {DAYS.map((day, activeTabIndex) => {
                             return (
                                 <TabButton
@@ -79,20 +81,26 @@ const MyReservationsPage = (): JSX.Element => {
                             )
                         })}
                     </div>
-                    <label className={styles.titleLabel}>Februar 4</label>
+                    <label className="myReservationsPage__colDiv__titleLabel">
+                        Februar 4
+                    </label>
                     {!reservationsExist && (
-                        <div className={styles.rowDiv}>
-                            <label className={styles.infoLabel}>
+                        <div className="myReservationsPage__colDiv__rowDiv">
+                            <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
                                 Nema rezervacija za ovaj datum.
                             </label>
                         </div>
                     )}
                     {reservationsExist && (
-                        <div className={styles.reservationWrapper}>
-                            <label className={styles.restaurantLabel}>
+                        <div
+                            className={
+                                'myReservationsPage__colDiv__reservationWrapper'
+                            }
+                        >
+                            <label className="myReservationsPage__colDiv__reservationWrapper__restaurantLabel">
                                 Restoran Top FOOD 021
                             </label>
-                            <label className={styles.reservationLabel}>
+                            <label className="myReservationsPage__colDiv__reservationWrapper__reservationLabel">
                                 Rezervacija #234913
                             </label>
                             <ReservationItem />
@@ -100,11 +108,11 @@ const MyReservationsPage = (): JSX.Element => {
                         </div>
                     )}
                     {reservationsExist && (
-                        <div className={styles.reservationWrapper}>
-                            <label className={styles.restaurantLabel}>
+                        <div className="myReservationsPage__colDiv__reservationWrapper">
+                            <label className="myReservationsPage__colDiv__reservationWrapper__restaurantLabel">
                                 Restoran Top FOOD 021
                             </label>
-                            <label className={styles.reservationLabel}>
+                            <label className="myReservationsPage__colDiv__reservationWrapper__reservationLabel">
                                 Rezervacija #234913
                             </label>
                             <ReservationItem />

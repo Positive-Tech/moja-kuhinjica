@@ -13,7 +13,6 @@ import Menu from 'src/components/mobileMenu'
 import { MOBILE_WIDTH } from '@/constants/constants'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import aboutUsPic from 'public/static/assets/images/aboutUs.png'
-import styles from './AboutUs.module.scss'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
@@ -73,17 +72,19 @@ const AboutUs = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.colDiv}>
+        <div className="aboutUs">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
 
-            <div className={styles.wrapper}>
-                <label className={styles.title}>DUNDA</label>
+            <div className="aboutUs__topWrapper">
+                <label className="aboutUs__topWrapper__aboutUsTitle">
+                    DUNDA
+                </label>
             </div>
             {isMobile ? (
                 <MobileHeader
                     handleClick={() => setShowMenu(true)}
                     showProfileIcon={false}
-                    style={styles.aboutUsHeader}
+                    style="aboutUs__aboutUsHeader"
                     src={burgerMenuIcon}
                 />
             ) : (
@@ -93,30 +94,30 @@ const AboutUs = (): JSX.Element => {
                     openLoginModal={setShowLoginModal}
                 />
             )}
-            <div className={styles.bottomWrapper}>
-                <div className={styles.menuRowDiv}>
+            <div className="aboutUs__bottomWrapper">
+                <div className="aboutUs__bottomWrapper__menuRowDiv">
                     <TabButton
                         active={active === BUTTON_ONE}
                         onClick={() => setActive(BUTTON_ONE)}
                         content="O nama"
-                        style={styles.tabButton}
+                        style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
                     />
                     <TabButton
                         active={active === BUTTON_TWO}
                         onClick={() => setActive(BUTTON_TWO)}
-                        style={styles.tabButton}
+                        style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
                         content="FAQ"
                     />
                     <TabButton
                         active={active === BUTTON_THREE}
                         onClick={() => setActive(BUTTON_THREE)}
-                        style={styles.tabButton}
+                        style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
                         content="Politika privatnosti"
                     />
                     <TabButton
                         active={active === BUTTON_FOUR}
                         onClick={() => setActive(BUTTON_FOUR)}
-                        style={styles.tabButton}
+                        style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
                         content="Uslovi korišćenja"
                     />
                 </div>
@@ -142,22 +143,22 @@ const AboutUs = (): JSX.Element => {
                     infoContent={resetPasswordMessage}
                     email={userEmail}
                 />
-                <div className={styles.tabWrapper}>
+                <div className="aboutUs__tabWrapper">
                     {active === 1 && (
-                        <div className={styles.aboutUsContainer}>
-                            <div className={styles.aboutUsWrapper}>
-                                <div className={styles.pictureWrapper}>
+                        <div className="aboutUs__tabWrapper__aboutUsContainer">
+                            <div className="aboutUs__tabWrapper__aboutUsContainer__aboutUsWrapper">
+                                <div className="aboutUs__tabWrapper__aboutUsContainer__aboutUsWrapper__pictureWrapper">
                                     <Image
                                         src={aboutUsPic}
                                         alt=""
-                                        className={styles.aboutUsPicture}
+                                        className="aboutUs__tabWrapper__aboutUsContainer__aboutUsWrapper__pictureWrapper__aboutUsPicture"
                                     />
                                 </div>
-                                <div className={styles.content}>
-                                    <label className={styles.contentTitle}>
+                                <div className="aboutUs__tabWrapper__aboutUsContainer__aboutUsWrapper__content">
+                                    <label className="aboutUs__tabWrapper__aboutUsContainer__aboutUsWrapper__content__contentTitle">
                                         Lorem ipsum?
                                     </label>
-                                    <label className={styles.contentText}>
+                                    <label className="aboutUs__tabWrapper__aboutUsContainer__aboutUsWrapper__content__contentText">
                                         Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit. Nullam mi elit, commodo
                                         nec ante id, ornare efficitur dui.
@@ -172,7 +173,7 @@ const AboutUs = (): JSX.Element => {
                         </div>
                     )}
                     {active === 2 && (
-                        <div className={styles.FAQContainer}>
+                        <div className="aboutUs__FAQContainer">
                             {questions &&
                                 questions.map((element) => {
                                     return (
@@ -186,11 +187,11 @@ const AboutUs = (): JSX.Element => {
                         </div>
                     )}
                     {active === 3 && (
-                        <div className={styles.privacyInfoContainer}>
-                            <label className={styles.infoTitle}>
+                        <div className="aboutUs__privacyInfoContainer">
+                            <label className="aboutUs__privacyInfoContainer__infoTitle">
                                 DUNDA Obaveštenje o privatnosti
                             </label>
-                            <label className={styles.infoText}>
+                            <label className="aboutUs__privacyInfoContainer__infoText">
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit. Vivamus quis dolor nec dui
                                 auctor lobortis. Ut placerat velit eu placerat
@@ -217,11 +218,11 @@ const AboutUs = (): JSX.Element => {
                         </div>
                     )}
                     {active === 4 && (
-                        <div className={styles.privacyInfoContainer}>
-                            <label className={styles.infoTitle}>
+                        <div className="aboutUs__privacyInfoContainer">
+                            <label className="aboutUs__privacyInfoContainer__infoTitle">
                                 DUNDA Uslovi korišćenja
                             </label>
-                            <label className={styles.infoText}>
+                            <label className="aboutUs__privacyInfoContainer__infoText">
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit. Vivamus quis dolor nec dui
                                 auctor lobortis. Ut placerat velit eu placerat
@@ -248,7 +249,11 @@ const AboutUs = (): JSX.Element => {
                         </div>
                     )}
                 </div>
-                {isMobile ? <MobileFooter style={styles.footer} /> : <Footer />}
+                {isMobile ? (
+                    <MobileFooter style="aboutUs__footer" />
+                ) : (
+                    <Footer />
+                )}
             </div>
         </div>
     )

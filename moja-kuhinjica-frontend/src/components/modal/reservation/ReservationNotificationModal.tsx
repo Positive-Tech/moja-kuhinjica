@@ -2,7 +2,6 @@ import React from 'react'
 import Modal from 'react-modal'
 import Image from 'next/image'
 import { bgModal } from '@/constants/constants'
-import styles from '../notification/SuccessNotificationModal.module.scss'
 import successFilled from 'public/static/assets/images/successFilled.svg'
 
 interface IReservationNotificationModalProps {
@@ -26,19 +25,26 @@ export const ReservationNotificationModal = ({
             isOpen={modalIsOpen}
             style={bgModal}
             onRequestClose={closeModal}
-            className={styles.modalContainer}
+            className="modalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
-                <div className={styles.formDiv}>
+            <div className="modalContainer__formContainer">
+                <div className="modalContainer__formContainer__formDiv">
                     {!isError && <Image src={successFilled} alt="" />}
-                    <label className={styles.formTitle}>{title}</label>
+                    <label className="modalContainer__formContainer__formDiv__formTitle">
+                        {title}
+                    </label>
 
-                    <div className={styles.contentDiv}>
-                        <label className={styles.contentLabel}>{text}</label>
+                    <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
+                        <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
+                            {text}
+                        </label>
                     </div>
 
-                    <button className={styles.formButton} onClick={closeModal}>
+                    <button
+                        className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
+                        onClick={closeModal}
+                    >
                         {buttonText}
                     </button>
                 </div>

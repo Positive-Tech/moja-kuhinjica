@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './HeaderButton.module.scss'
+
 
 const HEADER_COLOR = 'red'
 interface IHeaderButtonProps {
@@ -19,9 +19,9 @@ export const HeaderButton = ({
             className={
                 active
                     ? headerType === HEADER_COLOR
-                        ? styles.navButtonProfileSelected
-                        : styles.navButtonSelected
-                    : styles.navButton
+                        ? `navButton navButton--selectedProfile`
+                        : `navButton navButton--selected`
+                    : `navButton`
             }
             onClick={onClick}
         >

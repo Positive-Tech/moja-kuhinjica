@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './TabButton.module.scss'
 
 interface IDayButtonProps {
     active?: boolean
@@ -17,7 +16,7 @@ export const TabButton = ({
         <button
             onClick={onClick}
             className={`${
-                active ? styles.dayButtonSelected : styles.dayButton
+                active ? `dayButton dayButton--selected` : `dayButton`
             } ${style}`}
         >
             {content}

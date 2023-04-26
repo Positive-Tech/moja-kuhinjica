@@ -17,7 +17,6 @@ import profile from 'public/static/assets/images/profile.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import passwordIcon from 'public/static/assets/images/password.svg'
-import styles from './EditProfilePage.module.scss'
 import { Oval } from 'react-loader-spinner'
 
 interface User {
@@ -102,7 +101,7 @@ const EditProfilePage = (): JSX.Element => {
             })
     }
     return (
-        <div className={styles.colDiv}>
+        <div className="editProfile">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
 
             {isMobile ? (
@@ -113,28 +112,30 @@ const EditProfilePage = (): JSX.Element => {
             ) : (
                 <Header type="red" selectedButton={0} />
             )}
-            <div className={styles.container}>
-                <label className={styles.titleLabel}>Izmena profila</label>
-                <div className={styles.formContainer}>
-                    <div className={styles.formWrapper}>
+            <div className="editProfile__container">
+                <label className="editProfile__container__titleLabel">
+                    Izmena profila
+                </label>
+                <div className="editProfile__container__formContainer">
+                    <div className="editProfile__container__formContainer__formWrapper">
                         <form
-                            className={styles.formDiv}
+                            className="editProfile__container__formContainer__formWrapper__formDiv"
                             onSubmit={handleSubmit((data) => editUser(data))}
                         >
-                            <div className={styles.changePasswordContainer}>
+                            <div className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer">
                                 <Image
                                     src={profileIcon}
                                     alt=""
-                                    className={styles.profileIcon}
+                                    className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__profileIcon"
                                 />
-                                <div className={styles.changePasswordWrapper}>
+                                <div className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__changePasswordWrapper">
                                     <Image
                                         src={passwordIcon}
                                         alt=""
-                                        className={styles.passwordIcon}
+                                        className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__changePasswordWrapper__passwordIcon"
                                     />
                                     <label
-                                        className={styles.changePasswordLabel}
+                                        className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__changePasswordWrapper__changePasswordLabel"
                                         onClick={() =>
                                             isMobile
                                                 ? router.push(
@@ -147,7 +148,7 @@ const EditProfilePage = (): JSX.Element => {
                                     </label>
                                 </div>
                             </div>
-                            <div className={styles.inputWrapper}>
+                            <div className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper">
                                 <FormInput
                                     register={register}
                                     errors={errors}
@@ -167,8 +168,8 @@ const EditProfilePage = (): JSX.Element => {
                                     isEditable={true}
                                     style={
                                         editName
-                                            ? styles.editableInput
-                                            : styles.disabledInput
+                                            ? 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput--editable'
+                                            : 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput'
                                     }
                                     handleEditClick={() => setEditName(true)}
                                     handleOnBlur={() => setEditName(false)}
@@ -191,8 +192,8 @@ const EditProfilePage = (): JSX.Element => {
                                     isEditable={true}
                                     style={
                                         editSurname
-                                            ? styles.editableInput
-                                            : styles.disabledInput
+                                            ? 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput--editable'
+                                            : 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput'
                                     }
                                     defaultValue={user?.surname}
                                     handleOnBlur={() => setEditSurname(false)}
@@ -218,8 +219,8 @@ const EditProfilePage = (): JSX.Element => {
                                     isEditable={true}
                                     style={
                                         editPhoneNumber
-                                            ? styles.editableInput
-                                            : styles.disabledInput
+                                            ? 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput--editable'
+                                            : 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput'
                                     }
                                     defaultValue={user?.phoneNumber}
                                     handleOnBlur={() =>
@@ -243,17 +244,17 @@ const EditProfilePage = (): JSX.Element => {
                                             message: 'invalid email value',
                                         },
                                     }}
-                                    style={styles.emailInput}
+                                    style="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput--email"
                                     defaultValue={user?.email}
                                 />
-                                <div className={styles.buttonWrapper}>
+                                <div className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__buttonWrapper">
                                     {isLoading ? (
                                         <Oval
                                             height={40}
                                             width={40}
                                             color="#c10016"
                                             wrapperStyle={{}}
-                                            wrapperClass={styles.spinner}
+                                            wrapperClass="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__buttonWrapper__spinner"
                                             visible={true}
                                             ariaLabel="oval-loading"
                                             secondaryColor="#c10016"
@@ -263,7 +264,7 @@ const EditProfilePage = (): JSX.Element => {
                                     ) : (
                                         <button
                                             type="submit"
-                                            className={styles.formButton}
+                                            className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__buttonWrapper__formButton"
                                         >
                                             Potvrdi
                                         </button>

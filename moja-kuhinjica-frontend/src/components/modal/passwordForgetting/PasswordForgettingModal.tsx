@@ -6,7 +6,6 @@ import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { FormInput } from '@/components/input/FormInput'
 import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
-import styles from './PasswordForgettingModal.module.scss'
 import emailIcon from 'public/static/assets/images/email.svg'
 import { Oval } from 'react-loader-spinner'
 
@@ -60,20 +59,20 @@ export const PasswordForgettingModal = ({
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={bgModal}
-            className={styles.modalContainerLogin}
+            className="modalContainer"
             ariaHideApp={false}
         >
-            <div className={styles.formContainer}>
+            <div className="modalContainer__formContainer">
                 <form
-                    className={styles.formDiv}
+                    className="modalContainer__formContainer__formDiv"
                     onSubmit={handleSubmit((data) => resetPassword(data))}
                 >
-                    <label className={styles.formTitle}>
+                    <label className="modalContainer__formContainer__formDiv__formTitle">
                         Zaboravili ste šifru?
                     </label>
                     <Text
                         content="Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje."
-                        style={styles.infoLabel}
+                        style="modalContainer__formContainer__formDiv__infoLabel"
                     />
                     {showError && <ErrorLabel content={errorMessage} />}
                     <FormInput
@@ -90,17 +89,17 @@ export const PasswordForgettingModal = ({
                                 message: 'Pogrešan format za email adresu.',
                             },
                         }}
-                        style={styles.passwordInput}
+                        style="modalContainer__formContainer__formDiv__passwordInput"
                     />
 
-                    <div className={styles.buttonWrapper}>
+                    <div className="modalContainer__formContainer__formDiv__buttonWrapper">
                         {isLoading ? (
                             <Oval
                                 height={40}
                                 width={40}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="modalContainer__formContainer__formDiv__buttonWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -108,7 +107,10 @@ export const PasswordForgettingModal = ({
                                 strokeWidthSecondary={4}
                             />
                         ) : (
-                            <button type="submit" className={styles.formButton}>
+                            <button
+                                type="submit"
+                                className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
+                            >
                                 Resetuj šifru
                             </button>
                         )}

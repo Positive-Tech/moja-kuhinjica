@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './Label.module.scss'
 
 interface IErrorLabelProps {
     content: string | undefined
@@ -9,5 +8,5 @@ export const ErrorLabel = ({
     content,
     style,
 }: IErrorLabelProps): JSX.Element => {
-    return <label className={`${styles.errorLabel} ${style}`}>{content}</label>
+    return <label className={`errorLabel ${style}`}>{content}</label>
 }
