@@ -51,7 +51,7 @@ const MyReservationsPage = (): JSX.Element => {
     const [cancellationModalIsOpen, setCancellationModalIsOpen] =
         useState<boolean>(false)
     const [reservationID, setReservationID] = useState<number>(-1)
-    const [isError, setIsError] = useState<boolean>(false)
+    const [isError] = useState<boolean>(false)
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
     const [activeDate, setActiveDate] = useState<string>(
         dayjs().format('DD-MM-YYYY')
@@ -269,7 +269,10 @@ const MyReservationsPage = (): JSX.Element => {
                                                 items,
                                                 price,
                                             }: IMyReservations) => (
-                                                <div className={styles.re}>
+                                                <div
+                                                    key={id}
+                                                    className={styles.re}
+                                                >
                                                     <label
                                                         className={
                                                             styles.restaurantLabel
