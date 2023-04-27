@@ -182,6 +182,13 @@ const MealReservation = (): JSX.Element => {
         return dateArrReversed?.reverse()?.join('/')
     }
 
+    const handleTabClickWithCartItems = (): void => {
+        if (cartItems.length) {
+            setConfirmationModalIsOpen(true)
+            setIsTabClick(true)
+        }
+    }
+
     const handleOrderCancellation = (): void => {
         dispatch(emptyCart())
         setConfirmationModalIsOpen(false)
@@ -268,6 +275,7 @@ const MealReservation = (): JSX.Element => {
                                                 activeTabIndex + INDEX_INCREMENT
                                             )
                                             setMenuForDay(menu)
+                                            handleTabClickWithCartItems()
                                         }}
                                         content={day}
                                     />
