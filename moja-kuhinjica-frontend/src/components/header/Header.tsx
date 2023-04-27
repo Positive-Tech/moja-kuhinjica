@@ -12,6 +12,7 @@ import editProfileIcon from 'public/static/assets/images/editProfile.svg'
 import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import { routes } from '@/constants/constants'
 import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
+import { loadUser } from '@/reduxStore/reducers/userReducer'
 
 const HEADER_TYPE = 'red'
 interface IHeaderProps {
@@ -33,6 +34,11 @@ const Header = ({
     const user = useAppSelector((state) => state.auth.user)
 
     const menuRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (isAuthorized || token) dispatch(loadUser())
+    }, [])
 
     useEffect(() => {
         const handler = (e: MouseEvent): void => {
@@ -123,8 +129,8 @@ const Header = ({
                             <div
                                 className={
                                     type === HEADER_TYPE
-                                        ? "headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu"
-                                        : "headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu--home"
+                                        ? 'headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu'
+                                        : 'headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu headerWrapper__buttonWrapper__profileIconWrapper__dropdownMenu--home'
                                 }
                                 ref={menuRef}
                             >

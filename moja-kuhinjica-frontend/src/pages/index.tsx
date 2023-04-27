@@ -65,8 +65,9 @@ const Home = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isAuthorized) dispatch(loadUser())
-    }, [isAuthorized])
+        const token = localStorage.getItem('token')
+        if (isAuthorized || token) dispatch(loadUser())
+    }, [])
 
     useEffect(() => {
         fetchMenus()
