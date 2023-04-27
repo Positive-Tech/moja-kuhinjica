@@ -137,7 +137,6 @@ const MealReservation = (): JSX.Element => {
                 setIsLoading(false)
             })
     }
-
     const addToCart = (meal: IMeal): void => {
         dispatch(
             addItemToCart({
@@ -147,7 +146,6 @@ const MealReservation = (): JSX.Element => {
             })
         )
     }
-
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
@@ -171,7 +169,6 @@ const MealReservation = (): JSX.Element => {
     const generateDateForWeekday = (activeDay: number): string => {
         const date = dayjs()
         let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
-
         if (dateForCreatingOrder.isAfter(date)) {
             dateForCreatingOrder = dateForCreatingOrder.startOf('day')
         }

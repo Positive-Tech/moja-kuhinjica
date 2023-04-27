@@ -22,7 +22,7 @@ import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 
 const FIRST_ELEMENT = 0
-const CANCELLING_SUCCESS = 'Otkazivanje je uspešno'
+const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
 interface IGenerateWeekdays {
@@ -157,7 +157,7 @@ const MyReservationsPage = (): JSX.Element => {
         }
     }, [windowWidth])
 
-    const handleOrderRemoving = (id: number): void => {
+    const handleOrderCancellation = (id: number): void => {
         const filteredReservations = myReservations?.filter(
             (reservation) => reservation.id !== id
         )
@@ -165,7 +165,7 @@ const MyReservationsPage = (): JSX.Element => {
         setConfirmationModalIsOpen(false)
         setCancellationModalIsOpen(true)
     }
-    const handleOrderCancellation = (): void => {
+    const handleModalClose = (): void => {
         setConfirmationModalIsOpen(false)
         setIsTabClick(false)
     }
@@ -183,10 +183,10 @@ const MyReservationsPage = (): JSX.Element => {
                 title="Potvrdite otkazivanje"
                 text={`Da li ste sigurni da želite da otkažete rezervaciju?`}
                 modalIsOpen={confirmationModalIsOpen}
-                confirmOrder={() => handleOrderRemoving(reservationID)}
+                confirmOrder={() => handleOrderCancellation(reservationID)}
                 closeModal={() => {
                     isTabClick
-                        ? handleOrderCancellation()
+                        ? handleModalClose()
                         : setConfirmationModalIsOpen(false)
                 }}
                 buttonText="OK"
@@ -242,7 +242,7 @@ const MyReservationsPage = (): JSX.Element => {
                     </div>
 
                     <label className={styles.titleLabel}>{activeDate}</label>
-                    {isLoading && (
+                    {isLoading ? (
                         <div className={styles.loadingBarWrapper}>
                             <Oval
                                 height={70}
@@ -257,88 +257,105 @@ const MyReservationsPage = (): JSX.Element => {
                                 strokeWidthSecondary={4}
                             />
                         </div>
-                    )}
-
-                    {myReservations ? (
-                        <div className={styles.reservationWrapper}>
-                            {resForDay?.length > 0 ? (
-                                resForDay?.map(
-                                    ({
-                                        id,
-                                        restaurant,
-                                        items,
-                                        price,
-                                    }: IMyReservations) => (
-                                        <div className={styles.re}>
-                                            <label
-                                                className={
-                                                    styles.restaurantLabel
-                                                }
-                                            >
-                                                {restaurant.restaurantName}
-                                            </label>
-                                            <label
-                                                className={
-                                                    styles.reservationLabel
-                                                }
-                                            >
-                                                Rezervacija {id}
-                                            </label>
-                                            {items.map(
-                                                (
-                                                    {
-                                                        id,
-                                                        quantity,
-                                                        mealName,
-                                                        mealImage,
-                                                    }: IReservationItem,
-                                                    index
-                                                ) => (
-                                                    <ReservationItem
-                                                        key={id}
-                                                        quantity={quantity}
-                                                        mealName={mealName}
-                                                        mealImage={mealImage}
-                                                        index={index}
-                                                        itemsLength={
-                                                            items.length
+                    ) : (
+                        <>
+                            {myReservations ? (
+                                <div className={styles.reservationWrapper}>
+                                    {resForDay?.length > 0 ? (
+                                        resForDay?.map(
+                                            ({
+                                                id,
+                                                restaurant,
+                                                items,
+                                                price,
+                                            }: IMyReservations) => (
+                                                <div className={styles.re}>
+                                                    <label
+                                                        className={
+                                                            styles.restaurantLabel
                                                         }
-                                                    />
-                                                )
-                                            )}
-                                            <div
-                                                className={styles.buttonWrapper}
-                                            >
-                                                <label
-                                                    className={
-                                                        styles.priceLabel
-                                                    }
-                                                >
-                                                    {price} din
-                                                </label>
-                                                <RegularButton
-                                                    content="Otkaži rezervaciju"
-                                                    isActive
-                                                    style={styles.cancelButton}
-                                                    onClick={() => {
-                                                        setConfirmationModalIsOpen(
-                                                            true
+                                                    >
+                                                        {
+                                                            restaurant.restaurantName
+                                                        }
+                                                    </label>
+                                                    <label
+                                                        className={
+                                                            styles.reservationLabel
+                                                        }
+                                                    >
+                                                        Rezervacija {id}
+                                                    </label>
+                                                    {items.map(
+                                                        (
+                                                            {
+                                                                id,
+                                                                quantity,
+                                                                mealName,
+                                                                mealImage,
+                                                            }: IReservationItem,
+                                                            index
+                                                        ) => (
+                                                            <ReservationItem
+                                                                key={id}
+                                                                quantity={
+                                                                    quantity
+                                                                }
+                                                                mealName={
+                                                                    mealName
+                                                                }
+                                                                mealImage={
+                                                                    mealImage
+                                                                }
+                                                                index={index}
+                                                                itemsLength={
+                                                                    items.length
+                                                                }
+                                                            />
                                                         )
-                                                        setReservationID(id)
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    )
-                                )
+                                                    )}
+                                                    <div
+                                                        className={
+                                                            styles.buttonWrapper
+                                                        }
+                                                    >
+                                                        <label
+                                                            className={
+                                                                styles.priceLabel
+                                                            }
+                                                        >
+                                                            {price} din
+                                                        </label>
+                                                        <RegularButton
+                                                            content="Otkaži rezervaciju"
+                                                            isActive
+                                                            style={
+                                                                styles.cancelButton
+                                                            }
+                                                            onClick={() => {
+                                                                setConfirmationModalIsOpen(
+                                                                    true
+                                                                )
+                                                                setReservationID(
+                                                                    id
+                                                                )
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )
+                                        )
+                                    ) : (
+                                        <NoReservationsMessage />
+                                    )}
+                                </div>
                             ) : (
                                 <NoReservationsMessage />
                             )}
-                        </div>
-                    ) : (
-                        <NoReservationsMessage />
+                        </>
                     )}
                 </div>
+
                 {isMobile ? <MobileFooter /> : <Footer />}
             </div>
         </div>
