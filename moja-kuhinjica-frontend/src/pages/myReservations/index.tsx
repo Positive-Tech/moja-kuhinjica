@@ -22,13 +22,21 @@ import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 
 const FIRST_ELEMENT = 0
-const CANCELING_SUCCESS = 'Otkazivanje je uspešno'
-const CANCELING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
+const CANCELLING_SUCCESS = 'Otkazivanje je uspešno'
+const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
 interface IGenerateWeekdays {
     dayofweek: string
     date: string
 }
+
+const NoReservationsMessage: React.FC = () => (
+    <div className={styles.rowDiv}>
+        <label className={styles.infoLabel}>
+            Nema rezervacija za ovaj datum.
+        </label>
+    </div>
+)
 
 const MyReservationsPage = (): JSX.Element => {
     const [active, setActive] = useState<number>(1)
@@ -40,9 +48,10 @@ const MyReservationsPage = (): JSX.Element => {
     const [myReservations, setMyReservations] = useState<IMyReservations[]>()
     const [confirmationModalIsOpen, setConfirmationModalIsOpen] =
         useState<boolean>(false)
-    const [selectedReservationId, setSelectedReservationId] = useState<
-        number | null
-    >(null)
+    const [cancellationModalIsOpen, setCancellationModalIsOpen] =
+        useState<boolean>(false)
+    const [reservationID, setReservationID] = useState<number>(-1)
+    const [isError, setIsError] = useState<boolean>(false)
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
     const [activeDate, setActiveDate] = useState<string>(
         dayjs().format('DD-MM-YYYY')
@@ -148,8 +157,13 @@ const MyReservationsPage = (): JSX.Element => {
         }
     }, [windowWidth])
 
-    const handleOrderRemoving = (): void => {
+    const handleOrderRemoving = (id: number): void => {
+        const filteredReservations = myReservations?.filter(
+            (reservation) => reservation.id !== id
+        )
+        setMyReservations(filteredReservations)
         setConfirmationModalIsOpen(false)
+        setCancellationModalIsOpen(true)
     }
     const handleOrderCancellation = (): void => {
         setConfirmationModalIsOpen(false)
@@ -167,9 +181,9 @@ const MyReservationsPage = (): JSX.Element => {
 
             <ReservationConfirmationModal
                 title="Potvrdite otkazivanje"
-                text={`Da li zelite da potvrdite otkazivanje narudžbine za ${selectedReservationId}?`}
+                text={`Da li ste sigurni da želite da otkažete rezervaciju?`}
                 modalIsOpen={confirmationModalIsOpen}
-                confirmOrder={handleOrderRemoving}
+                confirmOrder={() => handleOrderRemoving(reservationID)}
                 closeModal={() => {
                     isTabClick
                         ? handleOrderCancellation()
@@ -177,18 +191,17 @@ const MyReservationsPage = (): JSX.Element => {
                 }}
                 buttonText="OK"
             />
-            {/* 
+
             <ReservationNotificationModal
-                title={!isError ? CANCELING_SUCCESS : CANCELING_FAIL}
-                text={!isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage}
-                modalIsOpen={reservationModalIsOpen}
+                title={!isError ? CANCELLING_SUCCESS : CANCELLING_FAIL}
+                modalIsOpen={cancellationModalIsOpen}
                 closeModal={() => {
-                    setReservationModalIsOpen(false)
+                    setCancellationModalIsOpen(false)
                 }}
                 buttonText="OK"
                 isError={isError}
             />
-*/}
+
             <div
                 className={
                     reservationsExist ? styles.container : styles.emptyContainer
@@ -245,75 +258,85 @@ const MyReservationsPage = (): JSX.Element => {
                             />
                         </div>
                     )}
-                    {!myReservations && (
-                        <div className={styles.rowDiv}>
-                            <label className={styles.infoLabel}>
-                                Nema rezervacija za ovaj datum.
-                            </label>
-                        </div>
-                    )}
-                    {myReservations && (
+
+                    {myReservations ? (
                         <div className={styles.reservationWrapper}>
-                            {resForDay?.map(
-                                ({
-                                    id,
-                                    restaurant,
-                                    items,
-                                    price,
-                                }: IMyReservations) => (
-                                    <div className={styles.re}>
-                                        <label
-                                            className={styles.restaurantLabel}
-                                        >
-                                            {restaurant.restaurantName}
-                                        </label>
-                                        <label
-                                            className={styles.reservationLabel}
-                                        >
-                                            Rezervacija {id}
-                                        </label>
-                                        {items.map(
-                                            (
-                                                {
-                                                    id,
-                                                    quantity,
-                                                    mealName,
-                                                    mealImage,
-                                                }: IReservationItem,
-                                                index
-                                            ) => (
-                                                <ReservationItem
-                                                    key={id}
-                                                    quantity={quantity}
-                                                    mealName={mealName}
-                                                    mealImage={mealImage}
-                                                    index={index}
-                                                    itemsLength={items.length}
-                                                />
-                                            )
-                                        )}
-                                        <div className={styles.buttonWrapper}>
+                            {resForDay?.length > 0 ? (
+                                resForDay?.map(
+                                    ({
+                                        id,
+                                        restaurant,
+                                        items,
+                                        price,
+                                    }: IMyReservations) => (
+                                        <div className={styles.re}>
                                             <label
-                                                className={styles.priceLabel}
+                                                className={
+                                                    styles.restaurantLabel
+                                                }
                                             >
-                                                {price} din
+                                                {restaurant.restaurantName}
                                             </label>
-                                            <RegularButton
-                                                content="Otkaži rezervaciju"
-                                                isActive
-                                                style={styles.cancelButton}
-                                                onClick={() => {
-                                                    setSelectedReservationId(id)
-                                                    setConfirmationModalIsOpen(
-                                                        true
-                                                    )
-                                                }}
-                                            />
+                                            <label
+                                                className={
+                                                    styles.reservationLabel
+                                                }
+                                            >
+                                                Rezervacija {id}
+                                            </label>
+                                            {items.map(
+                                                (
+                                                    {
+                                                        id,
+                                                        quantity,
+                                                        mealName,
+                                                        mealImage,
+                                                    }: IReservationItem,
+                                                    index
+                                                ) => (
+                                                    <ReservationItem
+                                                        key={id}
+                                                        quantity={quantity}
+                                                        mealName={mealName}
+                                                        mealImage={mealImage}
+                                                        index={index}
+                                                        itemsLength={
+                                                            items.length
+                                                        }
+                                                    />
+                                                )
+                                            )}
+                                            <div
+                                                className={styles.buttonWrapper}
+                                            >
+                                                <label
+                                                    className={
+                                                        styles.priceLabel
+                                                    }
+                                                >
+                                                    {price} din
+                                                </label>
+                                                <RegularButton
+                                                    content="Otkaži rezervaciju"
+                                                    isActive
+                                                    style={styles.cancelButton}
+                                                    onClick={() => {
+                                                        setConfirmationModalIsOpen(
+                                                            true
+                                                        )
+                                                        setReservationID(id)
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
+                                    )
                                 )
+                            ) : (
+                                <NoReservationsMessage />
                             )}
                         </div>
+                    ) : (
+                        <NoReservationsMessage />
                     )}
                 </div>
                 {isMobile ? <MobileFooter /> : <Footer />}
