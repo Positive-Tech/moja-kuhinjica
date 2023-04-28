@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './HomePageButton.module.scss'
 
 interface IHeaderButtonProps {
     content: string
@@ -10,7 +9,7 @@ export const HomePageButton = ({
     onClick,
 }: IHeaderButtonProps): JSX.Element => {
     return (
-        <button className={styles.button} onClick={onClick}>
+        <button className="homeBtn" onClick={onClick}>
             {content}
         </button>
     )

@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './ReservationItem.module.scss'
+
+const IMAGE_SIZE = 500;
+
 
 interface IReservationItemProps {
     itemsLength: number
@@ -18,22 +20,38 @@ export const ReservationItem = ({
     mealImage
 }: IReservationItemProps): JSX.Element => {
     return (
-        <div className={styles.container}>
-            <div className={styles.rowDiv}>
-                <div className={styles.pictureWrapper}>
+        <div className="reservationContainer">
+            <div className="reservationContainer__rowDiv">
+                <div className="reservationContainer__rowDiv__pictureWrapper">
                     <Image
                         src={mealImage}
                         alt=""
-                        className={styles.mealPicture}
-                        width={500}
-                        height={500}
+                        className="reservationContainer__rowDiv__pictureWrapper__mealPicture"
+                        width={IMAGE_SIZE}
+                        height={IMAGE_SIZE}
                     />
                 </div>
-                <div className={styles.contentWrapper}>
-                    <label className={styles.titleLabel}>{mealName}</label>
-                    <label className={styles.contentLabel}>
-                        {quantity} porcija
+                <div className="reservationContainer__rowDiv__contentWrapper">
+                    <label className="reservationContainer__rowDiv__contentWrapper__titleLabel">
+                        {mealName}
                     </label>
+                    <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing
+                        elit. Donec odio. Quisque volutpat mattis eros.
+                    </label>
+                    <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
+                    {quantity} porcija
+                    </label>
+                    <div className="reservationContainer__rowDiv__contentWrapper__buttonContainer">
+                        <div className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper">
+                            <label className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper__priceLabel">
+                                560 din
+                            </label>
+                            <button className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper__cancelButton">
+                                Otkaži
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

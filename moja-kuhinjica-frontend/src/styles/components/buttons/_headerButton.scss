@@ -1,0 +1,45 @@
+.navButton {
+    width: 25%;
+    height: 40%;
+    margin-right: 5%;
+    color: white;
+    font-weight: 300;
+    font-family: 'Nunito';
+    font-size: 25px;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 0;
+
+    @media only screen and (max-width: $breakpoint-ultrawide) {
+        width: 30%;
+        height: 35%;
+        font-size: 30px;
+    }
+    @media only screen and (max-width: $breakpoint-1080p) {
+        width: 25%;
+    }
+    @media only screen and (max-width: $breakpoint-900p) {
+        width: 30%;
+        height: 40%;
+        font-size: 25px;
+    }
+    @media only screen and (max-width: $breakpoint-720p) {
+        width: 35%;
+        height: 40%;
+        font-size: 24px;
+    }
+    @media only screen and (max-width: $breakpoint-large) {
+        width: 45%;
+        height: 50%;
+        font-size: 18px;
+    }
+
+    &--selected {
+        border: 2px solid #c10016;
+    }
+
+    &--selectedProfile {
+        border: 2px solid white;
+    }
+}

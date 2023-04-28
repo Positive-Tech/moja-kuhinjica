@@ -7,7 +7,6 @@ import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
 import { INDEX_INCREMENT, MOBILE_WIDTH } from '@/constants/constants'
-import styles from './MyReservationsPage.module.scss'
 import uuid from 'react-uuid'
 import RestaurantService, {
     IMyReservations,
@@ -31,8 +30,8 @@ interface IGenerateWeekdays {
 }
 
 const NoReservationsMessage: React.FC = () => (
-    <div className={styles.rowDiv}>
-        <label className={styles.infoLabel}>
+    <div className="myReservationsPage__colDiv__rowDiv">
+        <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
             Nema rezervacija za ovaj datum.
         </label>
     </div>
@@ -171,7 +170,7 @@ const MyReservationsPage = (): JSX.Element => {
     }
 
     return (
-        <div className={styles.colDiv}>
+        <div className={'myReservationsPage'}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
@@ -204,23 +203,25 @@ const MyReservationsPage = (): JSX.Element => {
 
             <div
                 className={
-                    reservationsExist ? styles.container : styles.emptyContainer
+                    reservationsExist
+                        ? 'myReservationsPage__container'
+                        : 'myReservationsPage__emptyContainer'
                 }
             >
                 <label
                     className={
                         reservationsExist
-                            ? styles.titleLabel
-                            : styles.emptyTitleLabel
+                            ? 'myReservationsPage__container__titleLabel'
+                            : 'myReservationsPage__container__titleLabel myReservationsPage__container__titleLabel--empty'
                     }
                 >
                     Moje rezervacije
                 </label>
-                <label className={styles.infoLabel}>
+                <label className="myReservationsPage__container__infoLabel">
                     Rezervacije se mogu otkazati do 10 časova
                 </label>
-                <div className={styles.colDiv1}>
-                    <div className={styles.menuRowDiv}>
+                <div className="myReservationsPage__colDiv">
+                    <div className="myReservationsPage__colDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
@@ -241,15 +242,17 @@ const MyReservationsPage = (): JSX.Element => {
                         })}
                     </div>
 
-                    <label className={styles.titleLabel}>{activeDate}</label>
+                    <label className="myReservationsPage__colDiv__titleLabel">
+                        {activeDate}
+                    </label>
                     {isLoading ? (
-                        <div className={styles.loadingBarWrapper}>
+                        <div className="myReservationsPage__colDiv__loadingBarWrapper">
                             <Oval
                                 height={70}
                                 width={70}
                                 color="#c10016"
                                 wrapperStyle={{}}
-                                wrapperClass={styles.spinner}
+                                wrapperClass="myReservationsPage__colDiv__loadingBarWrapper__spinner"
                                 visible={true}
                                 ariaLabel="oval-loading"
                                 secondaryColor="#c10016"
@@ -260,7 +263,7 @@ const MyReservationsPage = (): JSX.Element => {
                     ) : (
                         <>
                             {myReservations ? (
-                                <div className={styles.reservationWrapper}>
+                                <div className="myReservationsPage__colDiv__reservationWrapper">
                                     {resForDay?.length > 0 ? (
                                         resForDay?.map(
                                             ({
@@ -271,22 +274,18 @@ const MyReservationsPage = (): JSX.Element => {
                                             }: IMyReservations) => (
                                                 <div
                                                     key={id}
-                                                    className={styles.re}
+                                                    className="myReservationsPage__colDiv__reservationWrapper__container"
                                                 >
                                                     <label
                                                         className={
-                                                            styles.restaurantLabel
+                                                            'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
                                                         }
                                                     >
                                                         {
                                                             restaurant.restaurantName
                                                         }
                                                     </label>
-                                                    <label
-                                                        className={
-                                                            styles.reservationLabel
-                                                        }
-                                                    >
+                                                    <label className="myReservationsPage__colDiv__reservationWrapper__container__reservationLabel">
                                                         Rezervacija {id}
                                                     </label>
                                                     {items.map(
@@ -318,14 +317,10 @@ const MyReservationsPage = (): JSX.Element => {
                                                         )
                                                     )}
                                                     <div
-                                                        className={
-                                                            styles.buttonWrapper
-                                                        }
+                                                      className="myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper"
                                                     >
                                                         <label
-                                                            className={
-                                                                styles.priceLabel
-                                                            }
+                                                             className="myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__priceLabel"
                                                         >
                                                             {price} din
                                                         </label>
@@ -333,7 +328,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                             content="Otkaži rezervaciju"
                                                             isActive
                                                             style={
-                                                                styles.cancelButton
+                                                                "myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__cancelButton"
                                                             }
                                                             onClick={() => {
                                                                 setConfirmationModalIsOpen(
