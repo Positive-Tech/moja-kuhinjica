@@ -159,10 +159,10 @@ const MealReservation = (): JSX.Element => {
     }
 
     const sortMenusByDate = (menus: IMenu[]): IMenu[] => {
-        return menus.sort((a: IMenu, b: IMenu) => {
-            const dateA = new Date(a.date)
-            const dateB = new Date(b.date)
-            return dateA.getTime() - dateB.getTime()
+        return menus.sort((menu1: IMenu, menu2: IMenu) => {
+            const dateMenu1 = new Date(menu1.date)
+            const dateMenu2 = new Date(menu2.date)
+            return dateMenu1.getTime() - dateMenu2.getTime()
         })
     }
 
