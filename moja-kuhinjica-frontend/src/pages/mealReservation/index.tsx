@@ -49,7 +49,6 @@ const MealReservation = (): JSX.Element => {
     const cartItems = useAppSelector(
         ({ restaurant: { cartItems } }) => cartItems
     )
-    const today = new Date(Date.now())
     const [active, setActive] = useState(dayjs().day())
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -59,7 +58,6 @@ const MealReservation = (): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [menusForWeek, setMenusForWeek] = useState<IMenu[]>([])
     const [menuForDay, setMenuForDay] = useState<IMenu>()
-    const [activeDay, setActiveDay] = useState<number>(0)
     const [reservationModalIsOpen, setReservationModalIsOpen] =
         useState<boolean>(false)
     const [confirmationModalIsOpen, setConfirmationModalIsOpen] =
@@ -156,7 +154,7 @@ const MealReservation = (): JSX.Element => {
     const createOrder = (): void => {
         const items = cartItems.map(({ meal, ...item }) => item)
         const order: IOrder = {
-            date: generateDateForWeekday(activeDay),
+            date: generateDateForWeekday(active),
             price: getTotalPrice(),
             restaurantId: 5,
             items,
@@ -277,6 +275,7 @@ const MealReservation = (): JSX.Element => {
                                                 activeTabIndex + INDEX_INCREMENT
                                             )
                                             setMenuForDay(menu)
+                                            handleTabClickWithCartItems()
                                         }}
                                         content={day}
                                     />
