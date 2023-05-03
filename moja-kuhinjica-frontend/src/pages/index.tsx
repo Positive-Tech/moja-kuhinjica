@@ -19,6 +19,7 @@ import {
     INDEX_INCREMENT,
     MOBILE_WIDTH,
     routes,
+    AUTH_TOKEN,
 } from 'src/constants/constants'
 import { generateWeekdays } from 'src/utils/dateUtils'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
@@ -64,8 +65,9 @@ const Home = (): JSX.Element => {
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isAuthorized) dispatch(loadUser())
-    }, [isAuthorized])
+        const token = localStorage.getItem(AUTH_TOKEN)
+        if (isAuthorized || token) dispatch(loadUser())
+    }, [])
 
     useEffect(() => {
         fetchMenus()
