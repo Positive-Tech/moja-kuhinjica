@@ -1,17 +1,25 @@
-import dayjs from 'dayjs'
-import { DAYS } from 'src/constants/constants'
+import dayjs, { Dayjs } from 'dayjs'
 
-export const generateWeekdays = (): string[] => {
+interface IGenerateWeekdays {
+    dayofweek: string
+    date: string
+}
+
+export const generateWeekDays = (): IGenerateWeekdays[] => {
+    const today: Dayjs = dayjs().startOf('day')
+    const endOfWeek: Dayjs = today.add(6, 'day').endOf('day')
+
     dayjs.locale('sr')
-    const formattedWeekdays: string[] = []
-    let currentDate = dayjs().startOf('week')
-    DAYS.forEach((day) => {
-        const formattedDate = currentDate
-            .format('ddd')
-            .toLocaleUpperCase()
-            .replace('.', '')
-        formattedWeekdays.push(formattedDate)
-        currentDate = currentDate.add(1, 'day')
-    })
-    return formattedWeekdays
+    const days: IGenerateWeekdays[] = []
+
+    let day = dayjs(today)
+    while (day.isBefore(endOfWeek)) {
+        days.push({
+            dayofweek: day.format('ddd').toLocaleUpperCase().replace('.', ''),
+            date: day.format('DD/MM/YYYY'),
+        })
+        day = day.add(1, 'day')
+    }
+
+    return days
 }
