@@ -149,7 +149,7 @@ const Header = ({
                                         src={editProfileIcon}
                                         handleClick={() =>
                                             router.push(
-                                                `${routes.EDIT_PROFILE_PAGE}/${user?.id}`
+                                                routes.EDIT_PROFILE_PAGE
                                             )
                                         }
                                     />
