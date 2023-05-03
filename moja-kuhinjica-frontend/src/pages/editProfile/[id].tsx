@@ -45,7 +45,6 @@ const EditProfilePage = (): JSX.Element => {
     const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false)
     const router = useRouter()
     const { id } = router.query
-
     const {
         register,
         handleSubmit,
@@ -57,6 +56,14 @@ const EditProfilePage = (): JSX.Element => {
         if (!router.isReady) return
         fetchUser()
     }, [id])
+
+    useEffect(() => {
+        const currentUrl = router.asPath
+
+        if (currentUrl != `/editProfile/${id}`) {
+            router.push('/404')
+        }
+    }, [])
 
     useEffect(() => {
         handleWindowResize()
@@ -103,7 +110,6 @@ const EditProfilePage = (): JSX.Element => {
     return (
         <div className="editProfile">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
-
             {isMobile ? (
                 <MobileHeader
                     handleClick={() => setShowMenu(true)}

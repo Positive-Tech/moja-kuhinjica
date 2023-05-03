@@ -38,6 +38,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
 
     return (
         <div className="mobileMenuContainer">
+            
             <div className="mobileMenuContainer__wrapper">
                 <div className="mobileMenuContainer__wrapper__closeButtonWrapper">
                     {isAuthorized && (
@@ -87,6 +88,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         />
                     )}
                     {isAuthorized && (
+                        
                         <DropdownMenuButton
                             content="Izmena profila"
                             src={editProfile}
