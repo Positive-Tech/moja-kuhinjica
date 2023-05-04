@@ -3,7 +3,7 @@ export const bgModal = {
         background: 'transparent',
     },
 }
-
+export const AUTH_TOKEN = 'token'
 export const INDEX_INCREMENT = 1
 export const MOBILE_WIDTH = 768
 export const DAYS = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']

@@ -57,7 +57,7 @@ export const userLogin = createAsyncThunk<
     }
 )
 export const loadUser = createAsyncThunk(ActionTypes.LOAD_USER, async () => {
-    const data = await UserService.getLoggedInUser()
+    const { data } = await UserService.getLoggedInUser()
     return data
 })
 
@@ -84,5 +84,6 @@ export const userReducer = createReducer(initialState, (builder) => {
         })
         .addCase(loadUser.fulfilled, (state, action) => {
             state.user = action.payload
+            state.isAuthorized = true
         })
 })

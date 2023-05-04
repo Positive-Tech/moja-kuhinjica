@@ -18,6 +18,7 @@ import mobile from 'public/static/assets/images/mobile.svg'
 import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
+import { useAppSelector } from '@/utils/hooks'
 
 interface User {
     id: number
@@ -44,8 +45,7 @@ const EditProfilePage = (): JSX.Element => {
     const [user, setUser] = useState<User>(emptyUser)
     const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false)
     const router = useRouter()
-    const { id } = router.query
-
+    const loggedUser = useAppSelector((state) => state.auth.user)
     const {
         register,
         handleSubmit,
@@ -56,7 +56,7 @@ const EditProfilePage = (): JSX.Element => {
     useEffect(() => {
         if (!router.isReady) return
         fetchUser()
-    }, [id])
+    }, [loggedUser])
 
     useEffect(() => {
         handleWindowResize()
@@ -69,7 +69,7 @@ const EditProfilePage = (): JSX.Element => {
     }, [windowWidth])
 
     const fetchUser = (): void => {
-        UserService.getUserById(id)
+        UserService.getUserById(loggedUser?.id)
             .then((res) => {
                 const user = res.data
                 user.phoneNumber = user.phoneNumber.split('+381')[1]
@@ -89,7 +89,7 @@ const EditProfilePage = (): JSX.Element => {
         setIsLoading(true)
         delete data.email
         data.phoneNumber = `+381${data.phoneNumber}`
-        if (id) data.id = +id
+        if (loggedUser?.id) data.id = +loggedUser.id
         UserService.editUserProfile(data)
             .then((res) => {
                 // alert('successfully edited')
@@ -103,7 +103,6 @@ const EditProfilePage = (): JSX.Element => {
     return (
         <div className="editProfile">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
-
             {isMobile ? (
                 <MobileHeader
                     handleClick={() => setShowMenu(true)}

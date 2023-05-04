@@ -316,19 +316,15 @@ const MyReservationsPage = (): JSX.Element => {
                                                             />
                                                         )
                                                     )}
-                                                    <div
-                                                      className="myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper"
-                                                    >
-                                                        <label
-                                                             className="myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__priceLabel"
-                                                        >
+                                                    <div className="myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper">
+                                                        <label className="myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__priceLabel">
                                                             {price} din
                                                         </label>
                                                         <RegularButton
                                                             content="Otkaži rezervaciju"
                                                             isActive
                                                             style={
-                                                                "myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__cancelButton"
+                                                                'myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__cancelButton'
                                                             }
                                                             onClick={() => {
                                                                 setConfirmationModalIsOpen(
