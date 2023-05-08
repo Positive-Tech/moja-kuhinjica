@@ -31,7 +31,6 @@ const Header = ({
     const router = useRouter()
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
-    const user = useAppSelector((state) => state.auth.user)
 
     const menuRef = useRef<HTMLDivElement>(null)
 
