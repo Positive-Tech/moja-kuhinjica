@@ -21,7 +21,7 @@ import {
     routes,
     AUTH_TOKEN,
 } from 'src/constants/constants'
-import { generateWeekdays } from 'src/utils/dateUtils'
+import { generateWeekDays } from 'src/utils/dateUtils'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
 import RestaurantService, { IMeal, IMenu } from '@/service/Restaurant.service'
@@ -35,7 +35,7 @@ const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
-    const [active, setActive] = useState(dayjs().day())
+    const [active, setActive] = useState<number>(1)
     const [activeNavigationTab, setActiveNavigationTab] = useState<
         number | undefined
     >(1)
@@ -54,6 +54,9 @@ const Home = (): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [allMenus, setAllMenus] = useState<IMenu[]>([])
     const [selectedMenu, setSelectedMenu] = useState<IMenu>()
+    const [activeDate, setActiveDate] = useState<string>(
+        dayjs().format('DD/MM/YYYY')
+    )
 
     const hasMeals = Boolean(selectedMenu?.meals?.length)
 
@@ -116,21 +119,13 @@ const Home = (): JSX.Element => {
         RestaurantService.fetchWeeklyMenus()
             .then(({ data }) => {
                 setAllMenus(data)
-                setSelectedMenu(data?.[active])
+                setSelectedMenu(data[active])
                 setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
                 setIsLoading(false)
             })
-    }
-
-    const getDate = (): string | undefined => {
-        const dateArrReversed = selectedMenu?.date.split('-')
-        if (dateArrReversed === undefined) {
-            return 'ovaj dan jos nije definisan'
-        }
-        return dateArrReversed?.reverse()?.join('/')
     }
 
     return (
@@ -201,10 +196,10 @@ const Home = (): JSX.Element => {
                         </label>
                     </div>
                     <label className="homeDiv__menuWrapper__menuColDiv__titleLabel">
-                        {`Dnevni meni za ${getDate()}`}
+                        {`Dnevni meni za ${activeDate}`}
                     </label>
                     <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
-                        {generateWeekdays().map((day, activeTabIndex) => {
+                        {generateWeekDays().map((day, activeTabIndex) => {
                             const date = dayjs()
                                 .startOf('week')
                                 .add(activeTabIndex, 'day')
@@ -222,9 +217,10 @@ const Home = (): JSX.Element => {
                                         setActive(
                                             activeTabIndex + INDEX_INCREMENT
                                         )
+                                        setActiveDate(day.date)
                                         setSelectedMenu(menu)
                                     }}
-                                    content={day}
+                                    content={day.dayofweek}
                                 />
                             )
                         })}
@@ -271,7 +267,7 @@ const Home = (): JSX.Element => {
                     {!isLoading && !hasMeals && (
                         <div className="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv">
                             <Text
-                                content={`Dnevni meni za ${getDate()} još uvek nije
+                                content={`Dnevni meni za ${activeDate} još uvek nije
                                         objavljen.`}
                                 style="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                             />
