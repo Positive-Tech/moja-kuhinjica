@@ -10,16 +10,19 @@ export const generateWeekDays = (): IGenerateWeekdays[] => {
     const endOfWeek: Dayjs = today.add(6, 'day').endOf('day')
 
     dayjs.locale('sr')
-    const days: IGenerateWeekdays[] = []
+    const weekdayRange: IGenerateWeekdays[] = []
 
-    let day = dayjs(today)
-    while (day.isBefore(endOfWeek)) {
-        days.push({
-            dayofweek: day.format('ddd').toLocaleUpperCase().replace('.', ''),
-            date: day.format('DD/MM/YYYY'),
+    let currentDay = dayjs(today)
+    while (currentDay.isBefore(endOfWeek)) {
+        weekdayRange.push({
+            dayofweek: currentDay
+                .format('ddd')
+                .toLocaleUpperCase()
+                .replace('.', ''),
+            date: currentDay.format('DD/MM/YYYY'),
         })
-        day = day.add(1, 'day')
+        currentDay = currentDay.add(1, 'day')
     }
 
-    return days
+    return weekdayRange
 }
