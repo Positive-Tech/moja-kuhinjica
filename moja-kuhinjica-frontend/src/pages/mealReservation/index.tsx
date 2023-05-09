@@ -264,12 +264,13 @@ const MealReservation = (): JSX.Element => {
                                             activeTabIndex + INDEX_INCREMENT
                                         }
                                         onClick={() => {
-                                            setActive(
-                                                activeTabIndex + INDEX_INCREMENT
-                                            )
                                             if (cartItems.length) {
                                                 handleTabClickWithCartItems()
                                             } else {
+                                                setActive(
+                                                    activeTabIndex +
+                                                        INDEX_INCREMENT
+                                                )
                                                 setActiveDate(day.date)
                                                 setMenuForDay(menu)
                                             }
