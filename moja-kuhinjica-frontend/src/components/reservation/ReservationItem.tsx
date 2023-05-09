@@ -41,6 +41,7 @@ export const ReservationItem = ({
                     <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
                         {quantity} porcija
                     </label>
+                    
                 </div>
             </div>
         </div>
