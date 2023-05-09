@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-const IMAGE_SIZE = 500;
-
+const IMAGE_SIZE = 500
 
 interface IReservationItemProps {
     itemsLength: number
@@ -17,7 +16,7 @@ export const ReservationItem = ({
     index,
     quantity,
     mealName,
-    mealImage
+    mealImage,
 }: IReservationItemProps): JSX.Element => {
     return (
         <div className="reservationContainer">
@@ -40,18 +39,8 @@ export const ReservationItem = ({
                         elit. Donec odio. Quisque volutpat mattis eros.
                     </label>
                     <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
-                    {quantity} porcija
+                        {quantity} porcija
                     </label>
-                    <div className="reservationContainer__rowDiv__contentWrapper__buttonContainer">
-                        <div className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper">
-                            <label className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper__priceLabel">
-                                560 din
-                            </label>
-                            <button className="reservationContainer__rowDiv__contentWrapper__buttonContainer__buttonWrapper__cancelButton">
-                                Otkaži
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
