@@ -38,6 +38,11 @@
     flex-direction: $flex-direction;
 }
 
+@mixin text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 @mixin spinner {
     height: 100%;
     width: 100%;
