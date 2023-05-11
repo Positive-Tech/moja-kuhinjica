@@ -64,7 +64,11 @@ const MyReservationsPage = (): JSX.Element => {
         setIsLoading(true)
         RestaurantService.fetchMyReservations(true)
             .then((res) => {
-                setMyReservations(res.data)
+                const activReservation = res?.data?.filter(
+                    (reservation: { status: string }) =>
+                        reservation?.status !== 'Otkazana'
+                )
+                setMyReservations(activReservation)
                 setIsLoading(false)
             })
             .catch((err) => {
@@ -158,16 +162,22 @@ const MyReservationsPage = (): JSX.Element => {
 
     const handleOrderCancellation = (id: number): void => {
         const filteredReservations = myReservations?.filter(
-            (reservation) => reservation.id !== id
+            (reservation) => reservation?.id !== id
         )
-        setMyReservations(filteredReservations)
-        setConfirmationModalIsOpen(false)
-        setCancellationModalIsOpen(true)
+        RestaurantService.cancleOrder(id)
+            .then(() => {
+                setMyReservations(filteredReservations),
+                    setConfirmationModalIsOpen(false),
+                    setCancellationModalIsOpen(true)
+            })
+            .catch((err) => console.log(err))
     }
     const handleModalClose = (): void => {
         setConfirmationModalIsOpen(false)
         setIsTabClick(false)
     }
+
+    console.log(myReservations, 'rezeervacije')
 
     return (
         <div className={'myReservationsPage'}>

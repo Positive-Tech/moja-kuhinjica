@@ -37,6 +37,7 @@ export interface IOrder {
 }
 
 export interface IMyReservations {
+    status: string
     id: number
     date: string
     price: number
@@ -69,10 +70,14 @@ export default class RestaurantService extends Component {
             data
         )
     }
-    
+
     public static async fetchMyReservations(isCurrent: boolean): Promise<any> {
         return await axiosInstance.get(
             axiosRoutes.restaurant.GET_MY_RESERVATIONS + isCurrent.toString()
         )
+    }
+
+    public static async cancleOrder(id: number): Promise<any> {
+        return await axiosInstance.patch(`order/cancel/${id}/restaurant/5`)
     }
 }
