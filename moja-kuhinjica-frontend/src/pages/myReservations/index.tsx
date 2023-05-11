@@ -166,9 +166,9 @@ const MyReservationsPage = (): JSX.Element => {
         )
         RestaurantService.cancleOrder(id)
             .then(() => {
-                setMyReservations(filteredReservations),
-                    setConfirmationModalIsOpen(false),
-                    setCancellationModalIsOpen(true)
+                setMyReservations(filteredReservations)
+                setConfirmationModalIsOpen(false)
+                setCancellationModalIsOpen(true)
             })
             .catch((err) => console.log(err))
     }

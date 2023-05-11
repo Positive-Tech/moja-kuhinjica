@@ -86,30 +86,6 @@ const Home = (): JSX.Element => {
         }
     }, [windowWidth])
 
-    const sortMenusByDate = (menus: IMenu[]): IMenu[] => {
-        return menus.sort((menu1: IMenu, menu2: IMenu) => {
-            const dateMenu1 = new Date(menu1.date)
-            const dateMenu2 = new Date(menu2.date)
-            return dateMenu1.getTime() - dateMenu2.getTime()
-        })
-    }
-
-    const weekdays = (): string[] => {
-        dayjs.locale('sr')
-        const weekdayArr: string[] = []
-
-        sortMenusByDate(allMenus)?.map(({ date }: IMenu) => {
-            const formattedDate = dayjs(date)
-                .format('ddd ')
-                .toLocaleUpperCase()
-                .replace('.', '')
-
-            weekdayArr.push(formattedDate)
-            return formattedDate
-        })
-        return weekdayArr
-    }
-
     const handleClick = (): void => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
