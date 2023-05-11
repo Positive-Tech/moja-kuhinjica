@@ -72,22 +72,6 @@ const MealReservation = (): JSX.Element => {
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
 
-    const weekdays = (): string[] => {
-        dayjs.locale('sr')
-        const weekdayArr: string[] = []
-
-        sortMenusByDate(menusForWeek)?.map(({ date }: IMenu) => {
-            const formattedDate = dayjs(date)
-                .format('ddd ')
-                .toLocaleUpperCase()
-                .replace('.', '')
-
-            weekdayArr.push(formattedDate)
-            return formattedDate
-        })
-        return weekdayArr
-    }
-
     useEffect(() => {
         fetchMenus()
     }, [])
@@ -159,14 +143,6 @@ const MealReservation = (): JSX.Element => {
         return totalPrice
     }
 
-    const sortMenusByDate = (menus: IMenu[]): IMenu[] => {
-        return menus.sort((menu1: IMenu, menu2: IMenu) => {
-            const dateMenu1 = new Date(menu1.date)
-            const dateMenu2 = new Date(menu2.date)
-            return dateMenu1.getTime() - dateMenu2.getTime()
-        })
-    }
-
     const generateDateForWeekday = (activeDay: number): string => {
         const date = dayjs()
         let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
@@ -199,13 +175,6 @@ const MealReservation = (): JSX.Element => {
             })
     }
 
-    const getDate = (): string | undefined => {
-        const dateArrReversed = menuForDay?.date.split('-')
-        if (!dateArrReversed) {
-            return 'ovaj dan jos nije definisan'
-        }
-        return dateArrReversed?.reverse()?.join('/')
-    }
     const handleTabClickWithCartItems = (): void => {
         setConfirmationModalIsOpen(true)
         setIsTabClick(true)
