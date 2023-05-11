@@ -36,6 +36,7 @@ import { generateWeekDays } from 'src/utils/dateUtils'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
+const ADD_ONE = 1
 const INITIAL_MEAL_AMOUNT = 1
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
@@ -70,6 +71,22 @@ const MealReservation = (): JSX.Element => {
     )
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
+
+    const weekdays = (): string[] => {
+        dayjs.locale('sr')
+        const weekdayArr: string[] = []
+
+        sortMenusByDate(menusForWeek)?.map(({ date }: IMenu) => {
+            const formattedDate = dayjs(date)
+                .format('ddd ')
+                .toLocaleUpperCase()
+                .replace('.', '')
+
+            weekdayArr.push(formattedDate)
+            return formattedDate
+        })
+        return weekdayArr
+    }
 
     useEffect(() => {
         fetchMenus()
@@ -121,7 +138,6 @@ const MealReservation = (): JSX.Element => {
                 setIsLoading(false)
             })
     }
-
     const addToCart = (meal: IMeal): void => {
         dispatch(
             addItemToCart({
@@ -131,7 +147,6 @@ const MealReservation = (): JSX.Element => {
             })
         )
     }
-
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
@@ -144,10 +159,17 @@ const MealReservation = (): JSX.Element => {
         return totalPrice
     }
 
+    const sortMenusByDate = (menus: IMenu[]): IMenu[] => {
+        return menus.sort((menu1: IMenu, menu2: IMenu) => {
+            const dateMenu1 = new Date(menu1.date)
+            const dateMenu2 = new Date(menu2.date)
+            return dateMenu1.getTime() - dateMenu2.getTime()
+        })
+    }
+
     const generateDateForWeekday = (activeDay: number): string => {
         const date = dayjs()
-        let dateForCreatingOrder = date.day(activeDay)
-
+        let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
         if (dateForCreatingOrder.isAfter(date)) {
             dateForCreatingOrder = dateForCreatingOrder.startOf('day')
         }
@@ -162,7 +184,7 @@ const MealReservation = (): JSX.Element => {
             restaurantId: 5,
             items,
         }
-
+        console.log(JSON.stringify(order))
         RestaurantService.createOrder(order)
             .then(() => {
                 setReservationModalIsOpen(true)
@@ -177,6 +199,13 @@ const MealReservation = (): JSX.Element => {
             })
     }
 
+    const getDate = (): string | undefined => {
+        const dateArrReversed = menuForDay?.date.split('-')
+        if (!dateArrReversed) {
+            return 'ovaj dan jos nije definisan'
+        }
+        return dateArrReversed?.reverse()?.join('/')
+    }
     const handleTabClickWithCartItems = (): void => {
         setConfirmationModalIsOpen(true)
         setIsTabClick(true)

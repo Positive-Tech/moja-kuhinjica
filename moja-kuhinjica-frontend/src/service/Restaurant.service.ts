@@ -35,6 +35,30 @@ export interface IOrder {
         quantity: number
     }>
 }
+
+export interface IMyReservations {
+    status: string
+    id: number
+    date: string
+    price: number
+    resolved: boolean
+    restaurant: { restaurantId: number; restaurantName: string }
+    client: { clientId: number; clientName: string }
+    items: IReservationItem[]
+}
+
+export interface IReservationItem {
+    id: number
+    quantity: number
+    mealName: string
+    mealImage: string
+}
+
+export interface IReservationGroup {
+    date: string
+    reservations: IMyReservations[]
+}
+
 export default class RestaurantService extends Component {
     public static async fetchWeeklyMenus(): Promise<any> {
         return await axiosInstance.get(axiosRoutes.restaurant.GET_WEEKLY_MENU)
@@ -45,5 +69,15 @@ export default class RestaurantService extends Component {
             axiosRoutes.restaurant.CREATE_ORDER,
             data
         )
+    }
+
+    public static async fetchMyReservations(isCurrent: boolean): Promise<any> {
+        return await axiosInstance.get(
+            axiosRoutes.restaurant.GET_MY_RESERVATIONS + isCurrent.toString()
+        )
+    }
+
+    public static async cancleOrder(id: number): Promise<any> {
+        return await axiosInstance.patch(`order/cancel/${id}/restaurant/5`)
     }
 }
