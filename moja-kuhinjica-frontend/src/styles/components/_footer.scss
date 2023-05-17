@@ -61,6 +61,10 @@
                 @media only screen and (max-width: $breakpoint-large) {
                     font-size: 12px;
                 }
+
+                &__textLink {
+                    @include text-link;
+                }
             }
 
             &__footerImage {

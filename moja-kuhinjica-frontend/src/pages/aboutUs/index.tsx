@@ -16,6 +16,7 @@ import aboutUsPic from 'public/static/assets/images/aboutUs.png'
 import { LoginModal } from '@/components/modal/login/LoginModal'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
+import { useRouter } from 'next/router'
 
 interface Question {
     id: number
@@ -42,6 +43,14 @@ const AboutUs = (): JSX.Element => {
         useState<boolean>(false)
     const [userEmail, setUserEmail] = useState<string>('')
     const [resetPasswordMessage, setResetPasswordMessage] = useState<string>('')
+
+    const router = useRouter()
+
+    const { activeTab } = router.query
+
+    useEffect(() => {
+        setActive(Number(activeTab))
+    }, [activeTab])
 
     useEffect(() => {
         handleWindowResize()
