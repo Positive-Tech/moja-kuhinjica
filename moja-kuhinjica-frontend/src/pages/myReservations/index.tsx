@@ -177,8 +177,6 @@ const MyReservationsPage = (): JSX.Element => {
         setIsTabClick(false)
     }
 
-    console.log(myReservations, 'rezeervacije')
-
     return (
         <div className={'myReservationsPage'}>
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
