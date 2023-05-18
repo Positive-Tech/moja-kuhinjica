@@ -36,7 +36,6 @@ import { generateWeekDays } from 'src/utils/dateUtils'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
-const ADD_ONE = 1
 const INITIAL_MEAL_AMOUNT = 1
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'

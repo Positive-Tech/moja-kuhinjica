@@ -15,12 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
-import {
-    INDEX_INCREMENT,
-    MOBILE_WIDTH,
-    routes,
-    AUTH_TOKEN,
-} from 'src/constants/constants'
+import { MOBILE_WIDTH, routes, AUTH_TOKEN } from 'src/constants/constants'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
@@ -207,8 +202,7 @@ const Home = (): JSX.Element => {
                     </label>
                     <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
-                            const date = dayjs()
-                                .add(activeTabIndex, 'day')
+                            const date = dayjs().add(activeTabIndex, 'day')
                             return (
                                 <TabButton
                                     key={uuid()}
