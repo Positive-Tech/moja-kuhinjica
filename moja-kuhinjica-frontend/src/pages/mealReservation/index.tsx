@@ -12,7 +12,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { INDEX_INCREMENT, MOBILE_WIDTH, routes } from '@/constants/constants'
+import { MOBILE_WIDTH, routes } from '@/constants/constants'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
     IMeal,
@@ -36,7 +36,6 @@ import { generateWeekDays } from 'src/utils/dateUtils'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
-const ADD_ONE = 1
 const INITIAL_MEAL_AMOUNT = 1
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
@@ -50,7 +49,7 @@ const MealReservation = (): JSX.Element => {
     const cartItems = useAppSelector(
         ({ restaurant: { cartItems } }) => cartItems
     )
-    const [active, setActive] = useState<number>(1)
+    const [active, setActive] = useState<number>(0)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -69,6 +68,7 @@ const MealReservation = (): JSX.Element => {
     const [activeDate, setActiveDate] = useState<string>(
         dayjs().format('DD/MM/YYYY')
     )
+    const [dayOfweek, setDeyOfWeek] = useState<number>(dayjs().day())
 
     const hasMeals = Boolean(menuForDay?.meals?.length)
 
@@ -103,6 +103,14 @@ const MealReservation = (): JSX.Element => {
             document.body.style.pointerEvents = 'auto'
         }
     }, [confirmationModalIsOpen])
+
+    useEffect(() => {
+        setMenuForDay(
+            menusForWeek.find(
+                (item) => new Date(item.date).getDay() === dayOfweek
+            )
+        )
+    }, [active])
 
     const isCartEmpty = (): boolean => !cartItems.length
 
@@ -145,9 +153,9 @@ const MealReservation = (): JSX.Element => {
 
     const generateDateForWeekday = (activeDay: number): string => {
         const date = dayjs()
-        let dateForCreatingOrder = date.day(activeDay + ADD_ONE)
-        if (dateForCreatingOrder.isAfter(date)) {
-            dateForCreatingOrder = dateForCreatingOrder.startOf('day')
+        let dateForCreatingOrder = date.day(activeDay)
+        if (dateForCreatingOrder.isBefore(date)) {
+            dateForCreatingOrder = dateForCreatingOrder.add(1, 'week')
         }
         return dateForCreatingOrder.utc(true).format()
     }
@@ -155,12 +163,12 @@ const MealReservation = (): JSX.Element => {
     const createOrder = (): void => {
         const items = cartItems.map(({ meal, ...item }) => item)
         const order: IOrder = {
-            date: generateDateForWeekday(active),
+            date: generateDateForWeekday(dayOfweek),
             price: getTotalPrice(),
             restaurantId: 5,
             items,
         }
-        console.log(JSON.stringify(order))
+
         RestaurantService.createOrder(order)
             .then(() => {
                 setReservationModalIsOpen(true)
@@ -248,29 +256,18 @@ const MealReservation = (): JSX.Element => {
                     <div className="mealReservation__container__menuDiv__menuColDiv">
                         <div className="mealReservation__container__menuDiv__menuColDiv__menuRowDiv">
                             {generateWeekDays().map((day, activeTabIndex) => {
-                                const date = dayjs()
-                                    .startOf('week')
-                                    .add(activeTabIndex, 'day')
-                                const menu = menusForWeek.find((menuItem) =>
-                                    dayjs(menuItem.date).isSame(date, 'day')
-                                )
+                                const date = dayjs().add(activeTabIndex, 'day')
                                 return (
                                     <TabButton
                                         key={uuid()}
-                                        active={
-                                            active ===
-                                            activeTabIndex + INDEX_INCREMENT
-                                        }
+                                        active={active === activeTabIndex}
                                         onClick={() => {
+                                            setDeyOfWeek(date.day())
+                                            setActive(activeTabIndex)
                                             if (cartItems.length) {
                                                 handleTabClickWithCartItems()
                                             } else {
-                                                setActive(
-                                                    activeTabIndex +
-                                                        INDEX_INCREMENT
-                                                )
                                                 setActiveDate(day.date)
-                                                setMenuForDay(menu)
                                             }
                                         }}
                                         content={day.dayofweek}

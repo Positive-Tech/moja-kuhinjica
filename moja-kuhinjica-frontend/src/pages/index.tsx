@@ -15,12 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
-import {
-    INDEX_INCREMENT,
-    MOBILE_WIDTH,
-    routes,
-    AUTH_TOKEN,
-} from 'src/constants/constants'
+import { MOBILE_WIDTH, routes, AUTH_TOKEN } from 'src/constants/constants'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import scrollArrowIcon from 'public/static/assets/images/scrollArrow.svg'
 import burgerMenuIcon from 'public/static/assets/images/burgerMenu.svg'
@@ -35,7 +30,7 @@ const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
 
 const Home = (): JSX.Element => {
-    const [active, setActive] = useState<number>(1)
+    const [active, setActive] = useState<number>(0)
     const [activeNavigationTab, setActiveNavigationTab] = useState<
         number | undefined
     >(1)
@@ -57,6 +52,7 @@ const Home = (): JSX.Element => {
     const [activeDate, setActiveDate] = useState<string>(
         dayjs().format('DD/MM/YYYY')
     )
+    const [dayOfweek, setDeyOfWeek] = useState<number>(dayjs().day())
 
     const hasMeals = Boolean(selectedMenu?.meals?.length)
 
@@ -85,6 +81,12 @@ const Home = (): JSX.Element => {
             window.removeEventListener('resize', handleWindowResize)
         }
     }, [windowWidth])
+
+    useEffect(() => {
+        setSelectedMenu(
+            allMenus.find((item) => new Date(item.date).getDay() === dayOfweek)
+        )
+    }, [active])
 
     const handleClick = (): void => {
         ref.current?.scrollIntoView({ behavior: 'smooth' })
@@ -200,25 +202,15 @@ const Home = (): JSX.Element => {
                     </label>
                     <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
-                            const date = dayjs()
-                                .startOf('week')
-                                .add(activeTabIndex, 'day')
-                            const menu = allMenus.find((menuItem) =>
-                                dayjs(menuItem.date).isSame(date, 'day')
-                            )
+                            const date = dayjs().add(activeTabIndex, 'day')
                             return (
                                 <TabButton
                                     key={uuid()}
-                                    active={
-                                        active ===
-                                        activeTabIndex + INDEX_INCREMENT
-                                    }
+                                    active={active === activeTabIndex}
                                     onClick={() => {
-                                        setActive(
-                                            activeTabIndex + INDEX_INCREMENT
-                                        )
+                                        setDeyOfWeek(date.day())
+                                        setActive(activeTabIndex)
                                         setActiveDate(day.date)
-                                        setSelectedMenu(menu)
                                     }}
                                     content={day.dayofweek}
                                 />
