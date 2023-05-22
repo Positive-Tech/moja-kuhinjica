@@ -5,6 +5,16 @@
     height: 15%;
     background: rgba(30, 30, 30, 0.3);
 
+    .container-flags{
+    padding-left:20px;
+    display: flex;
+    flex-direction: row;
+    grid-column-gap:20px;
+    .icon_side_bar_flag{
+        width: 45px;
+        height: 45px;
+    }
+    }
     @media only screen and (max-width: $breakpoint-medium) {
         display: none;
     }
