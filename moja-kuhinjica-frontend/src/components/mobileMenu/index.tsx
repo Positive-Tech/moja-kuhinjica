@@ -13,12 +13,15 @@ import editProfile from 'public/static/assets/images/editProfile.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import profile from 'public/static/assets/images/profileHeader.svg'
 import { routes } from '@/constants/constants'
+import LanguageChanger from '../LanguageChanger'
+import { useTranslation } from 'react-i18next'
 
 interface IMenuProps {
     closeMenu: () => void
 }
 
 const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
+    const { t } = useTranslation()
     const router = useRouter()
     const dispatch = useAppDispatch()
     const isAuthorized = useAppSelector(
@@ -38,8 +41,9 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
 
     return (
         <div className="mobileMenuContainer">
-            
             <div className="mobileMenuContainer__wrapper">
+                <LanguageChanger />
+
                 <div className="mobileMenuContainer__wrapper__closeButtonWrapper">
                     {isAuthorized && (
                         <div className="mobileMenuContainer__wrapper__closeButtonWrapper__userNameWrapper">
@@ -60,13 +64,13 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                 </div>
                 <div className="mobileMenuContainer__wrapper__buttonWrapper">
                     <DropdownMenuButton
-                        content="Početna"
+                        content={t("Početna")}
                         src={homeIcon}
                         style="mobileMenuContainer__wrapper__buttonWrapper__button"
                         handleClick={() => navigate(routes.HOME_PAGE)}
                     />
                     <DropdownMenuButton
-                        content="Rezerviši"
+                        content={t("Rezerviši")}
                         src={reservationIcon}
                         style="mobileMenuContainer__wrapper__buttonWrapper__button"
                         handleClick={() =>
@@ -79,7 +83,7 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                     />
                     {isAuthorized && (
                         <DropdownMenuButton
-                            content="Moje rezervacije"
+                            content={t("Moje rezervacije")}
                             src={myReservations}
                             style="mobileMenuContainer__wrapper__buttonWrapper__button"
                             handleClick={() =>
@@ -88,9 +92,8 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         />
                     )}
                     {isAuthorized && (
-                        
                         <DropdownMenuButton
-                            content="Izmena profila"
+                            content={t("Izmena profila")}
                             src={editProfile}
                             style="mobileMenuContainer__wrapper__buttonWrapper__button"
                             handleClick={() =>
@@ -101,14 +104,14 @@ const Menu = ({ closeMenu }: IMenuProps): JSX.Element => {
                         />
                     )}
                     <DropdownMenuButton
-                        content="O nama"
+                        content={t("O nama")}
                         src={aboutUsIcon}
                         style="mobileMenuContainer__wrapper__buttonWrapper__button"
                         handleClick={() => navigate(routes.ABOUT_US_PAGE)}
                     />
                     {isAuthorized && (
                         <DropdownMenuButton
-                            content="Odjavi se"
+                            content={t("Odjavi se")}
                             src={logoutIcon}
                             style="mobileMenuContainer__wrapper__buttonWrapper__button"
                             handleClick={() => logout()}

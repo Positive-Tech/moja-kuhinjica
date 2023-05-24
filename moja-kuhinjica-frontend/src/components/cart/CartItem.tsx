@@ -6,6 +6,7 @@ import bin from 'public/static/assets/images/bin.svg'
 import { IMeal } from '@/service/Restaurant.service'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { removeCartItem } from '@/reduxStore/reducers/restaurantReducer'
+import { useTranslation } from 'react-i18next'
 
 const NIL_PRICE = 0
 interface ICartItemPRops {
@@ -13,6 +14,7 @@ interface ICartItemPRops {
 }
 export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
     const dispatch = useAppDispatch()
+    const { t } = useTranslation()
     const amount = useAppSelector(
         ({ restaurant: { cartItems } }) =>
             cartItems.find((item) => item.meal.id === meal.id)?.quantity
@@ -36,7 +38,7 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
                 </div>
                 <div className="itemContainer__mealNameWrapper">
                     <Text
-                        content={meal.title}
+                        content={t(meal.title) as string}
                         style="itemContainer__mealNameWrapper__mealName"
                     />
                     <AmountButton

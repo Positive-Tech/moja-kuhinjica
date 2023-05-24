@@ -17,6 +17,7 @@ import { LoginModal } from '@/components/modal/login/LoginModal'
 import { PasswordForgettingModal } from '@/components/modal/passwordForgetting/PasswordForgettingModal'
 import { PasswordResettingModal } from '@/components/modal/passwordReset/PasswordResettingModal'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 interface Question {
     id: number
@@ -31,6 +32,7 @@ const BUTTON_THREE = 3
 const BUTTON_FOUR = 4
 
 const AboutUs = (): JSX.Element => {
+    const { t } = useTranslation()
     const [active, setActive] = useState<number>(1)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -108,7 +110,7 @@ const AboutUs = (): JSX.Element => {
                     <TabButton
                         active={active === BUTTON_ONE}
                         onClick={() => setActive(BUTTON_ONE)}
-                        content="O nama"
+                        content={t("O nama") as string}
                         style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
                     />
                     <TabButton
@@ -121,13 +123,13 @@ const AboutUs = (): JSX.Element => {
                         active={active === BUTTON_THREE}
                         onClick={() => setActive(BUTTON_THREE)}
                         style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
-                        content="Politika privatnosti"
+                        content={t("Politika privatnosti") as string}
                     />
                     <TabButton
                         active={active === BUTTON_FOUR}
                         onClick={() => setActive(BUTTON_FOUR)}
                         style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
-                        content="Uslovi korišćenja"
+                        content={t("Uslovi korišćenja") as string}
                     />
                 </div>
                 <LoginModal
@@ -198,7 +200,7 @@ const AboutUs = (): JSX.Element => {
                     {active === 3 && (
                         <div className="aboutUs__privacyInfoContainer">
                             <label className="aboutUs__privacyInfoContainer__infoTitle">
-                                DUNDA Obaveštenje o privatnosti
+                                DUNDA {t("Obaveštenje o privatnosti")}
                             </label>
                             <label className="aboutUs__privacyInfoContainer__infoText">
                                 Lorem ipsum dolor sit amet, consectetur
@@ -229,7 +231,7 @@ const AboutUs = (): JSX.Element => {
                     {active === 4 && (
                         <div className="aboutUs__privacyInfoContainer">
                             <label className="aboutUs__privacyInfoContainer__infoTitle">
-                                DUNDA Uslovi korišćenja
+                                DUNDA {t("Uslovi korišćenja")}
                             </label>
                             <label className="aboutUs__privacyInfoContainer__infoText">
                                 Lorem ipsum dolor sit amet, consectetur

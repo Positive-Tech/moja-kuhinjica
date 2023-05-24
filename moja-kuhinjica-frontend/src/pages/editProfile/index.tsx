@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { TransitionStartFunction, useTransition } from 'react'
 import { useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -19,6 +19,7 @@ import profileIcon from 'public/static/assets/images/profileHeader.svg'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 import { useAppSelector } from '@/utils/hooks'
+import { useTranslation } from 'react-i18next'
 
 interface User {
     id: number
@@ -45,6 +46,7 @@ const EditProfilePage = (): JSX.Element => {
     const [user, setUser] = useState<User>(emptyUser)
     const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false)
     const router = useRouter()
+    const { t } = useTranslation()
     const loggedUser = useAppSelector((state) => state.auth.user)
     const {
         register,
@@ -113,7 +115,7 @@ const EditProfilePage = (): JSX.Element => {
             )}
             <div className="editProfile__container">
                 <label className="editProfile__container__titleLabel">
-                    Izmena profila
+                    {t("Izmena profila")}
                 </label>
                 <div className="editProfile__container__formContainer">
                     <div className="editProfile__container__formContainer__formWrapper">
@@ -143,7 +145,7 @@ const EditProfilePage = (): JSX.Element => {
                                                 : setShowPasswordModal(true)
                                         }
                                     >
-                                        Promeni šifru
+                                        {t("Promeni šifru")}
                                     </label>
                                 </div>
                             </div>
@@ -153,14 +155,14 @@ const EditProfilePage = (): JSX.Element => {
                                     errors={errors}
                                     name="name"
                                     src={profile}
-                                    placeholder="Ime"
+                                    placeholder={t("Ime") as string}
                                     type="text"
                                     validationSchema={{
-                                        required: 'Ime je obavezno.',
+                                        required: t('Ime je obavezno.'),
                                         pattern: {
                                             value: /^[A-Za-z\s]+$/,
                                             message:
-                                                'Ime može da sadrži samo slova.',
+                                                t('Ime može da sadrži samo slova.'),
                                         },
                                     }}
                                     defaultValue={user?.name}
@@ -178,14 +180,14 @@ const EditProfilePage = (): JSX.Element => {
                                     errors={errors}
                                     name="surname"
                                     src={profile}
-                                    placeholder="Prezime"
+                                    placeholder={t("Prezime") as string} 
                                     type="text"
                                     validationSchema={{
-                                        required: 'Prezime je obavezno.',
+                                        required: t('Prezime je obavezno.'),
                                         pattern: {
                                             value: /^[A-Za-z\s]+$/,
                                             message:
-                                                'Prezime može da sadrži samo slova.',
+                                                t('Prezime može da sadrži samo slova.'),
                                         },
                                     }}
                                     isEditable={true}
@@ -207,11 +209,11 @@ const EditProfilePage = (): JSX.Element => {
                                     placeholder=""
                                     type="number"
                                     validationSchema={{
-                                        required: 'Broj telefona je obavezan.',
+                                        required: t('Broj telefona je obavezan.'),
                                         pattern: {
                                             value: /^[0-9]{6,}$/,
                                             message:
-                                                'Broj telefona sadrži minimalno 6 brojeva.',
+                                                t('Broj telefona sadrži minimalno 6 brojeva.'),
                                         },
                                     }}
                                     isPhoneNumber={true}
@@ -265,7 +267,7 @@ const EditProfilePage = (): JSX.Element => {
                                             type="submit"
                                             className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__buttonWrapper__formButton"
                                         >
-                                            Potvrdi
+                                            {t("Potvrdi")}
                                         </button>
                                     )}
                                 </div>

@@ -81,7 +81,7 @@ export const MenuItem = ({
             {openDescription && (
                 <div className="descriptionLabelDiv">
                     <Text
-                        content={description}
+                        content={t(description) as string}
                         style={
                             isOrdering()
                                 ? 'descriptionLabelDiv descriptionLabelDiv__descriptionLabel--ordering'
@@ -113,7 +113,7 @@ export const MenuItem = ({
             {isOrdering() && (
                 <div className="buttonContainer">
                     <RegularButton
-                        content="Rezerviši"
+                        content={t("Rezerviši")}
                         onClick={handleClick}
                         isActive={buttonIsActive}
                     />

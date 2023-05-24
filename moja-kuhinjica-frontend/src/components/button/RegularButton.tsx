@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface IRegularButtonProps {
     onClick?: () => void
@@ -12,6 +13,7 @@ export const RegularButton = ({
     style,
     isActive,
 }: IRegularButtonProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <button
             onClick={onClick}
@@ -22,7 +24,7 @@ export const RegularButton = ({
             }
             disabled={!isActive}
         >
-            {isActive ? content : `Dodato u korpu`}
+            {isActive ? content : t("Dodato u korpu")}
         </button>
     )
 }

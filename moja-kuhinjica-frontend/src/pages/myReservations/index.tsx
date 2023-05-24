@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useTransition } from 'react'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { ReservationItem } from '@/components/reservation/ReservationItem'
@@ -19,6 +19,7 @@ import { Oval } from 'react-loader-spinner'
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
+import { useTranslation } from 'react-i18next'
 
 const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
@@ -29,15 +30,17 @@ interface IGenerateWeekdays {
     date: string
 }
 
-const NoReservationsMessage: React.FC = () => (
+const NoReservationsMessage: React.FC = ()  => (
     <div className="myReservationsPage__colDiv__rowDiv">
-        <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
+        <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
             Nema rezervacija za ovaj datum.
         </label>
     </div>
+    
 )
 
 const MyReservationsPage = (): JSX.Element => {
+    const { t } = useTranslation()
     const [active, setActive] = useState<number>(1)
     const [reservationsExist, setReservationsExist] = useState<boolean>(true)
     const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -187,8 +190,8 @@ const MyReservationsPage = (): JSX.Element => {
             )}
 
             <ReservationConfirmationModal
-                title="Potvrdite otkazivanje"
-                text={`Da li ste sigurni da želite da otkažete rezervaciju?`}
+                title={t("Potvrdite otkazivanje")}
+                text={t("Da li ste sigurni da želite da otkažete rezervaciju?") as string}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={() => handleOrderCancellation(reservationID)}
                 closeModal={() => {
@@ -223,10 +226,10 @@ const MyReservationsPage = (): JSX.Element => {
                             : 'myReservationsPage__container__titleLabel myReservationsPage__container__titleLabel--empty'
                     }
                 >
-                    Moje rezervacije
+                    {t("Moje rezervacije")}
                 </label>
                 <label className="myReservationsPage__container__infoLabel">
-                    Rezervacije se mogu otkazati do 10 časova
+                    {t("Rezervacije se mogu otkazati do 10 časova")}
                 </label>
                 <div className="myReservationsPage__colDiv">
                     <div className="myReservationsPage__colDiv__menuRowDiv">
@@ -244,7 +247,7 @@ const MyReservationsPage = (): JSX.Element => {
                                         )
                                         setActiveDate(day.date)
                                     }}
-                                    content={day.dayofweek}
+                                    content={t(day.dayofweek)}
                                 />
                             )
                         })}

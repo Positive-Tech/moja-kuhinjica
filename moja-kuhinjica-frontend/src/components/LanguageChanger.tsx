@@ -30,7 +30,7 @@ const LanguageChanger = (): JSX.Element => {
                             <Image
                                 src={option.icon}
                                 alt=""
-                                className="icon_side_bar_flag"
+                                className='icon-flag'
                                 onClick={() => changeLanguage(option.value)}
                             />
                         </div>
