@@ -8,7 +8,7 @@
     &__colDiv {
         @include col-div;
         width: 90%;
-        margin-top: 5%;
+        margin-top: 2%;
         align-items: center;
         min-height: 100vh;
 
@@ -143,6 +143,7 @@
                 font-weight: lighter;
                 color: #333333;
                 font-size: 22px;
+                margin-top: 5%;
 
                 @media only screen and (max-width: $breakpoint-720p) {
                     font-size: 20px;
@@ -158,12 +159,12 @@
         }
 
         &__titleLabel {
-            font-family: Poppins;
-            font-weight: 500;
+            font-family: Nunito;
+            font-weight: 600;
             color: #333333;
-            margin-top: 3%;
+            margin-top: 1%;
             margin-bottom: 1%;
-            font-size: 32px;
+            font-size: 26px;
 
             @media only screen and (max-width: $breakpoint-720p) {
                 font-size: 28px;

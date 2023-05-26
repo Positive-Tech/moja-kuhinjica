@@ -52,10 +52,7 @@ const MyReservationsPage = (): JSX.Element => {
     const [reservationID, setReservationID] = useState<number>(-1)
     const [isError] = useState<boolean>(false)
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
-    const [activeDate, setActiveDate] = useState<string>(
-        dayjs().format('DD-MM-YYYY')
-    )
-
+    const [activeDate, setActiveDate] = useState<string>(dayjs().format('DD/MM/YYYY'))
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
@@ -116,7 +113,7 @@ const MyReservationsPage = (): JSX.Element => {
         dayOfWeek: string
     ): IReservationGroup[] => {
         return groupReservationsByDate(myReservations).filter((reservation) => {
-            return dayjs(reservation.date).format('DD-MM-YYYY') === dayOfWeek
+            return dayjs(reservation.date).format('DD/MM/YYYY') === dayOfWeek
         })
     }
 
@@ -134,7 +131,7 @@ const MyReservationsPage = (): JSX.Element => {
                     .format('ddd')
                     .toLocaleUpperCase()
                     .replace('.', ''),
-                date: day.format('DD-MM-YYYY'),
+                date: day.format('DD/MM/YYYY'),
             })
             day = day.add(1, 'day')
         }
@@ -228,6 +225,9 @@ const MyReservationsPage = (): JSX.Element => {
                 <label className="myReservationsPage__container__infoLabel">
                     Rezervacije se mogu otkazati do 10 časova
                 </label>
+                <label className="myReservationsPage__colDiv__titleLabel">
+                        Rezervacije za: {activeDate}
+                </label>
                 <div className="myReservationsPage__colDiv">
                     <div className="myReservationsPage__colDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
@@ -239,9 +239,7 @@ const MyReservationsPage = (): JSX.Element => {
                                         activeTabIndex + INDEX_INCREMENT
                                     }
                                     onClick={() => {
-                                        setActive(
-                                            activeTabIndex + INDEX_INCREMENT
-                                        )
+                                        setActive(activeTabIndex + INDEX_INCREMENT)
                                         setActiveDate(day.date)
                                     }}
                                     content={day.dayofweek}
@@ -250,9 +248,6 @@ const MyReservationsPage = (): JSX.Element => {
                         })}
                     </div>
 
-                    <label className="myReservationsPage__colDiv__titleLabel">
-                        {activeDate}
-                    </label>
                     {isLoading ? (
                         <div className="myReservationsPage__colDiv__loadingBarWrapper">
                             <Oval
