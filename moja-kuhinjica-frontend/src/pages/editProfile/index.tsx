@@ -20,6 +20,7 @@ import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 import { useAppSelector } from '@/utils/hooks'
 import { useTranslation } from 'react-i18next'
+import editIcon from 'public/static/assets/images/editIcon.svg'
 
 interface User {
     id: number
@@ -204,6 +205,36 @@ const EditProfilePage = (): JSX.Element => {
                                 <FormInput
                                     register={register}
                                     errors={errors}
+                                    name="email"
+                                    src={email}
+                                    placeholder="Email"
+                                    type="text"
+                                    validationSchema={{
+                                        required: 'email is required',
+                                        pattern: {
+                                            value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                            message: 'invalid email value',
+                                        },
+                                    }}
+                                    style="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput--email"
+                                    defaultValue={user?.email}
+                                />
+
+                                <div className="formInputWrapper" 
+                                    onClick={() => isMobile ? router.push(routes.CHANGE_PASSWORD_PAGE) : setShowPasswordModal(true)}
+                                >
+                                    <Image src={passwordIcon} className="formInputWrapper__icon" alt="" />
+                                    <input
+                                        className='formInputWrapper__input formInputWrapper__input__pass'
+                                        defaultValue="Promeni sifru"
+                                        readOnly
+                                     ></input>
+                                    <Image src={editIcon} alt="" className="formInputWrapper__sideEditIcon"/>
+                                </div>
+
+                                <FormInput
+                                    register={register}
+                                    errors={errors}
                                     name="phoneNumber"
                                     src={mobile}
                                     placeholder=""
@@ -231,23 +262,7 @@ const EditProfilePage = (): JSX.Element => {
                                         setEditPhoneNumber(true)
                                     }
                                 />
-                                <FormInput
-                                    register={register}
-                                    errors={errors}
-                                    name="email"
-                                    src={email}
-                                    placeholder="Email"
-                                    type="text"
-                                    validationSchema={{
-                                        required: 'email is required',
-                                        pattern: {
-                                            value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                            message: 'invalid email value',
-                                        },
-                                    }}
-                                    style="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput--email"
-                                    defaultValue={user?.email}
-                                />
+
                                 <div className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__buttonWrapper">
                                     {isLoading ? (
                                         <Oval
