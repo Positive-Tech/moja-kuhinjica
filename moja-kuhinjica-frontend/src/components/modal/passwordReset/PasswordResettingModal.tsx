@@ -4,6 +4,7 @@ import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
 import UserService from '@/service/User.service'
 import { Oval } from 'react-loader-spinner'
+import { useTranslation } from 'react-i18next'
 
 interface IPasswordResettingModalProps {
     modalIsOpen: boolean
@@ -17,6 +18,7 @@ export const PasswordResettingModal = ({
     infoContent,
     email,
 }: IPasswordResettingModalProps): JSX.Element => {
+    const { t } = useTranslation()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const sendEmail = (): void => {
         setIsLoading(true)
@@ -41,20 +43,20 @@ export const PasswordResettingModal = ({
             <div className="modalContainer__formContainer">
                 <div className="modalContainer__formContainer__formDiv">
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        Proverite svoj email
+                        {t("Proverite svoj email")}
                     </label>
                     <Text
-                        content={infoContent}
+                        content={t(infoContent) as string}
                         style="modalContainer__formContainer__formDiv__infoLabel"
                     />
                     {!isLoading && (
                         <div className="modalContainer__formContainer__formDiv__labelWrapper">
                             <Text
-                                content="Nije Vam stigao email?"
+                                content={t("Nije Vam stigao email?") as string}
                                 style="modalContainer__formContainer__formDiv__labelWrapper__mailLabel"
                             />
                             <Text
-                                content="Pošalji ponovo"
+                                content={t("Pošalji ponovo") as string}
                                 style="modalContainer__formContainer__formDiv__labelWrapper__mailLabel modalContainer__formContainer__formDiv__labelWrapper__mailLabel--button"
                                 handleClick={() => sendEmail()}
                             />

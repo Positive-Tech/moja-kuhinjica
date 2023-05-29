@@ -6,6 +6,23 @@
     background-color: #c10016f7;
     z-index: 1;
 
+    .container-flags{
+    display: flex;
+    width: 150px;
+    justify-content: flex-end;
+    padding-bottom:20px;
+    grid-column-gap:20px;
+
+        .icon-flag{
+        width:45px;
+        height: 45px;
+        }
+        .icon-side-bar-flag{
+        width:45px;
+        height: 45px;
+        }
+    }
+
     &__wrapper {
         @include flex-column;
         width: 85%;

@@ -14,6 +14,7 @@ import successFilled from 'public/static/assets/images/successFilled.svg'
 import success from 'public/static/assets/images/success.svg'
 import { Oval } from 'react-loader-spinner'
 import { routes } from '@/constants/constants'
+import { t } from 'i18next'
 
 const RegistrationPage = (): JSX.Element => {
     const [showError, setShowError] = useState<boolean>(false)
@@ -68,7 +69,7 @@ const RegistrationPage = (): JSX.Element => {
                         onSubmit={handleSubmit((data) => validate(data))}
                     >
                         <label className="registrationContainer__wrapper__formDiv__formTitle">
-                            Registrujte se
+                            {t("Registrujte se")}
                         </label>
                         {showError && <ErrorLabel content={errorMessage} />}
                         <div className="registrationContainer__wrapper__formDiv__inputWrapper">
@@ -77,14 +78,14 @@ const RegistrationPage = (): JSX.Element => {
                                 errors={errors}
                                 name="name"
                                 src={profile}
-                                placeholder="Ime"
+                                placeholder={t("Ime") as string}
                                 type="text"
                                 validationSchema={{
-                                    required: 'Ime je obavezno.',
+                                    required: t('Ime je obavezno.'),
                                     pattern: {
                                         value: /^[A-Za-z\s]+$/,
                                         message:
-                                            'Ime može da sadrži samo slova.',
+                                            t('Ime može da sadrži samo slova.'),
                                     },
                                 }}
                                 style="registrationContainer__wrapper__formDiv__inputWrapper__input"
@@ -94,14 +95,14 @@ const RegistrationPage = (): JSX.Element => {
                                 errors={errors}
                                 name="surname"
                                 src={profile}
-                                placeholder="Prezime"
+                                placeholder={t("Prezime") as string}
                                 type="text"
                                 validationSchema={{
-                                    required: 'Prezime je obavezno.',
+                                    required: t('Prezime je obavezno.'),
                                     pattern: {
                                         value: /^[A-Za-z\s]+$/,
                                         message:
-                                            'Prezime može da sadrži samo slova.',
+                                            t('Prezime može da sadrži samo slova.'),
                                     },
                                 }}
                                 style="registrationContainer__wrapper__formDiv__inputWrapper__input"
@@ -114,11 +115,11 @@ const RegistrationPage = (): JSX.Element => {
                                 placeholder="Email"
                                 type="text"
                                 validationSchema={{
-                                    required: 'Email adresa je obavezna.',
+                                    required: t('Email adresa je obavezna.'),
                                     pattern: {
                                         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                                         message:
-                                            'Pogrešan format za email adresu.',
+                                            t('Pogrešan format za email adresu.'),
                                     },
                                 }}
                                 style="registrationContainer__wrapper__formDiv__inputWrapper__input"
@@ -128,14 +129,14 @@ const RegistrationPage = (): JSX.Element => {
                                 errors={errors}
                                 name="password"
                                 src={password}
-                                placeholder="Šifra"
+                                placeholder={t("Šifra") as string}
                                 type="password"
                                 validationSchema={{
-                                    required: 'Šifra je obavezna.',
+                                    required: t('Šifra je obavezna.'),
                                     pattern: {
                                         value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
                                         message:
-                                            'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
+                                            t('Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'),
                                     },
                                 }}
                                 style="registrationContainer__wrapper__formDiv__inputWrapper__input"
@@ -145,10 +146,10 @@ const RegistrationPage = (): JSX.Element => {
                                 errors={errors}
                                 name="confirmPassword"
                                 src={password}
-                                placeholder="Potvrdi šifru"
+                                placeholder={t("Potvrdi šifru") as string}
                                 type="password"
                                 validationSchema={{
-                                    required: 'Ponovljena šifra je obavezna.',
+                                    required: t('Ponovljena šifra je obavezna.'),
                                 }}
                                 style="registrationContainer__wrapper__formDiv__inputWrapper__input"
                             />
@@ -160,11 +161,11 @@ const RegistrationPage = (): JSX.Element => {
                                 placeholder=""
                                 type="number"
                                 validationSchema={{
-                                    required: 'Broj telefona je obavezan.',
+                                    required: t('Broj telefona je obavezan.'),
                                     pattern: {
                                         value: /^[0-9]{6,}$/,
                                         message:
-                                            'Broj telefona sadrži minimalno 6 brojeva.',
+                                            t('Broj telefona sadrži minimalno 6 brojeva.'),
                                     },
                                 }}
                                 style="registrationContainer__wrapper__formDiv__inputWrapper__input"
@@ -190,7 +191,7 @@ const RegistrationPage = (): JSX.Element => {
                                     type="submit"
                                     className="registrationContainer__wrapper__formDiv__inputWrapper__buttonWrapper__formButton"
                                 >
-                                    Potvrdi
+                                    {t("Potvrdi")}
                                 </button>
                             )}
                         </div>
@@ -205,16 +206,14 @@ const RegistrationPage = (): JSX.Element => {
                         <div className="registrationContainer__notificationContainer__notificationDiv__contentDiv">
                             <Image src={success} alt="" />
                             <label className="registrationContainer__notificationContainer__notificationDiv__contentDiv__contentLabel">
-                                Poslat je email na {userEmail}. Potrebno je
-                                kliknuti na link u poruci kako bi aktivirali Vas
-                                profil.
+                                {t("Poslat je email na")} {userEmail}. {t("Potrebno je kliknuti na link u poruci kako bi aktivirali Vam profil.")}
                             </label>
                         </div>
                         <button
                             className="registrationContainer__notificationContainer__notificationDiv__notificationButton"
                             onClick={() => router.push(routes.HOME_PAGE)}
                         >
-                            zatvori
+                            {t("zatvori")}
                         </button>
                     </div>
                 </div>

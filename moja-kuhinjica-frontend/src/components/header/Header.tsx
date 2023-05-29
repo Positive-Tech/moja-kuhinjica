@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { userLogout } from '@/reduxStore/reducers/userReducer'
+import serbiaFlag from '../../../public/static/assets/images/serbiaIconFlag.svg'
 import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'
@@ -13,6 +14,9 @@ import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import { routes, AUTH_TOKEN } from '@/constants/constants'
 import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
+import LanguageChanger from '../LanguageChanger'
+import icon from '../../../public/static/assets/images/serbiaIconFlag.svg'
+import { useTranslation } from 'react-i18next'
 
 const HEADER_TYPE = 'red'
 interface IHeaderProps {
@@ -33,7 +37,7 @@ const Header = ({
     const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
 
     const menuRef = useRef<HTMLDivElement>(null)
-
+    const { t } = useTranslation()
     useEffect(() => {
         const token = localStorage.getItem(AUTH_TOKEN)
         if (isAuthorized || token) dispatch(loadUser())
@@ -94,12 +98,14 @@ const Header = ({
                     alt=""
                     className="headerWrapper__logoWrapper__logoImage"
                 />
+                <LanguageChanger />
+                <img src={serbiaFlag} alt="" />
             </div>
             <div className="headerWrapper__buttonWrapper">
                 <HeaderButton
                     active={active === 1}
                     onClick={() => handleClick(1, routes.HOME_PAGE)}
-                    content="Početna"
+                    content={t("Početna")}
                     headerType={type}
                 />
                 <HeaderButton
@@ -107,13 +113,13 @@ const Header = ({
                     onClick={() =>
                         handleReservationClick(2, routes.MEAL_RESERVATION_PAGE)
                     }
-                    content="Rezerviši"
+                    content={t("Rezerviši")}
                     headerType={type}
                 />
                 <HeaderButton
                     active={active === 3}
                     onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
-                    content="O nama"
+                    content={t("O nama")}
                     headerType={type}
                 />
                 {isAuthorized && (
@@ -135,7 +141,7 @@ const Header = ({
                             >
                                 <div className="headerWrapper__buttonWrapper__profileIconWrapper__dropDownButtonWrapper">
                                     <DropdownMenuButton
-                                        content="Moje rezervacije"
+                                        content={t("Moje rezervacije")}
                                         src={myReservationsIcon}
                                         handleClick={() =>
                                             router.push(
@@ -144,7 +150,7 @@ const Header = ({
                                         }
                                     />
                                     <DropdownMenuButton
-                                        content="Izmena profila"
+                                        content={t("Izmena profila")}
                                         src={editProfileIcon}
                                         handleClick={() =>
                                             router.push(
@@ -153,7 +159,7 @@ const Header = ({
                                         }
                                     />
                                     <DropdownMenuButton
-                                        content="Odjavi me"
+                                        content={t("Odjavi me")}
                                         src={logoutIcon}
                                         handleClick={() => logout()}
                                     />

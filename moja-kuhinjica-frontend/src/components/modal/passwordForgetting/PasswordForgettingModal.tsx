@@ -8,6 +8,7 @@ import { Text } from '@/components/label/Text'
 import { bgModal } from 'src/constants/constants'
 import emailIcon from 'public/static/assets/images/email.svg'
 import { Oval } from 'react-loader-spinner'
+import { useTranslation } from 'react-i18next'
 
 interface IPasswordForgettingModalProps {
     modalIsOpen: boolean
@@ -23,6 +24,7 @@ export const PasswordForgettingModal = ({
     setMessage,
     setUserEmail,
 }: IPasswordForgettingModalProps): JSX.Element => {
+    const { t } = useTranslation()
     const [showError, setShowError] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
@@ -68,10 +70,10 @@ export const PasswordForgettingModal = ({
                     onSubmit={handleSubmit((data) => resetPassword(data))}
                 >
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        Zaboravili ste šifru?
+                        {t("Zaboravili ste šifru?")}
                     </label>
                     <Text
-                        content="Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje."
+                        content={t("Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.") as string}
                         style="modalContainer__formContainer__formDiv__infoLabel"
                     />
                     {showError && <ErrorLabel content={errorMessage} />}
@@ -83,7 +85,7 @@ export const PasswordForgettingModal = ({
                         placeholder="Email"
                         type="text"
                         validationSchema={{
-                            required: 'Obavezno polje.',
+                            required: t('Obavezno polje.'),
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                                 message: 'Pogrešan format za email adresu.',
@@ -111,7 +113,7 @@ export const PasswordForgettingModal = ({
                                 type="submit"
                                 className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
                             >
-                                Resetuj šifru
+                                {t("Resetuj šifru")}
                             </button>
                         )}
                     </div>

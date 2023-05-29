@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { bgModal } from '@/constants/constants'
 import success from 'public/static/assets/images/success.svg'
 import successFilled from 'public/static/assets/images/successFilled.svg'
+import { useTranslation } from 'react-i18next'
 
 interface ISignUpNotificationModalProps {
     modalIsOpen: boolean
@@ -21,6 +22,7 @@ export const SuccessNotificationModal = ({
     buttonText,
     email,
 }: ISignUpNotificationModalProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -43,8 +45,7 @@ export const SuccessNotificationModal = ({
                         <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
                             <Image src={success} alt="" />
                             <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
-                                Poslat je email na {email}. Potrebno je kliknuti
-                                na link u poruci kako bi aktivirali Vas profil.
+                                {t("Poslat je email na")} {email}. {t("Potrebno je kliknuti na link u poruci kako bi aktivirali Vas profil.")}
                             </label>
                         </div>
                     )}
@@ -52,7 +53,7 @@ export const SuccessNotificationModal = ({
                         className="modalContainer__formContainer__formDiv__formTitle__formButton"
                         onClick={closeModal}
                     >
-                        {buttonText}
+                        {t(buttonText)}
                     </button>
                 </div>
             </div>
