@@ -20,7 +20,6 @@ import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 import { useAppSelector } from '@/utils/hooks'
 import editIcon from 'public/static/assets/images/editIcon.svg'
-import { text } from 'stream/consumers'
 
 interface User {
     id: number
