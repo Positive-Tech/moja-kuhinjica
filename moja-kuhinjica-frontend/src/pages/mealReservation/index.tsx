@@ -212,19 +212,9 @@ const MealReservation = (): JSX.Element => {
    const isBookingAllowed = (): boolean => {
        const today = new Date();
        const activeDay = new Date(activeDate.split('/').reverse().join('/'));
-        console.log("today", today)
-        console.log("activeDay", activeDay)
         const currentHour = today.getHours();
-        // This is hardcoded for now.  
         const cutoffHour = 10;
-        if (
-            currentHour >= cutoffHour &&
-            today.toDateString() === activeDay.toDateString()
-        ) {
-            return false
-        }
-
-        return true;
+        return !(currentHour >= cutoffHour && today.toDateString() === activeDay.toDateString())
      }
 
     return (
