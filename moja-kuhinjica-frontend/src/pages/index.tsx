@@ -185,7 +185,12 @@ const Home = (): JSX.Element => {
             <div className="homeDiv__menuWrapper" ref={ref}>
                 <div className="homeDiv__menuWrapper__menuColDiv">
                     <div className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper">
-                        <label className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantTitle">
+                        <label
+                            className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantTitle"
+                            onClick={() =>
+                                router.push(routes.RESTAURANT_PROFILE_PAGE)
+                            }
+                        >
                             Restoran Top FOOD 021
                         </label>
                         <label
