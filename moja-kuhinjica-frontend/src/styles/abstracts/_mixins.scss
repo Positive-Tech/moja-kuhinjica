@@ -1,0 +1,176 @@
+@mixin flex {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-row-vertical-center {
+    @include flex;
+    align-items: center;
+}
+
+@mixin row-div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+@mixin col-div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+@mixin flex-column {
+    @include flex;
+    flex-direction: column;
+}
+
+@mixin flex-column-reverse {
+    @include flex;
+    flex-direction: column-reverse;
+}
+
+@mixin flex-options($justify-content, $align-items, $flex-direction) {
+    @include flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex-direction: $flex-direction;
+}
+
+@mixin text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+@mixin spinner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin error-page {
+    height: 100vh;
+    @include flex-options(center, center, column);
+    gap: 5px;
+
+    &__title {
+        color: $red;
+        font-size: 5rem;
+        font-weight: 600;
+    }
+
+    &__subtitle {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    &__link {
+        color: $red;
+        font-size: 2rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+@mixin page-title {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+@mixin table-row {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+@mixin page-margins {
+    margin-left: 10px;
+    margin-right: 10px;
+    @include responsive-rule($breakpoint-medium) {
+        margin-left: 290px;
+        margin-right: 30px;
+    }
+}
+@mixin page-paddings {
+    @include page-margins;
+    padding: 15px 0;
+}
+
+@mixin responsive-rule($size) {
+    @if $size == $breakpoint-smallest {
+        @media (max-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-small {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-medium {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-large {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-720p {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-900p {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-1080p {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-1440p {
+        @media (min-width: $size) {
+            @content;
+        }
+    } @else if $size == $breakpoint-ultrawide {
+        @media (min-width: $size) {
+            @content;
+        }
+    }
+}
+
+@mixin row-content {
+    &:nth-child(1) {
+        width: 40px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+        width: 40%;
+
+        @include responsive-rule($breakpoint-large) {
+            width: 28%;
+        }
+    }
+
+    &:nth-child(4),
+    &:nth-child(6) {
+        display: none;
+    }
+
+    &:nth-child(4) {
+        width: 20%;
+    }
+
+    &:nth-child(5),
+    &:nth-child(6) {
+        width: 10%;
+    }
+
+    @include flex;
+    @include responsive-rule($breakpoint-large) {
+        &:nth-child(4),
+        &:nth-child(6) {
+            display: block;
+        }
+    }
+}
