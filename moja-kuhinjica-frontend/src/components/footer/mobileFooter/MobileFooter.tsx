@@ -3,21 +3,23 @@ import Image from 'next/image'
 import location from 'public/static/assets/images/blackLocation.svg'
 import earth from 'public/static/assets/images/blackEarth.svg'
 import circle from 'public/static/assets/images/blackCircle.svg'
+import { useTranslation } from 'react-i18next'
 interface IMobileFooterProps {
     style?: string
 }
 export const MobileFooter = ({ style }: IMobileFooterProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <div className={`mobileFooterContainer ${style}`}>
             <div className="mobileFooterContainer__wrapper">
                 <button className="mobileFooterContainer__wrapper__mobileButton">
-                    Početna
+                    {t("Početna")}
                 </button>
                 <button className="mobileFooterContainer__wrapper__mobileButton">
-                    Ponuda
+                    {t("Ponuda")}
                 </button>
                 <button className="mobileFooterContainer__wrapper__mobileButton">
-                    O nama
+                    {t("O nama")}
                 </button>
                 <div className="mobileFooterContainer__wrapper__bottomDiv">
                     <Image
@@ -27,7 +29,7 @@ export const MobileFooter = ({ style }: IMobileFooterProps): JSX.Element => {
                     />
 
                     <label className="mobileFooterContainer__wrapper__bottomDiv__footerLabel">
-                        Srbija
+                        {t("Srbija")}
                     </label>
                     <Image
                         className="mobileFooterContainer__wrapper__bottomDiv__footerImage"
@@ -35,7 +37,7 @@ export const MobileFooter = ({ style }: IMobileFooterProps): JSX.Element => {
                         alt=""
                     />
                     <label className="mobileFooterContainer__wrapper__bottomDiv__footerLabel">
-                        Srpski
+                        {t("Srpski")}
                     </label>
                     <Image
                         className="mobileFooterContainer__wrapper__bottomDiv__footerImage"
@@ -43,7 +45,7 @@ export const MobileFooter = ({ style }: IMobileFooterProps): JSX.Element => {
                         alt=""
                     />
                     <label className="mobileFooterContainer__wrapper__bottomDiv__footerLabel">
-                        Moja klopica 2022
+                        {t("Moja klopica 2022")}
                     </label>
                 </div>
             </div>

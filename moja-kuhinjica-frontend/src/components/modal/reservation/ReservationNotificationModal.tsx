@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import Image from 'next/image'
 import { bgModal } from '@/constants/constants'
 import successFilled from 'public/static/assets/images/successFilled.svg'
+import { useTranslation } from 'react-i18next'
 
 interface IReservationNotificationModalProps {
     modalIsOpen: boolean
@@ -20,6 +21,7 @@ export const ReservationNotificationModal = ({
     text,
     isError,
 }: IReservationNotificationModalProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -32,7 +34,7 @@ export const ReservationNotificationModal = ({
                 <div className="modalContainer__formContainer__formDiv">
                     {!isError && <Image src={successFilled} alt="" />}
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        {title}
+                        {t(title)}
                     </label>
 
                     <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">

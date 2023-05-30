@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { bgModal } from '@/constants/constants'
+import { useTranslation } from 'react-i18next'
 
 interface IReservationConfirmationModalProps {
     modalIsOpen: boolean
@@ -17,6 +18,7 @@ export const ReservationConfirmationModal = ({
     title,
     text,
 }: IReservationConfirmationModalProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -28,7 +30,7 @@ export const ReservationConfirmationModal = ({
             <div className="modalContainer__formContainer">
                 <div className="modalContainer__formContainer__formDiv">
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        {title}
+                        {t(title)}
                     </label>
 
                     <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
@@ -41,13 +43,13 @@ export const ReservationConfirmationModal = ({
                             className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
                             onClick={confirmOrder}
                         >
-                            Potvrdi
+                            {t("Potvrdi")}
                         </button>
                         <button
                             className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
                             onClick={closeModal}
                         >
-                            Otkaži
+                            {t("Otkaži")}
                         </button>
                     </div>
                 </div>
