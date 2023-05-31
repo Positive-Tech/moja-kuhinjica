@@ -54,7 +54,8 @@ const MealReservation = (): JSX.Element => {
         ({ restaurant: { cartItems } }) => cartItems
     )
     const [active, setActive] = useState<number>(0)
-    const [showDisabledReservation, setShowDisabledReservation] = useState<boolean>(false)
+    const [showDisabledReservation, setShowDisabledReservation] =
+        useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
@@ -78,7 +79,7 @@ const MealReservation = (): JSX.Element => {
     const hasMeals = Boolean(menuForDay?.meals?.length)
     useEffect(() => {
         fetchMenus()
-    }, [])  
+    }, [])
 
     useEffect(() => {
         handleWindowResize()
@@ -116,7 +117,6 @@ const MealReservation = (): JSX.Element => {
         )
     }, [active])
 
-
     const isCartEmpty = (): boolean => !cartItems.length
 
     const isItemInCart = (mealId: number): boolean =>
@@ -137,7 +137,7 @@ const MealReservation = (): JSX.Element => {
     }
     const addToCart = (meal: IMeal): void => {
         if (!isBookingAllowed()) {
-            return setShowDisabledReservation(true);
+            return setShowDisabledReservation(true)
         }
 
         dispatch(
@@ -208,14 +208,13 @@ const MealReservation = (): JSX.Element => {
         setConfirmationModalIsOpen(false)
     }
 
-    
-   const isBookingAllowed = (): boolean => {
-       const today = new Date();
-       const activeDay = new Date(activeDate.split('/').reverse().join('/'));
-        const currentHour = today.getHours();
-        const cutoffHour = 10;
-        return !(currentHour >= cutoffHour && today.toDateString() === activeDay.toDateString())
-     }
+    const isBookingAllowed = (): boolean => {
+        const cutoffHour = 10
+        const today = dayjs()
+        const activeDay = dayjs(activeDate.split('/').reverse().join('/'))
+        const currentHour = today.hour()
+        return !(currentHour >= cutoffHour && today.isSame(activeDay, 'day'))
+    }
 
     return (
         <div className="mealReservation">

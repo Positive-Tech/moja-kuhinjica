@@ -17,13 +17,13 @@ export const DisabledReservationModal = ({
     closeModal,
     title,
     buttonText,
-    children
+    children,
 }: DisabledReservationModalProps): JSX.Element => {
-    const { t } = useTranslation();
+    const { t } = useTranslation()
 
     const getBody = () => {
         if (children) {
-            return children;
+            return children
         }
 
         return (
@@ -52,7 +52,7 @@ export const DisabledReservationModal = ({
             <div className="modalContainer__formContainer">
                 <div className="modalContainer__formContainer__formDiv">
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                       {getBody()}
+                        {getBody()}
                     </label>
                 </div>
             </div>
