@@ -15,7 +15,6 @@ import { routes, AUTH_TOKEN } from '@/constants/constants'
 import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
 import LanguageChanger from '../LanguageChanger'
-import icon from '../../../public/static/assets/images/serbiaIconFlag.svg'
 import { useTranslation } from 'react-i18next'
 
 const HEADER_TYPE = 'red'
@@ -105,7 +104,7 @@ const Header = ({
                 <HeaderButton
                     active={active === 1}
                     onClick={() => handleClick(1, routes.HOME_PAGE)}
-                    content={t("Početna")}
+                    content={t('Početna')}
                     headerType={type}
                 />
                 <HeaderButton
@@ -113,13 +112,13 @@ const Header = ({
                     onClick={() =>
                         handleReservationClick(2, routes.MEAL_RESERVATION_PAGE)
                     }
-                    content={t("Rezerviši")}
+                    content={t('Rezerviši')}
                     headerType={type}
                 />
                 <HeaderButton
                     active={active === 3}
                     onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
-                    content={t("O nama")}
+                    content={t('O nama')}
                     headerType={type}
                 />
                 {isAuthorized && (
@@ -141,7 +140,7 @@ const Header = ({
                             >
                                 <div className="headerWrapper__buttonWrapper__profileIconWrapper__dropDownButtonWrapper">
                                     <DropdownMenuButton
-                                        content={t("Moje rezervacije")}
+                                        content={t('Moje rezervacije')}
                                         src={myReservationsIcon}
                                         handleClick={() =>
                                             router.push(
@@ -150,7 +149,7 @@ const Header = ({
                                         }
                                     />
                                     <DropdownMenuButton
-                                        content={t("Izmena profila")}
+                                        content={t('Izmena profila')}
                                         src={editProfileIcon}
                                         handleClick={() =>
                                             router.push(
@@ -159,7 +158,7 @@ const Header = ({
                                         }
                                     />
                                     <DropdownMenuButton
-                                        content={t("Odjavi me")}
+                                        content={t('Odjavi me')}
                                         src={logoutIcon}
                                         handleClick={() => logout()}
                                     />

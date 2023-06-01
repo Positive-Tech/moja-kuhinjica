@@ -81,7 +81,7 @@ export const MenuItem = ({
             {openDescription && (
                 <div className="descriptionLabelDiv">
                     <Text
-                        content={t(description) as string}
+                        content={t(description)}
                         style={
                             isOrdering()
                                 ? 'descriptionLabelDiv descriptionLabelDiv__descriptionLabel--ordering'
@@ -98,7 +98,7 @@ export const MenuItem = ({
                             : 'priceWrapper__contentLabel'
                     }
                 >
-                    {t("meni 1")} -&nbsp;
+                    {t('meni 1')} -&nbsp;
                 </label>
                 <label
                     className={
@@ -113,7 +113,7 @@ export const MenuItem = ({
             {isOrdering() && (
                 <div className="buttonContainer">
                     <RegularButton
-                        content={t("Rezerviši")}
+                        content={t('Rezerviši')}
                         onClick={handleClick}
                         isActive={buttonIsActive}
                     />

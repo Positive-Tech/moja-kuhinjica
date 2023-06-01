@@ -76,7 +76,7 @@ export const SignUpModal = ({
                     onSubmit={handleSubmit((data) => validate(data))}
                 >
                     <label className="signUpModalContainer__formContainer__formDiv__formTitle">
-                        {t("Registrujte se")}
+                        {t('Registrujte se')}
                     </label>
                     {showError && <ErrorLabel content={errorMessage} />}
                     <div className="signUpModalContainer__formContainer__formDiv__inputWrapper">
@@ -85,7 +85,7 @@ export const SignUpModal = ({
                             errors={errors}
                             name="name"
                             src={profile}
-                            placeholder={t("Ime") as string}
+                            placeholder={t('Ime')}
                             type="text"
                             validationSchema={{
                                 required: t('Ime je obavezno.'),
@@ -100,14 +100,15 @@ export const SignUpModal = ({
                             errors={errors}
                             name="surname"
                             src={profile}
-                            placeholder={t("Prezime") as string}
+                            placeholder={t('Prezime')}
                             type="text"
                             validationSchema={{
                                 required: t('Prezime je obavezno.'),
                                 pattern: {
                                     value: /^[A-Za-zČčĆćĐđŠšŽžабвгдђежзијклљмнњопрстћуфхцчџшАБВГДЂЕЖЗИЈКЛЉМНЊОПРСТЋУФХЦЧЏШ\s]+$/,
-                                    message:
-                                        t('Prezime može da sadrži samo slova.'),
+                                    message: t(
+                                        'Prezime može da sadrži samo slova.'
+                                    ),
                                 },
                             }}
                         />
@@ -131,14 +132,15 @@ export const SignUpModal = ({
                             errors={errors}
                             name="password"
                             src={password}
-                            placeholder={t("Šifra") as string}
+                            placeholder={t('Šifra')}
                             type="password"
                             validationSchema={{
                                 required: t('Šifra je obavezna.'),
                                 pattern: {
                                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                                    message:
-                                        t('Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'),
+                                    message: t(
+                                        'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'
+                                    ),
                                 },
                             }}
                         />
@@ -147,7 +149,7 @@ export const SignUpModal = ({
                             errors={errors}
                             name="confirmPassword"
                             src={password}
-                            placeholder={t("Potvrdi šifru") as string}
+                            placeholder={t('Potvrdi šifru')}
                             type="password"
                             validationSchema={{
                                 required: t('Ponovljena šifra je obavezna.'),
@@ -164,8 +166,9 @@ export const SignUpModal = ({
                                 required: t('Broj telefona je obavezan.'),
                                 pattern: {
                                     value: /^[0-9]{6,}$/,
-                                    message:
-                                        t('Broj telefona sadrži minimalno 6 brojeva.'),
+                                    message: t(
+                                        'Broj telefona sadrži minimalno 6 brojeva.'
+                                    ),
                                 },
                             }}
                             isPhoneNumber={true}
@@ -190,7 +193,7 @@ export const SignUpModal = ({
                                 type="submit"
                                 className="signUpModalContainer__formContainer__formDiv__buttonWrapper__formButton"
                             >
-                                {t("Potvrdi")}
+                                {t('Potvrdi')}
                             </button>
                         )}
                     </div>

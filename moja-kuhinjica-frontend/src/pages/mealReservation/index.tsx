@@ -220,7 +220,7 @@ const MealReservation = (): JSX.Element => {
                 isError={isError}
             />
             <ReservationConfirmationModal
-                title={t("Potvrdite rezervaciju")}
+                title={t('Potvrdite rezervaciju')}
                 text={`Da li zelite da potvrdite narudzbinu za ${activeDate} ?`}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={handleOrderConfirmation}
@@ -248,11 +248,11 @@ const MealReservation = (): JSX.Element => {
                         }
                         className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel"
                     >
-                        {t("opšte informacije")}
+                        {t('opšte informacije')}
                     </label>
                 </div>
                 <label className="mealReservation__container__titleLabel">
-                    {t("Dnevni meni za")} {activeDate}
+                    {t('Dnevni meni za')} {activeDate}
                 </label>
                 <div className="mealReservation__container__menuDiv">
                     <div className="mealReservation__container__menuDiv__menuColDiv">
@@ -328,11 +328,13 @@ const MealReservation = (): JSX.Element => {
                             {isCartEmpty() && (
                                 <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv">
                                     <Title
-                                        content={t("korpa")}
+                                        content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
                                     <Text
-                                        content={t("Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.") as string}
+                                        content={t(
+                                            'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
+                                        )}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
                                     />
                                 </div>
@@ -355,7 +357,7 @@ const MealReservation = (): JSX.Element => {
                                     </div>
                                     <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv">
                                         <Text
-                                            content={t("Ukupno:") as string}
+                                            content={t('Ukupno:')}
                                             style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__priceLabel"
                                         />
                                         <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__totalPriceDiv">
@@ -371,7 +373,7 @@ const MealReservation = (): JSX.Element => {
                                     </div>
                                     <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__confirmButtonWrapper">
                                         <RegularButton
-                                            content={t("Potvrdi rezervaciju")}
+                                            content={t('Potvrdi rezervaciju')}
                                             isActive
                                             style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__confirmButtonWrapper__confirmButton"
                                             onClick={() =>
@@ -388,8 +390,8 @@ const MealReservation = (): JSX.Element => {
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
-                title={t("rezervacija uspešna")}
-                buttonText={t("rezerviši ponovo")}
+                title={t('rezervacija uspešna')}
+                buttonText={t('rezerviši ponovo')}
             />
             {isMobile && !showCart && (
                 <div
@@ -406,7 +408,9 @@ const MealReservation = (): JSX.Element => {
                                 />
                             </div>
                             <label className="mealReservation__bottomCart__cartInfo">
-                                {t("Vaša korpa je prazna, rezervišite neko jelo iz dnevnog menija.")}
+                                {t(
+                                    'Vaša korpa je prazna, rezervišite neko jelo iz dnevnog menija.'
+                                )}
                             </label>
                         </>
                     ) : (
@@ -425,7 +429,7 @@ const MealReservation = (): JSX.Element => {
                             </div>
                             <div className="mealReservation__bottomCart__priceWrapper">
                                 <label className="mealReservation__bottomCart__priceWrapper__priceLabel">
-                                    {t("Ukupno")}
+                                    {t('Ukupno')}
                                 </label>
                                 <label className="mealReservation__bottomCart__priceWrapper__totalPrice">
                                     {`${getTotalPrice()} RSD`}

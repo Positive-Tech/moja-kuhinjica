@@ -43,20 +43,20 @@ export const PasswordResettingModal = ({
             <div className="modalContainer__formContainer">
                 <div className="modalContainer__formContainer__formDiv">
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        {t("Proverite svoj email")}
+                        {t('Proverite svoj email')}
                     </label>
                     <Text
-                        content={t(infoContent) as string}
+                        content={t(infoContent)}
                         style="modalContainer__formContainer__formDiv__infoLabel"
                     />
                     {!isLoading && (
                         <div className="modalContainer__formContainer__formDiv__labelWrapper">
                             <Text
-                                content={t("Nije Vam stigao email?") as string}
+                                content={t('Nije Vam stigao email?')}
                                 style="modalContainer__formContainer__formDiv__labelWrapper__mailLabel"
                             />
                             <Text
-                                content={t("Pošalji ponovo") as string}
+                                content={t('Pošalji ponovo')}
                                 style="modalContainer__formContainer__formDiv__labelWrapper__mailLabel modalContainer__formContainer__formDiv__labelWrapper__mailLabel--button"
                                 handleClick={() => sendEmail()}
                             />
