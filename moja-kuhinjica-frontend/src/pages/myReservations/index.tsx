@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useTransition } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { ReservationItem } from '@/components/reservation/ReservationItem'
@@ -30,13 +30,12 @@ interface IGenerateWeekdays {
     date: string
 }
 
-const NoReservationsMessage: React.FC = ()  => (
+const NoReservationsMessage: React.FC = () => (
     <div className="myReservationsPage__colDiv__rowDiv">
         <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
             Nema rezervacija za ovaj datum.
         </label>
     </div>
-    
 )
 
 const MyReservationsPage = (): JSX.Element => {
@@ -55,7 +54,9 @@ const MyReservationsPage = (): JSX.Element => {
     const [reservationID, setReservationID] = useState<number>(-1)
     const [isError] = useState<boolean>(false)
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
-    const [activeDate, setActiveDate] = useState<string>(dayjs().format('DD/MM/YYYY'))
+    const [activeDate, setActiveDate] = useState<string>(
+        dayjs().format('DD/MM/YYYY')
+    )
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
@@ -187,8 +188,10 @@ const MyReservationsPage = (): JSX.Element => {
             )}
 
             <ReservationConfirmationModal
-                title={t("Potvrdite otkazivanje")}
-                text={t("Da li ste sigurni da želite da otkažete rezervaciju?") as string}
+                title={t('Potvrdite otkazivanje')}
+                text={t(
+                    'Da li ste sigurni da želite da otkažete rezervaciju?'
+                ).toString()}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={() => handleOrderCancellation(reservationID)}
                 closeModal={() => {
@@ -223,13 +226,13 @@ const MyReservationsPage = (): JSX.Element => {
                             : 'myReservationsPage__container__titleLabel myReservationsPage__container__titleLabel--empty'
                     }
                 >
-                    {t("Moje rezervacije")}
+                    {t('Moje rezervacije')}
                 </label>
                 <label className="myReservationsPage__container__infoLabel">
-                    {t("Rezervacije se mogu otkazati do 10 časova")}
+                    {t('Rezervacije se mogu otkazati do 10 časova')}
                 </label>
                 <label className="myReservationsPage__colDiv__titleLabel">
-                        Rezervacije za: {activeDate}
+                    Rezervacije za: {activeDate}
                 </label>
                 <div className="myReservationsPage__colDiv">
                     <div className="myReservationsPage__colDiv__menuRowDiv">
@@ -242,7 +245,9 @@ const MyReservationsPage = (): JSX.Element => {
                                         activeTabIndex + INDEX_INCREMENT
                                     }
                                     onClick={() => {
-                                        setActive(activeTabIndex + INDEX_INCREMENT)
+                                        setActive(
+                                            activeTabIndex + INDEX_INCREMENT
+                                        )
                                         setActiveDate(day.date)
                                     }}
                                     content={t(day.dayofweek)}

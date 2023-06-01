@@ -110,7 +110,7 @@ const AboutUs = (): JSX.Element => {
                     <TabButton
                         active={active === BUTTON_ONE}
                         onClick={() => setActive(BUTTON_ONE)}
-                        content={t("O nama") as string}
+                        content={t('O nama')}
                         style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
                     />
                     <TabButton
@@ -123,13 +123,13 @@ const AboutUs = (): JSX.Element => {
                         active={active === BUTTON_THREE}
                         onClick={() => setActive(BUTTON_THREE)}
                         style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
-                        content={t("Politika privatnosti") as string}
+                        content={t('Politika privatnosti')}
                     />
                     <TabButton
                         active={active === BUTTON_FOUR}
                         onClick={() => setActive(BUTTON_FOUR)}
                         style="aboutUs__bottomWrapper__menuRowDiv__tabButton"
-                        content={t("Uslovi korišćenja") as string}
+                        content={t('Uslovi korišćenja')}
                     />
                 </div>
                 <LoginModal
@@ -200,7 +200,7 @@ const AboutUs = (): JSX.Element => {
                     {active === 3 && (
                         <div className="aboutUs__privacyInfoContainer">
                             <label className="aboutUs__privacyInfoContainer__infoTitle">
-                                DUNDA {t("Obaveštenje o privatnosti")}
+                                DUNDA {t('Obaveštenje o privatnosti')}
                             </label>
                             <label className="aboutUs__privacyInfoContainer__infoText">
                                 Lorem ipsum dolor sit amet, consectetur
@@ -231,7 +231,7 @@ const AboutUs = (): JSX.Element => {
                     {active === 4 && (
                         <div className="aboutUs__privacyInfoContainer">
                             <label className="aboutUs__privacyInfoContainer__infoTitle">
-                                DUNDA {t("Uslovi korišćenja")}
+                                DUNDA {t('Uslovi korišćenja')}
                             </label>
                             <label className="aboutUs__privacyInfoContainer__infoText">
                                 Lorem ipsum dolor sit amet, consectetur

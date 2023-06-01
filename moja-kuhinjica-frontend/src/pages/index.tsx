@@ -156,11 +156,11 @@ const Home = (): JSX.Element => {
                     {!isAuthorized && (
                         <div className="homeDiv__wrapper__container__buttonWrapper">
                             <HomePageButton
-                                content={t("Registrujte se")}
+                                content={t('Registrujte se')}
                                 onClick={handleSignUpClick}
                             />
                             <HomePageButton
-                                content={t("Ulogujte se")}
+                                content={t('Ulogujte se')}
                                 onClick={handleLoginClick}
                             />
                         </div>
@@ -172,7 +172,7 @@ const Home = (): JSX.Element => {
                             className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper__labelForScroll"
                             onClick={handleClick}
                         >
-                            {t("Ponuda")}
+                            {t('Ponuda')}
                         </label>
                         <Image
                             className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper__labelForScrollIcon"
@@ -195,11 +195,11 @@ const Home = (): JSX.Element => {
                             }
                             className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantInfoLabel"
                         >
-                            {t("opšte informacije")}
+                            {t('opšte informacije')}
                         </label>
                     </div>
                     <label className="homeDiv__menuWrapper__menuColDiv__titleLabel">
-                        {t("Dnevni meni za")} {activeDate}
+                        {t('Dnevni meni za')} {activeDate}
                     </label>
                     <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
@@ -260,7 +260,9 @@ const Home = (): JSX.Element => {
                     {!isLoading && !hasMeals && (
                         <div className="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv">
                             <Text
-                                content = {t(`Dnevni meni za ${activeDate} jos uvek nije objavljen.`) as string}
+                                content={t(
+                                    `Dnevni meni za ${activeDate} jos uvek nije objavljen.`
+                                )}
                                 style="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                             />
                         </div>
@@ -285,7 +287,7 @@ const Home = (): JSX.Element => {
                 closeModal={() => setShowNotification(false)}
                 type={NOTIFICATION_MODAL_TYPE}
                 title=""
-                buttonText={t("zatvori")}
+                buttonText={t('zatvori')}
                 email={userEmail}
             />
             <PasswordForgettingModal

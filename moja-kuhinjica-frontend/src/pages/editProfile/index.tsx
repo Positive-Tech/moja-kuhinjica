@@ -1,4 +1,4 @@
-import React, { TransitionStartFunction, useTransition } from 'react'
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -116,7 +116,7 @@ const EditProfilePage = (): JSX.Element => {
             )}
             <div className="editProfile__container">
                 <label className="editProfile__container__titleLabel">
-                    {t("Izmena profila")}
+                    {t('Izmena profila')}
                 </label>
                 <div className="editProfile__container__formContainer">
                     <div className="editProfile__container__formContainer__formWrapper">
@@ -146,7 +146,7 @@ const EditProfilePage = (): JSX.Element => {
                                                 : setShowPasswordModal(true)
                                         }
                                     >
-                                        {t("Promeni šifru")}
+                                        {t('Promeni šifru')}
                                     </label>
                                 </div>
                             </div>
@@ -156,14 +156,15 @@ const EditProfilePage = (): JSX.Element => {
                                     errors={errors}
                                     name="name"
                                     src={profile}
-                                    placeholder={t("Ime") as string}
+                                    placeholder={t('Ime')}
                                     type="text"
                                     validationSchema={{
                                         required: t('Ime je obavezno.'),
                                         pattern: {
                                             value: /^[A-Za-z\s]+$/,
-                                            message:
-                                                t('Ime može da sadrži samo slova.'),
+                                            message: t(
+                                                'Ime može da sadrži samo slova.'
+                                            ),
                                         },
                                     }}
                                     defaultValue={user?.name}
@@ -181,14 +182,15 @@ const EditProfilePage = (): JSX.Element => {
                                     errors={errors}
                                     name="surname"
                                     src={profile}
-                                    placeholder={t("Prezime") as string} 
+                                    placeholder={t('Prezime')}
                                     type="text"
                                     validationSchema={{
                                         required: t('Prezime je obavezno.'),
                                         pattern: {
                                             value: /^[A-Za-z\s]+$/,
-                                            message:
-                                                t('Prezime može da sadrži samo slova.'),
+                                            message: t(
+                                                'Prezime može da sadrži samo slova.'
+                                            ),
                                         },
                                     }}
                                     isEditable={true}
@@ -220,16 +222,31 @@ const EditProfilePage = (): JSX.Element => {
                                     defaultValue={user?.email}
                                 />
 
-                                <div className="formInputWrapper" 
-                                    onClick={() => isMobile ? router.push(routes.CHANGE_PASSWORD_PAGE) : setShowPasswordModal(true)}
+                                <div
+                                    className="formInputWrapper"
+                                    onClick={() =>
+                                        isMobile
+                                            ? router.push(
+                                                  routes.CHANGE_PASSWORD_PAGE
+                                              )
+                                            : setShowPasswordModal(true)
+                                    }
                                 >
-                                    <Image src={passwordIcon} className="formInputWrapper__icon" alt="" />
+                                    <Image
+                                        src={passwordIcon}
+                                        className="formInputWrapper__icon"
+                                        alt=""
+                                    />
                                     <input
-                                        className='formInputWrapper__input formInputWrapper__input__pass'
+                                        className="formInputWrapper__input formInputWrapper__input__pass"
                                         defaultValue="Promeni sifru"
                                         readOnly
-                                     ></input>
-                                    <Image src={editIcon} alt="" className="formInputWrapper__sideEditIcon"/>
+                                    ></input>
+                                    <Image
+                                        src={editIcon}
+                                        alt=""
+                                        className="formInputWrapper__sideEditIcon"
+                                    />
                                 </div>
 
                                 <FormInput
@@ -240,11 +257,14 @@ const EditProfilePage = (): JSX.Element => {
                                     placeholder=""
                                     type="number"
                                     validationSchema={{
-                                        required: t('Broj telefona je obavezan.'),
+                                        required: t(
+                                            'Broj telefona je obavezan.'
+                                        ),
                                         pattern: {
                                             value: /^[0-9]{6,}$/,
-                                            message:
-                                                t('Broj telefona sadrži minimalno 6 brojeva.'),
+                                            message: t(
+                                                'Broj telefona sadrži minimalno 6 brojeva.'
+                                            ),
                                         },
                                     }}
                                     isPhoneNumber={true}
@@ -282,7 +302,7 @@ const EditProfilePage = (): JSX.Element => {
                                             type="submit"
                                             className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__buttonWrapper__formButton"
                                         >
-                                            {t("Potvrdi")}
+                                            {t('Potvrdi')}
                                         </button>
                                     )}
                                 </div>

@@ -38,7 +38,7 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
                 </div>
                 <div className="itemContainer__mealNameWrapper">
                     <Text
-                        content={t(meal.title) as string}
+                        content={t(meal.title)}
                         style="itemContainer__mealNameWrapper__mealName"
                     />
                     <AmountButton

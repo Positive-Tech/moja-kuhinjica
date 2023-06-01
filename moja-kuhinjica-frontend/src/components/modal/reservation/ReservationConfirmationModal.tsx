@@ -43,13 +43,13 @@ export const ReservationConfirmationModal = ({
                             className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
                             onClick={confirmOrder}
                         >
-                            {t("Potvrdi")}
+                            {t('Potvrdi')}
                         </button>
                         <button
                             className="modalContainer__formContainer__formDiv__confirmationModalButtons__formButton"
                             onClick={closeModal}
                         >
-                            {t("Otkaži")}
+                            {t('Otkaži')}
                         </button>
                     </div>
                 </div>
