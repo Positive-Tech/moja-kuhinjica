@@ -50,7 +50,7 @@ const LoginPage = (): JSX.Element => {
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className="loginContainer__wrapper__formDiv__formTitle">
-                        {t("Ulogujte se")}
+                        {t('Ulogujte se')}
                     </label>
                     {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
@@ -74,7 +74,7 @@ const LoginPage = (): JSX.Element => {
                         errors={errors}
                         name="password"
                         src={password}
-                        placeholder={t("Šifra") as string}
+                        placeholder={t('Šifra')}
                         type="password"
                         validationSchema={{
                             required: t('Obavezno polje.'),
@@ -82,7 +82,7 @@ const LoginPage = (): JSX.Element => {
                         style="loginContainer__wrapper__formDiv__input"
                     />
                     <Text
-                        content={t("Zaboravili ste šifru?") as string}
+                        content={t('Zaboravili ste šifru?')}
                         style="loginContainer__wrapper__formDiv__forgotPasswordLabel"
                         handleClick={() =>
                             router.push(routes.FORGOTTEN_PASSWORD_PAGE)
@@ -104,7 +104,7 @@ const LoginPage = (): JSX.Element => {
                             />
                         ) : (
                             <button className="loginContainer__wrapper__formDiv__buttonWrapper__formButton">
-                                {t("Potvrdi")}
+                                {t('Potvrdi')}
                             </button>
                         )}
                     </div>

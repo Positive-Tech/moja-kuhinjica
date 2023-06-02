@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface ITextProps {
-    content: string | undefined
+    content: string
     style: string
     handleClick?: () => void
 }

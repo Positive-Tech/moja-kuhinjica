@@ -77,7 +77,7 @@ export const LoginModal = ({
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        {t("Ulogujte se")}
+                        {t('Ulogujte se')}
                     </label>
                     {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
@@ -100,14 +100,14 @@ export const LoginModal = ({
                         errors={errors}
                         name="password"
                         src={password}
-                        placeholder={t("Šifra") as string}
+                        placeholder={t('Šifra')}
                         type="password"
                         validationSchema={{
                             required: t('Šifra je obavezna.'),
                         }}
                     />
                     <Text
-                        content={t("Zaboravili ste šifru?") as string}
+                        content={t('Zaboravili ste šifru?')}
                         style="modalContainer__formContainer__formDiv__forgotPasswordLabel"
                         handleClick={() => {
                             closeModal()
@@ -133,7 +133,7 @@ export const LoginModal = ({
                                 type="submit"
                                 className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
                             >
-                                {t("Potvrdi")}
+                                {t('Potvrdi')}
                             </button>
                         )}
                     </div>

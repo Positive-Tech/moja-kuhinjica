@@ -13,10 +13,10 @@ import { useTranslation } from 'react-i18next'
 
 const PasswordForgettingPage = (): JSX.Element => {
     const { t } = useTranslation()
-    const [errorMessage, setErrorMessage] = useState<string>()
+    const [errorMessage, setErrorMessage] = useState<string>('')
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [message, setMessage] = useState<string>()
+    const [message, setMessage] = useState<string>('')
     const [inputData, setInputData] = useState<FieldValues>()
     const router = useRouter()
     const {
@@ -63,12 +63,14 @@ const PasswordForgettingPage = (): JSX.Element => {
                         content={
                             showNotification
                                 ? message
-                                : t('Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.') as string
+                                : t(
+                                      'Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.'
+                                  )
                         }
                         style="forgetContainer__wrapper__formDiv__infoLabel"
                     />
                     {!showNotification && errorMessage && (
-                        <ErrorLabel content={t(errorMessage) as string} />
+                        <ErrorLabel content={t(errorMessage).toString()} />
                     )}
                     {!showNotification && (
                         <FormInput
@@ -108,7 +110,7 @@ const PasswordForgettingPage = (): JSX.Element => {
                                     type="submit"
                                     className="forgetContainer__wrapper__formDiv__buttonWrapper__formButton"
                                 >
-                                    {t("Resetuj šifru")}
+                                    {t('Resetuj šifru')}
                                 </button>
                             )}
                         </div>
@@ -118,11 +120,11 @@ const PasswordForgettingPage = (): JSX.Element => {
                             {!isLoading ? (
                                 <>
                                     <Text
-                                        content={t("Nije Vam stigao email?") as string }
+                                        content={t('Nije Vam stigao email?')}
                                         style="forgetContainer__wrapper__formDiv__labelWrapper__infoLabel"
                                     />
                                     <Text
-                                        content={t("Pošalji ponovo") as string }
+                                        content={t('Pošalji ponovo')}
                                         style="forgetContainer__wrapper__formDiv__labelWrapper__infoLabel forgetContainer__wrapper__formDiv__labelWrapper__infoLabel--buttonLabel"
                                         handleClick={() =>
                                             resetPassword(inputData)

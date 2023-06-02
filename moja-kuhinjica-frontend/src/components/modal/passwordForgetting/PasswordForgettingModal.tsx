@@ -70,10 +70,12 @@ export const PasswordForgettingModal = ({
                     onSubmit={handleSubmit((data) => resetPassword(data))}
                 >
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        {t("Zaboravili ste šifru?")}
+                        {t('Zaboravili ste šifru?')}
                     </label>
                     <Text
-                        content={t("Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.") as string}
+                        content={t(
+                            'Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.'
+                        )}
                         style="modalContainer__formContainer__formDiv__infoLabel"
                     />
                     {showError && <ErrorLabel content={errorMessage} />}
@@ -113,7 +115,7 @@ export const PasswordForgettingModal = ({
                                 type="submit"
                                 className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
                             >
-                                {t("Resetuj šifru")}
+                                {t('Resetuj šifru')}
                             </button>
                         )}
                     </div>
