@@ -239,7 +239,12 @@ const MealReservation = (): JSX.Element => {
                             : 'mealReservation__container__restaurantTitleWrapper mealReservation__container__restaurantTitleWrapper--empty'
                     }
                 >
-                    <label className="mealReservation__container__restaurantTitleWrapper__restaurantTitle">
+                    <label
+                        className="mealReservation__container__restaurantTitleWrapper__restaurantTitle"
+                        onClick={() =>
+                            router.push(routes.RESTAURANT_PROFILE_PAGE)
+                        }
+                    >
                         Restoran Top FOOD 021
                     </label>
                     <label
