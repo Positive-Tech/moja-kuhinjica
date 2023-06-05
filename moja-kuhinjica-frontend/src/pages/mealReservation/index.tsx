@@ -247,6 +247,12 @@ const MealReservation = (): JSX.Element => {
                 }}
                 buttonText="OK"
             />
+            <DisabledReservationModal
+                modalIsOpen={showDisabledReservation}
+                closeModal={() => setShowDisabledReservation(!true)}
+                title={DISABLED_MESSAGE}
+                buttonText={'OK'}
+            />
 
             <div className="mealReservation__container">
                 <div
@@ -256,13 +262,12 @@ const MealReservation = (): JSX.Element => {
                             : 'mealReservation__container__restaurantTitleWrapper mealReservation__container__restaurantTitleWrapper--empty'
                     }
                 >
-                    <DisabledReservationModal
-                        modalIsOpen={showDisabledReservation}
-                        closeModal={() => setShowDisabledReservation(!true)}
-                        title={DISABLED_MESSAGE}
-                        buttonText={'OK'}
-                    />
-                    <label className="mealReservation__container__restaurantTitleWrapper__restaurantTitle">
+                    <label
+                        className="mealReservation__container__restaurantTitleWrapper__restaurantTitle"
+                        onClick={() =>
+                            router.push(routes.RESTAURANT_PROFILE_PAGE)
+                        }
+                    >
                         Restoran Top FOOD 021
                     </label>
                     <label

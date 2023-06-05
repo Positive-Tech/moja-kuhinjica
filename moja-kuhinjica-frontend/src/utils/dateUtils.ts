@@ -14,13 +14,12 @@ export const generateWeekDays = (): IGenerateWeekdays[] => {
 
     let currentDay = dayjs(today)
     while (currentDay.isBefore(endOfWeek)) {
-        weekdayRange.push({
-            dayofweek: currentDay
-                .format('ddd')
-                .toLocaleUpperCase()
-                .replace('.', ''),
+        if (currentDay.day() !== 0) {
+          weekdayRange.push({
+            dayofweek: currentDay.format('ddd').toLocaleUpperCase().replace('.', ''),
             date: currentDay.format('DD/MM/YYYY'),
-        })
+          });
+        }
         currentDay = currentDay.add(1, 'day')
     }
 
