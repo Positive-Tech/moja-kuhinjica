@@ -58,6 +58,7 @@ const MealReservation = (): JSX.Element => {
         useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [selectedDay, setSelectedDay] = useState<string>()
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
@@ -286,11 +287,11 @@ const MealReservation = (): JSX.Element => {
                                         key={uuid()}
                                         active={active === activeTabIndex}
                                         onClick={() => {
-                                            setDeyOfWeek(date.day())
-                                            setActive(activeTabIndex)
                                             if (cartItems.length) {
                                                 handleTabClickWithCartItems()
                                             } else {
+                                                setDeyOfWeek(date.day())
+                                                setActive(activeTabIndex)
                                                 setActiveDate(day.date)
                                             }
                                         }}
