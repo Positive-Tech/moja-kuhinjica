@@ -25,6 +25,7 @@ import { Oval } from 'react-loader-spinner'
 import { Text } from '@/components/label/Text'
 import dayjs from 'dayjs'
 import 'dayjs/locale/sr'
+import { useTranslation } from 'react-i18next'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
@@ -53,7 +54,7 @@ const Home = (): JSX.Element => {
         dayjs().format('DD/MM/YYYY')
     )
     const [dayOfweek, setDeyOfWeek] = useState<number>(dayjs().day())
-
+    const { t } = useTranslation()
     const hasMeals = Boolean(selectedMenu?.meals?.length)
 
     const dispatch = useAppDispatch()
@@ -155,11 +156,11 @@ const Home = (): JSX.Element => {
                     {!isAuthorized && (
                         <div className="homeDiv__wrapper__container__buttonWrapper">
                             <HomePageButton
-                                content="Registrujte se"
+                                content={t('Registrujte se')}
                                 onClick={handleSignUpClick}
                             />
                             <HomePageButton
-                                content="Ulogujte se"
+                                content={t('Ulogujte se')}
                                 onClick={handleLoginClick}
                             />
                         </div>
@@ -171,7 +172,7 @@ const Home = (): JSX.Element => {
                             className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper__labelForScroll"
                             onClick={handleClick}
                         >
-                            Ponuda
+                            {t('Ponuda')}
                         </label>
                         <Image
                             className="homeDiv__wrapper__scrollDiv__labelForScrollWrapper__labelForScrollIcon"
@@ -199,11 +200,11 @@ const Home = (): JSX.Element => {
                             }
                             className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantInfoLabel"
                         >
-                            opšte informacije
+                            {t('opšte informacije')}
                         </label>
                     </div>
                     <label className="homeDiv__menuWrapper__menuColDiv__titleLabel">
-                        {`Dnevni meni za ${activeDate}`}
+                        {t('Dnevni meni za')} {activeDate}
                     </label>
                     <div className="homeDiv__menuWrapper__menuColDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
@@ -217,7 +218,7 @@ const Home = (): JSX.Element => {
                                         setActive(activeTabIndex)
                                         setActiveDate(day.date)
                                     }}
-                                    content={day.dayofweek}
+                                    content={t(day.dayofweek)}
                                 />
                             )
                         })}
@@ -264,8 +265,9 @@ const Home = (): JSX.Element => {
                     {!isLoading && !hasMeals && (
                         <div className="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv">
                             <Text
-                                content={`Dnevni meni za ${activeDate} još uvek nije
-                                        objavljen.`}
+                                content={t(
+                                    `Dnevni meni za ${activeDate} jos uvek nije objavljen.`
+                                )}
                                 style="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                             />
                         </div>
@@ -290,7 +292,7 @@ const Home = (): JSX.Element => {
                 closeModal={() => setShowNotification(false)}
                 type={NOTIFICATION_MODAL_TYPE}
                 title=""
-                buttonText="zatvori"
+                buttonText={t('zatvori')}
                 email={userEmail}
             />
             <PasswordForgettingModal

@@ -9,12 +9,14 @@ import back from 'public/static/assets/images/backArrow.svg'
 import emailIcon from 'public/static/assets/images/email.svg'
 import UserService from '@/service/User.service'
 import { Oval } from 'react-loader-spinner'
+import { useTranslation } from 'react-i18next'
 
 const PasswordForgettingPage = (): JSX.Element => {
-    const [errorMessage, setErrorMessage] = useState<string>()
+    const { t } = useTranslation()
+    const [errorMessage, setErrorMessage] = useState<string>('')
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [message, setMessage] = useState<string>()
+    const [message, setMessage] = useState<string>('')
     const [inputData, setInputData] = useState<FieldValues>()
     const router = useRouter()
     const {
@@ -54,19 +56,21 @@ const PasswordForgettingPage = (): JSX.Element => {
                 >
                     <label className="forgetContainer__wrapper__formDiv__formTitle">
                         {showNotification
-                            ? 'Proverite svoj email'
-                            : 'Zaboravili ste šifru?'}
+                            ? t('Proverite svoj email')
+                            : t('Zaboravili ste šifru?')}
                     </label>
                     <Text
                         content={
                             showNotification
                                 ? message
-                                : 'Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.'
+                                : t(
+                                      'Ne brinite, mi ćemo Vam poslati instrukcije za resetovanje.'
+                                  )
                         }
                         style="forgetContainer__wrapper__formDiv__infoLabel"
                     />
                     {!showNotification && errorMessage && (
-                        <ErrorLabel content={errorMessage} />
+                        <ErrorLabel content={t(errorMessage).toString()} />
                     )}
                     {!showNotification && (
                         <FormInput
@@ -77,10 +81,10 @@ const PasswordForgettingPage = (): JSX.Element => {
                             placeholder="Email"
                             type="text"
                             validationSchema={{
-                                required: 'Obavezno polje.',
+                                required: t('Obavezno polje.'),
                                 pattern: {
                                     value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                    message: 'Pogrešan format email adrese.',
+                                    message: t('Pogrešan format email adrese.'),
                                 },
                             }}
                             style="forgetContainer__wrapper__formDiv__input"
@@ -106,7 +110,7 @@ const PasswordForgettingPage = (): JSX.Element => {
                                     type="submit"
                                     className="forgetContainer__wrapper__formDiv__buttonWrapper__formButton"
                                 >
-                                    Resetuj šifru
+                                    {t('Resetuj šifru')}
                                 </button>
                             )}
                         </div>
@@ -116,11 +120,11 @@ const PasswordForgettingPage = (): JSX.Element => {
                             {!isLoading ? (
                                 <>
                                     <Text
-                                        content="Nije Vam stigao email?"
+                                        content={t('Nije Vam stigao email?')}
                                         style="forgetContainer__wrapper__formDiv__labelWrapper__infoLabel"
                                     />
                                     <Text
-                                        content="Pošalji ponovo"
+                                        content={t('Pošalji ponovo')}
                                         style="forgetContainer__wrapper__formDiv__labelWrapper__infoLabel forgetContainer__wrapper__formDiv__labelWrapper__infoLabel--buttonLabel"
                                         handleClick={() =>
                                             resetPassword(inputData)

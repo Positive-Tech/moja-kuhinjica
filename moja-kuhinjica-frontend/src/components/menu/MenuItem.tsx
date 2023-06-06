@@ -4,6 +4,7 @@ import { RegularButton } from '../button/RegularButton'
 import { Title } from '../label/Title'
 import { Text } from '../label/Text'
 import pic from 'public/static/assets/images/meal1.png'
+import { useTranslation } from 'react-i18next'
 
 const IMAGE_WIDTH = 500
 const IMAGE_HEIGHT = 500
@@ -29,7 +30,7 @@ export const MenuItem = ({
 }: IMenuItemProps): JSX.Element => {
     const [openDescription, setOpenDescription] = useState(false)
     const isOrdering = (): boolean => type === ORDERING
-
+    const { t } = useTranslation()
     return (
         <div
             className={
@@ -56,7 +57,7 @@ export const MenuItem = ({
             <div className="titleWrapper">
                 <Title
                     onClick={() => setOpenDescription(!openDescription)}
-                    content={title}
+                    content={t(title)}
                     style={
                         isOrdering()
                             ? 'titleWrapper__orderingTitleLabel'
@@ -80,7 +81,7 @@ export const MenuItem = ({
             {openDescription && (
                 <div className="descriptionLabelDiv">
                     <Text
-                        content={description}
+                        content={t(description)}
                         style={
                             isOrdering()
                                 ? 'descriptionLabelDiv descriptionLabelDiv__descriptionLabel--ordering'
@@ -97,7 +98,7 @@ export const MenuItem = ({
                             : 'priceWrapper__contentLabel'
                     }
                 >
-                    meni 1 -&nbsp;
+                    {t('meni 1')} -&nbsp;
                 </label>
                 <label
                     className={
@@ -112,7 +113,7 @@ export const MenuItem = ({
             {isOrdering() && (
                 <div className="buttonContainer">
                     <RegularButton
-                        content="Rezerviši"
+                        content={t('Rezerviši')}
                         onClick={handleClick}
                         isActive={buttonIsActive}
                     />

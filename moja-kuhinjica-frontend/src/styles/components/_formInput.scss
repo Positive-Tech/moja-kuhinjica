@@ -41,6 +41,10 @@
             font-weight: lighter;
         }
 
+        &__pass {
+            cursor: pointer;
+        }
+
         @media only screen and (max-width: $breakpoint-large) {
             padding-left: 10%;
             padding-right: 10%;
@@ -135,7 +139,7 @@
     &__numberFormat {
         display: flex;
         font-family: Poppins;
-        font-size: 20px;
+        font-size: 18px;
         padding-left: 7%;
         color: #333333cc;
         font-weight: lighter;

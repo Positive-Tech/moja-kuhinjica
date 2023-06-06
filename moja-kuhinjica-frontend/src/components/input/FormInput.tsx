@@ -5,6 +5,7 @@ import errorIcon from 'public/static/assets/images/error.svg'
 import hidePassword from 'public/static/assets/images/hidePassword.svg'
 import editIcon from 'public/static/assets/images/editIcon.svg'
 import { ErrorLabel } from '../label/ErrorLabel'
+
 interface IFormInputProps {
     src: string
     placeholder: string

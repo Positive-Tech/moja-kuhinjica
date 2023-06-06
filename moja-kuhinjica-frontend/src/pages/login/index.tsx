@@ -12,6 +12,7 @@ import email from 'public/static/assets/images/email.svg'
 import password from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 import { routes } from '@/constants/constants'
+import { t } from 'i18next'
 
 const LoginPage = (): JSX.Element => {
     const [errorMessage, setErrorMessage] = useState<string>()
@@ -49,7 +50,7 @@ const LoginPage = (): JSX.Element => {
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className="loginContainer__wrapper__formDiv__formTitle">
-                        Ulogujte se
+                        {t('Ulogujte se')}
                     </label>
                     {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
@@ -60,10 +61,10 @@ const LoginPage = (): JSX.Element => {
                         placeholder="Email"
                         type="text"
                         validationSchema={{
-                            required: 'Obavezno polje.',
+                            required: t('Obavezno polje.'),
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'Pogrešan format email adrese.',
+                                message: t('Pogrešan format email adrese.'),
                             },
                         }}
                         style="loginContainer__wrapper__formDiv__input"
@@ -73,15 +74,15 @@ const LoginPage = (): JSX.Element => {
                         errors={errors}
                         name="password"
                         src={password}
-                        placeholder="Šifra"
+                        placeholder={t('Šifra')}
                         type="password"
                         validationSchema={{
-                            required: 'Obavezno polje.',
+                            required: t('Obavezno polje.'),
                         }}
                         style="loginContainer__wrapper__formDiv__input"
                     />
                     <Text
-                        content="Zaboravili ste šifru?"
+                        content={t('Zaboravili ste šifru?')}
                         style="loginContainer__wrapper__formDiv__forgotPasswordLabel"
                         handleClick={() =>
                             router.push(routes.FORGOTTEN_PASSWORD_PAGE)
@@ -103,7 +104,7 @@ const LoginPage = (): JSX.Element => {
                             />
                         ) : (
                             <button className="loginContainer__wrapper__formDiv__buttonWrapper__formButton">
-                                Potvrdi
+                                {t('Potvrdi')}
                             </button>
                         )}
                     </div>

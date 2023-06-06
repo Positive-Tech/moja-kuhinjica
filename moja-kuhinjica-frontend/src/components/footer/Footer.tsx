@@ -6,8 +6,10 @@ import location from 'public/static/assets/images/locationFooter.svg'
 import earth from 'public/static/assets/images/earth.svg'
 import Link from 'next/link'
 import { routes } from '@/constants/constants'
+import { useTranslation } from 'react-i18next'
 
 export const Footer = (): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <div className="footerWrapper">
             <div className="footerWrapper__rowDiv1">
@@ -22,7 +24,7 @@ export const Footer = (): JSX.Element => {
                     />
 
                     <label className="footerWrapper__rowDiv1__rowDiv2__footerLabel">
-                        Srbija
+                        {t("Srbija")}
                     </label>
                     <Image
                         className="footerWrapper__rowDiv1__rowDiv2__footerImage"
@@ -30,7 +32,7 @@ export const Footer = (): JSX.Element => {
                         alt=""
                     />
                     <label className="footerWrapper__rowDiv1__rowDiv2__footerLabel">
-                        Srpski
+                        {t("Srpski")}
                     </label>
                 </div>
                 <div className="footerWrapper__rowDiv1__rowDiv3">
@@ -42,7 +44,7 @@ export const Footer = (): JSX.Element => {
                                 query: { activeTab: '4' },
                             }}
                         >
-                            Uslovi korišćenja
+                            {t("Uslovi korišćenja")}
                         </Link>
                     </label>
 
@@ -54,7 +56,7 @@ export const Footer = (): JSX.Element => {
                                 query: { activeTab: '3' },
                             }}
                         >
-                            Politika privatnosti
+                            {t("Politika privatnosti")}
                         </Link>
                     </label>
 
@@ -81,7 +83,7 @@ export const Footer = (): JSX.Element => {
                             className="footerWrapper__rowDiv1__rowDiv3__footerLabel__textLink"
                             href="/"
                         >
-                            Moja klopica 2022
+                            {t("Moja klopica 2022")}
                         </Link>
                     </label>
                 </div>

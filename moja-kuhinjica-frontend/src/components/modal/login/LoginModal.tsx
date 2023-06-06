@@ -13,6 +13,7 @@ import password from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 import { useRouter } from 'next/router'
 import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
+import { useTranslation } from 'react-i18next'
 
 interface ILoginModalProps {
     modalIsOpen: boolean
@@ -29,6 +30,7 @@ export const LoginModal = ({
     openPasswordForgettingModal,
 }: ILoginModalProps): JSX.Element => {
     const dispatch = useAppDispatch()
+    const { t } = useTranslation()
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
     const redirectToReservations = useAppSelector(
@@ -75,7 +77,7 @@ export const LoginModal = ({
                     onSubmit={handleSubmit((data) => login(data))}
                 >
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        Ulogujte se
+                        {t('Ulogujte se')}
                     </label>
                     {errorMessage && <ErrorLabel content={errorMessage} />}
                     <FormInput
@@ -86,10 +88,10 @@ export const LoginModal = ({
                         placeholder="Email"
                         type="text"
                         validationSchema={{
-                            required: 'Email je obavezan.',
+                            required: t('Email je obavezan.'),
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'Pogrešan format email adrese.',
+                                message: t('Pogrešan format email adrese.'),
                             },
                         }}
                     />
@@ -98,14 +100,14 @@ export const LoginModal = ({
                         errors={errors}
                         name="password"
                         src={password}
-                        placeholder="Šifra"
+                        placeholder={t('Šifra')}
                         type="password"
                         validationSchema={{
-                            required: 'Šifra je obavezna.',
+                            required: t('Šifra je obavezna.'),
                         }}
                     />
                     <Text
-                        content="Zaboravili ste šifru?"
+                        content={t('Zaboravili ste šifru?')}
                         style="modalContainer__formContainer__formDiv__forgotPasswordLabel"
                         handleClick={() => {
                             closeModal()
@@ -131,7 +133,7 @@ export const LoginModal = ({
                                 type="submit"
                                 className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
                             >
-                                Potvrdi
+                                {t('Potvrdi')}
                             </button>
                         )}
                     </div>

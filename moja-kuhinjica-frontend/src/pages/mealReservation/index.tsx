@@ -33,6 +33,7 @@ import 'dayjs/locale/sr'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 import { generateWeekDays } from 'src/utils/dateUtils'
+import { useTranslation } from 'react-i18next'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -44,6 +45,7 @@ const RESERVATION_SUCCESS_MESSAGE =
 dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
+    const { t } = useTranslation()
     const router = useRouter()
     const dispatch = useAppDispatch()
     const cartItems = useAppSelector(
@@ -218,7 +220,7 @@ const MealReservation = (): JSX.Element => {
                 isError={isError}
             />
             <ReservationConfirmationModal
-                title="Potvrdite rezervaciju"
+                title={t('Potvrdite rezervaciju')}
                 text={`Da li zelite da potvrdite narudzbinu za ${activeDate} ?`}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={handleOrderConfirmation}
@@ -251,11 +253,11 @@ const MealReservation = (): JSX.Element => {
                         }
                         className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel"
                     >
-                        opšte informacije
+                        {t('opšte informacije')}
                     </label>
                 </div>
                 <label className="mealReservation__container__titleLabel">
-                    {`Dnevni meni za ${activeDate}`}
+                    {t('Dnevni meni za')} {activeDate}
                 </label>
                 <div className="mealReservation__container__menuDiv">
                     <div className="mealReservation__container__menuDiv__menuColDiv">
@@ -275,7 +277,7 @@ const MealReservation = (): JSX.Element => {
                                                 setActiveDate(day.date)
                                             }
                                         }}
-                                        content={day.dayofweek}
+                                        content={t(day.dayofweek)}
                                     />
                                 )
                             })}
@@ -331,11 +333,13 @@ const MealReservation = (): JSX.Element => {
                             {isCartEmpty() && (
                                 <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv">
                                     <Title
-                                        content="korpa"
+                                        content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
                                     <Text
-                                        content="Vaša korpa je prazna, rezervišite jelo iz dnevnog menija."
+                                        content={t(
+                                            'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
+                                        )}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
                                     />
                                 </div>
@@ -358,7 +362,7 @@ const MealReservation = (): JSX.Element => {
                                     </div>
                                     <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv">
                                         <Text
-                                            content="Ukupno:"
+                                            content={t('Ukupno:')}
                                             style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__priceLabel"
                                         />
                                         <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__totalPriceDiv">
@@ -374,7 +378,7 @@ const MealReservation = (): JSX.Element => {
                                     </div>
                                     <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__confirmButtonWrapper">
                                         <RegularButton
-                                            content="Potvrdi rezervaciju"
+                                            content={t('Potvrdi rezervaciju')}
                                             isActive
                                             style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__confirmButtonWrapper__confirmButton"
                                             onClick={() =>
@@ -391,8 +395,8 @@ const MealReservation = (): JSX.Element => {
             <SuccessNotificationModal
                 modalIsOpen={showNotification}
                 closeModal={() => setShowNotification(false)}
-                title="rezervacija uspešna"
-                buttonText="rezerviši ponovo"
+                title={t('rezervacija uspešna')}
+                buttonText={t('rezerviši ponovo')}
             />
             {isMobile && !showCart && (
                 <div
@@ -409,8 +413,9 @@ const MealReservation = (): JSX.Element => {
                                 />
                             </div>
                             <label className="mealReservation__bottomCart__cartInfo">
-                                Vaša korpa je prazna, rezervišite neko jelo iz
-                                dnevnog menija.
+                                {t(
+                                    'Vaša korpa je prazna, rezervišite neko jelo iz dnevnog menija.'
+                                )}
                             </label>
                         </>
                     ) : (
@@ -429,7 +434,7 @@ const MealReservation = (): JSX.Element => {
                             </div>
                             <div className="mealReservation__bottomCart__priceWrapper">
                                 <label className="mealReservation__bottomCart__priceWrapper__priceLabel">
-                                    Ukupno:
+                                    {t('Ukupno')}
                                 </label>
                                 <label className="mealReservation__bottomCart__priceWrapper__totalPrice">
                                     {`${getTotalPrice()} RSD`}

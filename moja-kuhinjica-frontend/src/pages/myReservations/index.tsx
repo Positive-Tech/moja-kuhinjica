@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer/Footer'
 import Menu from '../../components/mobileMenu'
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { INDEX_INCREMENT, MOBILE_WIDTH } from '@/constants/constants'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import uuid from 'react-uuid'
 import RestaurantService, {
     IMyReservations,
@@ -14,30 +14,28 @@ import RestaurantService, {
     IReservationItem,
 } from '@/service/Restaurant.service'
 import 'dayjs/locale/sr'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import { Oval } from 'react-loader-spinner'
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
+import { useTranslation } from 'react-i18next'
+import { generateWeekDays } from 'src/utils/dateUtils'
 
 const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
-interface IGenerateWeekdays {
-    dayofweek: string
-    date: string
-}
-
 const NoReservationsMessage: React.FC = () => (
     <div className="myReservationsPage__colDiv__rowDiv">
-        <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
+        <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
             Nema rezervacija za ovaj datum.
         </label>
     </div>
 )
 
 const MyReservationsPage = (): JSX.Element => {
+    const { t } = useTranslation()
     const [active, setActive] = useState<number>(1)
     const [reservationsExist, setReservationsExist] = useState<boolean>(true)
     const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -53,9 +51,8 @@ const MyReservationsPage = (): JSX.Element => {
     const [isError] = useState<boolean>(false)
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
     const [activeDate, setActiveDate] = useState<string>(
-        dayjs().format('DD-MM-YYYY')
+        dayjs().format('DD/MM/YYYY')
     )
-
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
@@ -116,30 +113,8 @@ const MyReservationsPage = (): JSX.Element => {
         dayOfWeek: string
     ): IReservationGroup[] => {
         return groupReservationsByDate(myReservations).filter((reservation) => {
-            return dayjs(reservation.date).format('DD-MM-YYYY') === dayOfWeek
+            return dayjs(reservation.date).format('DD/MM/YYYY') === dayOfWeek
         })
-    }
-
-    const generateWeekDays = (): IGenerateWeekdays[] => {
-        const today: Dayjs = dayjs().startOf('day')
-        const endOfWeek: Dayjs = today.add(6, 'day').endOf('day')
-
-        dayjs.locale('sr')
-        const days: IGenerateWeekdays[] = []
-
-        let day = dayjs(today)
-        while (day.isBefore(endOfWeek)) {
-            days.push({
-                dayofweek: day
-                    .format('ddd')
-                    .toLocaleUpperCase()
-                    .replace('.', ''),
-                date: day.format('DD-MM-YYYY'),
-            })
-            day = day.add(1, 'day')
-        }
-
-        return days
     }
 
     const resForDay: IMyReservations[] =
@@ -187,8 +162,10 @@ const MyReservationsPage = (): JSX.Element => {
             )}
 
             <ReservationConfirmationModal
-                title="Potvrdite otkazivanje"
-                text={`Da li ste sigurni da želite da otkažete rezervaciju?`}
+                title={t('Potvrdite otkazivanje')}
+                text={t(
+                    'Da li ste sigurni da želite da otkažete rezervaciju?'
+                ).toString()}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={() => handleOrderCancellation(reservationID)}
                 closeModal={() => {
@@ -223,36 +200,31 @@ const MyReservationsPage = (): JSX.Element => {
                             : 'myReservationsPage__container__titleLabel myReservationsPage__container__titleLabel--empty'
                     }
                 >
-                    Moje rezervacije
+                    {t('Moje rezervacije')}
                 </label>
                 <label className="myReservationsPage__container__infoLabel">
-                    Rezervacije se mogu otkazati do 10 časova
+                    {t('Rezervacije se mogu otkazati do 10 časova')}
+                </label>
+                <label className="myReservationsPage__colDiv__titleLabel">
+                    Rezervacije za: {activeDate}
                 </label>
                 <div className="myReservationsPage__colDiv">
                     <div className="myReservationsPage__colDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
-                                    key={uuid()}
-                                    active={
-                                        active ===
-                                        activeTabIndex + INDEX_INCREMENT
-                                    }
-                                    onClick={() => {
-                                        setActive(
-                                            activeTabIndex + INDEX_INCREMENT
-                                        )
-                                        setActiveDate(day.date)
-                                    }}
-                                    content={day.dayofweek}
-                                />
+                                key={uuid()}
+                                active={active === activeTabIndex}
+                                onClick={() => {
+                                    setActive(activeTabIndex)
+                                    setActiveDate(day.date)
+                                }}
+                                content={t(day.dayofweek)}
+                            />
                             )
                         })}
                     </div>
 
-                    <label className="myReservationsPage__colDiv__titleLabel">
-                        {activeDate}
-                    </label>
                     {isLoading ? (
                         <div className="myReservationsPage__colDiv__loadingBarWrapper">
                             <Oval
