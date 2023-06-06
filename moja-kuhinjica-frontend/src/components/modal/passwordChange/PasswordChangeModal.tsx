@@ -95,7 +95,7 @@ export const PasswordChangeModal = ({
                         validationSchema={{
                             required: 'Obavezno polje.',
                             pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
                                 message:
                                     'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                             },
