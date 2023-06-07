@@ -28,7 +28,6 @@ export const PasswordChangeModal = ({
     } = useForm()
 
     const validate = (data: FieldValues): void => {
-        console.log(data, 'sta je dataa')
         if (data.newPassword !== data.confirmPassword) {
             setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
             setShowError(true)
