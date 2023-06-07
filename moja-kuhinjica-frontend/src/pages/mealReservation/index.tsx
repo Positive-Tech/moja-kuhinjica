@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
@@ -12,7 +11,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { MOBILE_WIDTH, routes } from '@/constants/constants'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
     IMeal,
@@ -34,6 +33,7 @@ import { ReservationNotificationModal } from '@/components/modal/reservation/Res
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -46,7 +46,6 @@ dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
     const { t } = useTranslation()
-    const router = useRouter()
     const dispatch = useAppDispatch()
     const cartItems = useAppSelector(
         ({ restaurant: { cartItems } }) => cartItems
@@ -239,22 +238,22 @@ const MealReservation = (): JSX.Element => {
                             : 'mealReservation__container__restaurantTitleWrapper mealReservation__container__restaurantTitleWrapper--empty'
                     }
                 >
-                    <label
-                        className="mealReservation__container__restaurantTitleWrapper__restaurantTitle"
-                        onClick={() =>
-                            router.push(routes.RESTAURANT_PROFILE_PAGE)
-                        }
+                    <Link
+                        href="/restaurant/profile"
+                        style={{ textDecoration: 'none' }}
                     >
-                        Restoran Top FOOD 021
-                    </label>
-                    <label
-                        onClick={() =>
-                            router.push(routes.RESTAURANT_PROFILE_PAGE)
-                        }
-                        className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel"
+                        <label className="mealReservation__container__restaurantTitleWrapper__restaurantTitle">
+                            Restoran Top FOOD 021
+                        </label>
+                    </Link>
+                    <Link
+                        href="/restaurant/profile"
+                        style={{ textDecoration: 'none' }}
                     >
-                        {t('opšte informacije')}
-                    </label>
+                        <label className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel">
+                            {t('opšte informacije')}
+                        </label>
+                    </Link>
                 </div>
                 <label className="mealReservation__container__titleLabel">
                     {t('Dnevni meni za')} {activeDate}
