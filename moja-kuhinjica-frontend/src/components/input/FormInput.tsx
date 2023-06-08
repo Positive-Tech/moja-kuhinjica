@@ -5,6 +5,7 @@ import errorIcon from 'public/static/assets/images/error.svg'
 import hidePassword from 'public/static/assets/images/hidePassword.svg'
 import editIcon from 'public/static/assets/images/editIcon.svg'
 import { ErrorLabel } from '../label/ErrorLabel'
+import { useTranslation } from 'react-i18next'
 
 interface IFormInputProps {
     src: string
@@ -37,6 +38,7 @@ export const FormInput = ({
     handleEditClick,
     handleOnBlur,
 }: IFormInputProps): JSX.Element => {
+    const { t }: { t: Function } = useTranslation()
     const [invalidInput, setInvalidInput] = useState(false)
     const [inputType, setInputType] = useState(type)
     const { ref, ...rest } = register(name, validationSchema)
@@ -137,7 +139,7 @@ export const FormInput = ({
             </div>
             {invalidInput && (
                 <ErrorLabel
-                    content={errors[name]?.message?.toString()}
+                    content={t(errors[name]?.message?.toString())}
                     style="formInputWrapper__errorLabel"
                 />
             )}

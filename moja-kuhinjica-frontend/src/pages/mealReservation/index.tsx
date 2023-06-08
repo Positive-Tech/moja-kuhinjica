@@ -226,8 +226,12 @@ const MealReservation = (): JSX.Element => {
                 <Header type={HEADER_TYPE} selectedButton={2} />
             )}
             <ReservationNotificationModal
-                title={!isError ? RESERVATION_SUCCESS : RESERVATION_FAIL}
-                text={!isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage}
+                title={t(!isError ? RESERVATION_SUCCESS : RESERVATION_FAIL)}
+                text={
+                    t(
+                        !isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage
+                    ) as string
+                }
                 modalIsOpen={reservationModalIsOpen}
                 closeModal={() => {
                     setReservationModalIsOpen(false)
@@ -237,7 +241,8 @@ const MealReservation = (): JSX.Element => {
             />
             <ReservationConfirmationModal
                 title={t('Potvrdite rezervaciju')}
-                text={`Da li zelite da potvrdite narudzbinu za ${activeDate} ?`}
+                text={t('Da li zelite da potvrdite narudzbinu za ') as string}
+                activeDate={activeDate}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={handleOrderConfirmation}
                 closeModal={() => {
@@ -344,8 +349,13 @@ const MealReservation = (): JSX.Element => {
                         {!isLoading && !hasMeals && (
                             <div className="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv">
                                 <Text
-                                    content={`Dnevni meni za ${activeDate} još uvek nije
-                                        objavljen.`}
+                                    content={
+                                        t('Dnevni meni za') +
+                                        ' ' +
+                                        activeDate +
+                                        ' ' +
+                                        t('nije objavljen.')
+                                    }
                                     style="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                                 />
                             </div>

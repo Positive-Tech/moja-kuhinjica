@@ -239,7 +239,9 @@ const EditProfilePage = (): JSX.Element => {
                                     />
                                     <input
                                         className="formInputWrapper__input formInputWrapper__input__pass"
-                                        defaultValue="Promeni sifru"
+                                        defaultValue={
+                                            t('Promeni sifru') as string
+                                        }
                                         readOnly
                                     ></input>
                                     <Image

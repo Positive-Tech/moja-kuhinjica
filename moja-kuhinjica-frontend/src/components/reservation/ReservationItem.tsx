@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useTranslation } from 'react-i18next'
 
 const IMAGE_SIZE = 500
 
@@ -18,6 +19,7 @@ export const ReservationItem = ({
     mealName,
     mealImage,
 }: IReservationItemProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <div className="reservationContainer">
             <div className="reservationContainer__rowDiv">
@@ -39,7 +41,7 @@ export const ReservationItem = ({
                         elit. Donec odio. Quisque volutpat mattis eros.
                     </label>
                     <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
-                        {quantity} porcija
+                        {quantity} {t('porcija')}
                     </label>
                 </div>
             </div>

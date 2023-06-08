@@ -8,8 +8,10 @@ import { useRouter } from 'next/router'
 import UserService from '@/service/User.service'
 import { Oval } from 'react-loader-spinner'
 import { routes } from '@/constants/constants'
+import { useTranslation } from 'react-i18next'
 
 const ResetPasswordPage = (): JSX.Element => {
+    const { t } = useTranslation()
     const [showError, setShowError] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')

@@ -26,10 +26,10 @@ const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
-const NoReservationsMessage: React.FC = () => (
+const NoReservationsMessage: React.FC<{ t: Function }> = ({ t }) => (
     <div className="myReservationsPage__colDiv__rowDiv">
         <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
-            Nema rezervacija za ovaj datum.
+            {t('Nema rezervacija za ovaj datum.')}
         </label>
     </div>
 )
@@ -177,7 +177,7 @@ const MyReservationsPage = (): JSX.Element => {
             />
 
             <ReservationNotificationModal
-                title={!isError ? CANCELLING_SUCCESS : CANCELLING_FAIL}
+                title={t(!isError ? CANCELLING_SUCCESS : CANCELLING_FAIL)}
                 modalIsOpen={cancellationModalIsOpen}
                 closeModal={() => {
                     setCancellationModalIsOpen(false)
@@ -206,21 +206,21 @@ const MyReservationsPage = (): JSX.Element => {
                     {t('Rezervacije se mogu otkazati do 10 časova')}
                 </label>
                 <label className="myReservationsPage__colDiv__titleLabel">
-                    Rezervacije za: {activeDate}
+                    {t('Rezervacije za')}: {activeDate}
                 </label>
                 <div className="myReservationsPage__colDiv">
                     <div className="myReservationsPage__colDiv__menuRowDiv">
                         {generateWeekDays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
-                                key={uuid()}
-                                active={active === activeTabIndex}
-                                onClick={() => {
-                                    setActive(activeTabIndex)
-                                    setActiveDate(day.date)
-                                }}
-                                content={t(day.dayofweek)}
-                            />
+                                    key={uuid()}
+                                    active={active === activeTabIndex}
+                                    onClick={() => {
+                                        setActive(activeTabIndex)
+                                        setActiveDate(day.date)
+                                    }}
+                                    content={t(day.dayofweek)}
+                                />
                             )
                         })}
                     </div>
@@ -266,7 +266,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                         }
                                                     </label>
                                                     <label className="myReservationsPage__colDiv__reservationWrapper__container__reservationLabel">
-                                                        Rezervacija {id}
+                                                        {t('Rezervacija')} {id}
                                                     </label>
                                                     {items.map(
                                                         (
@@ -301,7 +301,9 @@ const MyReservationsPage = (): JSX.Element => {
                                                             {price} din
                                                         </label>
                                                         <RegularButton
-                                                            content="Otkaži rezervaciju"
+                                                            content={t(
+                                                                'Otkaži rezervaciju'
+                                                            )}
                                                             isActive
                                                             style={
                                                                 'myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__cancelButton'
@@ -320,11 +322,11 @@ const MyReservationsPage = (): JSX.Element => {
                                             )
                                         )
                                     ) : (
-                                        <NoReservationsMessage />
+                                        <NoReservationsMessage t={t} />
                                     )}
                                 </div>
                             ) : (
-                                <NoReservationsMessage />
+                                <NoReservationsMessage t={t} />
                             )}
                         </>
                     )}

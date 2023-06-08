@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface ITextProps {
     content: string
@@ -10,9 +11,10 @@ export const Text = ({
     style,
     handleClick,
 }: ITextProps): JSX.Element => {
+    const { t } = useTranslation()
     return (
         <label className={`$textLabel ${style}`} onClick={handleClick}>
-            {content}
+            {t(content) as string}
         </label>
     )
 }

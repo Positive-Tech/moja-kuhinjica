@@ -90,7 +90,7 @@ export const PasswordForgettingModal = ({
                             required: t('Obavezno polje.'),
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: 'Pogrešan format za email adresu.',
+                                message: t('Pogrešan format za email adresu.'),
                             },
                         }}
                         style="modalContainer__formContainer__formDiv__passwordInput"
