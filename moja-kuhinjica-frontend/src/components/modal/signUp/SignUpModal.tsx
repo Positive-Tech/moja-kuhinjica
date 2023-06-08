@@ -137,7 +137,7 @@ export const SignUpModal = ({
                             validationSchema={{
                                 required: t('Šifra je obavezna.'),
                                 pattern: {
-                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                    value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
                                     message: t(
                                         'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'
                                     ),

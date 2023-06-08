@@ -30,13 +30,16 @@ export const PasswordChangeModal = ({
     } = useForm()
 
     const validate = (data: FieldValues): void => {
-        if (data.newPassword === data.confirmPassword) {
+        if (data.newPassword !== data.confirmPassword) {
+            setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
+            setShowError(true)
+        } else if (data.oldPassword === data.newPassword) {
+            setErrorMessage('Nova šifra ne može biti ista kao stara')
+            setShowError(true)
+        } else {
             delete data.confirmPassword
             setShowError(false)
             changePassword(data)
-        } else {
-            setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
-            setShowError(true)
         }
     }
 
