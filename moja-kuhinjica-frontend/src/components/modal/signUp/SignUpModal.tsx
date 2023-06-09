@@ -43,7 +43,6 @@ export const SignUpModal = ({
                 setIsLoading(false)
             })
             .catch((err) => {
-                setErrorMessage('')
                 if (err.response?.data?.message) 
                     setErrorMessage(err.response.data.message)
                  else 
