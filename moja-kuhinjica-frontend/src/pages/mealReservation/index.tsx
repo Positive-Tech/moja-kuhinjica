@@ -5,6 +5,7 @@ import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
+import { isBookingAllowed } from 'src/utils/dateUtils'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
@@ -137,7 +138,7 @@ const MealReservation = (): JSX.Element => {
             })
     }
     const addToCart = (meal: IMeal): void => {
-        if (!isBookingAllowed()) {
+        if (!isBookingAllowed(activeDate)) {
             return setShowDisabledReservation(true)
         }
 
@@ -207,14 +208,6 @@ const MealReservation = (): JSX.Element => {
     const handleOrderConfirmation = (): void => {
         createOrder()
         setConfirmationModalIsOpen(false)
-    }
-
-    const isBookingAllowed = (): boolean => {
-        const cutoffHour = 10
-        const today = dayjs()
-        const activeDay = dayjs(activeDate.split('/').reverse().join('/'))
-        const currentHour = today.hour()
-        return !(currentHour >= cutoffHour && today.isSame(activeDay, 'day'))
     }
 
     return (
@@ -510,7 +503,7 @@ const MealReservation = (): JSX.Element => {
                                 content={t('Potvrdi rezervaciju') as string}
                                 style="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper__confirmButton"
                                 isActive
-                                onClick={() => createOrder()}
+                                onClick={createOrder}
                             />
                         </div>
                     </div>
