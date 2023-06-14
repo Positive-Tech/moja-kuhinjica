@@ -170,6 +170,12 @@ export const SignUpModal = ({
                                         'Broj telefona sadrži minimalno 6 brojeva.'
                                     ),
                                 },
+                                maxLength: {
+                                    value: 14,
+                                    message: t(
+                                        'Broj telefona sadrži maksimalno 14 brojeva.'
+                                    ),
+                                },
                             }}
                             isPhoneNumber={true}
                         />
