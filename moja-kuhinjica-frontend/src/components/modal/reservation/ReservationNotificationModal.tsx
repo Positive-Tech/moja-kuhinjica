@@ -4,14 +4,16 @@ import Image from 'next/image'
 import { bgModal } from '@/constants/constants'
 import successFilled from 'public/static/assets/images/successFilled.svg'
 import { useTranslation } from 'react-i18next'
-
+import { useRouter } from 'next/router'
+import { routes } from '../../../constants/constants'
 interface IReservationNotificationModalProps {
     modalIsOpen: boolean
     closeModal: () => void
     title: string
     buttonText: string
     text?: string
-    isError?: boolean
+    isError?: boolean,
+    linkMyReservations?: boolean
 }
 export const ReservationNotificationModal = ({
     modalIsOpen,
@@ -20,8 +22,15 @@ export const ReservationNotificationModal = ({
     buttonText,
     text,
     isError,
+    linkMyReservations
 }: IReservationNotificationModalProps): JSX.Element => {
+    const router = useRouter()
     const { t } = useTranslation()
+
+    const handleRedirect = (): void => {
+        router.push(routes.MY_RESERVATIONS_PAGE)
+    }
+
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -39,7 +48,16 @@ export const ReservationNotificationModal = ({
 
                     <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
                         <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
-                            {text}
+                            {t(text ?? '')}
+                            <br />
+                            {linkMyReservations && (
+                                <span
+                                    className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel__contentSpan"
+                                    onClick={handleRedirect}
+                                 >
+                                    {' ' + t('Moje rezervacije')}
+                                </span>
+                            )}
                         </label>
                     </div>
 

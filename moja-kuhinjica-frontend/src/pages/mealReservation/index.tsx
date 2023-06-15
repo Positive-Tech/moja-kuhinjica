@@ -41,7 +41,7 @@ const INITIAL_MEAL_AMOUNT = 1
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
 const RESERVATION_SUCCESS_MESSAGE =
-    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
+    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici'
 dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
@@ -217,6 +217,7 @@ const MealReservation = (): JSX.Element => {
                 }}
                 buttonText="OK"
                 isError={isError}
+                linkMyReservations={!isError}
             />
             <ReservationConfirmationModal
                 title={t('Potvrdite rezervaciju')}

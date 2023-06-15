@@ -67,6 +67,17 @@
                         font-weight: 400;
                         color: #c10016;
                         font-size: 16px;
+
+                        &__contentSpan {
+                            cursor: pointer;
+                            color: #282720;
+                            display: flex;
+                            justify-content: center;
+
+                            &:hover {
+                                color: #c10016;
+                              }
+                        }
                     }
                 }
                 &__formButton {
