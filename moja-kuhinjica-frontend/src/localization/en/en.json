@@ -113,6 +113,7 @@
     "Bićete odjavljeni." : "You will be logged out.",
     "Vaša sesija je istekla" : "Session expired",
     "Prijavite se" : "Go to login page",
-    "Vaša rezervacija je sačuvana. Možete je pogledati na stranici" : "Your reservation has been saved. You can view it on the page" 
+    "Vaša rezervacija je sačuvana. Možete je pogledati na stranici" : "Your reservation has been saved. You can view it on the page", 
+    "Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu" : "Your cart is empty, if you want to view your reservations go to the page"
   }
 

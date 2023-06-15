@@ -34,6 +34,8 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { routes } from '../../constants/constants'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -42,10 +44,12 @@ const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
 const RESERVATION_SUCCESS_MESSAGE =
     'Vaša rezervacija je sačuvana. Možete je pogledati na stranici'
+const EMPTY_CART_MESSAGE = 'Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu'
 dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
     const { t } = useTranslation()
+    const router = useRouter()
     const dispatch = useAppDispatch()
     const cartItems = useAppSelector(
         ({ restaurant: { cartItems } }) => cartItems
@@ -200,6 +204,10 @@ const MealReservation = (): JSX.Element => {
         setConfirmationModalIsOpen(false)
     }
 
+    const handleRedirect = (): void => {
+        router.push(routes.MY_RESERVATIONS_PAGE)
+    }
+
     return (
         <div className="mealReservation">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -336,12 +344,15 @@ const MealReservation = (): JSX.Element => {
                                         content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
-                                    <Text
-                                        content={t(
-                                            'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
-                                        )}
-                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
-                                    />
+                                    <label className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel">
+                                        {t(EMPTY_CART_MESSAGE)}
+                                        <span 
+                                            className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan"
+                                            onClick={handleRedirect}    
+                                        > 
+                                            {' ' + t('Moje rezervacije')}
+                                        </span>
+                                    </label>
                                 </div>
                             )}
                             {!isCartEmpty() && (
