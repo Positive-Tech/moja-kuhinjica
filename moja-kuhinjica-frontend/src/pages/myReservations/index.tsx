@@ -28,6 +28,7 @@ import mealDefault from 'public/static/assets/images/mealDefault.svg'
 const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
+const NO_RESERVATIONS_MESSAGE = 'Trenutno nemate rezervacija za izabrani datum.'
 
 const NoReservationsMessage: React.FC = () => {
     const { t } = useTranslation()
@@ -38,14 +39,16 @@ const NoReservationsMessage: React.FC = () => {
     }
 
     return (
-        <div className="myReservationsPage__colDiv__rowDiv">
+        <div className="myReservationsPage__colDiv">
             <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
-                {t("Nema rezervacija za ovaj datum. Ukoliko želite da rezervišete jelo posetite stranicu")} 
-                <span 
-                    className="myReservationsPage__colDiv__rowDiv__infoLabel__infoSpan"
-                    onClick={handleRedirect}
-                >{' ' + t('Rezerviši')}</span>
+                {t(NO_RESERVATIONS_MESSAGE)} 
             </label>
+            <RegularButton
+                    content={t('Rezerviši')}
+                    style="myReservationsPage__colDiv__infoButton"
+                    isActive
+                    onClick={handleRedirect}
+            />
         </div>
     )
 }
