@@ -137,13 +137,22 @@
 
         &__rowDiv {
             @include row-div;
+            margin-top: 2%;
 
             &__infoLabel {
                 font-family: Poppins;
                 font-weight: lighter;
                 color: #333333;
                 font-size: 22px;
-                margin-top: 5%;
+
+                &__infoSpan {
+                    color: #c10016;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #333333;
+                    }
+                }
 
                 @media only screen and (max-width: $breakpoint-720p) {
                     font-size: 20px;

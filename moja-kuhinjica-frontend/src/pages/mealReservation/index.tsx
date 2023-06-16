@@ -226,6 +226,8 @@ const MealReservation = (): JSX.Element => {
                 buttonText="OK"
                 isError={isError}
                 linkMyReservations={!isError}
+                linkText='Moje rezervacije'
+                route={routes.MY_RESERVATIONS_PAGE}
             />
             <ReservationConfirmationModal
                 title={t('Potvrdite rezervaciju')}

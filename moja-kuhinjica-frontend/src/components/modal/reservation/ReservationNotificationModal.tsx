@@ -14,6 +14,8 @@ interface IReservationNotificationModalProps {
     text?: string
     isError?: boolean,
     linkMyReservations?: boolean
+    linkText?: string,
+    route?: string
 }
 export const ReservationNotificationModal = ({
     modalIsOpen,
@@ -22,13 +24,15 @@ export const ReservationNotificationModal = ({
     buttonText,
     text,
     isError,
-    linkMyReservations
+    linkMyReservations,
+    linkText,
+    route
 }: IReservationNotificationModalProps): JSX.Element => {
     const router = useRouter()
     const { t } = useTranslation()
 
-    const handleRedirect = (): void => {
-        router.push(routes.MY_RESERVATIONS_PAGE)
+    const handleRedirect = (link: string = routes.HOME_PAGE): void => {
+        router.push(link);
     }
 
     return (
@@ -53,9 +57,9 @@ export const ReservationNotificationModal = ({
                             {linkMyReservations && (
                                 <span
                                     className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel__contentSpan"
-                                    onClick={handleRedirect}
+                                    onClick={() => handleRedirect(route)}
                                  >
-                                    {' ' + t('Moje rezervacije')}
+                                    {' ' + t(linkText ?? '')}
                                 </span>
                             )}
                         </label>

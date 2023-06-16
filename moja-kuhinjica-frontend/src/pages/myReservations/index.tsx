@@ -21,18 +21,32 @@ import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { useTranslation } from 'react-i18next'
 import { generateWeekDays } from 'src/utils/dateUtils'
+import { routes } from '../../constants/constants'
+import { useRouter } from 'next/router'
 
 const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
-const NoReservationsMessage: React.FC = () => (
-    <div className="myReservationsPage__colDiv__rowDiv">
-        <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
-            Nema rezervacija za ovaj datum.
-        </label>
-    </div>
-)
+const NoReservationsMessage: React.FC = () => {
+    const router = useRouter()
+
+    const handleRedirect = (): void => {
+        router.push(routes.MEAL_RESERVATION_PAGE)
+    }
+
+    return (
+        <div className="myReservationsPage__colDiv__rowDiv">
+            <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
+                Nema rezervacija za ovaj datum. Ukoliko želite da rezervišete jelo posetite stranicu 
+                <span 
+                    className="myReservationsPage__colDiv__rowDiv__infoLabel__infoSpan"
+                    onClick={handleRedirect}
+                >{' ' + 'Rezerviši'}</span>
+            </label>
+        </div>
+    )
+}
 
 const MyReservationsPage = (): JSX.Element => {
     const { t } = useTranslation()
@@ -184,6 +198,9 @@ const MyReservationsPage = (): JSX.Element => {
                 }}
                 buttonText="OK"
                 isError={isError}
+                linkMyReservations={!isError}
+                linkText="Rezerviši ponovo"
+                route={routes.MEAL_RESERVATION_PAGE}
             />
 
             <div
