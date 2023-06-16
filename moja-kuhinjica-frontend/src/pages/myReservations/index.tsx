@@ -34,10 +34,6 @@ const NoReservationsMessage: React.FC = () => {
     const { t } = useTranslation()
     const router = useRouter()
 
-    const handleRedirect = (): void => {
-        router.push(routes.MEAL_RESERVATION_PAGE)
-    }
-
     return (
         <div className="myReservationsPage__colDiv">
             <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
@@ -47,7 +43,7 @@ const NoReservationsMessage: React.FC = () => {
                     content={t('Rezerviši')}
                     style="myReservationsPage__colDiv__infoButton"
                     isActive
-                    onClick={handleRedirect}
+                    onClick={() => router.push(routes.MEAL_RESERVATION_PAGE)}
             />
         </div>
     )

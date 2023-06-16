@@ -204,10 +204,6 @@ const MealReservation = (): JSX.Element => {
         setConfirmationModalIsOpen(false)
     }
 
-    const handleRedirect = (): void => {
-        router.push(routes.MY_RESERVATIONS_PAGE)
-    }
-
     return (
         <div className="mealReservation">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -350,7 +346,7 @@ const MealReservation = (): JSX.Element => {
                                         {t(EMPTY_CART_MESSAGE)}
                                         <span 
                                             className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan"
-                                            onClick={handleRedirect}    
+                                            onClick={() => router.push(routes.MY_RESERVATIONS_PAGE)}    
                                         > 
                                             {' ' + t('Moje rezervacije')}
                                         </span>
