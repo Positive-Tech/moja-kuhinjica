@@ -33,9 +33,6 @@ export const LoginModal = ({
     const { t } = useTranslation()
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
-    const redirectToReservations = useAppSelector(
-        ({ navigation: { redirectToReservations } }) => redirectToReservations
-    )
     const router = useRouter()
 
     const {
@@ -52,8 +49,7 @@ export const LoginModal = ({
                 onSuccess: () => {
                     closeModal()
                     reset()
-                    redirectToReservations &&
-                        router.push(routes.MEAL_RESERVATION_PAGE)
+                    router.push(routes.MEAL_RESERVATION_PAGE)
                     dispatch(setRedirectToReservations(false))
                 },
                 onError: (message: string) => {
