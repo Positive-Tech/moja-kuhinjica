@@ -29,6 +29,7 @@ const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
 const NoReservationsMessage: React.FC = () => {
+    const { t } = useTranslation()
     const router = useRouter()
 
     const handleRedirect = (): void => {
@@ -38,11 +39,11 @@ const NoReservationsMessage: React.FC = () => {
     return (
         <div className="myReservationsPage__colDiv__rowDiv">
             <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
-                Nema rezervacija za ovaj datum. Ukoliko želite da rezervišete jelo posetite stranicu 
+                {t("Nema rezervacija za ovaj datum. Ukoliko želite da rezervišete jelo posetite stranicu")} 
                 <span 
                     className="myReservationsPage__colDiv__rowDiv__infoLabel__infoSpan"
                     onClick={handleRedirect}
-                >{' ' + 'Rezerviši'}</span>
+                >{' ' + t('Rezerviši')}</span>
             </label>
         </div>
     )
