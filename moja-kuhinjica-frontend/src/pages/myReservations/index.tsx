@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { routes } from '../../constants/constants'
 import { useRouter } from 'next/router'
+import mealDefault from 'public/static/assets/images/mealDefault.svg'
 
 const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
@@ -305,7 +306,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                                     mealName
                                                                 }
                                                                 mealImage={
-                                                                    mealImage
+                                                                    mealImage || mealDefault
                                                                 }
                                                                 index={index}
                                                                 itemsLength={
