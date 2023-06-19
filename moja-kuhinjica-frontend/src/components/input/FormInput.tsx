@@ -136,13 +136,13 @@ export const FormInput = ({
                         }
                     />
                 )}
-            </div>
-            {invalidInput && (
+                 {invalidInput && (
                 <ErrorLabel
                     content={t(errors[name]?.message?.toString())}
                     style="formInputWrapper__errorLabel"
                 />
             )}
+            </div>
         </>
     )
 }

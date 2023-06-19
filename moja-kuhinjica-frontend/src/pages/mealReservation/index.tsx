@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
@@ -12,7 +11,7 @@ import { SuccessNotificationModal } from '@/components/modal/notification/Succes
 import { MobileHeader } from '@/components/header/mobileHeader/MobileHeader'
 import Menu from '../../components/mobileMenu'
 import { MobileFooter } from '@/components/footer/mobileFooter/MobileFooter'
-import { MOBILE_WIDTH, routes } from '@/constants/constants'
+import { MOBILE_WIDTH } from '@/constants/constants'
 import cartIcon from 'public/static/assets/images/cart.svg'
 import RestaurantService, {
     IMeal,
@@ -35,6 +34,9 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 import { DisabledReservationModal } from '@/components/modal/disabledReservation/DisabledReservationModal'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { routes } from '../../constants/constants'
 
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
@@ -43,7 +45,9 @@ const DISABLED_MESSAGE = 'Ne možete da rezervišete posle 10 ujutru'
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
 const RESERVATION_SUCCESS_MESSAGE =
-    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije'
+    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici'
+const EMPTY_CART_MESSAGE =
+    'Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu'
 dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
@@ -238,6 +242,9 @@ const MealReservation = (): JSX.Element => {
                 }}
                 buttonText="OK"
                 isError={isError}
+                linkMyReservations={!isError}
+                linkText="Moje rezervacije"
+                route={routes.MY_RESERVATIONS_PAGE}
             />
             <ReservationConfirmationModal
                 title={t('Potvrdite rezervaciju')}
@@ -267,22 +274,22 @@ const MealReservation = (): JSX.Element => {
                             : 'mealReservation__container__restaurantTitleWrapper mealReservation__container__restaurantTitleWrapper--empty'
                     }
                 >
-                    <label
-                        className="mealReservation__container__restaurantTitleWrapper__restaurantTitle"
-                        onClick={() =>
-                            router.push(routes.RESTAURANT_PROFILE_PAGE)
-                        }
+                    <Link
+                        href="/restaurant/profile"
+                        style={{ textDecoration: 'none' }}
                     >
-                        Restoran Top FOOD 021
-                    </label>
-                    <label
-                        onClick={() =>
-                            router.push(routes.RESTAURANT_PROFILE_PAGE)
-                        }
-                        className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel"
+                        <label className="mealReservation__container__restaurantTitleWrapper__restaurantTitle">
+                            Restoran Top FOOD 021
+                        </label>
+                    </Link>
+                    <Link
+                        href="/restaurant/profile"
+                        style={{ textDecoration: 'none' }}
                     >
-                        {t('opšte informacije')}
-                    </label>
+                        <label className="mealReservation__container__restaurantTitleWrapper__restaurantInfoLabel">
+                            {t('opšte informacije')}
+                        </label>
+                    </Link>
                 </div>
                 <label className="mealReservation__container__titleLabel">
                     {t('Dnevni meni za')} {activeDate}
@@ -369,14 +376,20 @@ const MealReservation = (): JSX.Element => {
                                         content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
-                                    <Text
-                                        content={
-                                            t(
-                                                'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
-                                            ) as string
-                                        }
-                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
-                                    />
+
+                                    <label className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel">
+                                        {t(EMPTY_CART_MESSAGE)}
+                                        <span
+                                            className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan"
+                                            onClick={() =>
+                                                router.push(
+                                                    routes.MY_RESERVATIONS_PAGE
+                                                )
+                                            }
+                                        >
+                                            {' ' + t('Moje rezervacije')}
+                                        </span>
+                                    </label>
                                 </div>
                             )}
                             {!isCartEmpty() && (

@@ -26,10 +26,10 @@ const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
-const NoReservationsMessage: React.FC<{ t: Function }> = ({ t }) => (
+const NoReservationsMessage: React.FC = () => (
     <div className="myReservationsPage__colDiv__rowDiv">
         <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
-            {t('Nema rezervacija za ovaj datum.')}
+            Nema rezervacija za ovaj datum.
         </label>
     </div>
 )
@@ -177,7 +177,7 @@ const MyReservationsPage = (): JSX.Element => {
             />
 
             <ReservationNotificationModal
-                title={t(!isError ? CANCELLING_SUCCESS : CANCELLING_FAIL)}
+                title={!isError ? CANCELLING_SUCCESS : CANCELLING_FAIL}
                 modalIsOpen={cancellationModalIsOpen}
                 closeModal={() => {
                     setCancellationModalIsOpen(false)
@@ -206,7 +206,7 @@ const MyReservationsPage = (): JSX.Element => {
                     {t('Rezervacije se mogu otkazati do 10 časova')}
                 </label>
                 <label className="myReservationsPage__colDiv__titleLabel">
-                    {t('Rezervacije za')}: {activeDate}
+                    Rezervacije za: {activeDate}
                 </label>
                 <div className="myReservationsPage__colDiv">
                     <div className="myReservationsPage__colDiv__menuRowDiv">
@@ -266,7 +266,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                         }
                                                     </label>
                                                     <label className="myReservationsPage__colDiv__reservationWrapper__container__reservationLabel">
-                                                        {t('Rezervacija')} {id}
+                                                        Rezervacija {id}
                                                     </label>
                                                     {items.map(
                                                         (
@@ -301,9 +301,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                             {price} din
                                                         </label>
                                                         <RegularButton
-                                                            content={t(
-                                                                'Otkaži rezervaciju'
-                                                            )}
+                                                            content="Otkaži rezervaciju"
                                                             isActive
                                                             style={
                                                                 'myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__cancelButton'
@@ -322,11 +320,11 @@ const MyReservationsPage = (): JSX.Element => {
                                             )
                                         )
                                     ) : (
-                                        <NoReservationsMessage t={t} />
+                                        <NoReservationsMessage />
                                     )}
                                 </div>
                             ) : (
-                                <NoReservationsMessage t={t} />
+                                <NoReservationsMessage />
                             )}
                         </>
                     )}

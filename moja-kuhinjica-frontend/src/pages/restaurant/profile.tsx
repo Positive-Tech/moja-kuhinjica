@@ -50,6 +50,7 @@ const Profile = (): JSX.Element => {
                                 <label className="profilePage__wrapper__container__mainContainer__mainWrapper__contentContainer__name">
                                     Restoran Top Food 021
                                 </label>
+
                                 <LabelWithIcon
                                     src={clock}
                                     content="Ponedeljak-Petak, 12h-15h"
