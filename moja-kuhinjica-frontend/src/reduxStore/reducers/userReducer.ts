@@ -14,6 +14,7 @@ interface UserState {
     inProgress: boolean
     isAuthorized: boolean
     errorMessage: string | null | undefined
+    showSessionExpiredModal: boolean
 }
 
 const initialState: UserState = {
@@ -27,9 +28,11 @@ const initialState: UserState = {
     inProgress: false,
     isAuthorized: false,
     errorMessage: null,
+    showSessionExpiredModal: false
 }
 
 export const userLogout = createAction(ActionTypes.USER_LOGOUT)
+export const toggleSessionExpiredModal = createAction<boolean>(ActionTypes.TOGGLE_SESSION_EXPIRE_MODAL)
 export const userLogin = createAsyncThunk<
     { access_token: string },
     {
@@ -85,5 +88,8 @@ export const userReducer = createReducer(initialState, (builder) => {
         .addCase(loadUser.fulfilled, (state, action) => {
             state.user = action.payload
             state.isAuthorized = true
+        })
+        .addCase(toggleSessionExpiredModal, (state, action) => {
+            state.showSessionExpiredModal = action.payload || !state.showSessionExpiredModal
         })
 })

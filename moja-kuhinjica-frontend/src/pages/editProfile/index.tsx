@@ -130,25 +130,6 @@ const EditProfilePage = (): JSX.Element => {
                                     alt=""
                                     className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__profileIcon"
                                 />
-                                <div className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__changePasswordWrapper">
-                                    <Image
-                                        src={passwordIcon}
-                                        alt=""
-                                        className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__changePasswordWrapper__passwordIcon"
-                                    />
-                                    <label
-                                        className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__changePasswordWrapper__changePasswordLabel"
-                                        onClick={() =>
-                                            isMobile
-                                                ? router.push(
-                                                      routes.CHANGE_PASSWORD_PAGE
-                                                  )
-                                                : setShowPasswordModal(true)
-                                        }
-                                    >
-                                        {t('Promeni šifru')}
-                                    </label>
-                                </div>
                             </div>
                             <div className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper">
                                 <FormInput
@@ -175,7 +156,6 @@ const EditProfilePage = (): JSX.Element => {
                                             : 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput'
                                     }
                                     handleEditClick={() => setEditName(true)}
-                                    handleOnBlur={() => setEditName(false)}
                                 />
                                 <FormInput
                                     register={register}
@@ -200,7 +180,6 @@ const EditProfilePage = (): JSX.Element => {
                                             : 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput'
                                     }
                                     defaultValue={user?.surname}
-                                    handleOnBlur={() => setEditSurname(false)}
                                     handleEditClick={() => setEditSurname(true)}
                                 />
 
@@ -275,9 +254,6 @@ const EditProfilePage = (): JSX.Element => {
                                             : 'editProfile__container__formContainer__formWrapper__formDiv__inputWrapper__disabledInput'
                                     }
                                     defaultValue={user?.phoneNumber}
-                                    handleOnBlur={() =>
-                                        setEditPhoneNumber(false)
-                                    }
                                     handleEditClick={() =>
                                         setEditPhoneNumber(true)
                                     }

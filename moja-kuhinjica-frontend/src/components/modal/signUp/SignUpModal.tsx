@@ -43,10 +43,12 @@ export const SignUpModal = ({
                 setIsLoading(false)
             })
             .catch((err) => {
-                setErrorMessage(err.message)
+                if (err.response?.data?.message) 
+                    setErrorMessage(err.response.data.message)
+                 else 
+                    setErrorMessage('An error occurred. Please try again later.')
                 setShowError(true)
                 setIsLoading(false)
-                console.log(err)
             })
     }
 
