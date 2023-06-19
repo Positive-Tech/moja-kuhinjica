@@ -11,9 +11,9 @@ export interface IMeal {
     id: number
     title: string
     price: number
-    description: string
     image: string
     type: IMealType
+    description: string
 }
 export interface IMealType {
     id: number
@@ -41,6 +41,7 @@ export interface IMyReservations {
     id: number
     date: string
     price: number
+    description: string
     resolved: boolean
     restaurant: { restaurantId: number; restaurantName: string }
     client: { clientId: number; clientName: string }
@@ -52,6 +53,7 @@ export interface IReservationItem {
     quantity: number
     mealName: string
     mealImage: string
+    description: string
 }
 
 export interface IReservationGroup {

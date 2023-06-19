@@ -5,7 +5,7 @@ import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
-import { isBookingAllowed } from 'src/utils/dateUtils'
+import { canCancelOrder, isBookingAllowed } from 'src/utils/dateUtils'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
@@ -137,6 +137,7 @@ const MealReservation = (): JSX.Element => {
                 setIsLoading(false)
             })
     }
+
     const addToCart = (meal: IMeal): void => {
         if (!isBookingAllowed(activeDate)) {
             return setShowDisabledReservation(true)

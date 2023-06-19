@@ -46,6 +46,7 @@ export const AmountButton = ({
                 onClick={() => {
                     changeAmount(INCREMENT_VALUE)
                 }}
+                style={{ pointerEvents: amount >= 10 ? 'none' : 'auto' }}
             />
         </div>
     )

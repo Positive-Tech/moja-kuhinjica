@@ -6,10 +6,18 @@ interface IGenerateWeekdays {
     date: string
 }
 
+export const canCancelOrder = (activeDate: string): boolean => {
+    return !isPast(activeDate)
+}
+
 export const isBookingAllowed = (activeDate: string): boolean => {
+    return isPast(activeDate)
+}
+
+export const isPast = (date: string): boolean => {
     const cutoffHour = 10
     const today = dayjs()
-    const activeDay = dayjs(activeDate.split('/').reverse().join('/'))
+    const activeDay = dayjs(date.split('/').reverse().join('/'))
     const currentHour = today.hour()
     return !(currentHour >= cutoffHour && today.isSame(activeDay, 'day'))
 }
