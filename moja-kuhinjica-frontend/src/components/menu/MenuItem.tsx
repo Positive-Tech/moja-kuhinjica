@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { RegularButton } from '../button/RegularButton'
 import { Title } from '../label/Title'
 import { Text } from '../label/Text'
-import pic from 'public/static/assets/images/meal1.png'
+import mealDefault from 'public/static/assets/images/mealDefault.svg'
 import { useTranslation } from 'react-i18next'
 
 const IMAGE_WIDTH = 500
@@ -47,7 +47,7 @@ export const MenuItem = ({
                 }
             >
                 <Image
-                    src={image ? image : pic}
+                    src={image ? image : mealDefault}
                     alt=""
                     className="pictureWrapper__restaurantPicture"
                     width={IMAGE_WIDTH}

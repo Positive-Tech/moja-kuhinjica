@@ -26,6 +26,7 @@ import { Text } from '@/components/label/Text'
 import dayjs from 'dayjs'
 import 'dayjs/locale/sr'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 const HEADER_TYPE = 'main'
 const NOTIFICATION_MODAL_TYPE = 'registration'
@@ -186,22 +187,23 @@ const Home = (): JSX.Element => {
             <div className="homeDiv__menuWrapper" ref={ref}>
                 <div className="homeDiv__menuWrapper__menuColDiv">
                     <div className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper">
-                        <label
-                            className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantTitle"
-                            onClick={() =>
-                                router.push(routes.RESTAURANT_PROFILE_PAGE)
-                            }
+                        <Link
+                            href="/restaurant/profile"
+                            style={{ textDecoration: 'none' }}
                         >
-                            Restoran Top FOOD 021
-                        </label>
-                        <label
-                            onClick={() =>
-                                router.push(routes.RESTAURANT_PROFILE_PAGE)
-                            }
-                            className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantInfoLabel"
+                            <label className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantTitle">
+                                Restoran Top FOOD 021
+                            </label>
+                        </Link>
+
+                        <Link
+                            href="/restaurant/profile"
+                            style={{ textDecoration: 'none' }}
                         >
-                            {t('opšte informacije')}
-                        </label>
+                            <label className="homeDiv__menuWrapper__menuColDiv__restaurantTitleWrapper__restaurantInfoLabel">
+                                {t('opšte informacije')}
+                            </label>
+                        </Link>
                     </div>
                     <label className="homeDiv__menuWrapper__menuColDiv__titleLabel">
                         {t('Dnevni meni za')} {activeDate}

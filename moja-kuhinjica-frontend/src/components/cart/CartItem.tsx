@@ -7,6 +7,7 @@ import { IMeal } from '@/service/Restaurant.service'
 import { useAppDispatch, useAppSelector } from '@/utils/hooks'
 import { removeCartItem } from '@/reduxStore/reducers/restaurantReducer'
 import { useTranslation } from 'react-i18next'
+import mealDefault from 'public/static/assets/images/mealDefault.svg'
 
 const NIL_PRICE = 0
 interface ICartItemPRops {
@@ -27,7 +28,7 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
             <div className="itemContainer__rowDiv1">
                 <div className="itemContainer__rowDiv1__pictureWrapper">
                     <Image
-                        src={meal.image}
+                        src={meal.image || mealDefault}
                         alt=""
                         className="itemContainer__rowDiv1__pictureWrapper__mealPicture"
                         width="0"
