@@ -1,9 +1,7 @@
-import { routes } from '@/constants/constants'
-import { userLogout } from '@/reduxStore/reducers/userReducer'
+import { toggleSessionExpiredModal } from '@/reduxStore/reducers/userReducer'
 import store from '@/reduxStore/store'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import { useRouter } from 'next/router'
 
 interface IToken {
     email: string
@@ -25,10 +23,7 @@ axiosInstance.interceptors.request.use(
             const currentTime = Math.floor(Date.now() / 1000)
 
             if (expirationTimestamp < currentTime) {
-                // Token has expired, perform logout action
-                alert('Session expired. You will be logged out.')
-                store.dispatch(userLogout())
-                useRouter().push(routes.HOME_PAGE)
+                store.dispatch(toggleSessionExpiredModal(true))
             }
             config.headers.authorization = 'Bearer ' + token
         }

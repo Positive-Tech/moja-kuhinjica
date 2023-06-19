@@ -43,10 +43,12 @@ export const SignUpModal = ({
                 setIsLoading(false)
             })
             .catch((err) => {
-                setErrorMessage(err.message)
+                if (err.response?.data?.message) 
+                    setErrorMessage(err.response.data.message)
+                 else 
+                    setErrorMessage('An error occurred. Please try again later.')
                 setShowError(true)
                 setIsLoading(false)
-                console.log(err)
             })
     }
 
@@ -137,7 +139,7 @@ export const SignUpModal = ({
                             validationSchema={{
                                 required: t('Šifra je obavezna.'),
                                 pattern: {
-                                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                    value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
                                     message: t(
                                         'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'
                                     ),

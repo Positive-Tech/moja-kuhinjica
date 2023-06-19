@@ -78,6 +78,7 @@
     &__restaurantPicture {
         max-height: 100%;
         max-width: 100%;
+        object-fit: cover;
     }
 }
 
@@ -160,8 +161,9 @@
 .descriptionLabelDiv {
     @include flex-options(center, flex-start, row);
     width: 100%;
-    margin-bottom: 5%;
-    margin-top: 5%;
+    margin-bottom: 8%;
+    margin-top: 3%;
+    height: 8%;
 
     @media only screen and (max-width: $breakpoint-medium) {
         height: 10%;
@@ -223,6 +225,7 @@
         text-transform: uppercase;
         font-size: 24px;
         color: #333333;
+        padding-top: 15%;
 
         @media only screen and (max-width: $breakpoint-900p) {
             font-size: 24px;
@@ -241,6 +244,7 @@
         }
         &--priceLabel {
             color: #c10016;
+            padding-top: 15%;
         }
         &--ordering {
             font-family: Poppins;
