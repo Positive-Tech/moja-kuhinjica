@@ -6,6 +6,8 @@ interface IErrorLabelProps {
     style?: string
 }
 
+const COMAPRING_NUMBER = 4
+
 export const ErrorLabel = ({
     content,
     style,
@@ -14,25 +16,22 @@ export const ErrorLabel = ({
     const [beforeEmail, setBeforeEmail] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [afterEmail, setAfterEmail] = useState<string>('')
+    const regex = /(.*) email (.*?) (.*?)$/
 
     useEffect(() => {
-        const regex = /(.*) email (.*?) (.*?)$/
         const matches = content?.match(regex)
-        if (matches && matches.length === 4) {
+        if (matches?.length === COMAPRING_NUMBER) {
             setBeforeEmail(matches[1])
             setEmail(matches[2])
             setAfterEmail(matches[3])
         }
     }, [content])
 
-    let errorMessage = ''
-    if (email) {
-        errorMessage = `${beforeEmail && t(beforeEmail)} ${email} ${
-            afterEmail && t(afterEmail)
-        }`
-    } else {
-        errorMessage = content || ''
-    }
+    const errorMessage = email
+        ? `${beforeEmail && t(beforeEmail)} ${email} ${
+              afterEmail && t(afterEmail)
+          }`
+        : content || ''
 
     return <label className={`errorLabel ${style}`}>{errorMessage}</label>
 }

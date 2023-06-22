@@ -4,6 +4,7 @@ import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
+import { isBookingAllowed } from 'src/utils/dateUtils'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
@@ -141,7 +142,7 @@ const MealReservation = (): JSX.Element => {
             })
     }
     const addToCart = (meal: IMeal): void => {
-        if (!isBookingAllowed()) {
+        if (!isBookingAllowed(activeDate)) {
             return setShowDisabledReservation(true)
         }
 
@@ -213,14 +214,6 @@ const MealReservation = (): JSX.Element => {
         setConfirmationModalIsOpen(false)
     }
 
-    const isBookingAllowed = (): boolean => {
-        const cutoffHour = 10
-        const today = dayjs()
-        const activeDay = dayjs(activeDate.split('/').reverse().join('/'))
-        const currentHour = today.hour()
-        return !(currentHour >= cutoffHour && today.isSame(activeDay, 'day'))
-    }
-
     return (
         <div className="mealReservation">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -230,12 +223,8 @@ const MealReservation = (): JSX.Element => {
                 <Header type={HEADER_TYPE} selectedButton={2} />
             )}
             <ReservationNotificationModal
-                title={t(!isError ? RESERVATION_SUCCESS : RESERVATION_FAIL)}
-                text={
-                    t(
-                        !isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage
-                    ) as string
-                }
+                title={!isError ? RESERVATION_SUCCESS : RESERVATION_FAIL}
+                text={!isError ? RESERVATION_SUCCESS_MESSAGE : errorMessage}
                 modalIsOpen={reservationModalIsOpen}
                 closeModal={() => {
                     setReservationModalIsOpen(false)
@@ -248,8 +237,7 @@ const MealReservation = (): JSX.Element => {
             />
             <ReservationConfirmationModal
                 title={t('Potvrdite rezervaciju')}
-                text={t('Da li zelite da potvrdite narudzbinu za ') as string}
-                activeDate={activeDate}
+                text={`Da li zelite da potvrdite narudzbinu za ${activeDate} ?`}
                 modalIsOpen={confirmationModalIsOpen}
                 confirmOrder={handleOrderConfirmation}
                 closeModal={() => {
@@ -356,13 +344,9 @@ const MealReservation = (): JSX.Element => {
                         {!isLoading && !hasMeals && (
                             <div className="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv">
                                 <Text
-                                    content={
-                                        t('Dnevni meni za') +
-                                        ' ' +
-                                        activeDate +
-                                        ' ' +
-                                        t('nije objavljen.')
-                                    }
+                                    content={`${t(
+                                        'Dnevni meni za'
+                                    )} ${activeDate} ${t('nije objavljen.')}`}
                                     style="mealReservation__container__menuDiv__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                                 />
                             </div>
@@ -533,7 +517,7 @@ const MealReservation = (): JSX.Element => {
                                 content={t('Potvrdi rezervaciju') as string}
                                 style="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper__confirmButton"
                                 isActive
-                                onClick={() => createOrder()}
+                                onClick={createOrder}
                             />
                         </div>
                     </div>
