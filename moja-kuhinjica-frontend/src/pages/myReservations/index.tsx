@@ -22,7 +22,7 @@ import { ReservationNotificationModal } from '@/components/modal/reservation/Res
 import { useTranslation } from 'react-i18next'
 import { generateWeekDays } from 'src/utils/dateUtils'
 
-const FIRST_ELEMENT = 0
+const FOUR = 4
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 
@@ -158,7 +158,7 @@ const MyReservationsPage = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header type="red" selectedButton={FIRST_ELEMENT} />
+                <Header type="red" selectedButton={FOUR} />
             )}
 
             <ReservationConfirmationModal
@@ -213,14 +213,14 @@ const MyReservationsPage = (): JSX.Element => {
                         {generateWeekDays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
-                                key={uuid()}
-                                active={active === activeTabIndex}
-                                onClick={() => {
-                                    setActive(activeTabIndex)
-                                    setActiveDate(day.date)
-                                }}
-                                content={t(day.dayofweek)}
-                            />
+                                    key={uuid()}
+                                    active={active === activeTabIndex}
+                                    onClick={() => {
+                                        setActive(activeTabIndex)
+                                        setActiveDate(day.date)
+                                    }}
+                                    content={t(day.dayofweek)}
+                                />
                             )
                         })}
                     </div>

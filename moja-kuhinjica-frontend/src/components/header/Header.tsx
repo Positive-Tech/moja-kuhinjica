@@ -7,10 +7,9 @@ import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'
 import logo from 'public/static/assets/images/logo-moja-klopica.svg'
-import profileIcon from 'public/static/assets/images/profileHeader.svg'
+import profileIcon from 'public/static/assets/images/profilePicture.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
-import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import { routes, AUTH_TOKEN } from '@/constants/constants'
 import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
@@ -115,6 +114,16 @@ const Header = ({
                     content={t('Rezerviši')}
                     headerType={type}
                 />
+                {isAuthorized && (
+                    <HeaderButton
+                        active={active === 4}
+                        content={t('Moje rezervacije')}
+                        onClick={() =>
+                            handleClick(4, routes.MY_RESERVATIONS_PAGE)
+                        }
+                        headerType={type}
+                    />
+                )}
                 <HeaderButton
                     active={active === 3}
                     onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
@@ -139,15 +148,6 @@ const Header = ({
                                 ref={menuRef}
                             >
                                 <div className="headerWrapper__buttonWrapper__profileIconWrapper__dropDownButtonWrapper">
-                                    <DropdownMenuButton
-                                        content={t('Moje rezervacije')}
-                                        src={myReservationsIcon}
-                                        handleClick={() =>
-                                            router.push(
-                                                routes.MY_RESERVATIONS_PAGE
-                                            )
-                                        }
-                                    />
                                     <DropdownMenuButton
                                         content={t('Izmena profila')}
                                         src={editProfileIcon}

@@ -5,15 +5,15 @@
     height: 15%;
     background: rgba(30, 30, 30, 0.3);
 
-    .container-flags{
-    padding-left:20px;
-    display: flex;
-    flex-direction: row;
-    grid-column-gap:20px;
+    .container-flags {
+        padding-left: 20px;
+        display: flex;
+        flex-direction: row;
+        grid-column-gap: 20px;
 
-    .icon-flag{
-        width: 45px;
-        height: 45px;
+        .icon-flag {
+            width: 45px;
+            height: 45px;
         }
     }
     @media only screen and (max-width: $breakpoint-medium) {
@@ -39,14 +39,13 @@
 
     &__buttonWrapper {
         @include flex-options(flex-end, center, row);
-        width: 50%;
-        height: 100%;
+        width: 80%;
 
         @media only screen and (max-width: $breakpoint-1440p) {
-            width: 35%;
+            width: 65%;
         }
         @media only screen and (max-width: $breakpoint-1080p) {
-            width: 40%;
+            width: 70%;
         }
         @media only screen and (max-width: $breakpoint-medium) {
             display: none;
