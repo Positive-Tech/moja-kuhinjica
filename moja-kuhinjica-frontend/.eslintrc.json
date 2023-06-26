@@ -12,7 +12,7 @@
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./moja-kuhinjica-frontend/tsconfig.json"
+        "project": "./tsconfig.json"
     },
     "plugins": ["react"],
     "rules": {
