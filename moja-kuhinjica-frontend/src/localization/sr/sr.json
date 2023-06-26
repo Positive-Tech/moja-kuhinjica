@@ -72,7 +72,7 @@
     "Confirm": "Potvrdi",
     "Edit profile": "Izmena profila",
     "Log out": "Odjavi se",
-    "My reservation": "Moje rezervacije",
+    "My reservations": "Moje rezervacije",
     "Name is required.": "Ime je obavezno.",
     "Email is required.": "Email je obavezan.",
     "Surname is required.": "Prezime je obavezno.",
@@ -107,5 +107,12 @@
     "300g Chicken in sauce with 4 types of cheese, baked potato, salad" :"300g Piletina u sosu sa 4 vrste sira, pekarski krompir, salata",
     "300g Fried stuffed peppers, side dish, salad" : "300g Pohovane punjene paprike, prilog, salata",
     "300g Meatballs in sauce, side dish, salad" : "300g Đufte u sosu, prilog, salata",
-    "300g pork rolls in mushroom sauce, side dish, salad" : "300g svinjske rolnice u sosu od šampinjona, prilog, salata"
+    "300g pork rolls in mushroom sauce, side dish, salad" : "300g svinjske rolnice u sosu od šampinjona, prilog, salata",
+    "You will be logged out." : "Bićete odjavljeni.",
+    "Session expired" : "Vaša sesija je istekla",
+    "Go to login page" : "Prijavite se",
+    "Your reservation has been saved. You can view it on the page" : "Vaša rezervacija je sačuvana. Možete je pogledati na stranici",
+    "Your cart is empty, if you want to view your reservations go to the page" : "Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu",
+    "Reserve again" : "Rezerviši ponovo",
+    "You currently have no reservations for the selected date." : "Trenutno nemate rezervacija za izabrani datum."
 }

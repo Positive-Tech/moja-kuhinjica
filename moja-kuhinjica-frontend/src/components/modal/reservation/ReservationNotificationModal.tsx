@@ -4,14 +4,18 @@ import Image from 'next/image'
 import { bgModal } from '@/constants/constants'
 import successFilled from 'public/static/assets/images/successFilled.svg'
 import { useTranslation } from 'react-i18next'
-
+import { useRouter } from 'next/router'
+import { routes } from '../../../constants/constants'
 interface IReservationNotificationModalProps {
     modalIsOpen: boolean
     closeModal: () => void
     title: string
     buttonText: string
     text?: string
-    isError?: boolean
+    isError?: boolean,
+    linkMyReservations?: boolean
+    linkText?: string,
+    route?: string
 }
 export const ReservationNotificationModal = ({
     modalIsOpen,
@@ -20,8 +24,17 @@ export const ReservationNotificationModal = ({
     buttonText,
     text,
     isError,
+    linkMyReservations,
+    linkText,
+    route
 }: IReservationNotificationModalProps): JSX.Element => {
+    const router = useRouter()
     const { t } = useTranslation()
+
+    const handleRedirect = (link: string = routes.HOME_PAGE): void => {
+        router.push(link);
+    }
+
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -39,7 +52,16 @@ export const ReservationNotificationModal = ({
 
                     <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
                         <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
-                            {text}
+                            {t(text ?? '')}
+                            <br />
+                            {linkMyReservations && (
+                                <span
+                                    className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel__contentSpan"
+                                    onClick={() => handleRedirect(route)}
+                                 >
+                                    {' ' + t(linkText ?? '')}
+                                </span>
+                            )}
                         </label>
                     </div>
 

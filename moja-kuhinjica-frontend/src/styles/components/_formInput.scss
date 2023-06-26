@@ -76,6 +76,7 @@
 
     &__invalidInput {
         position: absolute;
+        height: 100%;
         box-sizing: border-box;
         padding-left: 7%;
 
@@ -160,5 +161,6 @@
         font-size: 12px;
         width: 100%;
         text-align: right !important;
+        margin-top: 10%;
     }
 }

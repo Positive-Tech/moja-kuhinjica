@@ -28,13 +28,16 @@ export const PasswordChangeModal = ({
     } = useForm()
 
     const validate = (data: FieldValues): void => {
-        if (data.newPassword === data.confirmPassword) {
+        if (data.newPassword !== data.confirmPassword) {
+            setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
+            setShowError(true)
+        } else if (data.oldPassword === data.newPassword) {
+            setErrorMessage('Nova šifra ne može biti ista kao stara')
+            setShowError(true)
+        } else {
             delete data.confirmPassword
             setShowError(false)
             changePassword(data)
-        } else {
-            setErrorMessage('Šifre se ne poklapaju. Pokušajte ponovo.')
-            setShowError(true)
         }
     }
 
@@ -95,7 +98,7 @@ export const PasswordChangeModal = ({
                         validationSchema={{
                             required: 'Obavezno polje.',
                             pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
                                 message:
                                     'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
                             },
