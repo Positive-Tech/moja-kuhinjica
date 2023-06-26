@@ -164,12 +164,9 @@
 .descriptionLabelDiv {
     @include flex-options(center, flex-start, row);
     width: 100%;
-    // margin-bottom: 8%;
-    // margin-top: 3%;
     height: auto;
 
     @media only screen and (max-width: $breakpoint-medium) {
-        // height: 10%;
         width: 80%;
     }
 
