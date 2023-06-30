@@ -129,7 +129,26 @@ const Profile = (): JSX.Element => {
                         </div>
                     )}
                     {isMobile && (
-                        <div className="profilePage__galleryWrapper__galleryColDiv__gallerySlider"></div>
+                        <div className="profilePage__galleryWrapper__galleryColDiv__gallerySlider">
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                style={{ width: '200px', height: '180px' }}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                style={{ width: '200px', height: '180px' }}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                style={{ width: '200px', height: '180px' }}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
+                            />
+                        </div>
                     )}
                 </div>
             </div>
