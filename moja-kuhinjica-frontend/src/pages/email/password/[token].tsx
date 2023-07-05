@@ -57,7 +57,7 @@ const ResetPasswordPage = (): JSX.Element => {
         <div className="resetVerifyContainer">
             <div className="resetVerifyContainer__resetPassWrapper">
                 <Title
-                    content="Resetovanje šifre"
+                    content={t('Resetovanje šifre') as string}
                     style="resetVerifyContainer__resetPassWrapper__resetPassTitle"
                 />
                 <div className="resetVerifyContainer__resetPassWrapper__formWrapper">
@@ -71,10 +71,10 @@ const ResetPasswordPage = (): JSX.Element => {
                             errors={errors}
                             name="password"
                             src={passwordIcon}
-                            placeholder="Unesi novu šifru"
+                            placeholder={t('Unesi novu šifru') as string}
                             type="password"
                             validationSchema={{
-                                required: 'Šifra je obavezna.',
+                                required: t('Šifra je obavezna.'),
                                 pattern: {
                                     value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
                                     message:
@@ -88,10 +88,10 @@ const ResetPasswordPage = (): JSX.Element => {
                             errors={errors}
                             name="confirmPassword"
                             src={passwordIcon}
-                            placeholder="Potvrdi novu šifru"
+                            placeholder={t('Potvrdi novu šifru') as string}
                             type="password"
                             validationSchema={{
-                                required: 'Šifra je obavezna.',
+                                required: t('Šifra je obavezna.'),
                             }}
                             style="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__passwordInput"
                         />
@@ -114,7 +114,7 @@ const ResetPasswordPage = (): JSX.Element => {
                                     type="submit"
                                     className="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__confirmButtonWrapper__formButton"
                                 >
-                                    Resetuj šifru
+                                    {t('Resetuj šifru')}
                                 </button>
                             )}
                         </div>
