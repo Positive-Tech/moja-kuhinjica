@@ -21,6 +21,10 @@ import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { useTranslation } from 'react-i18next'
 import { generateWeekDays } from 'src/utils/dateUtils'
+import Link from 'next/link'
+import { routes } from '../../constants/constants'
+import { useRouter } from 'next/router'
+import mealDefault from 'public/static/assets/images/mealDefault.svg'
 
 const FIRST_ELEMENT = 0
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
@@ -256,15 +260,26 @@ const MyReservationsPage = (): JSX.Element => {
                                                     key={id}
                                                     className="myReservationsPage__colDiv__reservationWrapper__container"
                                                 >
-                                                    <label
-                                                        className={
-                                                            'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
-                                                        }
+                                                    <Link
+                                                        href="/restaurant/profile"
+                                                        style={{
+                                                            textDecoration:
+                                                                'none',
+                                                        }}
                                                     >
-                                                        {
-                                                            restaurant.restaurantName
-                                                        }
-                                                    </label>
+                                                        <label
+                                                            style={{
+                                                                cursor: 'pointer',
+                                                            }}
+                                                            className={
+                                                                'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
+                                                            }
+                                                        >
+                                                            {
+                                                                restaurant.restaurantName
+                                                            }
+                                                        </label>
+                                                    </Link>
                                                     <label className="myReservationsPage__colDiv__reservationWrapper__container__reservationLabel">
                                                         Rezervacija {id}
                                                     </label>
