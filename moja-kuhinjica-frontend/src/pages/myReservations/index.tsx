@@ -29,26 +29,14 @@ import mealDefault from 'public/static/assets/images/mealDefault.svg'
 const FOUR = 4
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
-const NO_RESERVATIONS_MESSAGE = 'Trenutno nemate rezervacija za izabrani datum.'
 
-const NoReservationsMessage: React.FC = () => {
-    const { t } = useTranslation()
-    const router = useRouter()
-
-    return (
-        <div className="myReservationsPage__colDiv">
-            <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
-                {t(NO_RESERVATIONS_MESSAGE)}
-            </label>
-            <RegularButton
-                content={t('Rezerviši')}
-                style="myReservationsPage__colDiv__infoButton"
-                isActive
-                onClick={() => router.push(routes.MEAL_RESERVATION_PAGE)}
-            />
-        </div>
-    )
-}
+const NoReservationsMessage: React.FC = () => (
+    <div className="myReservationsPage__colDiv__rowDiv">
+        <label className="myReservationsPage__colDiv_an_rowDiv__infoLabel">
+            Nema rezervacija za ovaj datum.
+        </label>
+    </div>
+)
 
 const MyReservationsPage = (): JSX.Element => {
     const { t } = useTranslation()
@@ -200,9 +188,6 @@ const MyReservationsPage = (): JSX.Element => {
                 }}
                 buttonText="OK"
                 isError={isError}
-                linkMyReservations={!isError}
-                linkText="Rezerviši ponovo"
-                route={routes.MEAL_RESERVATION_PAGE}
             />
 
             <div
@@ -317,8 +302,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                                     mealName
                                                                 }
                                                                 mealImage={
-                                                                    mealImage ||
-                                                                    mealDefault
+                                                                    mealImage
                                                                 }
                                                                 index={index}
                                                                 itemsLength={

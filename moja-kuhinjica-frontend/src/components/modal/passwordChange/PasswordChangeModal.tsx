@@ -7,6 +7,7 @@ import { ErrorLabel } from '@/components/label/ErrorLabel'
 import { bgModal } from 'src/constants/constants'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
+import { useTranslation } from 'react-i18next'
 
 interface IChangePasswordModalProps {
     modalIsOpen: boolean
@@ -16,6 +17,7 @@ export const PasswordChangeModal = ({
     modalIsOpen,
     closeModal,
 }: IChangePasswordModalProps): JSX.Element => {
+    const { t } = useTranslation()
     const [showError, setShowError] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
@@ -73,7 +75,7 @@ export const PasswordChangeModal = ({
                     onSubmit={handleSubmit((data) => validate(data))}
                 >
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        Promeni šifru
+                        {t('Promeni šifru')}
                     </label>
                     {showError && <ErrorLabel content={errorMessage} />}
                     <FormInput
@@ -81,10 +83,10 @@ export const PasswordChangeModal = ({
                         errors={errors}
                         name="oldPassword"
                         src={passwordIcon}
-                        placeholder="Stara šifra"
+                        placeholder={t('Stara šifra') as string}
                         type="password"
                         validationSchema={{
-                            required: 'Obavezno polje.',
+                            required: t('Obavezno polje.'),
                         }}
                         style="modalContainer__formContainer__formDiv__passwordInput"
                     />
@@ -93,14 +95,15 @@ export const PasswordChangeModal = ({
                         errors={errors}
                         name="newPassword"
                         src={passwordIcon}
-                        placeholder="Nova šifra"
+                        placeholder={t('Nova šifra') as string}
                         type="password"
                         validationSchema={{
-                            required: 'Obavezno polje.',
+                            required: t('Obavezno polje.'),
                             pattern: {
-                                value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
-                                message:
-                                    'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
+                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                message: t(
+                                    'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'
+                                ),
                             },
                         }}
                         style="modalContainer__formContainer__formDiv__passwordInput"
@@ -110,10 +113,10 @@ export const PasswordChangeModal = ({
                         errors={errors}
                         name="confirmPassword"
                         src={passwordIcon}
-                        placeholder="Potvrdi novu šifru"
+                        placeholder={t('Potvrdi novu šifru') as string}
                         type="password"
                         validationSchema={{
-                            required: 'Obavezno polje.',
+                            required: t('Obavezno polje.'),
                         }}
                         style="modalContainer__formContainer__formDiv__passwordInput"
                     />
@@ -136,7 +139,7 @@ export const PasswordChangeModal = ({
                                 type="submit"
                                 className="modalContainer__formContainer__formDiv__buttonWrapper__formButton"
                             >
-                                Potvrdi
+                                {t('Potvrdi')}
                             </button>
                         )}
                     </div>
