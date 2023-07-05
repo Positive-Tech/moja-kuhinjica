@@ -4,6 +4,7 @@ import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
+import { isBookingAllowed } from 'src/utils/dateUtils'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
@@ -34,18 +35,18 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 import { DisabledReservationModal } from '@/components/modal/disabledReservation/DisabledReservationModal'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import {
-    DISABLED_MESSAGE,
+    routes,
     ORDERING,
     HEADER_TYPE,
     INITIAL_MEAL_AMOUNT,
+    DISABLED_MESSAGE,
     RESERVATION_SUCCESS,
     RESERVATION_FAIL,
     RESERVATION_SUCCESS_MESSAGE,
 } from '../../constants/constants'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { routes } from '../../constants/constants'
 
 const EMPTY_CART_MESSAGE =
     'Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu'
@@ -63,6 +64,7 @@ const MealReservation = (): JSX.Element => {
         useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
+    const [selectedDay, setSelectedDay] = useState<string>()
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
@@ -142,7 +144,8 @@ const MealReservation = (): JSX.Element => {
     }
 
     const addToCart = (meal: IMeal): void => {
-        if (!isBookingAllowed()) return setShowDisabledReservation(true)
+        if (!isBookingAllowed(activeDate))
+            return setShowDisabledReservation(true)
 
         dispatch(
             addItemToCart({
@@ -212,14 +215,6 @@ const MealReservation = (): JSX.Element => {
         setConfirmationModalIsOpen(false)
     }
 
-    const isBookingAllowed = (): boolean => {
-        const cutoffHour = 10
-        const today = dayjs()
-        const activeDay = dayjs(activeDate.split('/').reverse().join('/'))
-        const currentHour = today.hour()
-        return !(currentHour >= cutoffHour && today.isSame(activeDay, 'day'))
-    }
-
     return (
         <div className="mealReservation">
             {showMenu && <Menu closeMenu={() => setShowMenu(false)} />}
@@ -253,6 +248,12 @@ const MealReservation = (): JSX.Element => {
                 }}
                 buttonText="OK"
             />
+            <DisabledReservationModal
+                modalIsOpen={showDisabledReservation}
+                closeModal={() => setShowDisabledReservation(!true)}
+                title={DISABLED_MESSAGE}
+                buttonText="OK"
+            />
 
             <div className="mealReservation__container">
                 <div
@@ -262,12 +263,6 @@ const MealReservation = (): JSX.Element => {
                             : 'mealReservation__container__restaurantTitleWrapper mealReservation__container__restaurantTitleWrapper--empty'
                     }
                 >
-                    <DisabledReservationModal
-                        modalIsOpen={showDisabledReservation}
-                        closeModal={() => setShowDisabledReservation(false)}
-                        title={DISABLED_MESSAGE}
-                        buttonText="OK"
-                    />
                     <Link
                         href="/restaurant/profile"
                         style={{ textDecoration: 'none' }}
@@ -298,11 +293,10 @@ const MealReservation = (): JSX.Element => {
                                         key={uuid()}
                                         active={active === activeTabIndex}
                                         onClick={() => {
-                                            setDeyOfWeek(date.day())
-                                            setActive(activeTabIndex)
                                             if (cartItems.length) {
                                                 handleTabClickWithCartItems()
-                                            } else {
+                                                setDeyOfWeek(date.day())
+                                                setActive(activeTabIndex)
                                                 setActiveDate(day.date)
                                             }
                                         }}
@@ -521,7 +515,7 @@ const MealReservation = (): JSX.Element => {
                                 content={t('Potvrdi rezervaciju') as string}
                                 style="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper__confirmButton"
                                 isActive
-                                onClick={() => createOrder()}
+                                onClick={createOrder}
                             />
                         </div>
                     </div>

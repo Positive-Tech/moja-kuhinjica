@@ -21,11 +21,12 @@ import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { useTranslation } from 'react-i18next'
 import { generateWeekDays } from 'src/utils/dateUtils'
+import Link from 'next/link'
 import { routes } from '../../constants/constants'
 import { useRouter } from 'next/router'
 import mealDefault from 'public/static/assets/images/mealDefault.svg'
 
-const FIRST_ELEMENT = 0
+const FOUR = 4
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 const NO_RESERVATIONS_MESSAGE = 'Trenutno nemate rezervacija za izabrani datum.'
@@ -37,13 +38,13 @@ const NoReservationsMessage: React.FC = () => {
     return (
         <div className="myReservationsPage__colDiv">
             <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
-                {t(NO_RESERVATIONS_MESSAGE)} 
+                {t(NO_RESERVATIONS_MESSAGE)}
             </label>
             <RegularButton
-                    content={t('Rezerviši')}
-                    style="myReservationsPage__colDiv__infoButton"
-                    isActive
-                    onClick={() => router.push(routes.MEAL_RESERVATION_PAGE)}
+                content={t('Rezerviši')}
+                style="myReservationsPage__colDiv__infoButton"
+                isActive
+                onClick={() => router.push(routes.MEAL_RESERVATION_PAGE)}
             />
         </div>
     )
@@ -173,7 +174,7 @@ const MyReservationsPage = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header type="red" selectedButton={FIRST_ELEMENT} />
+                <Header type="red" selectedButton={FOUR} />
             )}
 
             <ReservationConfirmationModal
@@ -231,14 +232,14 @@ const MyReservationsPage = (): JSX.Element => {
                         {generateWeekDays().map((day, activeTabIndex) => {
                             return (
                                 <TabButton
-                                key={uuid()}
-                                active={active === activeTabIndex}
-                                onClick={() => {
-                                    setActive(activeTabIndex)
-                                    setActiveDate(day.date)
-                                }}
-                                content={t(day.dayofweek)}
-                            />
+                                    key={uuid()}
+                                    active={active === activeTabIndex}
+                                    onClick={() => {
+                                        setActive(activeTabIndex)
+                                        setActiveDate(day.date)
+                                    }}
+                                    content={t(day.dayofweek)}
+                                />
                             )
                         })}
                     </div>
@@ -274,15 +275,26 @@ const MyReservationsPage = (): JSX.Element => {
                                                     key={id}
                                                     className="myReservationsPage__colDiv__reservationWrapper__container"
                                                 >
-                                                    <label
-                                                        className={
-                                                            'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
-                                                        }
+                                                    <Link
+                                                        href="/restaurant/profile"
+                                                        style={{
+                                                            textDecoration:
+                                                                'none',
+                                                        }}
                                                     >
-                                                        {
-                                                            restaurant.restaurantName
-                                                        }
-                                                    </label>
+                                                        <label
+                                                            style={{
+                                                                cursor: 'pointer',
+                                                            }}
+                                                            className={
+                                                                'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
+                                                            }
+                                                        >
+                                                            {
+                                                                restaurant.restaurantName
+                                                            }
+                                                        </label>
+                                                    </Link>
                                                     <label className="myReservationsPage__colDiv__reservationWrapper__container__reservationLabel">
                                                         Rezervacija {id}
                                                     </label>
@@ -305,7 +317,8 @@ const MyReservationsPage = (): JSX.Element => {
                                                                     mealName
                                                                 }
                                                                 mealImage={
-                                                                    mealImage || mealDefault
+                                                                    mealImage ||
+                                                                    mealDefault
                                                                 }
                                                                 index={index}
                                                                 itemsLength={

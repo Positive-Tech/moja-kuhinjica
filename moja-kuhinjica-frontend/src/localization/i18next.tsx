@@ -8,6 +8,8 @@ import translationSR from './sr/sr.json'
 import serbiaIcon from '../../public/static/assets/images/serbiaIconFlag.svg'
 import ukIcon from '../../public/static/assets/images/ukFlag.svg'
 
+const DEFAULT_LANGUAGE = 'sr'
+
 export const LANGUAGES_OPTIONS = [
     {
         name: 'Serbian',
@@ -31,13 +33,13 @@ export const resources = {
 }
 
 i18n.use(initReactI18next)
-    .use(LanguageDetector)
     .init({
         compatibilityJSON: 'v3',
         resources,
         interpolation: {
             escapeValue: false,
         },
+        lng: DEFAULT_LANGUAGE,
     })
     .then(() => {
         console.log('i18n initialized')
@@ -45,5 +47,3 @@ i18n.use(initReactI18next)
     .catch((err: Error) => {
         console.log('i18n initialization failed', err)
     })
-
-
