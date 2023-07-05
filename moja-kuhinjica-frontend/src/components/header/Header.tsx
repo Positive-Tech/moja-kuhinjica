@@ -17,6 +17,10 @@ import LanguageChanger from '../LanguageChanger'
 import { useTranslation } from 'react-i18next'
 
 const HEADER_TYPE = 'red'
+const FOUR = 4
+const ONE = 1
+const TWO = 2
+const THREE = 3
 interface IHeaderProps {
     type: string
     selectedButton?: number
@@ -101,32 +105,35 @@ const Header = ({
             </div>
             <div className="headerWrapper__buttonWrapper">
                 <HeaderButton
-                    active={active === 1}
-                    onClick={() => handleClick(1, routes.HOME_PAGE)}
+                    active={active === ONE}
+                    onClick={() => handleClick(ONE, routes.HOME_PAGE)}
                     content={t('Početna')}
                     headerType={type}
                 />
                 <HeaderButton
-                    active={active === 2}
+                    active={active === TWO}
                     onClick={() =>
-                        handleReservationClick(2, routes.MEAL_RESERVATION_PAGE)
+                        handleReservationClick(
+                            TWO,
+                            routes.MEAL_RESERVATION_PAGE
+                        )
                     }
                     content={t('Rezerviši')}
                     headerType={type}
                 />
                 {isAuthorized && (
                     <HeaderButton
-                        active={active === 4}
+                        active={active === FOUR}
                         content={t('Moje rezervacije')}
                         onClick={() =>
-                            handleClick(4, routes.MY_RESERVATIONS_PAGE)
+                            handleClick(FOUR, routes.MY_RESERVATIONS_PAGE)
                         }
                         headerType={type}
                     />
                 )}
                 <HeaderButton
-                    active={active === 3}
-                    onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
+                    active={active === THREE}
+                    onClick={() => handleClick(THREE, routes.ABOUT_US_PAGE)}
                     content={t('O nama')}
                     headerType={type}
                 />
