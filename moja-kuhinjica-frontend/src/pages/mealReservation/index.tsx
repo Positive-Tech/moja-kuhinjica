@@ -34,19 +34,19 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 import { DisabledReservationModal } from '@/components/modal/disabledReservation/DisabledReservationModal'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
-import { DISABLED_MESSAGE } from '../../constants/constants'
+import {
+    DISABLED_MESSAGE,
+    ORDERING,
+    HEADER_TYPE,
+    INITIAL_MEAL_AMOUNT,
+    RESERVATION_SUCCESS,
+    RESERVATION_FAIL,
+    RESERVATION_SUCCESS_MESSAGE,
+} from '../../constants/constants'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { routes } from '../../constants/constants'
 
-const ORDERING = 'ordering'
-const HEADER_TYPE = 'red'
-const INITIAL_MEAL_AMOUNT = 1
-
-const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
-const RESERVATION_FAIL = 'Neuspešna rezervacija'
-const RESERVATION_SUCCESS_MESSAGE =
-    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici'
 const EMPTY_CART_MESSAGE =
     'Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu'
 dayjs.extend(utc)

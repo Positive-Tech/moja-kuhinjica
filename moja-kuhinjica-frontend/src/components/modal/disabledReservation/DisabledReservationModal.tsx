@@ -21,8 +21,6 @@ export const DisabledReservationModal = ({
 }: DisabledReservationModalProps): JSX.Element => {
     const { t } = useTranslation()
 
-    if (children) return children
-
     return (
         <Modal
             isOpen={modalIsOpen}
