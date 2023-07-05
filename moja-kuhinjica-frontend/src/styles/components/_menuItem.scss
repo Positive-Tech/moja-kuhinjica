@@ -7,14 +7,17 @@
     @media only screen and (max-width: $breakpoint-ultrawide) {
         height: 680px;
         width: 70%;
+        margin: 40px;
     }
     @media only screen and (max-width: $breakpoint-1080p) {
         height: 600px;
         width: 70%;
+        margin: 40px;
     }
     @media only screen and (max-width: $breakpoint-900p) {
         height: 680px;
         width: 100%;
+        margin: 40px;
     }
     @media only screen and (max-width: $breakpoint-720p) {
         height: 630px;
@@ -161,19 +164,18 @@
 .descriptionLabelDiv {
     @include flex-options(center, flex-start, row);
     width: 100%;
-    margin-bottom: 8%;
-    margin-top: 3%;
-    height: 8%;
+    height: auto;
 
     @media only screen and (max-width: $breakpoint-medium) {
-        height: 10%;
         width: 80%;
     }
 
     &__descriptionLabel {
+        max-width: 95%;
         font-weight: lighter;
-        font-size: 20px;
+        font-size: 18px;
         text-align: center;
+        word-break: break-all;
 
         @media only screen and (max-width: $breakpoint-900p) {
             font-size: 20px;
