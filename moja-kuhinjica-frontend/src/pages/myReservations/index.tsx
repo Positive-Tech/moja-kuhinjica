@@ -26,7 +26,7 @@ import { routes } from '../../constants/constants'
 import { useRouter } from 'next/router'
 import mealDefault from 'public/static/assets/images/mealDefault.svg'
 
-const FIRST_ELEMENT = 0
+const FOUR = 4
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 const NO_RESERVATIONS_MESSAGE = 'Trenutno nemate rezervacija za izabrani datum.'
@@ -174,7 +174,7 @@ const MyReservationsPage = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header type="red" selectedButton={FIRST_ELEMENT} />
+                <Header type="red" selectedButton={FOUR} />
             )}
 
             <ReservationConfirmationModal
