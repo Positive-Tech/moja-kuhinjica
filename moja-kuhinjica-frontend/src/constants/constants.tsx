@@ -5,6 +5,7 @@ export const bgModal = {
 }
 export const AUTH_TOKEN = 'token'
 export const INDEX_INCREMENT = 1
+export const TimeBeforeOrder = 10
 export const MOBILE_WIDTH = 768
 export const DAYS = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
 export const ORDERING = 'ordering'
