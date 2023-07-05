@@ -21,25 +21,7 @@ export const DisabledReservationModal = ({
 }: DisabledReservationModalProps): JSX.Element => {
     const { t } = useTranslation()
 
-    const getBody = () => {
-        if (children) {
-            return children
-        }
-
-        return (
-            <div>
-                <label className="modalContainer__formContainer__formDiv__formTitle">
-                    {t(title)}
-                </label>
-                <button
-                    className="modalContainer__formContainer__formDiv__formTitle__formButton"
-                    onClick={closeModal}
-                >
-                    {t(buttonText)}
-                </button>
-            </div>
-        )
-    }
+    if (children) return children
 
     return (
         <Modal
@@ -52,7 +34,23 @@ export const DisabledReservationModal = ({
             <div className="modalContainer__formContainer">
                 <div className="modalContainer__formContainer__formDiv">
                     <label className="modalContainer__formContainer__formDiv__formTitle">
-                        {getBody()}
+                        <div>
+                            {children ? (
+                                children
+                            ) : (
+                                <React.Fragment>
+                                    <label className="modalContainer__formContainer__formDiv__formTitle">
+                                        {t(title)}
+                                    </label>
+                                    <button
+                                        className="modalContainer__formContainer__formDiv__formTitle__formButton"
+                                        onClick={closeModal}
+                                    >
+                                        {t(buttonText)}
+                                    </button>
+                                </React.Fragment>
+                            )}
+                        </div>
                     </label>
                 </div>
             </div>

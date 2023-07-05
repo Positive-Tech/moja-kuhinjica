@@ -34,6 +34,7 @@ import { ReservationConfirmationModal } from '@/components/modal/reservation/Res
 import { DisabledReservationModal } from '@/components/modal/disabledReservation/DisabledReservationModal'
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
+import { DISABLED_MESSAGE } from '../../constants/constants'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { routes } from '../../constants/constants'
@@ -41,7 +42,7 @@ import { routes } from '../../constants/constants'
 const ORDERING = 'ordering'
 const HEADER_TYPE = 'red'
 const INITIAL_MEAL_AMOUNT = 1
-const DISABLED_MESSAGE = 'Ne možete da rezervišete posle 10 ujutru'
+
 const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
 const RESERVATION_FAIL = 'Neuspešna rezervacija'
 const RESERVATION_SUCCESS_MESSAGE =
@@ -139,10 +140,9 @@ const MealReservation = (): JSX.Element => {
                 setIsLoading(false)
             })
     }
+
     const addToCart = (meal: IMeal): void => {
-        if (!isBookingAllowed()) {
-            return setShowDisabledReservation(true)
-        }
+        if (!isBookingAllowed()) return setShowDisabledReservation(true)
 
         dispatch(
             addItemToCart({
@@ -264,9 +264,9 @@ const MealReservation = (): JSX.Element => {
                 >
                     <DisabledReservationModal
                         modalIsOpen={showDisabledReservation}
-                        closeModal={() => setShowDisabledReservation(!true)}
+                        closeModal={() => setShowDisabledReservation(false)}
                         title={DISABLED_MESSAGE}
-                        buttonText={'OK'}
+                        buttonText="OK"
                     />
                     <Link
                         href="/restaurant/profile"
@@ -365,25 +365,17 @@ const MealReservation = (): JSX.Element => {
                                         content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
-                                    <Text
-                                        content={
-                                            t(
-                                                'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
-                                            ) as string
-                                        }
-                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
-                                    />
+
                                     <label className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel">
                                         {t(EMPTY_CART_MESSAGE)}
-                                        <span
-                                            className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan"
-                                            onClick={() =>
-                                                router.push(
+                                        <span className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan">
+                                            <Link
+                                                href={
                                                     routes.MY_RESERVATIONS_PAGE
-                                                )
-                                            }
-                                        >
-                                            {' ' + t('Moje rezervacije')}
+                                                }
+                                            >
+                                                {' ' + t('Moje rezervacije')}
+                                            </Link>
                                         </span>
                                     </label>
                                 </div>
