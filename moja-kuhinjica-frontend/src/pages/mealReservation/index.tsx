@@ -142,6 +142,7 @@ const MealReservation = (): JSX.Element => {
                 setIsLoading(false)
             })
     }
+
     const addToCart = (meal: IMeal): void => {
         if (!isBookingAllowed(activeDate))
             return setShowDisabledReservation(true)
