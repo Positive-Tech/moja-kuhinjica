@@ -84,6 +84,7 @@
 
                 @media only screen and (max-width: $breakpoint-720p) {
                     width: 220px;
+                    z-index: 1;
                 }
                 @media only screen and (max-width: $breakpoint-large) {
                     width: 180px;

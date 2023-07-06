@@ -273,7 +273,9 @@ const MyReservationsPage = (): JSX.Element => {
                                                     className="myReservationsPage__colDiv__reservationWrapper__container"
                                                 >
                                                     <Link
-                                                        href="/restaurant/profile"
+                                                        href={
+                                                            routes.RESTAURANT_PROFILE_PAGE
+                                                        }
                                                         style={{
                                                             textDecoration:
                                                                 'none',
