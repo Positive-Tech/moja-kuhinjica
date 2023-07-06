@@ -4,7 +4,7 @@ import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
-import { isBookingAllowed } from 'src/utils/dateUtils'
+import { canCancelOrder, isBookingAllowed } from 'src/utils/dateUtils'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
@@ -360,11 +360,21 @@ const MealReservation = (): JSX.Element => {
                                         content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
-
+                                    <Text
+                                        content={
+                                            t(
+                                                'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
+                                            ) as string
+                                        }
+                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
+                                    />
                                     <label className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel">
-                                        {t(EMPTY_CART_MESSAGE)}
                                         <span className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan">
                                             <Link
+                                                style={{
+                                                    color: 'red',
+                                                    textDecoration: 'none',
+                                                }}
                                                 href={
                                                     routes.MY_RESERVATIONS_PAGE
                                                 }

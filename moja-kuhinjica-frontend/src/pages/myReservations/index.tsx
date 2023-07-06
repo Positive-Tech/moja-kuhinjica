@@ -15,7 +15,9 @@ import RestaurantService, {
 } from '@/service/Restaurant.service'
 import 'dayjs/locale/sr'
 import dayjs from 'dayjs'
+import { CanCancelReservationModal } from '@/components/modal/CanCancelReservation'
 import { Oval } from 'react-loader-spinner'
+import { canCancelOrder } from 'src/utils/dateUtils'
 import { ReservationConfirmationModal } from '@/components/modal/reservation/ReservationConfirmationModal'
 import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
@@ -51,12 +53,15 @@ const MyReservationsPage = (): JSX.Element => {
         useState<boolean>(false)
     const [cancellationModalIsOpen, setCancellationModalIsOpen] =
         useState<boolean>(false)
+    const [showDisabledReservation, setShowDisabledReservation] =
+        useState<boolean>(false)
     const [reservationID, setReservationID] = useState<number>(-1)
     const [isError] = useState<boolean>(false)
     const [isTabClick, setIsTabClick] = useState<boolean>(false)
     const [activeDate, setActiveDate] = useState<string>(
         dayjs().format('DD/MM/YYYY')
     )
+
     const handleWindowResize = (): void => {
         setWindowWidth(window.innerWidth)
     }
@@ -165,6 +170,12 @@ const MyReservationsPage = (): JSX.Element => {
                 <Header type="red" selectedButton={FOUR} />
             )}
 
+            <CanCancelReservationModal
+                modalIsOpen={showDisabledReservation}
+                closeModal={() => setShowDisabledReservation(!true)}
+                title={'Ne mozete da otkazete rezervaciju posle 10 ujutru'}
+                buttonText="OK"
+            />
             <ReservationConfirmationModal
                 title={t('Potvrdite otkazivanje')}
                 text={t(
@@ -253,6 +264,7 @@ const MyReservationsPage = (): JSX.Element => {
                                             ({
                                                 id,
                                                 restaurant,
+                                                description,
                                                 items,
                                                 price,
                                             }: IMyReservations) => (
@@ -288,6 +300,7 @@ const MyReservationsPage = (): JSX.Element => {
                                                             {
                                                                 id,
                                                                 quantity,
+                                                                description,
                                                                 mealName,
                                                                 mealImage,
                                                             }: IReservationItem,
@@ -300,6 +313,9 @@ const MyReservationsPage = (): JSX.Element => {
                                                                 }
                                                                 mealName={
                                                                     mealName
+                                                                }
+                                                                description={
+                                                                    description
                                                                 }
                                                                 mealImage={
                                                                     mealImage
@@ -322,6 +338,15 @@ const MyReservationsPage = (): JSX.Element => {
                                                                 'myReservationsPage__colDiv__reservationWrapper__container__buttonWrapper__cancelButton'
                                                             }
                                                             onClick={() => {
+                                                                if (
+                                                                    canCancelOrder(
+                                                                        activeDate
+                                                                    )
+                                                                ) {
+                                                                    return setShowDisabledReservation(
+                                                                        true
+                                                                    )
+                                                                }
                                                                 setConfirmationModalIsOpen(
                                                                     true
                                                                 )
