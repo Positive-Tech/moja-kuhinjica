@@ -127,5 +127,12 @@
     "You cannot book after 10am": "Ne možete da rezervišete posle 10 ujutru",
     "There are no reservations for this date.": "Nema rezervacija za ovaj datum.",
     "The daily menu has not yet been published.": "Dnevni meni za još uvek nije objavljen.",
-    "Your reservation has been saved. You can view it on the My Reservations page": "Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije"
+    "Your reservation has been saved. You can view it on the My Reservations page": "Vaša rezervacija je sačuvana. Možete je pogledati na stranici Moje rezervacije",
+    "You will be logged out.": "Bićete odjavljeni.",
+    "Session expired": "Vaša sesija je istekla",
+    "Go to login page": "Prijavite se",
+    "Your reservation has been saved. You can view it on the page": "Vaša rezervacija je sačuvana. Možete je pogledati na stranici",
+    "Your cart is empty, if you want to view your reservations go to the page": "Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu",
+    "Reserve again": "Rezerviši ponovo",
+    "You currently have no reservations for the selected date.": "Trenutno nemate rezervacija za izabrani datum."
 }

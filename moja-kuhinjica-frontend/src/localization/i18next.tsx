@@ -39,6 +39,7 @@ i18n.use(initReactI18next)
         interpolation: {
             escapeValue: false,
         },
+        lng: DEFAULT_LANGUAGE,
     })
     .then(() => {
         console.log('i18n initialized')

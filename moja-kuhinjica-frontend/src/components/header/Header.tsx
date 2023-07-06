@@ -7,10 +7,9 @@ import { HeaderButton } from '../button/HeaderButton'
 import { useRouter } from 'next/router'
 import { DropdownMenuButton } from '../button/DropdownMenuButton'
 import logo from 'public/static/assets/images/logo-moja-klopica.svg'
-import profileIcon from 'public/static/assets/images/profileHeader.svg'
+import profileIcon from 'public/static/assets/images/profilePicture.svg'
 import logoutIcon from 'public/static/assets/images/logout.svg'
 import editProfileIcon from 'public/static/assets/images/editProfile.svg'
-import myReservationsIcon from 'public/static/assets/images/myReservations.svg'
 import { routes, AUTH_TOKEN } from '@/constants/constants'
 import { setRedirectToReservations } from '@/reduxStore/reducers/navigationReducer'
 import { loadUser } from '@/reduxStore/reducers/userReducer'
@@ -18,6 +17,10 @@ import LanguageChanger from '../LanguageChanger'
 import { useTranslation } from 'react-i18next'
 
 const HEADER_TYPE = 'red'
+const FOUR = 4
+const ONE = 1
+const TWO = 2
+const THREE = 3
 interface IHeaderProps {
     type: string
     selectedButton?: number
@@ -102,22 +105,35 @@ const Header = ({
             </div>
             <div className="headerWrapper__buttonWrapper">
                 <HeaderButton
-                    active={active === 1}
-                    onClick={() => handleClick(1, routes.HOME_PAGE)}
+                    active={active === ONE}
+                    onClick={() => handleClick(ONE, routes.HOME_PAGE)}
                     content={t('Početna')}
                     headerType={type}
                 />
                 <HeaderButton
-                    active={active === 2}
+                    active={active === TWO}
                     onClick={() =>
-                        handleReservationClick(2, routes.MEAL_RESERVATION_PAGE)
+                        handleReservationClick(
+                            TWO,
+                            routes.MEAL_RESERVATION_PAGE
+                        )
                     }
                     content={t('Rezerviši')}
                     headerType={type}
                 />
+                {isAuthorized && (
+                    <HeaderButton
+                        active={active === FOUR}
+                        content={t('Moje rezervacije')}
+                        onClick={() =>
+                            handleClick(FOUR, routes.MY_RESERVATIONS_PAGE)
+                        }
+                        headerType={type}
+                    />
+                )}
                 <HeaderButton
-                    active={active === 3}
-                    onClick={() => handleClick(3, routes.ABOUT_US_PAGE)}
+                    active={active === THREE}
+                    onClick={() => handleClick(THREE, routes.ABOUT_US_PAGE)}
                     content={t('O nama')}
                     headerType={type}
                 />
@@ -139,15 +155,6 @@ const Header = ({
                                 ref={menuRef}
                             >
                                 <div className="headerWrapper__buttonWrapper__profileIconWrapper__dropDownButtonWrapper">
-                                    <DropdownMenuButton
-                                        content={t('Moje rezervacije')}
-                                        src={myReservationsIcon}
-                                        handleClick={() =>
-                                            router.push(
-                                                routes.MY_RESERVATIONS_PAGE
-                                            )
-                                        }
-                                    />
                                     <DropdownMenuButton
                                         content={t('Izmena profila')}
                                         src={editProfileIcon}

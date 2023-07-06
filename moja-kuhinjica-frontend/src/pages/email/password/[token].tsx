@@ -57,7 +57,7 @@ const ResetPasswordPage = (): JSX.Element => {
         <div className="resetVerifyContainer">
             <div className="resetVerifyContainer__resetPassWrapper">
                 <Title
-                    content={t('Resetovanje šifre')}
+                    content={t('Resetovanje šifre') as string}
                     style="resetVerifyContainer__resetPassWrapper__resetPassTitle"
                 />
                 <div className="resetVerifyContainer__resetPassWrapper__formWrapper">

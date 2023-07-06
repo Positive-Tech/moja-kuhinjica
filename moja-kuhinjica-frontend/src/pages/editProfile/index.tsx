@@ -15,7 +15,7 @@ import { MOBILE_WIDTH, routes } from '@/constants/constants'
 import email from 'public/static/assets/images/email.svg'
 import profile from 'public/static/assets/images/profile.svg'
 import mobile from 'public/static/assets/images/mobile.svg'
-import profileIcon from 'public/static/assets/images/profileHeader.svg'
+import userProfileIcon from 'public/static/assets/images/userProfileIcon.svg'
 import passwordIcon from 'public/static/assets/images/password.svg'
 import { Oval } from 'react-loader-spinner'
 import { useAppSelector } from '@/utils/hooks'
@@ -125,11 +125,13 @@ const EditProfilePage = (): JSX.Element => {
                             onSubmit={handleSubmit((data) => editUser(data))}
                         >
                             <div className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer">
-                                <Image
-                                    src={profileIcon}
-                                    alt=""
-                                    className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__profileIcon"
-                                />
+                                <div className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__profileIconContainer">
+                                    <Image
+                                        src={userProfileIcon}
+                                        alt=""
+                                        className="editProfile__container__formContainer__formWrapper__formDiv__changePasswordContainer__profileIcon"
+                                    />
+                                </div>
                             </div>
                             <div className="editProfile__container__formContainer__formWrapper__formDiv__inputWrapper">
                                 <FormInput
