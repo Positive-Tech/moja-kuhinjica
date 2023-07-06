@@ -5,8 +5,17 @@ export const bgModal = {
 }
 export const AUTH_TOKEN = 'token'
 export const INDEX_INCREMENT = 1
+export const TimeBeforeOrder = 10
 export const MOBILE_WIDTH = 768
+export const DISABLED_MESSAGE = 'Ne možete da rezervišete posle 10 ujutru'
 export const DAYS = ['PON', 'UTO', 'SRE', 'ČET', 'PET', 'SUB']
+export const ORDERING = 'ordering'
+export const HEADER_TYPE = 'red'
+export const INITIAL_MEAL_AMOUNT = 1
+export const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
+export const RESERVATION_FAIL = 'Neuspešna rezervacija'
+export const RESERVATION_SUCCESS_MESSAGE =
+    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici'
 
 export const routes = {
     RESTAURANT_PROFILE_PAGE: '/restaurant/profile',

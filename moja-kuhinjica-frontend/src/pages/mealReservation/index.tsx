@@ -37,16 +37,17 @@ import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { routes } from '../../constants/constants'
+import {
+    routes,
+    ORDERING,
+    HEADER_TYPE,
+    INITIAL_MEAL_AMOUNT,
+    DISABLED_MESSAGE,
+    RESERVATION_SUCCESS,
+    RESERVATION_FAIL,
+    RESERVATION_SUCCESS_MESSAGE,
+} from '../../constants/constants'
 
-const ORDERING = 'ordering'
-const HEADER_TYPE = 'red'
-const INITIAL_MEAL_AMOUNT = 1
-const DISABLED_MESSAGE = 'Ne možete da rezervišete posle 10 ujutru'
-const RESERVATION_SUCCESS = 'Rezervacija je uspešna'
-const RESERVATION_FAIL = 'Neuspešna rezervacija'
-const RESERVATION_SUCCESS_MESSAGE =
-    'Vaša rezervacija je sačuvana. Možete je pogledati na stranici'
 const EMPTY_CART_MESSAGE =
     'Vaša korpa je prazna, ukoliko želite da pogledate svoje rezervacije možete otići na stranicu'
 dayjs.extend(utc)
@@ -142,9 +143,8 @@ const MealReservation = (): JSX.Element => {
             })
     }
     const addToCart = (meal: IMeal): void => {
-        if (!isBookingAllowed(activeDate)) {
+        if (!isBookingAllowed(activeDate))
             return setShowDisabledReservation(true)
-        }
 
         dispatch(
             addItemToCart({
@@ -251,7 +251,7 @@ const MealReservation = (): JSX.Element => {
                 modalIsOpen={showDisabledReservation}
                 closeModal={() => setShowDisabledReservation(!true)}
                 title={DISABLED_MESSAGE}
-                buttonText={'OK'}
+                buttonText="OK"
             />
 
             <div className="mealReservation__container">
@@ -294,7 +294,6 @@ const MealReservation = (): JSX.Element => {
                                         onClick={() => {
                                             if (cartItems.length) {
                                                 handleTabClickWithCartItems()
-                                            } else {
                                                 setDeyOfWeek(date.day())
                                                 setActive(activeTabIndex)
                                                 setActiveDate(day.date)
@@ -363,15 +362,18 @@ const MealReservation = (): JSX.Element => {
 
                                     <label className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel">
                                         {t(EMPTY_CART_MESSAGE)}
-                                        <span
-                                            className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan"
-                                            onClick={() =>
-                                                router.push(
+                                        <span className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan">
+                                            <Link
+                                                style={{
+                                                    color: 'red',
+                                                    textDecoration: 'none',
+                                                }}
+                                                href={
                                                     routes.MY_RESERVATIONS_PAGE
-                                                )
-                                            }
-                                        >
-                                            {' ' + t('Moje rezervacije')}
+                                                }
+                                            >
+                                                {' ' + t('Moje rezervacije')}
+                                            </Link>
                                         </span>
                                     </label>
                                 </div>

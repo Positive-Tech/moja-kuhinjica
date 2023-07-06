@@ -9,12 +9,14 @@ interface IReservationItemProps {
     index: number
     quantity: number
     mealName: string
+    description: string
     mealImage: string
 }
 
 export const ReservationItem = ({
     itemsLength,
     index,
+    description,
     quantity,
     mealName,
     mealImage,
@@ -37,8 +39,7 @@ export const ReservationItem = ({
                         {mealName}
                     </label>
                     <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros.
+                        {t(description)}
                     </label>
                     <label className="reservationContainer__rowDiv__contentWrapper__contentLabel">
                         {quantity} {t('porcija')}

@@ -39,14 +39,13 @@
 
     &__buttonWrapper {
         @include flex-options(flex-end, center, row);
-        width: 50%;
-        height: 100%;
+        width: 80%;
 
         @media only screen and (max-width: $breakpoint-1440p) {
-            width: 35%;
+            width: 65%;
         }
         @media only screen and (max-width: $breakpoint-1080p) {
-            width: 55%;
+            width: 70%;
         }
         @media only screen and (max-width: $breakpoint-medium) {
             display: none;
