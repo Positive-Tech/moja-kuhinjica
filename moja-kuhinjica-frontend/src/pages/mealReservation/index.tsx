@@ -4,7 +4,7 @@ import Header from '@/components/header/Header'
 import { TabButton } from '@/components/button/TabButton'
 import { Footer } from '@/components/footer/Footer'
 import { Title } from '@/components/label/Title'
-import { canCancelOrder, isBookingAllowed } from 'src/utils/dateUtils'
+import { isBookingAllowed } from 'src/utils/dateUtils'
 import { CartItem } from '@/components/cart/CartItem'
 import { RegularButton } from '@/components/button/RegularButton'
 import { Text } from '@/components/label/Text'
@@ -142,7 +142,6 @@ const MealReservation = (): JSX.Element => {
                 setIsLoading(false)
             })
     }
-
     const addToCart = (meal: IMeal): void => {
         if (!isBookingAllowed(activeDate))
             return setShowDisabledReservation(true)
@@ -360,15 +359,9 @@ const MealReservation = (): JSX.Element => {
                                         content={t('korpa')}
                                         style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__cartTitle"
                                     />
-                                    <Text
-                                        content={
-                                            t(
-                                                'Vaša korpa je prazna, rezervišite jelo iz dnevnog menija.'
-                                            ) as string
-                                        }
-                                        style="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel"
-                                    />
+
                                     <label className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel">
+                                        {t(EMPTY_CART_MESSAGE)}
                                         <span className="mealReservation__container__menuDiv__cartContainer__cartWrapper__emptyCartDiv__emptyCartLabel__emptySpan">
                                             <Link
                                                 style={{

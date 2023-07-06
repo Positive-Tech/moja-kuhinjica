@@ -16,6 +16,7 @@ export const ErrorLabel = ({
     const [beforeEmail, setBeforeEmail] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [afterEmail, setAfterEmail] = useState<string>('')
+
     const regex = /(.*) email (.*?) (.*?)$/
 
     useEffect(() => {

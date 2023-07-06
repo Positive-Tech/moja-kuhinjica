@@ -77,8 +77,9 @@ const ResetPasswordPage = (): JSX.Element => {
                                 required: t('Šifra je obavezna.'),
                                 pattern: {
                                     value: /^(?=.*[A-Za-z])(?=.*[\d\p{P}]).{8,}$/u,
-                                    message:
-                                        'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.',
+                                    message: t(
+                                        'Šifra mora da sadrži minimum 8 karaktera i barem jedan broj.'
+                                    ),
                                 },
                             }}
                             style="resetVerifyContainer__resetPassWrapper__formWrapper__formDiv__passwordInput"
