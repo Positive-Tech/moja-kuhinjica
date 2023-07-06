@@ -112,12 +112,10 @@ export const LoginModal = ({
                         <input
                             id="cb1"
                             checked={rememberMe}
-                            onChange={() => {
-                                setRememberMe(!rememberMe)
-                            }}
+                            onChange={() => setRememberMe(!rememberMe)}
                             type="checkbox"
                         />
-                        <p>Zapamti me</p>
+                        <p>{t('Zapamti me')}</p>
                     </div>
                     <Text
                         content={t('Zaboravili ste šifru?')}
