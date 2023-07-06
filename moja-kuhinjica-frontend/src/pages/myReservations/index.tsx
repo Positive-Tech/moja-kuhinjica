@@ -23,11 +23,12 @@ import { RegularButton } from '@/components/button/RegularButton'
 import { ReservationNotificationModal } from '@/components/modal/reservation/ReservationNotificationModal'
 import { useTranslation } from 'react-i18next'
 import { generateWeekDays } from 'src/utils/dateUtils'
+import Link from 'next/link'
 import { routes } from '../../constants/constants'
 import { useRouter } from 'next/router'
 import mealDefault from 'public/static/assets/images/mealDefault.svg'
 
-const FIRST_ELEMENT = 0
+const FOUR = 4
 const CANCELLING_SUCCESS = 'Otkazali ste rezervaciju'
 const CANCELLING_FAIL = 'Rezervacije se mogu otkazati do 10 časova'
 const NO_RESERVATIONS_MESSAGE = 'Trenutno nemate rezervacija za izabrani datum.'
@@ -39,13 +40,13 @@ const NoReservationsMessage: React.FC = () => {
     return (
         <div className="myReservationsPage__colDiv">
             <label className="myReservationsPage__colDiv__rowDiv__infoLabel">
-                {t(NO_RESERVATIONS_MESSAGE)} 
+                {t(NO_RESERVATIONS_MESSAGE)}
             </label>
             <RegularButton
-                    content={t('Rezerviši')}
-                    style="myReservationsPage__colDiv__infoButton"
-                    isActive
-                    onClick={() => router.push(routes.MEAL_RESERVATION_PAGE)}
+                content={t('Rezerviši')}
+                style="myReservationsPage__colDiv__infoButton"
+                isActive
+                onClick={() => router.push(routes.MEAL_RESERVATION_PAGE)}
             />
         </div>
     )
@@ -139,7 +140,6 @@ const MyReservationsPage = (): JSX.Element => {
 
     const resForDay: IMyReservations[] =
         getReservationsForDayOfWeek(activeDate)[0]?.reservations
-    console.log(resForDay, 'resforDay')
 
     useEffect(() => {
         fetchMyReservations()
@@ -179,14 +179,14 @@ const MyReservationsPage = (): JSX.Element => {
             {isMobile ? (
                 <MobileHeader handleClick={() => setShowMenu(true)} />
             ) : (
-                <Header type="red" selectedButton={FIRST_ELEMENT} />
+                <Header type="red" selectedButton={FOUR} />
             )}
 
             <CanCancelReservationModal
                 modalIsOpen={showDisabledReservation}
                 closeModal={() => setShowDisabledReservation(!true)}
                 title={'Ne mozete da otkazete rezervaciju posle 10 ujutru'}
-                buttonText={'OK'}
+                buttonText="OK"
             />
             <ReservationConfirmationModal
                 title={t('Potvrdite otkazivanje')}
@@ -287,16 +287,26 @@ const MyReservationsPage = (): JSX.Element => {
                                                     key={id}
                                                     className="myReservationsPage__colDiv__reservationWrapper__container"
                                                 >
-                                                    <p>{description}</p>
-                                                    <label
-                                                        className={
-                                                            'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
-                                                        }
+                                                    <Link
+                                                        href="/restaurant/profile"
+                                                        style={{
+                                                            textDecoration:
+                                                                'none',
+                                                        }}
                                                     >
-                                                        {
-                                                            restaurant.restaurantName
-                                                        }
-                                                    </label>
+                                                        <label
+                                                            style={{
+                                                                cursor: 'pointer',
+                                                            }}
+                                                            className={
+                                                                'myReservationsPage__colDiv__reservationWrapper__container__restaurantLabel'
+                                                            }
+                                                        >
+                                                            {
+                                                                restaurant.restaurantName
+                                                            }
+                                                        </label>
+                                                    </Link>
                                                     <label className="myReservationsPage__colDiv__reservationWrapper__container__reservationLabel">
                                                         Rezervacija {id}
                                                     </label>
@@ -323,7 +333,8 @@ const MyReservationsPage = (): JSX.Element => {
                                                                     description
                                                                 }
                                                                 mealImage={
-                                                                    mealImage || mealDefault
+                                                                    mealImage ||
+                                                                    mealDefault
                                                                 }
                                                                 index={index}
                                                                 itemsLength={

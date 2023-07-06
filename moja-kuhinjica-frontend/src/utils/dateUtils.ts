@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import { TimeBeforeOrder } from '../constants/constants'
 
 interface IGenerateWeekdays {
     dayofweek: string
@@ -19,7 +19,7 @@ export const isPast = (date: string): boolean => {
     const today = dayjs()
     const activeDay = dayjs(date.split('/').reverse().join('/'))
     const currentHour = today.hour()
-    return !(currentHour >= cutoffHour && today.isSame(activeDay, 'day'))
+    return !(currentHour >= TimeBeforeOrder && today.isSame(activeDay, 'day'))
 }
 
 export const generateWeekDays = (): IGenerateWeekdays[] => {

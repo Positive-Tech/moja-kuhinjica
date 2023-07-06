@@ -43,9 +43,7 @@ export const AmountButton = ({
                 src={increment}
                 alt=""
                 className="amountButton"
-                onClick={() => {
-                    changeAmount(INCREMENT_VALUE)
-                }}
+                onClick={() => changeAmount(INCREMENT_VALUE)}
                 style={{ pointerEvents: amount >= 10 ? 'none' : 'auto' }}
             />
         </div>
