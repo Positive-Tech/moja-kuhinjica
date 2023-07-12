@@ -12,8 +12,10 @@ import location from 'public/static/assets/images/location.svg'
 import telephone from 'public/static/assets/images/telephone.svg'
 import restaurantPic from 'public/static/assets/images/restaurantGallery.svg'
 import { MOBILE_WIDTH } from '@/constants/constants'
+import { useTranslation } from 'react-i18next'
 
 const Profile = (): JSX.Element => {
+    const { t } = useTranslation()
     const [isMobile, setIsMobile] = useState<boolean>(false)
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
@@ -89,7 +91,7 @@ const Profile = (): JSX.Element => {
             </div>
             <div className="profilePage__galleryWrapper">
                 <label className="profilePage__galleryWrapper__title">
-                    Galerija
+                    {t('Galerija')}
                 </label>
                 <div className="profilePage__galleryWrapper__galleryColDiv">
                     {!isMobile && (
@@ -127,7 +129,26 @@ const Profile = (): JSX.Element => {
                         </div>
                     )}
                     {isMobile && (
-                        <div className="profilePage__galleryWrapper__galleryColDiv__gallerySlider"></div>
+                        <div className="profilePage__galleryWrapper__galleryColDiv__gallerySlider">
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                style={{ width: '200px', height: '180px' }}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                style={{ width: '200px', height: '180px' }}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
+                            />
+                            <Image
+                                src={restaurantPic}
+                                alt=""
+                                style={{ width: '200px', height: '180px' }}
+                                className="profilePage__galleryWrapper__galleryColDiv__grid__gridImage"
+                            />
+                        </div>
                     )}
                 </div>
             </div>

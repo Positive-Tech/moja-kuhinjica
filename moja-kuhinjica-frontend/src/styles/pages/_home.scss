@@ -225,8 +225,6 @@
                 font-family: Nunito;
                 font-weight: 500;
                 color: #ffff;
-                line-height: 50px;
-                letter-spacing: 0.03em;
                 height: 10%;
                 width: 90%;
                 font-size: 35px;
@@ -238,6 +236,7 @@
                 @media only screen and (max-width: $breakpoint-720p) {
                     font-size: 30px;
                     line-height: 40px;
+                    height: 20%;
                 }
                 @media only screen and (max-width: $breakpoint-medium) {
                     font-size: 30px;
@@ -306,7 +305,6 @@
             @media only screen and (max-width: $breakpoint-medium) {
                 backdrop-filter: blur(1.5px);
                 height: 100%;
-                width: 100%;
                 margin-left: 0;
                 margin-top: 0;
                 justify-content: flex-start;

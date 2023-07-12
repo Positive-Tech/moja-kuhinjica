@@ -268,7 +268,7 @@ const Home = (): JSX.Element => {
                         <div className="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv">
                             <Text
                                 content={t(
-                                    `Dnevni meni za ${activeDate} jos uvek nije objavljen.`
+                                    'Dnevni meni za jos uvek nije objavljen.'
                                 )}
                                 style="homeDiv__menuWrapper__menuColDiv__emptyMenuDiv__emptyMenuLabel"
                             />

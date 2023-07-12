@@ -10,6 +10,7 @@ interface IReservationConfirmationModalProps {
     title: string
     buttonText: string
     text?: string
+    activeDate?: any
 }
 export const ReservationConfirmationModal = ({
     modalIsOpen,
@@ -17,13 +18,13 @@ export const ReservationConfirmationModal = ({
     confirmOrder,
     title,
     text,
+    activeDate,
 }: IReservationConfirmationModalProps): JSX.Element => {
     const { t } = useTranslation()
     return (
         <Modal
             isOpen={modalIsOpen}
             style={bgModal}
-            onRequestClose={closeModal}
             className="modalContainer"
             ariaHideApp={false}
         >
@@ -35,7 +36,8 @@ export const ReservationConfirmationModal = ({
 
                     <div className="modalContainer__formContainer__formDiv__formTitle__contentDiv">
                         <label className="modalContainer__formContainer__formDiv__formTitle__contentDiv__contentLabel">
-                            {text}
+                            {t(text as string)}
+                            {activeDate}
                         </label>
                     </div>
                     <div className="modalContainer__formContainer__formDiv__confirmationModalButtons">

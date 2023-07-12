@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Modal from 'react-modal'
 import { FieldValues } from 'react-hook-form'
@@ -34,6 +34,7 @@ export const LoginModal = ({
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
     const router = useRouter()
+    const [rememberMe, setRememberMe] = useState<boolean>(true)
 
     const {
         register,
@@ -58,6 +59,11 @@ export const LoginModal = ({
             })
         )
     }
+
+    useEffect(() => {
+        if (rememberMe) localStorage.setItem('rememberMe', '')
+        if (!rememberMe) localStorage.removeItem('rememberMe')
+    }, [rememberMe])
 
     return (
         <Modal
@@ -102,6 +108,15 @@ export const LoginModal = ({
                             required: t('Šifra je obavezna.'),
                         }}
                     />
+                    <div className="remember-me">
+                        <input
+                            id="cb1"
+                            checked={rememberMe}
+                            onChange={() => setRememberMe(!rememberMe)}
+                            type="checkbox"
+                        />
+                        <p>{t('Zapamti me')}</p>
+                    </div>
                     <Text
                         content={t('Zaboravili ste šifru?')}
                         style="modalContainer__formContainer__formDiv__forgotPasswordLabel"

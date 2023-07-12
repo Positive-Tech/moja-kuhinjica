@@ -76,7 +76,7 @@
 
                             &:hover {
                                 color: #c10016;
-                              }
+                            }
                         }
                     }
                 }
@@ -197,4 +197,16 @@
             }
         }
     }
+}
+
+.remember-me {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    grid-column-gap: 10px;
+}
+#cb1 {
+    accent-color: red;
 }

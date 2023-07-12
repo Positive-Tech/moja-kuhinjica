@@ -48,26 +48,25 @@ export const CartItem = ({ meal }: ICartItemPRops): JSX.Element => {
                         meal={meal}
                     />
                 </div>
-            </div>
-
-            <div className="itemContainer__priceWrapper">
-                <div className="itemContainer__priceWrapper__binWrapper">
-                    <Image
-                        src={bin}
-                        alt=""
-                        className="itemContainer__priceWrapper__binWrapper__binButton"
-                        onClick={() => dispatch(removeCartItem(meal))}
-                    />
-                </div>
-                <div className="itemContainer__priceWrapper__binWrapper__priceDiv">
-                    <Text
-                        content={getTotalMealPrice().toString()}
-                        style="itemContainer__priceWrapper__binWrapper__priceDiv__price"
-                    />
-                    <Text
-                        content="RSD"
-                        style="itemContainer__priceWrapper__binWrapper__priceDiv__price"
-                    />
+                <div className="itemContainer__priceWrapper">
+                    <div className="itemContainer__priceWrapper__binWrapper">
+                        <Image
+                            src={bin}
+                            alt=""
+                            className="itemContainer__priceWrapper__binWrapper__binButton"
+                            onClick={() => dispatch(removeCartItem(meal))}
+                        />
+                    </div>
+                    <div className="itemContainer__priceWrapper__binWrapper__priceDiv">
+                        <Text
+                            content={getTotalMealPrice().toString()}
+                            style="itemContainer__priceWrapper__binWrapper__priceDiv__price"
+                        />
+                        <Text
+                            content="RSD"
+                            style="itemContainer__priceWrapper__binWrapper__priceDiv__price"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

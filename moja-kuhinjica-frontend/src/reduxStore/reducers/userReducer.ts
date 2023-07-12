@@ -28,11 +28,13 @@ const initialState: UserState = {
     inProgress: false,
     isAuthorized: false,
     errorMessage: null,
-    showSessionExpiredModal: false
+    showSessionExpiredModal: false,
 }
 
 export const userLogout = createAction(ActionTypes.USER_LOGOUT)
-export const toggleSessionExpiredModal = createAction<boolean>(ActionTypes.TOGGLE_SESSION_EXPIRE_MODAL)
+export const toggleSessionExpiredModal = createAction<boolean>(
+    ActionTypes.TOGGLE_SESSION_EXPIRE_MODAL
+)
 export const userLogin = createAsyncThunk<
     { access_token: string },
     {
@@ -50,6 +52,9 @@ export const userLogin = createAsyncThunk<
         try {
             const { data } = await UserService.login(inputData)
             localStorage.setItem('token', data.access_token)
+            const value = localStorage.getItem('rememberMe')
+            if (value === '')
+                localStorage.setItem('rememberMe', data.access_token)
             onSuccess()
 
             return { access_token: data.access_token }
@@ -90,6 +95,7 @@ export const userReducer = createReducer(initialState, (builder) => {
             state.isAuthorized = true
         })
         .addCase(toggleSessionExpiredModal, (state, action) => {
-            state.showSessionExpiredModal = action.payload || !state.showSessionExpiredModal
+            state.showSessionExpiredModal =
+                action.payload || !state.showSessionExpiredModal
         })
 })

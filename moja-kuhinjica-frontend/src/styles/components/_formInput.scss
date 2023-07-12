@@ -162,5 +162,12 @@
         width: 100%;
         text-align: right !important;
         margin-top: 10%;
+
+        @media only screen and (max-width: $breakpoint-large) {
+            margin-top: 8%;
+        }
+        @media only screen and (max-width: $breakpoint-small) {
+            margin-top: 15%;
+        }
     }
 }

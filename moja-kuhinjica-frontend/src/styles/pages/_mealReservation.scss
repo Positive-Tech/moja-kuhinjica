@@ -107,7 +107,7 @@
                         }
 
                         &__scrollItemsDiv {
-                            width: 80%;
+                            width: 100%;
                             overflow-y: auto;
                             padding: 5%;
                             height: 80%;
@@ -192,7 +192,7 @@
                             }
 
                             &__emptySpan {
-                                color:#b30000;
+                                color: #b30000;
                                 cursor: pointer;
 
                                 &:hover {
@@ -288,7 +288,7 @@
         &__restaurantTitleWrapper {
             width: 100%;
             height: 10%;
-            margin-top: 1%;
+            margin-top: 10%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -363,7 +363,6 @@
         &__openCartBottom {
             display: flex;
             width: 100%;
-            height: 65px;
             background-color: white;
             position: fixed;
             bottom: 0;
@@ -422,7 +421,6 @@
                 }
 
                 &__scrollItemsDiv {
-                    width: 80%;
                     overflow-y: auto;
                     padding: 5%;
                     height: 80%;

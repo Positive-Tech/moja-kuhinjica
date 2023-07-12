@@ -17,6 +17,7 @@ import { t } from 'i18next'
 const LoginPage = (): JSX.Element => {
     const [errorMessage, setErrorMessage] = useState<string>()
     const isLoading = useAppSelector(({ auth: { inProgress } }) => inProgress)
+    const [rememberMe, setRememberMe] = useState<boolean>(true)
     const dispatch = useAppDispatch()
     const router = useRouter()
     const {
@@ -81,6 +82,15 @@ const LoginPage = (): JSX.Element => {
                         }}
                         style="loginContainer__wrapper__formDiv__input"
                     />
+                    <div className="remember-me">
+                        <input
+                            id="cb1"
+                            checked={rememberMe}
+                            onChange={() => setRememberMe(!rememberMe)}
+                            type="checkbox"
+                        />
+                        <p>{t('Zapamti me')}</p>
+                    </div>
                     <Text
                         content={t('Zaboravili ste šifru?')}
                         style="loginContainer__wrapper__formDiv__forgotPasswordLabel"
