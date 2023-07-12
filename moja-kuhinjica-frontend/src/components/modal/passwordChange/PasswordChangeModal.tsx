@@ -46,8 +46,7 @@ export const PasswordChangeModal = ({
     const changePassword = (data: FieldValues): void => {
         setIsLoading(true)
         UserService.changePassword(data)
-            .then((res) => {
-                // notification
+            .then(() => {
                 reset()
                 closeModal()
                 setIsLoading(false)
