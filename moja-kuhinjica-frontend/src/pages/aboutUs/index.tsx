@@ -260,11 +260,7 @@ const AboutUs = (): JSX.Element => {
                         </div>
                     )}
                 </div>
-                {isMobile ? (
-                    <MobileFooter style="aboutUs__footer" />
-                ) : (
-                    <Footer />
-                )}
+                {isMobile ? <MobileFooter /> : <Footer />}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import Modal from 'react-modal'
 import { useTranslation } from 'react-i18next'
 

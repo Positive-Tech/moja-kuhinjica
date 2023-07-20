@@ -32,7 +32,7 @@ export const ErrorLabel = ({
         ? `${beforeEmail && t(beforeEmail)} ${email} ${
               afterEmail && t(afterEmail)
           }`
-        : content || ''
+        : content ?? ''
 
     return <label className={`errorLabel ${style}`}>{errorMessage}</label>
 }

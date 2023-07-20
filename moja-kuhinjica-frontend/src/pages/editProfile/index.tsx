@@ -48,6 +48,7 @@ const EditProfilePage = (): JSX.Element => {
     const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false)
     const router = useRouter()
     const { t } = useTranslation()
+    const translatedText = t('Promeni sifru')
     const loggedUser = useAppSelector((state) => state.auth.user)
     const {
         register,
@@ -220,9 +221,7 @@ const EditProfilePage = (): JSX.Element => {
                                     />
                                     <input
                                         className="formInputWrapper__input formInputWrapper__input__pass"
-                                        defaultValue={
-                                            t('Promeni sifru') as string
-                                        }
+                                        defaultValue={translatedText}
                                         readOnly
                                     ></input>
                                     <Image

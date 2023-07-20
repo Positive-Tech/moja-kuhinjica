@@ -15,7 +15,6 @@ export const isBookingAllowed = (activeDate: string): boolean => {
 }
 
 export const isPast = (date: string): boolean => {
-    const cutoffHour = 10
     const today = dayjs()
     const activeDay = dayjs(date.split('/').reverse().join('/'))
     const currentHour = today.hour()

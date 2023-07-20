@@ -82,7 +82,7 @@ export const PasswordChangeModal = ({
                         errors={errors}
                         name="oldPassword"
                         src={passwordIcon}
-                        placeholder={t('Stara šifra') as string}
+                        placeholder={t('Stara šifra')}
                         type="password"
                         validationSchema={{
                             required: t('Obavezno polje.'),
@@ -94,7 +94,7 @@ export const PasswordChangeModal = ({
                         errors={errors}
                         name="newPassword"
                         src={passwordIcon}
-                        placeholder={t('Nova šifra') as string}
+                        placeholder={t('Nova šifra')}
                         type="password"
                         validationSchema={{
                             required: t('Obavezno polje.'),
@@ -112,7 +112,7 @@ export const PasswordChangeModal = ({
                         errors={errors}
                         name="confirmPassword"
                         src={passwordIcon}
-                        placeholder={t('Potvrdi novu šifru') as string}
+                        placeholder={t('Potvrdi novu šifru')}
                         type="password"
                         validationSchema={{
                             required: t('Obavezno polje.'),

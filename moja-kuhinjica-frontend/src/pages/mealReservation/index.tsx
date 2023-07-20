@@ -36,7 +36,7 @@ import { DisabledReservationModal } from '@/components/modal/disabledReservation
 import { generateWeekDays } from 'src/utils/dateUtils'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+
 import {
     routes,
     ORDERING,
@@ -54,7 +54,7 @@ dayjs.extend(utc)
 
 const MealReservation = (): JSX.Element => {
     const { t } = useTranslation()
-    const router = useRouter()
+
     const dispatch = useAppDispatch()
     const cartItems = useAppSelector(
         ({ restaurant: { cartItems } }) => cartItems
@@ -64,7 +64,7 @@ const MealReservation = (): JSX.Element => {
         useState<boolean>(false)
     const [showNotification, setShowNotification] = useState<boolean>(false)
     const [isMobile, setIsMobile] = useState<boolean>(false)
-    const [selectedDay, setSelectedDay] = useState<string>()
+
     const [windowWidth, setWindowWidth] = useState<number>(0)
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const [showCart, setShowCart] = useState<boolean>(false)
@@ -396,7 +396,7 @@ const MealReservation = (): JSX.Element => {
                                     </div>
                                     <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv">
                                         <Text
-                                            content={t('Ukupno:') as string}
+                                            content={t('Ukupno:')}
                                             style="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__priceLabel"
                                         />
                                         <div className="mealReservation__container__menuDiv__cartContainer__cartWrapper__cartDiv__priceDiv__totalPriceDiv">
@@ -500,7 +500,7 @@ const MealReservation = (): JSX.Element => {
                         </div>
                         <div className="mealReservation__openCartContainer__openCartBottom__priceDiv">
                             <Text
-                                content={t('Ukupno:') as string}
+                                content={t('Ukupno:')}
                                 style="mealReservation__openCartContainer__openCartBottom__priceDiv__priceLabel"
                             />
                             <div className="mealReservation__openCartContainer__openCartBottom__priceDiv__totalPriceDiv">
@@ -516,7 +516,7 @@ const MealReservation = (): JSX.Element => {
                         </div>
                         <div className="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper">
                             <RegularButton
-                                content={t('Potvrdi rezervaciju') as string}
+                                content={t('Potvrdi rezervaciju')}
                                 style="mealReservation__openCartContainer__openCartBottom__confirmButtonWrapper__confirmButton"
                                 isActive
                                 onClick={createOrder}
