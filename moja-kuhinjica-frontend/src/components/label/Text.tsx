@@ -10,13 +10,12 @@ interface ITextProps {
 export const Text = ({
     content,
     style,
-    activeDate,
     handleClick,
 }: ITextProps): JSX.Element => {
     const { t } = useTranslation()
     return (
         <label className={`$textLabel ${style}`} onClick={handleClick}>
-            {t(content) as string}
+            {t(content)}
         </label>
     )
 }

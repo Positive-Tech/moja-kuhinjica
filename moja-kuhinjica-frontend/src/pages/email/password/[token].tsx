@@ -57,7 +57,7 @@ const ResetPasswordPage = (): JSX.Element => {
         <div className="resetVerifyContainer">
             <div className="resetVerifyContainer__resetPassWrapper">
                 <Title
-                    content={t('Resetovanje šifre') as string}
+                    content={t('Resetovanje šifre')}
                     style="resetVerifyContainer__resetPassWrapper__resetPassTitle"
                 />
                 <div className="resetVerifyContainer__resetPassWrapper__formWrapper">
@@ -71,7 +71,7 @@ const ResetPasswordPage = (): JSX.Element => {
                             errors={errors}
                             name="password"
                             src={passwordIcon}
-                            placeholder={t('Unesi novu šifru') as string}
+                            placeholder={t('Unesi novu šifru')}
                             type="password"
                             validationSchema={{
                                 required: t('Šifra je obavezna.'),
@@ -89,7 +89,7 @@ const ResetPasswordPage = (): JSX.Element => {
                             errors={errors}
                             name="confirmPassword"
                             src={passwordIcon}
-                            placeholder={t('Potvrdi novu šifru') as string}
+                            placeholder={t('Potvrdi novu šifru')}
                             type="password"
                             validationSchema={{
                                 required: t('Šifra je obavezna.'),
